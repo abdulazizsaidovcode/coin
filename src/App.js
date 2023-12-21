@@ -6,15 +6,9 @@ function App() {
     <>
         <div>hello world</div>
         <Routes>
-          <Route>
-              
-          </Route>
+          <Route/>
         </Routes>
-      
     </>
-
-
-
   )
 }
 
