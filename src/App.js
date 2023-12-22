@@ -4,13 +4,14 @@ import FalsePage from "./components/falsepage"
 import SignIn from "./components/signin"
 import CategoryTable from "./components/category"
 import Dashboard from "./components/overview/cahrity"
+import SidebarTemplate from "./components/sidebar/SidebarTemplate";
 
 
 
 function App() {
   return (
     <>
-        <h1>Hello</h1>
+        <SidebarTemplate/>
         <Routes>
           <Route path="/404page"  element={<FalsePage/>}/>
           <Route path="/SignIn"  element={<SignIn/>}/>
