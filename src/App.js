@@ -12,7 +12,6 @@ import UserProfile from "./components/usercard"
 function App() {
   return (
     <>
-        <SidebarTemplate/>
         <Routes>
           <Route path="/404page"  element={<FalsePage/>}/>
           <Route path="/SignIn"  element={<SignIn/>}/>
