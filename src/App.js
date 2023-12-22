@@ -12,7 +12,7 @@ import UserProfile from "./components/usercard"
 function App() {
   return (
     <>
-        <h1>Hello</h1>
+        <SidebarTemplate/>
         <Routes>
           <Route path="/404page"  element={<FalsePage/>}/>
           <Route path="/SignIn"  element={<SignIn/>}/>
