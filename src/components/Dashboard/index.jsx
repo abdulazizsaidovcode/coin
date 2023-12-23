@@ -1,13 +1,16 @@
 import React from 'react';
-import TopGroup from '../../TopGroups';
-import TopStudent from '../../Topstudents';
-import TopTeachers from '../../Topteachers';
-import TotalCoins from '../../Total coins';
-import "../../../globalcss/style.css"
+import TopGroup from '../TopGroups';
+import TopStudent from '../Topstudents';
+import TopTeachers from '../Topteachers';
+import TotalCoins from '../Total coins';
+// import "../../../globalcss/style.css"
 
 const Dashboard = () => (
-  <div className="bg-gray-100 min-h-screen p-8 ml-64 ">
-    <Header />
+  <div className="bg-gray-100 min-h-screen p-8 ml-64 w-full">
+    <div className=" mb-4">
+      <h1 className="text-3xl font-semibold text-gray-800">Hi Admin(a)</h1>
+      <span className="text-sm text-gray-600">Welcome back to Coin system dashboard</span>
+    </div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
       <MetricCard title="Number of Students" value="200" icon="fas fa-users" />
       <MetricCard title="Number of Teachers" value="20" icon="fas fa-chalkboard-teacher" />
@@ -30,13 +33,6 @@ const Dashboard = () => (
         <TopGroup />
       </div>
     </div>
-  </div>
-);
-
-const Header = () => (
-  <div className="flex justify-between items-center mb-4">
-    <h1 className="text-3xl font-semibold text-gray-800">Hi Admin Admina</h1>
-    <span className="text-sm text-gray-600">Welcome back to Coin system dashboard</span>
   </div>
 );
 

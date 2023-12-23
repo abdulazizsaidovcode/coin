@@ -2,21 +2,21 @@ import { Route, Routes } from "react-router-dom"
 import "./index.css"
 import FalsePage from "./components/falsepage"
 import SignIn from "./components/signin"
-import CategoryTable from "./components/category"
-import Dashboard from "./components/overview/cahrity"
+import CategoryTable from "./components/categorytable"
+import Dashboard from "./components/Dashboard"
 import GiftExchangeComponent from "./components/card"
 import UserProfile from "./components/usercard"
 import SidebarTemplate from "./components/sidebar/SidebarTemplate"
 import TotalCoins from "./components/Total coins"
 import TopGroup from "./components/TopGroups"
 import TopTeachers from "./components/Topteachers"
+import Category from "./components/category"
 
 
 
 function App() {
   return (
-    <>
-      <h1>hello</h1>
+    <div className="flex">
       <SidebarTemplate/>
       <Routes>
         <Route path="/404page" element={<FalsePage />} />
@@ -28,8 +28,9 @@ function App() {
         <Route path="/totalcoins" element={<TotalCoins />} />
         <Route path="/topgroup" element={<TopGroup />} />
         <Route path="/topteachers" element={<TopTeachers />} />
+        <Route path="/category" element={<Category />} />
       </Routes>
-    </>
+    </div>
   )
 }
 

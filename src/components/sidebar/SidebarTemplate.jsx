@@ -6,7 +6,7 @@ function SidebarTemplate() {
     return (
         <>
 
-            <div className="min-h-screen flex w-64 flex-col flex-auto flex-shrink-0 antialiased bg-red-50 text-gray-800">
+            {/* <div className="min-h-screen flex w-64 flex-col flex-auto flex-shrink-0 antialiased bg-red-50 text-gray-800"> */}
                 <div className="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
                     <div className="flex items-center  h-14 border-b px-2">
                         <img className='w-1/5 mx-3' src={img} alt="" />
@@ -40,7 +40,7 @@ function SidebarTemplate() {
                                                 strokeWidth="2"
                                                 d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
                                     </span>
-                                    <span className="ml-2 text-sm tracking-wide truncate">Inbox</span>
+                                    <span className="ml-2 text-sm tracking-wide truncate">Category</span>
                                     <span
                                         className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full">New</span>
                                 </a>
@@ -149,7 +149,7 @@ function SidebarTemplate() {
                         </ul>
                     </div>
                 </div>
-            </div>
+            {/* </div> */}
         </>
     );
 }
