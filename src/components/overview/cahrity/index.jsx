@@ -6,7 +6,7 @@ import TotalCoins from '../../Total coins';
 import "../../../globalcss/style.css"
 
 const Dashboard = () => (
-  <div className="bg-gray-100 min-h-screen p-8">
+  <div className="bg-gray-100 min-h-screen p-8 ml-64 ">
     <Header />
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
       <MetricCard title="Number of Students" value="200" icon="fas fa-users" />

@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <h1>hello</h1>
-      {/* <SidebarTemplate/> */}
+      <SidebarTemplate/>
       <Routes>
         <Route path="/404page" element={<FalsePage />} />
         <Route path="/SignIn" element={<SignIn />} />

@@ -1,16 +1,16 @@
 import React from 'react';
-import './style.css'
 import { Link } from 'react-router-dom';
-import Dashboard from '../overview/cahrity';
+import img from "../../assits/asdf.png"
 
 function SidebarTemplate() {
     return (
         <>
 
-            <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800">
+            <div className="min-h-screen flex w-64 flex-col flex-auto flex-shrink-0 antialiased bg-red-50 text-gray-800">
                 <div className="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
-                    <div className="flex items-center justify-center h-14 border-b">
-                        <div>Sidebar Navigation By iAmine</div>
+                    <div className="flex items-center  h-14 border-b px-2">
+                        <img className='w-1/5 mx-3' src={img} alt="" />
+                        <div>Coin </div>
                     </div>
                     <div className="overflow-y-auto overflow-x-hidden flex-grow">
                         <ul className="flex flex-col py-4 space-y-1">
