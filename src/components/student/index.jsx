@@ -2,14 +2,9 @@ import React, { useState } from 'react';
 
 // Demo uchun ba'zi ma'lumotlar
 const initialData = [
-  { id: 1, name: 'Front-End', description: 'Tashqi qism', pL: 'React', active: true },
-  { id: 2, name: 'Back-End', description: 'Orqa qism', pL: 'Java', active: false },
-  { id: 2, name: 'Back-End', description: 'Orqa qism', pL: 'Java', active: false },
-  { id: 2, name: 'Back-End', description: 'Orqa qism', pL: 'Java', active: false },
-  { id: 2, name: 'Back-End', description: 'Orqa qism', pL: 'Java', active: false },
-  { id: 2, name: 'Back-End', description: 'Orqa qism', pL: 'Java', active: true },
-  { id: 2, name: 'Back-End', description: 'Orqa qism', pL: 'Java', active: false },
-  { id: 2, name: 'Back-End', description: 'Orqa qism', pL: 'Java', active: false },
+  { id: 1, name: 'Front-End', description: 'Tashqi qism', Coin: '503', active: true },
+  { id: 2, name: 'Back-End', description: 'Orqa qism', Coin: '101', active: false },
+ 
   // ... Qo'shimcha ma'lumotlar bu yerga qo'shiladi
 ];
 
@@ -41,7 +36,14 @@ const TableWithFilters = () => {
   };
 
   return (
-    <div className=" p-5 ml-80 w-full">
+    <div className=" p-8 ml-64 w-full">
+      <div className=" mb-4">
+        <h1 className="text-3xl font-semibold text-gray-800">Hi Admin(a)</h1>
+        <span className="text-sm text-gray-600">Welcome back to Coin system dashboard</span>
+      </div>
+      <div className="mt-10">
+        <h2 className="text-3xl font-extrabold text-gray-900 mb-4">students</h2>
+      </div>
       <div className=" mb-4 flex justify-between">
         <button className="btm">+ Add</button>
         <input
@@ -50,6 +52,7 @@ const TableWithFilters = () => {
           placeholder="Search..."
           aria-label="Search input" />
       </div>
+
       <div>
         {/* Filterlar */}
         <div className="mb-4">
@@ -81,24 +84,24 @@ const TableWithFilters = () => {
           </div>
         </div>
         {/* Jadval */}
-        <table className="w-full rounded-3xl rounded-t-3xl shadow-md">
+        <table className="w-full rounded-3xl rounded-t-3xl shadow-md .table-top">
           <thead className="bg-gray-800 text-white rounded-t-2xl uppercase text-sm leading-normal">
             <tr>
               <th className="py-3 px-6 text-left">No</th>
               <th className="py-3 px-6 text-left">Name</th>
               <th className="py-3 px-6 text-left">Description</th>
-              <th className="py-3 px-6 text-left">P.L</th>
+              <th className="py-3 px-6 text-left">Cion</th>
               <th className="py-3 px-6 text-center">Active</th>
               <th className="py-3 px-6 text-center">Actions</th>
             </tr>
           </thead>
-          <tbody className="text-gray-600 text-sm font-light">
+          <tbody className="text-gray-600 font-light">
             {data.map((item, index) => (
               <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-100">
                 <td className="py-3 px-6 text-left whitespace-nowrap">{index + 1}</td>
                 <td className="py-3 px-6 text-left">{item.name}</td>
                 <td className="py-3 px-6 text-left">{item.description}</td>
-                <td className="py-3 px-6 text-left">{item.pL}</td>
+                <td className="py-3 px-6 text-left">{item.Coin}</td>
                 <td className="py-3 px-6 text-center">
                   <input
                     type="checkbox"
