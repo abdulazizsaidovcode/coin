@@ -1,7 +1,7 @@
 import React from 'react';
 import img from "../../assits/itca.jpg"
 
-const GiftCard = ({ imageUrl, giftName, coins, description }) => {
+const GiftCard = ( imageUrl, giftName, coins, description ) => {
   return (
     <div className="w-1/5 rounded-xl overflow-hidden shadow-xl">
       <img className="w-full h-1/2 bg-contain" src={img} alt="Gift" />
@@ -20,6 +20,8 @@ const GiftCard = ({ imageUrl, giftName, coins, description }) => {
     </div>
   );
 };
+
+
 
 const GiftExchangeComponent = () => {
   const gifts = [

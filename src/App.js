@@ -11,6 +11,8 @@ import TotalCoins from "./components/Total coins"
 import TopGroup from "./components/TopGroups"
 import TopTeachers from "./components/Topteachers"
 import Category from "./components/category"
+import GroupCategory from "./components/group"
+import Students from "./components/student"
 
 
 
@@ -29,6 +31,8 @@ function App() {
         <Route path="/topgroup" element={<TopGroup />} />
         <Route path="/topteachers" element={<TopTeachers />} />
         <Route path="/category" element={<Category />} />
+        <Route path="/categorygroup" element={<GroupCategory />} />
+        <Route path="/students" element={<Students />} />
       </Routes>
     </div>
   )
