@@ -16,6 +16,7 @@ import Gift from "./components/gift"
 import "./index.css"
 import GiftCard from "./components/card"
 import Exchange from "./components/exchange"
+import Message from "./components/message"
 
 
 
@@ -39,6 +40,7 @@ function App() {
         <Route path="/offcanvas" element={<Offcanvas />} />
         <Route path="/gift" element={<Gift />} />
         <Route path="/exchange" element={<Exchange />} />
+        <Route path="/message" element={<Message />} />
       </Routes>
     </div>
   )
