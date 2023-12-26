@@ -2,7 +2,7 @@ wd-50 {
     width: 50% !important;
 }
 .btm {
-    padding: 10px 50px;
+    padding: 0px 50px !important;
     color: #fff;
     border: none;
     border-radius: 5px;

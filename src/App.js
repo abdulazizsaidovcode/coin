@@ -13,6 +13,7 @@ import TopTeachers from "./components/Topteachers"
 import Category from "./components/category"
 import GroupCategory from "./components/group"
 import Students from "./components/student"
+import Offcanvas from "./components/ofcanvas"
 
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/category" element={<Category />} />
         <Route path="/categorygroup" element={<GroupCategory />} />
         <Route path="/students" element={<Students />} />
+        <Route path="/offcanvas" element={<Offcanvas />} />
       </Routes>
     </div>
   )

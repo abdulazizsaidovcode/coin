@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const initialData = [
   { id: 1, name: 'Front-End', description: 'Tashqi qism', Coin: '503', active: true },
   { id: 2, name: 'Back-End', description: 'Orqa qism', Coin: '101', active: false },
- 
+
   // ... Qo'shimcha ma'lumotlar bu yerga qo'shiladi
 ];
 
@@ -46,11 +46,14 @@ const TableWithFilters = () => {
       </div>
       <div className=" mb-4 flex justify-between">
         <button className="btm">+ Add</button>
-        <input
-          className="border border-blue-600 rounded  text-gray-700 mr-3 py-1 px-2  focus:outline-blue-700"
-          type="text"
-          placeholder="Search..."
-          aria-label="Search input" />
+        <div class="relative">
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+            </svg>
+          </div>
+          <input type="search" id="search" class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
+        </div>
       </div>
 
       <div>

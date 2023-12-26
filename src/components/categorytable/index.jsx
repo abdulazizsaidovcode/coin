@@ -27,6 +27,7 @@ const CategoryTable = () => {
 
   return (
     <div className="min-h-screen w-full bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+
       <div className="w-full mx-auto space-y-8">
         <div className="bg-white shadow-md rounded-3xl overflow-hidden">
           <div className="overflow-x-auto">
