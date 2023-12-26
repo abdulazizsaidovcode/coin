@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "../../globalcss/style.css"
 
 const GiftCard = () => {
   const initialCategories = [
@@ -32,9 +33,9 @@ const GiftCard = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-between">
+    <div className="flex flex-wrap justify-around">
       {categories.map(category => (
-        <div key={category.id} className="w-1/5 h-96 rounded-xl overflow-hidden shadow-2xl m-4">
+        <div key={category.id} className="w-80 h-96 rounded-xl overflow-hidden shadow-xl m-4 up">
           <img className="w-full h-1/2 bg-contain" src={category.imageUrl} alt="Gift" />
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2 text-center">{category.giftName}</div>
