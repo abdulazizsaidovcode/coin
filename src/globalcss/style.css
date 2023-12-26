@@ -16,6 +16,11 @@ wd-50 {
 }
 
 
+.up:hover{
+    transform: scale(1.02);
+}
+
+
 
 
 

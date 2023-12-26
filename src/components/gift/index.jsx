@@ -1,5 +1,6 @@
 import "../../globalcss/style.css"
 import React from 'react';
+import GiftCard from "../card";
 
 function Gift() {
     return (
@@ -24,6 +25,7 @@ function Gift() {
                     <input type="search" id="search" class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
                 </div>
             </div>
+            <GiftCard/>
         </div>
     );
 }
