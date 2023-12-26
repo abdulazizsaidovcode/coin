@@ -15,6 +15,7 @@ import Offcanvas from "./components/ofcanvas"
 import Gift from "./components/gift"
 import "./index.css"
 import GiftCard from "./components/card"
+import Exchange from "./components/exchange"
 
 
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/students" element={<Students />} />
         <Route path="/offcanvas" element={<Offcanvas />} />
         <Route path="/gift" element={<Gift />} />
+        <Route path="/exchange" element={<Exchange />} />
       </Routes>
     </div>
   )

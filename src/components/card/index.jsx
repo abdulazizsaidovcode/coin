@@ -89,7 +89,7 @@ const GiftCard = () => {
                 </div>
               </div>
               <button type="submit" className="btm">
-               + Add new product
+               Save
               </button>
             </form>
           </div>
