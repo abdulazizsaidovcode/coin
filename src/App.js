@@ -1,10 +1,8 @@
 import { Route, Routes } from "react-router-dom"
-import "./index.css"
 import FalsePage from "./components/falsepage"
 import SignIn from "./components/signin"
 import CategoryTable from "./components/categorytable"
 import Dashboard from "./components/Dashboard"
-import GiftExchangeComponent from "./components/card"
 import UserProfile from "./components/usercard"
 import SidebarTemplate from "./components/sidebar/SidebarTemplate"
 import TotalCoins from "./components/Total coins"
@@ -14,6 +12,9 @@ import Category from "./components/category"
 import GroupCategory from "./components/group"
 import Students from "./components/student"
 import Offcanvas from "./components/ofcanvas"
+import Gift from "./components/gift"
+import "./index.css"
+import GiftCard from "./components/card"
 
 
 
@@ -26,7 +27,7 @@ function App() {
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/CategoryTable" element={<CategoryTable />} />
         <Route path="/Dashboard" element={<Dashboard />} />
-        <Route path="/GiftExchangeComponent" element={<GiftExchangeComponent />} />
+        <Route path="/giftCard" element={<GiftCard />} />
         <Route path="/usercard" element={<UserProfile />} />
         <Route path="/totalcoins" element={<TotalCoins />} />
         <Route path="/topgroup" element={<TopGroup />} />
@@ -35,6 +36,7 @@ function App() {
         <Route path="/categorygroup" element={<GroupCategory />} />
         <Route path="/students" element={<Students />} />
         <Route path="/offcanvas" element={<Offcanvas />} />
+        <Route path="/gift" element={<Gift />} />
       </Routes>
     </div>
   )
