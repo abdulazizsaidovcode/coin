@@ -1,25 +1,37 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faTrophy, faClock, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 const TotalCoinForStudent = () => {
   return (
-    <div className="p-4 max-w-sm mx-auto bg-white rounded-lg border shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
-      <div className="flex justify-between items-center mb-4">
-        <div className="text-sm font-semibold text-gray-900 dark:text-white">Total coin</div>
-        <div className="text-3xl font-bold text-gray-900 dark:text-white">3255</div>
-      </div>
-      <div className="flex justify-between items-center mb-4">
-        <div className="text-sm font-semibold text-gray-900 dark:text-white">Rate</div>
-        <div className="text-3xl font-bold text-gray-900 dark:text-white">15</div>
-      </div>
-      <div className="flex justify-between items-center mb-4">
+    <div className="flex flex-col items-center bg-white rounded-lg border shadow-md p-4 md:p-6 lg:p-8">
+      <div className="flex items-center justify-between w-full mb-4">
         <div className="flex items-center">
-          <span className="text-sm font-semibold text-gray-900 dark:text-white">Learning time</span>
-          <span className="ml-1 text-xl font-bold text-gray-900 dark:text-white">5h 45m</span>
+          <FontAwesomeIcon icon={faStar} className="text-yellow-400 mr-2" />
+          <span className="text-sm font-semibold">Total coin</span>
         </div>
+        <span className="text-lg font-bold">3255</span>
+      </div>
+      <div className="flex items-center justify-between w-full mb-4">
         <div className="flex items-center">
-          <span className="text-sm font-semibold text-gray-900 dark:text-white">Completed course</span>
-          <span className="ml-1 text-xl font-bold text-gray-900 dark:text-white">3</span>
+          <FontAwesomeIcon icon={faTrophy} className="text-yellow-500 mr-2" />
+          <span className="text-sm font-semibold">Rate</span>
         </div>
+        <span className="text-lg font-bold">15</span>
+      </div>
+      <div className="flex items-center justify-between w-full mb-4">
+        <div className="flex items-center">
+          <FontAwesomeIcon icon={faClock} className="text-blue-500 mr-2" />
+          <span className="text-sm font-semibold">Learning time</span>
+        </div>
+        <span className="text-lg font-bold">5h 45m</span>
+      </div>
+      <div className="flex items-center justify-between w-full">
+        <div className="flex items-center">
+          <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mr-2" />
+          <span className="text-sm font-semibold">Completed course</span>
+        </div>
+        <span className="text-lg font-bold">3</span>
       </div>
     </div>
   );

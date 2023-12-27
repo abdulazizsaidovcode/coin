@@ -2,9 +2,6 @@ import { Route, Routes } from "react-router-dom"
 import FalsePage from "./components/falsepage"
 import SignIn from "./components/signin"
 import "./index.css"
-import Teacher from "./teacher"
-import Admin from "./admin"
-import Student from "./student"
 
 
 
