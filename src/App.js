@@ -12,12 +12,11 @@ function App() {
   return (
     <div className="flex">
       <Routes>
-        <Route path="/404page" element={<FalsePage />} />
-        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/" element={<SignIn />} />
+        <Route path="*" element={<FalsePage />} />
       </Routes>
       <Admin/>
       <Teacher/>
-
       <Student/>
     </div>
   )
