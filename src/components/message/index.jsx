@@ -35,7 +35,7 @@ const initialMessages = [
     // Qo'shimcha xabarlar...
 ];
 
-function App() {
+function Message() {
     const [messages, setMessages] = useState(initialMessages);
     const [sortType, setSortType] = useState('date'); // 'date' yoki 'time'
     const [isAscending, setIsAscending] = useState(false); // O'sish tartibi bo'yicha tartiblash
@@ -110,4 +110,4 @@ function App() {
     );
 }
 
-export default App;
+export default Message;

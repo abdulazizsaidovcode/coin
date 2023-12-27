@@ -20,6 +20,40 @@ wd-50 {
     transform: scale(1.02);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
 }
+.text {
+    color: #0c8ce9;
+}
+
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    height: 3.5rem;
+    padding: 0.5rem;
+    border-left-width: 4px;
+    border-left-color: transparent;
+    /* text-gray-600;
+    hover:text-gray-800;
+    hover:bg-gray-50;
+    focus:outline-none; */
+  }
+  
+  .sidebar-item:hover {
+    border-left-color: #4f46e5; /* Indigo color */
+  }
+  
+  .sidebar-icon {
+    min-width: 1.25rem; /* Icon width */
+    margin-left: 1rem;
+    margin-right: 2rem; /* Space between icon and text */
+  }
+  
+  .sidebar-text {
+    flex: 1;
+    white-space: nowrap;
+  }
+  
+  
 
 
 

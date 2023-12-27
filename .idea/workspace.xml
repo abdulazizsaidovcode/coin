@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4b76715-8cdf-4046-b717-f8b70306c278" name="Changes" comment="axios istal qilindi">
-      <change beforePath="$PROJECT_DIR$/src/components/signin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/signin/index.js" afterDir="false" />
+    <list default="true" id="f4b76715-8cdf-4046-b717-f8b70306c278" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="f4b76715-8cdf-4046-b717-f8b70306c278" name="Changes" comment="erta tugirleman sidebar sal amallab quydim">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/api/api.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,11 +83,13 @@
       <workItem from="1703156816488" duration="1160000" />
       <workItem from="1703159594684" duration="1340000" />
       <workItem from="1703264991801" duration="3134000" />
+      <workItem from="1703268232593" duration="2657000" />
+      <workItem from="1703658745762" duration="758000" />
       <workItem from="1703268232593" duration="2804000" />
       <workItem from="1703311321909" duration="643000" />
       <workItem from="1703313441024" duration="980000" />
       <workItem from="1703329859011" duration="1361000" />
-      <workItem from="1703659133799" duration="2877000" />
+      <workItem from="1703659133799" duration="918000" />
     </task>
     <task id="LOCAL-00001" summary="erta tugirleman sidebar sal amallab quydim">
       <option name="closed" value="true" />
@@ -110,23 +115,7 @@
       <option name="project" value="LOCAL" />
       <updated>1703659326573</updated>
     </task>
-    <task id="LOCAL-00004" summary="axios istal qilindi">
-      <option name="closed" value="true" />
-      <created>1703660383679</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1703660383679</updated>
-    </task>
-    <task id="LOCAL-00005" summary="axios istal qilindi">
-      <option name="closed" value="true" />
-      <created>1703662301851</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1703662301851</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,7 +134,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="erta tugirleman sidebar sal amallab quydim" />
-    <MESSAGE value="axios istal qilindi" />
-    <option name="LAST_COMMIT_MESSAGE" value="axios istal qilindi" />
+    <option name="LAST_COMMIT_MESSAGE" value="erta tugirleman sidebar sal amallab quydim" />
   </component>
 </project>
