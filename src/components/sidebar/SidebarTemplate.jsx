@@ -21,7 +21,7 @@ function SidebarTemplate() {
                             </div>
                         </li>
                         <li>
-                            <Link to="/dashboard"
+                            <Link to="/admin/dashboard"
                                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                                 <span className="inline-flex justify-center items-center ml-4 mr-2">
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -33,7 +33,7 @@ function SidebarTemplate() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/category"
+                            <Link to="/admin/category"
                                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                                 <span className="inline-flex justify-center items-center ml-4 mr-2">
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -47,7 +47,7 @@ function SidebarTemplate() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/categorygroup"
+                            <Link to="/admin/categorygroup"
                                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                                 <span className="inline-flex justify-center items-center ml-4">
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -59,7 +59,7 @@ function SidebarTemplate() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/students"
+                            <Link to="/admin/students"
                                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                                 <span className="inline-flex justify-center items-center ml-4">
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -73,7 +73,7 @@ function SidebarTemplate() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/message"
+                            <Link to="/admin/message"
                                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                                 <span className="inline-flex justify-center items-center ml-4">
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -92,7 +92,7 @@ function SidebarTemplate() {
                             </div>
                         </li>
                         <li>
-                            <Link to="/gift"
+                            <Link to="/admin/gift"
                                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                                 <span className="inline-flex justify-center items-center ml-4">
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -104,7 +104,7 @@ function SidebarTemplate() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/exchange"
+                            <Link to="/admin/exchange"
                                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                                 <span className="inline-flex justify-center items-center ml-4">
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
