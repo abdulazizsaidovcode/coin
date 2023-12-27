@@ -1,14 +1,19 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import TopGroup from '../TopGroups';
 import TopStudent from '../Topstudents';
 import TopTeachers from '../Topteachers';
 import TotalCoins from '../Total coins';
+import axios from "axios";
+import {url} from "../api/api";
 // import "../../../globalcss/style.css"
 
 const Dashboard = () => {
 
-    useEffect(() => {
+    const [STMGSize, setSTMGSize] = useState('');
 
+    useEffect(() => {
+        console.log('ha')
+        axios.get(url + "user/statistic").then(res => console.log(res))
     }, []);
 
     return (

@@ -23,10 +23,10 @@ import Message from "./components/message"
 function App() {
   return (
     <div className="flex">
-      <SidebarTemplate/>
+      {/*<SidebarTemplate/>*/}
       <Routes>
         <Route path="/404page" element={<FalsePage />} />
-        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/signIn" element={<SignIn />} />
         <Route path="/CategoryTable" element={<CategoryTable />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/giftCard" element={<GiftCard />} />
