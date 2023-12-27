@@ -13,7 +13,6 @@ function App() {
     <div className="flex">
       <Routes>
         <Route path="/" element={<SignIn />} />
-        <Route path="*" element={<FalsePage />} />
       </Routes>
       <Admin/>
       <Teacher/>
