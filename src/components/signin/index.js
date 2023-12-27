@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, {useRef, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import "./style.css";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const username = useRef('');
+  const password = useRef('');
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -17,12 +20,12 @@ const SignIn = () => {
         <form className="space-y-4">
           <div>
             <label className="block mb-1 font-bold text-gray-500">Username</label>
-            <input type="text" className="w-full border-2 border-gray-200 p-3 rounded-xl outline-none focus:border-purple-500" placeholder="Enter username"/>
+            <input ref={username} type="text" className="w-full border-2 border-gray-200 p-3 rounded-xl outline-none focus:border-purple-500" placeholder="Enter username"/>
           </div>
           <div>
             <label className="block mb-1 font-bold text-gray-500">Password</label>
             <div className="relative">
-              <input type={showPassword ? 'text' : 'password'} className="w-full border-2 border-gray-200 p-3 rounded-xl outline-none focus:border-purple-500" placeholder="Enter password"/>
+              <input ref={password} type={showPassword ? 'text' : 'password'} className="w-full border-2 border-gray-200 p-3 rounded-xl outline-none focus:border-purple-500" placeholder="Enter password"/>
               <button type="button" className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
                       onClick={togglePasswordVisibility}>
                 <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />

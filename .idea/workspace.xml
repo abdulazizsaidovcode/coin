@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4b76715-8cdf-4046-b717-f8b70306c278" name="Changes" comment="axios istal qilindi">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dashboard/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/signin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/signin/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +84,7 @@
       <workItem from="1703311321909" duration="643000" />
       <workItem from="1703313441024" duration="980000" />
       <workItem from="1703329859011" duration="1361000" />
-      <workItem from="1703659133799" duration="2372000" />
+      <workItem from="1703659133799" duration="2877000" />
     </task>
     <task id="LOCAL-00001" summary="erta tugirleman sidebar sal amallab quydim">
       <option name="closed" value="true" />
@@ -120,7 +118,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703660383679</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="axios istal qilindi">
+      <option name="closed" value="true" />
+      <created>1703662301851</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1703662301851</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
