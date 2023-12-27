@@ -22,22 +22,21 @@ const SignIn = () => {
         }
 
         await axios.post("http://192.168.168.139/auth/login", addData)
-            .then(async res => {
-                sessionStorage.setItem('jwtToken', "Bearer " + res.data.body);
+            .then( async res => {
+                await sessionStorage.setItem('jwtToken', "Bearer " + res.data.body);
+                // console.log(res.data.body);
+                // console.log(res.data.message);
 
                 if (res.data.message === "ROLE_SUPER_ADMIN"){
-                    await setRole('/admin/dashboard');
+                    setRole('/admin/dashboard');
                     document.getElementById('links').click()
-
-                    await console.log(res.data.message);
-                    await console.log(res.data.body)
                 }
                 else if (res.data.message === "ROLE_USER"){
-                    await setRole('/student/dashboard');
+                    setRole('/student/dashboard');
                     document.getElementById('links').click()
                 }
                 else if (res.data.message === "ROLE_TEACHER"){
-                    await setRole('/teacher/dashboard');
+                    setRole('/teacher/dashboard');
                     document.getElementById('links').click()
                 }
 
