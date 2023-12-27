@@ -1,22 +1,19 @@
-// import React from "react";
+import React from "react";
 import CategoryTable from "../categorytable";
 import "../../globalcss/style.css"
-import React from 'react';
 
-function Category() {
+function CategoryGroup() {
     return (
         <div className="bg-gray-100 min-h-screen p-8 ml-64 w-full">
-            <div className=" mb-4">
+            <div className=" mb-7">
                 <h1 className="text-3xl font-semibold text-gray-800">Hi Admin(a)</h1>
                 <span className="text-sm text-gray-600">Welcome back to Coin system dashboard</span>
             </div>
             <div className="mt-10">
-                <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Category</h2>
+                <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Group</h2>
             </div>
             <div className=" mb-2 flex justify-between">
-                <button id="openMenuButton" className="btm">
-                    + Add
-                </button>
+                <button className="btm">+ Add</button>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -31,4 +28,4 @@ function Category() {
     );
 }
 
-export default Category;
+export default CategoryGroup;
