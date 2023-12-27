@@ -11,7 +11,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen signin w-full">
+    <div className="flex items-center justify-center h-screen signin w-full z-10">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold mb-2 text-gray-800">Edu Coin System</h2>
         <form className="space-y-4">
