@@ -45,8 +45,8 @@ const TotalCoins = () => {
 
     return (
         <div className="bg-white rounded-lg shadow-md p-5">
-            <div style={{ height: '400px', width: '100%' }}>
-                <EChartsReact option={option} style={{ height: '100%', width: '100%' }} />
+            <div style={{ height: '400px', width: '100%', display: "flex", flexDirection:"column" }}>
+                <EChartsReact option={option} style={{ height: '100%', width: '100%', display: "flex", justifyContent: "center"}} />
             </div>
         </div>
 
