@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom"
-import FalsePage from "./components/falsepage"
 import SignIn from "./components/signin"
 import "./index.css"
 import Admin from "./admin/index"

@@ -35,7 +35,7 @@ function Admin() {
         <Route path="/admin/exchange" element={<Exchange />} />
         <Route path="/admin/message" element={<Message />} />
         <Route path="/admin/totalcoinforstudent" element={<TotalCoinForStudent />} />
-        <Route path="*" element={<FalsePage />} />
+        {/* <Route path="*" element={<FalsePage />} /> */}
       </Routes>
     </>
   );
