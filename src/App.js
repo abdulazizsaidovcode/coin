@@ -18,6 +18,7 @@ import GiftCard from "./components/card"
 import Exchange from "./components/exchange"
 import Message from "./components/message"
 import TotalCoinForStudent from "./components/totalconforstudent"
+import Student from "./student"
 
 
 
@@ -42,6 +43,7 @@ function App() {
         <Route path="/exchange" element={<Exchange />} />
         <Route path="/message" element={<Message />} />
         <Route path="/totalcoinforstudent" element={<TotalCoinForStudent />} />
+        <Route path="/Student" element={<Student />} />
       </Routes>
     </div>
   )
