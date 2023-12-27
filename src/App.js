@@ -16,7 +16,6 @@ import TopTeachers from "./components/Topteachers"
 function App() {
   return (
     <>
-      <h1>hello</h1>
       <SidebarTemplate/>
       <Routes>
         <Route path="/404page" element={<FalsePage />} />
