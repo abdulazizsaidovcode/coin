@@ -4,16 +4,22 @@ import TopStudent from '../Topstudents';
 import TopTeachers from '../Topteachers';
 import TotalCoins from '../Total coins';
 import axios from "axios";
-import {url} from "../api/api";
-// import "../../../globalcss/style.css"
+import {config, setConfig, url} from "../api/api";
 
 const Dashboard = () => {
 
-    const [STMGSize, setSTMGSize] = useState('');
+    const [STMGSize, setSTMGSize] = useState(null);
+    const [topTeacher, setTopTeacher] = useState(null);
+    const [topStudent, setTopStudent] = useState(null);
+    const [topGroup, setTopGroup] = useState(null);
 
     useEffect(() => {
-        console.log('ha')
-        axios.get(url + "user/statistic").then(res => console.log(res))
+        setConfig();
+        axios.get(url + "user/statistic", config).then(res => setSTMGSize(res.data.body));
+        axios.get(url + 'user/top/teachers', config).then(res => setTopTeacher(res.data.body))
+        axios.get(url + 'user/top/student', config).then(res => setTopStudent(res.data.body))
+        axios.get(url + 'group/topGroupsForAdmin', config).then(res => setTopGroup(res.data.body))
+        axios.get(url + 'coin/history/course/statistics', config).then(res => console.log(res.data.body))
     }, []);
 
     return (
@@ -23,25 +29,25 @@ const Dashboard = () => {
                 <span className="text-sm text-gray-600">Welcome back to Coin system dashboard</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
-                <MetricCard title="Number of Students" value="200" icon="fas fa-users"/>
-                <MetricCard title="Number of Teachers" value="20" icon="fas fa-chalkboard-teacher"/>
-                <MetricCard title="Monthly Growth" value="33.98%" icon="fas fa-chart-line"/>
-                <MetricCard title="Number of Groups" value="8" icon="fas fa-users"/>
+                <MetricCard title="Number of Students" value={STMGSize && STMGSize.studentCount} icon="fas fa-users"/>
+                <MetricCard title="Number of Teachers" value={STMGSize && STMGSize.teacherCount} icon="fas fa-chalkboard-teacher"/>
+                <MetricCard title="Monthly Growth" value={STMGSize && STMGSize.statisticByPercentage + '%'} icon="fas fa-chart-line"/>
+                <MetricCard title="Number of Groups" value={STMGSize && STMGSize.groupCount} icon="fas fa-users"/>
             </div>
             <div className="flex flex-col lg:flex-row gap-4 mb-4">
                 <div className="flex-grow">
                     <TotalCoins/>
                 </div>
                 <div className="flex-grow">
-                    <TopTeachers/>
+                    {topTeacher && <TopTeachers teacherList={topTeacher}/>}
                 </div>
             </div>
             <div className="flex flex-col lg:flex-row gap-4">
                 <div className="flex-grow">
-                    <TopStudent/>
+                    {topStudent && <TopStudent students={topStudent}/>}
                 </div>
                 <div className="flex-grow">
-                    <TopGroup/>
+                    {topGroup && <TopGroup topGroups={topGroup}/>}
                 </div>
             </div>
         </div>

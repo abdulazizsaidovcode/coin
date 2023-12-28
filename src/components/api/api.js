@@ -7,3 +7,5 @@ export const config = {
         Authorization: sessionStorage.getItem("jwtToken"),
     }
 }
+
+export const setConfig = () => config.headers.Authorization = sessionStorage.getItem("jwtToken");

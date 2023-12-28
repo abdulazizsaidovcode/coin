@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import "./style.css";
 import axios from "axios";
-import {byId, url} from "../api/api";
+import {byId} from "../api/api";
 import {Link} from "react-router-dom";
 import {toast} from "react-toastify";
 
@@ -29,8 +29,7 @@ const SignIn = () => {
                 if (res.data.message === "ROLE_SUPER_ADMIN") setRole('/admin/dashboard');
                 else if (res.data.message === "ROLE_TEACHER") setRole('/teacher/dashboard');
                 else if (res.data.message === "ROLE_USER") setRole('/student/dashboard');
-            })
-            .catch(() => toast.error("Raqam yoki parol xato!"));
+            }).catch(() => toast.error("Raqam yoki parol xato!"));
     }
 
 
