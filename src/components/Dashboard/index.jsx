@@ -40,7 +40,6 @@ const Dashboard = () => {
             </div>
             <div className="flex flex-col lg:flex-row gap-4 mb-4">
                 <div className="flex-grow">
-                    {console.log(pl ? 'ha' : 'yuq')}
                     {pl ? <TotalCoins pl={pl}/> : <TotalCoins pl={[{categoryName: "Loading...", coin: 100}]}/>}
                 </div>
                 <div className="flex-grow">
