@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 // Circular Progress Bar Component
-const CircularProgress = ({percentage, color}) => {
+export const CircularProgress = ({percentage, color}) => {
     const radius = 18;
     const strokeWidth = 4;
     const normalizedRadius = radius - strokeWidth;

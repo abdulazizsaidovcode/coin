@@ -1,14 +1,24 @@
 // TotalCoins.js
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import EChartsReact from 'echarts-for-react';
 
-const TotalCoins = () => {
+const TotalCoins = ({pl}) => {
+
+    const [pn, setPn] = useState(null);
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        setPn(pl.map(p => p.categoryName));
+        setData(pl.map(p => {
+            return {value: p.coin, name: p.categoryName}
+        }))
+    }, [pl]);
 
     const option = {
         title: {
             text: 'Total coin by courses',
-            subtext: 'Fake Data',
+            subtext: 'Languages',
             left: 'center'
         },
         tooltip: {
@@ -18,20 +28,14 @@ const TotalCoins = () => {
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: ['Java', 'css', 'Html', 'ReactJs', 'Scss']
+            data: pn ? pn : []
         },
         series: [
             {
                 name: 'Access From',
                 type: 'pie',
                 radius: '50%',
-                data: [
-                    { value: 1048, name: 'Java' },
-                    { value: 735, name: 'css' },
-                    { value: 580, name: 'Html' },
-                    { value: 484, name: 'ReactJs' },
-                    { value: 300, name: 'Scss' }
-                ],
+                data: data ? data : [],
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,
@@ -45,8 +49,9 @@ const TotalCoins = () => {
 
     return (
         <div className="bg-white rounded-lg shadow-md p-5">
-            <div style={{ height: '400px', width: '100%', display: "flex", flexDirection:"column" }}>
-                <EChartsReact option={option} style={{ height: '100%', width: '100%', display: "flex", justifyContent: "center"}} />
+            <div style={{height: '400px', width: '100%', display: "flex", flexDirection: "column"}}>
+                <EChartsReact option={option}
+                              style={{height: '100%', width: '100%', display: "flex", justifyContent: "center"}}/>
             </div>
         </div>
 
