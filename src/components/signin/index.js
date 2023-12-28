@@ -12,7 +12,12 @@ const SignIn = () => {
     const [role, setRole] = useState("");
 
     useEffect(() => {
-        document.getElementById('links').click()
+        let getJwtToken = sessionStorage.getItem("jwtToken")
+        if (getJwtToken) {
+            byId('links').click();
+        } else {
+            console.log("xato")
+        }
     }, [role]);
 
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
@@ -34,14 +39,14 @@ const SignIn = () => {
     }
 
 
-    // function checkKeyPress(event) {
-    //     if (event.key === "Enter") {
-    //         event.preventDefault(); // Enter tuşunun varsayılan davranışını engeller
-    //
-    //         var submitButton = document.getElementById("button");
-    //         submitButton.click(); // "Submit" düğmesini tıklar
-    //     }
-    // }
+    function checkKeyPress(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+
+            let submitButton = byId("loginBtn");
+            submitButton.click();
+        }
+    }
 
     // role user => student/dashboard
     // role teacher => teacher/dashboard
@@ -50,11 +55,12 @@ const SignIn = () => {
     return (
         <>
             <Link to={role} id="links"></Link>
+            <a href="/" id="refresh"></a>
             <div className="flex items-center justify-center h-screen signin w-full z-10">
                 <div className="bg-white p-8 rounded-lg shadow-lg w-96 font-inika">
                     <h2 className="text-2xl font-bold mb-2 text-gray-800">Edu Coin System</h2>
                     {/*<form className="mt-4">*/}
-                    <div>
+                    <div className={`mt-5`}>
                         <label className="block mb-1 font-bold text-gray-500">Phone Number</label>
                         <input
                             id="phoneNumber"
@@ -62,10 +68,11 @@ const SignIn = () => {
                             className="w-full border-2 border-gray-200 p-3 rounded-xl outline-none focus:border-purple-500"
                             placeholder="Phone number"/>
                     </div>
-                    <div className="mt-4">
+                    <div className="mt-5">
                         <label className="block mb-1 font-bold text-gray-500">Password</label>
                         <div className="relative">
                             <input
+                                onKeyDown={checkKeyPress}
                                 id="password"
                                 type={showPassword ? 'text' : 'password'}
                                 className="w-full border-2 border-gray-200 p-3 rounded-xl outline-none focus:border-purple-500"
