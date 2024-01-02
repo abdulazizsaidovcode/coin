@@ -4,13 +4,12 @@ import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import "./style.css";
 import axios from "axios";
 import {byId, url} from "../api/api";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {toast} from "react-toastify";
 
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [role, setRole] = useState("");
-    const navigate = useNavigate();
 
     useEffect(() => {
         let getJwtToken = sessionStorage.getItem("jwtToken")
@@ -36,19 +35,12 @@ const SignIn = () => {
             }).catch(() => toast.error("Raqam yoki parol xato!"));
     }
 
-
     function checkKeyPress(event) {
         if (event.key === "Enter") {
             event.preventDefault();
-
-            let submitButton = byId("loginBtn");
-            submitButton.click();
+            byId("loginBtn").click();
         }
     }
-
-    // role user => student/dashboard
-    // role teacher => teacher/dashboard
-    // role admin => admin/dashboard
 
     return (
         <>
