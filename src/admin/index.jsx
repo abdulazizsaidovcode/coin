@@ -21,7 +21,7 @@ function Admin() {
     <>
       <SidebarTemplate />
 
-      <Routes>
+      <Routes >
         <Route path="/admin/CategoryTable" element={<CategoryTable />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/giftCard" element={<GiftCard />} />

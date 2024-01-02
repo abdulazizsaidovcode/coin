@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import "./style.css";
 import axios from "axios";
-import {byId} from "../api/api";
+import {byId, url} from "../api/api";
 import {Link} from "react-router-dom";
 import {toast} from "react-toastify";
 
@@ -13,11 +13,8 @@ const SignIn = () => {
 
     useEffect(() => {
         let getJwtToken = sessionStorage.getItem("jwtToken")
-        if (getJwtToken) {
-            byId('links').click();
-        } else {
-            console.log("xato")
-        }
+        if (getJwtToken) byId('links').click();
+        else console.log("xato");
     }, [role]);
 
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
@@ -28,9 +25,10 @@ const SignIn = () => {
             password: byId("password").value,
         }
 
-        await axios.post("http://192.168.168.139/auth/login", addData)
+        await axios.post(url + "auth/login", addData)
             .then(async res => {
                 await sessionStorage.setItem('jwtToken', "Bearer " + res.data.body);
+                await sessionStorage.setItem('role', res.data.message)
                 if (res.data.message === "ROLE_SUPER_ADMIN") setRole('/admin/dashboard');
                 else if (res.data.message === "ROLE_TEACHER") setRole('/teacher/dashboard');
                 else if (res.data.message === "ROLE_USER") setRole('/student/dashboard');

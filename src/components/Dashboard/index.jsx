@@ -6,6 +6,7 @@ import TotalCoins from '../Total coins';
 import axios from "axios";
 import {config, setConfig, url} from "../api/api";
 import TopLoading from "../Topteachers/TopLoading";
+import {toast} from "react-toastify";
 
 const Dashboard = () => {
 
@@ -17,11 +18,11 @@ const Dashboard = () => {
 
     useEffect(() => {
         setConfig();
-        axios.get(url + "user/statistic", config).then(res => setSTMGSize(res.data.body));
-        axios.get(url + 'user/top/teachers', config).then(res => setTopTeacher(res.data.body))
-        axios.get(url + 'user/top/student', config).then(res => setTopStudent(res.data.body))
-        axios.get(url + 'group/topGroupsForAdmin', config).then(res => setTopGroup(res.data.body))
-        axios.get(url + 'coin/history/course/statistics', config).then(res => setPl(res.data.body))
+        axios.get(url + "user/statistic", config).then(res => setSTMGSize(res.data.body)).catch(() => toast.warning('internetga ulanganligingizni tekshirig!'));
+        axios.get(url + 'user/top/teachers', config).then(res => setTopTeacher(res.data.body)).catch();
+        axios.get(url + 'user/top/student', config).then(res => setTopStudent(res.data.body)).catch();
+        axios.get(url + 'group/topGroupsForAdmin', config).then(res => setTopGroup(res.data.body)).catch();
+        axios.get(url + 'coin/history/course/statistics', config).then(res => setPl(res.data.body)).catch();
     }, []);
 
     return (
