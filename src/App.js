@@ -9,6 +9,13 @@ import {useEffect} from "react";
 
 
 function App() {
+
+    function SidebarControl() {
+        if (sessionStorage.getItem('role') === 'ROLE_SUPER_ADMIN') return <Admin/>
+        if (sessionStorage.getItem('role') === 'ROLE_TEACHER') return <Teacher/>
+        return <Student/>
+    }
+
     return (
         <div className="flex">
             <Routes>
@@ -19,9 +26,7 @@ function App() {
                 <Route path='/teacher/*' element={<Scan role='ROLE_TEACHER'/>}/>
                 <Route path='/student/*' element={<Scan role='ROLE_USER'/>}/>
             </Routes>
-            <Admin/>
-            <Teacher/>
-            <Student/>
+            <SidebarControl/>
         </div>
     )
 }

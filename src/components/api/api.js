@@ -1,4 +1,4 @@
-export const url = "http://192.168.129.27/";
+export const url = "http://172.20.10.6/";
 
 export const byId = (id) => document.getElementById(id);
 
