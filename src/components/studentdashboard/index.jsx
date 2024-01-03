@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { config, url } from "../api/api";
+import {config, setConfig, url} from "../api/api";
 
 function StudentDashboard() {
     const [name, setName] = useState("");
 
     useEffect(() => {
+        setConfig();
         axios.get(url + "user/getMe", config)
             .then(response => {
                 setName(response.data.body.fullName);
