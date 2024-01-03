@@ -18,11 +18,11 @@ const Dashboard = () => {
 
     useEffect(() => {
         setConfig();
-        axios.get(url + "user/statistic", config).then(res => setSTMGSize(res.data.body)).catch(() => toast.warning('internetga ulanganligingizni tekshirig!'));
-        axios.get(url + 'user/top/teachers', config).then(res => setTopTeacher(res.data.body)).catch();
-        axios.get(url + 'user/top/student', config).then(res => setTopStudent(res.data.body)).catch();
-        axios.get(url + 'group/topGroupsForAdmin', config).then(res => setTopGroup(res.data.body)).catch();
-        axios.get(url + 'coin/history/course/statistics', config).then(res => setPl(res.data.body)).catch();
+        axios.get(url + "user/statistic", config).then(res => setSTMGSize(res.data.body)).catch(() => toast.warning('internetga blan aloqani tekshirig!'));
+        axios.get(url + 'user/top/teachers', config).then(res => setTopTeacher(res.data.body)).catch(err => console.log(err));
+        axios.get(url + 'user/top/student', config).then(res => setTopStudent(res.data.body)).catch(err => console.log(err));
+        axios.get(url + 'group/topGroupsForAdmin', config).then(res => setTopGroup(res.data.body)).catch(err => console.log(err));
+        axios.get(url + 'coin/history/course/statistics', config).then(res => setPl(res.data.body)).catch(err => console.log(err));
     }, []);
 
     return (
