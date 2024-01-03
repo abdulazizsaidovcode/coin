@@ -5,7 +5,7 @@ import SidebarTemplateTeacher from "./sidebar/SidebarTemplate";
 function Teacher() {
     return (
         <>
-            <SidebarTemplateTeacher />
+            {/* <SidebarTemplateTeacher /> */}
         </>
     );
 }

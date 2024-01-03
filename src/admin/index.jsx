@@ -19,7 +19,7 @@ import FalsePage from "../components/falsepage";
 function Admin() {
   return (
     <>
-      <SidebarTemplate />
+      {/* <SidebarTemplate /> */}
 
       <Routes >
         <Route path="/admin/CategoryTable" element={<CategoryTable />} />

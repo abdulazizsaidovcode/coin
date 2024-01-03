@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import img from '../../assits/IT-CA-logo.png'; // O'zgartiring, agar yo'l noto'g'ri bo'lsa
+import img from '../../assits//IT-CA-logo.png'; // O'zgartiring, agar yo'l noto'g'ri bo'lsa
 
-function SidebarTemplate() {
+function StudentSidebar() {
     const [isExpanded, setIsExpanded] = useState(window.innerWidth > 992);
 
     // Oyna o'lchamini kuzatish
@@ -21,7 +21,7 @@ function SidebarTemplate() {
         <>
             <div className={` bg-white h-full border-r ${isExpanded ? 'w-64' : 'w-20'} transition-width duration-300 ease-in-out`}>
                 <div className="flex items-center justify-between h-16 border-b ">
-                    <img className={`transition-all duration-300 ease-in-out ${isExpanded ? 'w-1/5 mx-3' : 'hidden'}`} src={img} alt="Logo" />
+                    <img className={`transition-all duration-300 ease-in-out ${isExpanded ? 'w-3/5 ' : 'hidden'}`} src={img} alt="Logo" />
                     <button onClick={() => setIsExpanded(!isExpanded)} className="p-2 rounded-full focus:outline-none focus:bg-gray-100 hover:bg-gray-100 mr-2 ml-5">
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             {isExpanded ? (
@@ -41,7 +41,7 @@ function SidebarTemplate() {
                         </li>
                         {/* Dashboard Link */}
                         <li>
-                            <Link to="/admin/dashboard" className="flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
+                            <Link to="/student/dashboard" className="flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                                 <span className="inline-flex justify-center items-center ml-5">
                                     <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round"
@@ -52,7 +52,7 @@ function SidebarTemplate() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/admin/category" className="flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
+                            <Link to="/student/category" className="flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                                 <span className="inline-flex justify-center items-center ml-5">
                                     <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round"
@@ -69,4 +69,4 @@ function SidebarTemplate() {
     );
 }
 
-export default SidebarTemplate;
+export default StudentSidebar;

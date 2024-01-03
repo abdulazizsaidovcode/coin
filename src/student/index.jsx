@@ -13,12 +13,12 @@ import Exchange from "../components/exchange";
 import TotalCoinForStudent from "../components/totalconforstudent";
 import Message from "../components/message";
 import StudentDashboard from "../components/studentdashboard";
-import SidebarTemplateStudent from "./sidebar/SidebarTemplate";
+import StudentSidebar from "./sidebar/Studentsitebar";
 
 function Student() {
   return (
     <>
-      <SidebarTemplateStudent />
+      <StudentSidebar />
       <Routes>
         <Route path="/student/CategoryTable" element={<CategoryTable />} />
         <Route path="/student/dashboard" element={<StudentDashboard />} />
