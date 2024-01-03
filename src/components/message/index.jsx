@@ -72,7 +72,7 @@ function Message() {
     };
 
     return (
-        <div className="container mx-auto p-8 ml-64">
+        <div className="container mx-auto p-8">
             {/* Tartiblash tugmalari */}
             <div className=" mb-7">
                 <h1 className="text-3xl font-semibold text-gray-800">Hi Admin(a)</h1>
