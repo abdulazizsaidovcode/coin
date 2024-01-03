@@ -12,16 +12,16 @@ import Gift from "../components/gift";
 import Exchange from "../components/exchange";
 import TotalCoinForStudent from "../components/totalconforstudent";
 import Message from "../components/message";
-import StudentDashboard from "../components/studentdashboard";
 import StudentSidebar from "./sidebar/Studentsitebar";
+import StudentDashboard from "../components/studentdashboard";
 
 function Student() {
   return (
     <>
       <StudentSidebar />
       <Routes>
-        <Route path="/student/CategoryTable" element={<CategoryTable />} />
         <Route path="/student/dashboard" element={<StudentDashboard />} />
+        <Route path="/student/CategoryTable" element={<CategoryTable />} />
         <Route path="/student/giftCard" element={<GiftCard />} />
         <Route path="/student/usercard" element={<UserProfile />} />
         <Route path="/student/totalcoins" element={<TotalCoins />} />
