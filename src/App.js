@@ -27,22 +27,16 @@ function App() {
                 <Route path='/student/*' element={<Scan role='ROLE_USER'/>}/>
             </Routes>
             <SidebarControl/>
-            {/*<Admin/>*/}
-            {/*<Teacher/>*/}
-            {/*<Student/>*/}
         </div>
     )
 }
 
 function Scan({role}) {
-
     useEffect(() => {
         if (sessionStorage.getItem('role') !== role) byId('default').click();
     }, []);
 
-    return <>
-        <Link to='/' id='default'/>
-    </>
+    return <Link to='/' id='default'/>
 }
 
 export default App;
