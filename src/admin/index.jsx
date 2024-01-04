@@ -18,7 +18,7 @@ import Message from "../components/message";
 function Admin() {
   return (
     <>
-      <SidebarTemplate />
+      <SidebarTemplate isAdmin={true} />
 
       <Routes >
         <Route path="/admin/CategoryTable" element={<CategoryTable />} />
