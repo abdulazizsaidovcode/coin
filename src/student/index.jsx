@@ -20,6 +20,7 @@ function Student() {
     <>
       <StudentSidebar />
       <Routes>
+
         <Route path="/student/dashboard" element={<StudentDashboard />} />
         <Route path="/student/CategoryTable" element={<CategoryTable />} />
         <Route path="/student/giftCard" element={<GiftCard />} />
@@ -33,7 +34,6 @@ function Student() {
         <Route path="/student/exchange" element={<Exchange />} />
         <Route path="/student/message" element={<Message />} />
         <Route path="/student/totalcoinforstudent" element={<TotalCoinForStudent />} />
-        {/* <Route path="*" element={<FalsePage />} /> */}
       </Routes>
     </>
   );

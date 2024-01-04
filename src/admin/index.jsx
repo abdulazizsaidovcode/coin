@@ -14,12 +14,12 @@ import Gift from "../components/gift";
 import Exchange from "../components/exchange";
 import TotalCoinForStudent from "../components/totalconforstudent";
 import Message from "../components/message";
+import FalsePage from "../components/falsepage";
 
 function Admin() {
   return (
     <>
       <SidebarTemplate />
-
       <Routes >
         <Route path="/admin/CategoryTable" element={<CategoryTable />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
@@ -34,7 +34,7 @@ function Admin() {
         <Route path="/admin/exchange" element={<Exchange />} />
         <Route path="/admin/message" element={<Message />} />
         <Route path="/admin/totalcoinforstudent" element={<TotalCoinForStudent />} />
-        {/* <Route path="*" element={<FalsePage />} /> */}
+        <Route path="*" element={<FalsePage/>} />
       </Routes>
     </>
   );
