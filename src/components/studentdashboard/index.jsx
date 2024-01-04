@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { config, url } from "../../components/api/api.js";
 import StudentsTotalcoin from "./Totalcoins";
+import Studetsrate from "./Studentsrate/index.jsx";
 
 function StudentDashboard() {
     const [name, setName] = useState("");
@@ -22,7 +23,17 @@ function StudentDashboard() {
                 <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800">Hi {name} (student)</h1>
                 <span className="text-sm text-gray-600">Welcome back to the Coin system dashboard</span>
             </div>
-            <StudentsTotalcoin/>
+            <div className="w-full py-5">
+                <Studetsrate />
+            </div>
+            <div className="flex w-full">
+                <div className="w-6/12">
+                    <StudentsTotalcoin />
+                </div>
+                <div>
+                    
+                </div>
+            </div>
         </div>
     );
 }
