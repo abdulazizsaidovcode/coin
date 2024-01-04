@@ -1,9 +1,10 @@
-.StudentsTotalcoin div{
+.StudentsTotalcoin{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     width: 100%;
 }
-
-@media only screen and (max-width:992px){
-    .StudentsTotalcoin div{
-        width: 100%;
-    }
+.StudentsTotalcoin > div{
+    margin: 5px;
+    width: 210px !important;
 }

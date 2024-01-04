@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 
 
 
-// Initial categories data
 const initialCategories = [
-  { id: 1, name: 'Front-Ent', description: 'Tashqi qism', programmingLanguage: 'React', active: true },
+  { id: 1, name: 'Front-End', description: 'Tashqi qism', programmingLanguage: 'React', active: true },
   { id: 2, name: 'Back-End', description: 'Orqa qism', programmingLanguage: 'Java', active: false },
-  { id: 3, name: 'Back-End', description: 'Orqa qism', programmingLanguage: 'Java', active: false },
+  { id: 3, name: 'Back-End', description: 'Orqa qism', programmingLanguage: 'Java', active: true },
   { id: 4, name: 'Back-End', description: 'Orqa qism', programmingLanguage: 'Java', active: false },
-  { id: 5, name: 'Back-End', description: 'Orqa qism', programmingLanguage: 'Java', active: false },
+  { id: 5, name: 'Back-End', description: 'Orqa qism', programmingLanguage: 'Java', active: true },
   { id: 6, name: 'Back-End', description: 'Orqa qism', programmingLanguage: 'Java', active: false },
 ];
 
