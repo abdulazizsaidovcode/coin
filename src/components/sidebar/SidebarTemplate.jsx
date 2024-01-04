@@ -16,8 +16,7 @@ function SidebarTemplate() {
     }, []);
     return (
         <>
-            
-            <div className={`bg-white h-full border-r ${isExpanded ? 'w-64' : 'w-20'} transition-width duration-300 ease-in-out`}>
+            <div className={` bg-white h-full border-r ${isExpanded ? 'w-64' : 'w-20'} transition-width duration-300 ease-in-out`}>
                 <div className="flex items-center justify-between h-16 border-b ">
                     <img className={`transition-all duration-300 ease-in-out ${isExpanded ? 'w-3/5 ' : 'hidden'}`} src={img} alt="Logo" />
                     <button onClick={() => setIsExpanded(!isExpanded)} className="p-2 rounded-full focus:outline-none focus:bg-gray-100 hover:bg-gray-100 mr-2 ml-5">
