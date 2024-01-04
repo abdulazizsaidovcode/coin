@@ -5,9 +5,17 @@ import Admin from "./admin/index"
 import Teacher from "./teacher/index"
 import Student from "./student/index"
 import {byId} from "./components/api/api";
+import {useEffect} from "react";
 
 
 function App() {
+
+    function SidebarControl() {
+        if (sessionStorage.getItem('role') === 'ROLE_SUPER_ADMIN') return <Admin/>
+        if (sessionStorage.getItem('role') === 'ROLE_TEACHER') return <Teacher/>
+        return <Student/>
+    }
+
     return (
         <div className="flex">
             <Routes>
@@ -16,18 +24,19 @@ function App() {
                 {/*yullarga utishga ruxsat berishni nazorat qilish*/}
                 <Route path='/admin/*' element={<Scan role='ROLE_SUPER_ADMIN'/>}/>
                 <Route path='/teacher/*' element={<Scan role='ROLE_TEACHER'/>}/>
-                <Route path='/user/*' element={<Scan role='ROLE_USER'/>}/>
+                <Route path='/student/*' element={<Scan role='ROLE_USER'/>}/>
             </Routes>
-            <Admin/>
-            <Teacher/>
-            <Student/>
+            <SidebarControl/>
         </div>
     )
 }
 
 function Scan({role}) {
-    if (sessionStorage.getItem('role') !== role) byId('default').click();
-    return <><Link to='/' id='default'/></>
+    useEffect(() => {
+        if (sessionStorage.getItem('role') !== role) byId('default').click();
+    }, []);
+
+    return <Link to='/' id='default'/>
 }
 
-export default App
+export default App;
