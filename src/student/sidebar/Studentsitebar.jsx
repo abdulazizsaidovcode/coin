@@ -4,19 +4,16 @@ import img from '../../assits//IT-CA-logo.png'; // O'zgartiring, agar yo'l noto'
 
 function StudentSidebar() {
     const [isExpanded, setIsExpanded] = useState(window.innerWidth > 992);
-
     // Oyna o'lchamini kuzatish
     useEffect(() => {
         const handleResize = () => {
             setIsExpanded(window.innerWidth > 992);
         };
-
         window.addEventListener('resize', handleResize);
         return () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-
     return (
         <>
             <div className={` bg-white h-full border-r ${isExpanded ? 'w-64' : 'w-20'} transition-width duration-300 ease-in-out`}>
