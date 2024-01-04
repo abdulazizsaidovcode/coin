@@ -3,6 +3,9 @@ import axios from "axios";
 import { config, url } from "../../components/api/api.js";
 import StudentsTotalcoin from "./Totalcoins";
 import Studetsrate from "./Studentsrate/index.jsx";
+import Studentcoinstatistic from "./Studentcoinstatistic/index.jsx";
+import TopTeachers from "../Topteachers/index.jsx";
+import TopGroup from "../TopGroups/index.jsx";
 
 function StudentDashboard() {
     const [name, setName] = useState("");
@@ -26,14 +29,23 @@ function StudentDashboard() {
             <div className="w-full py-5">
                 <Studetsrate />
             </div>
-            <div className="flex w-full">
-                <div className="w-6/12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 w-full ">
+                <div className="col-span-1 lg:col-span-6 mb-3">
                     <StudentsTotalcoin />
                 </div>
-                <div>
-                    
+                <div className="col-span-1 lg:col-span-6 ">
+                    <Studentcoinstatistic />
                 </div>
             </div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 w-full ">
+                <div className="col-span-1 lg:col-span-6 mb-3">
+                    {/* <TopTeachers/> */}
+                </div>
+                <div className="col-span-1 lg:col-span-6 ">
+                    <TopGroup/>
+                </div>
+            </div>
+
         </div>
     );
 }

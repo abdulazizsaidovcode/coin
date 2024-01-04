@@ -40,26 +40,60 @@ function StudentSidebar() {
                             </div>
                         </li>
                         {/* Dashboard Link */}
-                        <li>
-                            <Link to="/student/dashboard" className="flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
-                                <span className="inline-flex justify-center items-center ml-5">
-                                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                                </span>
+                        <li className='py-2'>
+                            <Link to="/student/dashboard" className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
+                                <div className='flex justify-center items-center'>
+                                    <span className="inline-flex justify-center items-center ml-4 text-xl">
+                                        <i class="fa-solid fa-house "></i>
+                                    </span>
+                                </div>
                                 <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Dashboard</span>
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/student/category" className="flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
-                                <span className="inline-flex justify-center items-center ml-5">
-                                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+                        <li className='py-2'>
+                            <Link to="/student/category" className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
+                                <div className='flex justify-center items-center'>
+                                    <span className="inline-flex justify-center items-center ml-4 text-xl">
+                                        <i class="fa-solid fa-keyboard"></i>
+                                    </span>
+                                </div>
+                                <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Test</span>
+                            </Link>
+                        </li>
+                        <li className='py-2'>
+                            <Link to="/student/category"className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
+                                <div className='flex justify-center items-center'>
+                                    <span className="inline-flex justify-center items-center ml-4 text-xl">
+                                        <i class="fa-solid fa-users"></i>
+                                    </span>
+                                </div>
+                                <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Group</span>
+                            </Link>
+                        </li>
+                        <li className='py-2'>
+                            <Link to="/student/category"  className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
+                                <div className='flex justify-center items-center'>
+                                    <span className="flex justify-center items-center ml-4 text-xl ">
+                                        <i class="fa-solid fa-gift"></i>
+                                    </span>
+                                </div>
+                                <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>gift</span>
+                            </Link>
+                        </li>
+                        <li className='py-2'>
+                            <Link to="/student/category" className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
+                                <span className="inline-flex justify-center items-center ml-4 text-xl">
+                                    <i class="fa-solid fa-calendar-days"></i>
                                 </span>
-                                <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Category</span>
+                                <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Exchange</span>
+                            </Link>
+                        </li>
+                        <li className='py-2'>
+                            <Link to="/student/category" className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
+                                <span className="inline-flex justify-center items-center ml-4 text-xl">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </span>
+                                <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Message</span>
                             </Link>
                         </li>
                     </ul>

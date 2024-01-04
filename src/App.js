@@ -20,7 +20,6 @@ function App() {
         <div className="flex">
             <Routes>
                 <Route path="/" element={<SignIn/>}/>
-
                 {/*yullarga utishga ruxsat berishni nazorat qilish*/}
                 <Route path='/admin/*' element={<Scan role='ROLE_SUPER_ADMIN'/>}/>
                 <Route path='/teacher/*' element={<Scan role='ROLE_TEACHER'/>}/>
