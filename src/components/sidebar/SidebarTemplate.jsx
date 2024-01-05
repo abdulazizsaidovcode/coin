@@ -18,7 +18,6 @@ function SidebarTemplate({isAdmin}) {
     }, []);
 
     return (
-        <>
             <div
                 className={` bg-white h-full border-r ${isExpanded ? 'w-64' : 'w-20'} transition-width duration-300 ease-in-out`}>
                 <div className="flex items-center justify-between h-16 border-b ">
@@ -130,7 +129,6 @@ function SidebarTemplate({isAdmin}) {
                     </ul>
                 </div>
             </div>
-        </>
     );
 }
 
