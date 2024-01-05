@@ -54,14 +54,6 @@ const Dashboard = () => {
   return (
     <>
       <div className="bg-gray-100 min-h-screen p-8  w-full">
-        <div className=" mb-4">
-          <h1 className="text-3xl font-semibold text-gray-800">
-            Hi {name}(admin)
-          </h1>
-          <span className="text-sm text-gray-600">
-            Welcome back to Coin system dashboard
-          </span>
-        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
           <MetricCard
             title="Number of Students"

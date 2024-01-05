@@ -19,7 +19,7 @@ import Navbarcha from "../components/navbar/Navbar";
 
 function Admin() {
   return (
-    <div className="flex">
+    <div className="flex w-full">
       <SidebarTemplate isAdmin={true} />
       <div className="w-full">
         <Navbarcha />

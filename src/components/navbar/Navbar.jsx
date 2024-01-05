@@ -40,7 +40,7 @@ const Navbarcha = () => {
                         <span className="hidden md:block">Admina</span>
                     </button>
 
-                    <div className={`${isOpen ? 'absolute' : ' hidden'}  right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20`}>
+                    <div className={`${isOpen ? 'absolute' : ' hidden'}  right-0 mt-2 py-2 w-48 bg-white rounded-xl shadow-xl z-20`}>
                         {/* Menu items */}
                         <img className="w-full h-1/2 bg-contain" src="" alt="Gift" />
                         <div className="px-6 py-4">
@@ -57,10 +57,9 @@ const Navbarcha = () => {
                             </button>
                         </div>
                     </div>
-
                 </div>
             </div>
-            <div className="px-8 py-10">
+            <div className="px-8 pt-10">
                 <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800">Hi {name} (student)</h1>
                 <span className="text-sm text-gray-600">Welcome back to the Coin system dashboard</span>
             </div>
