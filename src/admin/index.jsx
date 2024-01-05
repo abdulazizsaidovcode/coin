@@ -15,29 +15,32 @@ import Exchange from "../components/exchange";
 import TotalCoinForStudent from "../components/totalconforstudent";
 import Message from "../components/message";
 import FalsePage from "../components/falsepage";
+import Navbarcha from "../components/navbar/Navbar";
 
 function Admin() {
   return (
-    <>
+    <div className="flex">
       <SidebarTemplate isAdmin={true} />
-
-      <Routes >
-        <Route path="/admin/CategoryTable" element={<CategoryTable />} />
-        <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/admin/giftCard" element={<GiftCard />} />
-        <Route path="/admin/usercard" element={<UserProfile />} />
-        <Route path="/admin/totalcoins" element={<TotalCoins />} />
-        <Route path="/admin/topgroup" element={<TopGroup />} />
-        <Route path="/admin/topteachers" element={<TopTeachers />} />
-        <Route path="/admin/category" element={<Category />} />
-        <Route path="/admin/offcanvas" element={<Offcanvas />} />
-        <Route path="/admin/gift" element={<Gift />} />
-        <Route path="/admin/exchange" element={<Exchange />} />
-        <Route path="/admin/message" element={<Message />} />
-        <Route path="/admin/totalcoinforstudent" element={<TotalCoinForStudent />} />
-        <Route path="*" element={<FalsePage/>} />
-      </Routes>
-    </>
+      <div className="w-full">
+        <Navbarcha />
+        <Routes >
+          <Route path="/admin/CategoryTable" element={<CategoryTable />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/giftCard" element={<GiftCard />} />
+          <Route path="/admin/usercard" element={<UserProfile />} />
+          <Route path="/admin/totalcoins" element={<TotalCoins />} />
+          <Route path="/admin/topgroup" element={<TopGroup />} />
+          <Route path="/admin/topteachers" element={<TopTeachers />} />
+          <Route path="/admin/category" element={<Category />} />
+          <Route path="/admin/offcanvas" element={<Offcanvas />} />
+          <Route path="/admin/gift" element={<Gift />} />
+          <Route path="/admin/exchange" element={<Exchange />} />
+          <Route path="/admin/message" element={<Message />} />
+          <Route path="/admin/totalcoinforstudent" element={<TotalCoinForStudent />} />
+          <Route path="*" element={<FalsePage />} />
+        </Routes>
+      </div>
+    </div>
   );
 }
 
