@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import TotalCoins from '../Total coins';
 import TotalCoinsmonth from '../totalcoinsmonth';
+import { config, url } from '../api/api';
+import axios from 'axios';
 
 // Demo uchun ba'zi ma'lumotlar
 const initialData = [
@@ -17,13 +19,16 @@ const categories = ['All', 'F-1', 'found-2', 'G-1', 'G-4', 'g_6'];
 const groups = ['All', 'Front-End', 'Back-End', 'Foundation', '3D-max'];
 
 const Exchange = () => {
-  const [data, setData] = useState(initialData);
+  const [exchange, setExchange] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedGroup, setSelectedGroup] = useState('All');
 
   // Checkbox holatini o'zgartirish uchun handler
-  const toggleActive = (id) => {
-    setData(data.map(item => item.id === id ? { ...item, active: !item.active } : item));
+  const getExchange = () => {
+    axios.get(url + "exchange", config) 
+      .then((res) => {
+        setExchange(res.data)
+      })
   };
 
   // Kategoriyalar va guruhlar bo'yicha filtrlash funksiyalari
@@ -36,7 +41,7 @@ const Exchange = () => {
       const groupMatch = group === 'All' || item.description === group;
       return categoryMatch && groupMatch;
     });
-    setData(filtered);
+    setExchange(filtered);
   };
 
   return (
@@ -46,14 +51,13 @@ const Exchange = () => {
       </div>
       <div className='flex justify-around mb-10 px-10'>
         <div className='w-5/12 shadow-xl up'>
-          <TotalCoins />
+          {/* <TotalCoins /> */}
         </div>
         <div className='w-5/12 shadow-xl up'>
           <TotalCoinsmonth />
         </div>
       </div>
       <div className=" mb-4 flex justify-between">
-        <button className="btm">+ Add</button>
         <div class="relative">
           <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -109,7 +113,7 @@ const Exchange = () => {
             </tr>
           </thead>
           <tbody className="text-gray-600 font-light">
-            {data.length && data.map((item, index) => (
+            {exchange.length && exchange.map((item, index) => (
               <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-100">
                 <td className="py-3 px-6 text-left whitespace-nowrap">{index + 1}</td>
                 <td className="py-3 px-6 text-left"><img src={item.imgurl} alt="nofound" /></td>
@@ -122,8 +126,6 @@ const Exchange = () => {
                     type="checkbox"
                     className="form-checkbox h-5 w-5 text-blue-600 rounded"
                     checked={item.active}
-                    onChange={() => toggleActive(item.id)}
-
                   />
                 </td>
                 <td className="py-3 px-6 text-center">
