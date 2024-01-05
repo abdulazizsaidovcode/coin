@@ -8,4 +8,4 @@ export const config = {
     }
 }
 
-export const setConfig = () => config.headers.Authorization = sessionStorage.getItem("jwtToken");
+export const setConfig = () => config.headers.Authorization = sessionStorage.getItem("jwtToken");   

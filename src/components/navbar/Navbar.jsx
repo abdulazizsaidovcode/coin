@@ -41,7 +41,7 @@ const Navbarcha = () => {
                         />
                         <span className="hidden md:block">{name}</span>
                     </button>
-                    <div className={`${isOpen ? 'absolute' : ' hidden'}  right-0 mt-2 py-2 w-48 bg-white rounded-xl shadow-xl z-20`}>
+                    <div className={`${isOpen ? 'absolute' : ' hidden'}  right-0 mt-2 py-2 w-64 bg-white rounded-xl shadow-xl z-20`}>
                         {/* Menu items */}
                         <div className='h-40 bg-black rounded-t-xl flex justify-center items-center'>
                             <img className="w-20 h-20 bg-contain bg" src={img} alt="Gift" />
