@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
-import { config, url } from "../../api/api";
+import {config, url} from "../../api/api";
 import "./style.css"
 
 function StudentsTotalcoin() {
