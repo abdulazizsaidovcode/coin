@@ -7,7 +7,6 @@ import axios from "axios";
 import { config, setConfig, url } from "../api/api";
 import TopLoading from "../Topteachers/TopLoading";
 import { toast } from "react-toastify";
-import Navbarcha from "../navbar/Navbar";
 
 const Dashboard = () => {
   const [STMGSize, setSTMGSize] = useState(null);
@@ -54,7 +53,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <Navbarcha />
       <div className="bg-gray-100 min-h-screen p-8  w-full">
         <div className=" mb-4">
           <h1 className="text-3xl font-semibold text-gray-800">

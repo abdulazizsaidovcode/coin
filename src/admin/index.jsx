@@ -13,13 +13,13 @@ import Offcanvas from "../components/ofcanvas";
 import Gift from "../components/gift";
 import Exchange from "../components/exchange";
 import TotalCoinForStudent from "../components/totalconforstudent";
-import Message from "../components/message";
+import Message from "../components/message"; 
+
 
 function Admin() {
   return (
     <>
       <SidebarTemplate />
-
       <Routes >
         <Route path="/admin/CategoryTable" element={<CategoryTable />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
