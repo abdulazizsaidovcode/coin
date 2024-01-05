@@ -1,68 +1,71 @@
 import React, { useState, useEffect } from 'react';
-import { config, url } from "../../components/api/api.js";
-import axios from "axios";
-
+import axios from 'axios';
+import { config, setConfig, url } from "../../components/api/api.js";
 
 const StudentNavbar = () => {
-    const [name, setName] = useState("");
+    const [students, setStudents] = useState([]); // Talabalar ro'yxati uchun state
+    const [fullname, setName] = useState([]); // Talabalar ro'yxati uchun state
+    const [img, setImg] = useState([]); // Talabalar ro'yxati uchun state
 
     useEffect(() => {
-        axios.get(url + "user/getMe", config)
+        setConfig();
+        axios.get(url + "user/getMe", {
+            headers: {
+                Authorization: sessionStorage.getItem("jwtToken")
+            }
+        })
             .then(response => {
-                setName(response.data.body.fullName);
+                setStudents(response.data.body); 
+                setName(response.data.body.fullName)
+                setImg(response.data.body.img)
             })
             .catch(error => {
-                console.log("Boshqa backendinchi topiyla iltomos 😭", error);
+                console.error("Backenddan ma'lumot olishda xatolik yuz berdi", error);
             });
     }, []);
-
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+    console.log(students);
 
     return (
         <div className="bg-gray-100 w-full">
             <div className="flex justify-between bg-white py-5 px-8 w-full">
-                {/* Qidiruv maydoni */}
                 <div className="flex items-center space-x-1">
                     <input type="search" placeholder="Search..." className="px-4 py-2 w-96 border rounded-md text-sm outline-none" />
                 </div>
-                {/* Foydalanuvchi profili va boshqa kontentlar uchun joy */}
-                <div className="relative">
-                    <button onClick={toggleMenu} className="flex items-center space-x-2 ">
-                        {/* <img
-                                src="/path-to-your-image.jpg" // Bu yerda rasm manzilini ko'rsating
-                                alt="Admin"
-                                className="rounded-full w-10 h-10"
-                            /> */}
-                        <span className="hidden md:block">Admina</span>
-                    </button>
-
-                    <div className={`${isOpen ? 'absolute' : ' hidden'}  right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20`}>
-                        {/* Menu items */}
-                        <img className="w-full h-1/2 bg-contain" src="" alt="Gift" />
-                        <div className="px-6 py-4">
-                            <div className="font-bold text-xl mb-2 text-center"></div>
-                            <p className="text-gray-700 text-base text-center">
-                                alosm
-                                <br />
-                                salom
-                            </p>
-                        </div>
-                        <div className="px-6 pt-4 text-center">
-                            <button className="btm">
-                                Edit
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
+                <button onClick={toggleMenu} className="flex items-center  bg-black ">
+                    <img
+                        src={img}
+                        alt="Admin"
+                        className="rounded-full w-10 h-10"
+                    />
+                    <span className="hidden md:block">{fullname}</span>
+                </button>
             </div>
-            <div className="px-8 py-10">
-                <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800">Hi {name} (student)</h1>
+            <div className="px-8 pt-10">
+                <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800">Hi {fullname} (student)</h1>
                 <span className="text-sm text-gray-600">Welcome back to the Coin system dashboard</span>
+            </div>
+
+            <div className={`${isOpen ? 'absolute' : ' hidden'}  right-0 mt-2 py-2 w-64 bg-white rounded-xl shadow-xl z-20`}>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {students.map((student) => (
+                        <div key={student.id} className="bg-white p-6 rounded-lg shadow-lg">
+                            <img
+                                src={student.attachment} // Agar rasm bo'lmasa, standart rasmni ko'rsatadi
+                                alt="rasm"
+                                className="h-40 w-40 rounded-full mx-auto mb-4"
+                            />
+                            <h3 className="text-center text-xl font-bold">{student.fullName}sdsd</h3>
+                            <p className="text-center text-gray-600">{student.phoneNumber}</p>
+                            <p className="text-center text-gray-600">{student.groupName}</p>
+                            <p className="text-center text-gray-600">{student.coin} Coins</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
