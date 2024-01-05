@@ -16,7 +16,8 @@ function StudentSidebar() {
     }, []);
     return (
         <>
-            <div className={` bg-white h-full border-r ${isExpanded ? 'w-64' : 'w-20'} transition-width duration-300 ease-in-out`}>
+            
+            <div className={`bg-white h-full border-r ${isExpanded ? 'w-64' : 'w-20'} transition-width duration-300 ease-in-out`}>
                 <div className="flex items-center justify-between h-16 border-b ">
                     <img className={`transition-all duration-300 ease-in-out ${isExpanded ? 'w-3/5 ' : 'hidden'}`} src={img} alt="Logo" />
                     <button onClick={() => setIsExpanded(!isExpanded)} className="p-2 rounded-full focus:outline-none focus:bg-gray-100 hover:bg-gray-100 mr-2 ml-5">
@@ -58,7 +59,7 @@ function StudentSidebar() {
                             </Link>
                         </li>
                         <li className='py-2'>
-                            <Link to="/student/category"className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
+                            <Link to="/student/group"className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
                                 <div className='flex justify-center items-center'>
                                     <span className="inline-flex justify-center items-center ml-4 text-xl">
                                         <i class="fa-solid fa-users"></i>
@@ -68,7 +69,7 @@ function StudentSidebar() {
                             </Link>
                         </li>
                         <li className='py-2'>
-                            <Link to="/student/category"  className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
+                            <Link to="/student/gift"  className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
                                 <div className='flex justify-center items-center'>
                                     <span className="flex justify-center items-center ml-4 text-xl ">
                                         <i class="fa-solid fa-gift"></i>
@@ -78,7 +79,7 @@ function StudentSidebar() {
                             </Link>
                         </li>
                         <li className='py-2'>
-                            <Link to="/student/category" className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
+                            <Link to="/student/exchange" className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
                                 <span className="inline-flex justify-center items-center ml-4 text-xl">
                                     <i class="fa-solid fa-calendar-days"></i>
                                 </span>
@@ -86,7 +87,7 @@ function StudentSidebar() {
                             </Link>
                         </li>
                         <li className='py-2'>
-                            <Link to="/student/category" className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
+                            <Link to="/student/message" className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
                                 <span className="inline-flex justify-center items-center ml-4 text-xl">
                                     <i class="fa-solid fa-envelope"></i>
                                 </span>

@@ -1,6 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDollarSign, faSyncAlt, faCoins } from '@fortawesome/free-solid-svg-icons';
 
 function Studetsrate() {
     // This component assumes you have FontAwesome icons set up.

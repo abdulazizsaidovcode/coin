@@ -41,10 +41,6 @@ const Exchange = () => {
 
   return (
     <div className="p-8 w-full">
-      <div className=" mb-4">
-        <h1 className="text-3xl font-semibold text-gray-800">Hi Admin(a)</h1>
-        <span className="text-sm text-gray-600">Welcome back to Coin system dashboard</span>
-      </div>
       <div className="mt-10">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Exchange</h2>
       </div>
@@ -73,7 +69,7 @@ const Exchange = () => {
         <div className="mb-4">
           {/* Kategoriyalar uchun filterlar */}
           <div className='flex mb-2 flex-wrap'>
-            {categories.map((category) => (
+            {categories.length && categories.map((category) => (
               <button
                 key={category}
                 onClick={() => handleFilter(category, selectedGroup)}
@@ -86,7 +82,7 @@ const Exchange = () => {
           </div>
           {/* Guruhlar uchun filterlar */}
           <div className='flex flex-wrap'>
-            {groups.map((group) => (
+            {groups.length && groups.map((group) => (
               <button
                 key={group}
                 onClick={() => handleFilter(selectedCategory, group)}
@@ -113,7 +109,7 @@ const Exchange = () => {
             </tr>
           </thead>
           <tbody className="text-gray-600 font-light">
-            {data.map((item, index) => (
+            {data.length && data.map((item, index) => (
               <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-100">
                 <td className="py-3 px-6 text-left whitespace-nowrap">{index + 1}</td>
                 <td className="py-3 px-6 text-left"><img src={item.imgurl} alt="nofound" /></td>
