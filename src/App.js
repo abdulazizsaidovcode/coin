@@ -6,6 +6,7 @@ import Teacher from "./teacher/index"
 import Student from "./student/index"
 import {byId} from "./components/api/api";
 import {useEffect} from "react";
+import FalsePage from "./components/falsepage"
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
                 <Route path='/admin/*' element={<Scan role='ROLE_SUPER_ADMIN'/>}/>
                 <Route path='/teacher/*' element={<Scan role='ROLE_TEACHER'/>}/>
                 <Route path='/student/*' element={<Scan role='ROLE_USER'/>}/>
+                <Route path='*' element={<FalsePage/>}/>                
             </Routes>
             <SidebarControl/>
         </div>
