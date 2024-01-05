@@ -1,11 +1,10 @@
 import React from "react";
-import SidebarTemplateTeacher from "./sidebar/SidebarTemplate";
-
+import Sidebar from "../components/sidebar/SidebarTemplate";
 
 function Teacher() {
     return (
         <>
-            {/* <SidebarTemplateTeacher /> */}
+            <Sidebar />
         </>
     );
 }
