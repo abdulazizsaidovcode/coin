@@ -13,7 +13,7 @@ function App() {
     function SidebarControl() {
         if (sessionStorage.getItem('role') === 'ROLE_SUPER_ADMIN') return <Admin/>
         if (sessionStorage.getItem('role') === 'ROLE_TEACHER') return <Teacher/>
-        return <Student/>
+        if (sessionStorage.getItem('role') === 'ROLE_USER') return <Student/>
     }
 
     return (
