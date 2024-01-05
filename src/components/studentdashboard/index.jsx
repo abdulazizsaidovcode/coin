@@ -2,7 +2,6 @@ import React from "react";
 import StudentsTotalcoin from "./Totalcoins";
 import Studetsrate from "./Studentsrate/index.jsx";
 import Studentcoinstatistic from "./Studentcoinstatistic/index.jsx";
-import TopTeachers from "../Topteachers/index.jsx";
 import TopGroup from "../TopGroups/index.jsx";
 
 function StudentDashboard() {

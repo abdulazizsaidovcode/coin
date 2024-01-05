@@ -7,7 +7,6 @@ import Student from "./student/index"
 import {byId} from "./components/api/api";
 import {useEffect} from "react";
 
-
 function App() {
 
     function SidebarControl() {
