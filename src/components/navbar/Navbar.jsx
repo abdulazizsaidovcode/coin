@@ -5,11 +5,13 @@ import axios from "axios";
 
 const Navbarcha = () => {
     const [name, setName] = useState("");
+    const [img, setImg] = useState("");
 
     useEffect(() => {
         axios.get(url + "user/getMe", config)
             .then(response => {
                 setName(response.data.body.fullName);
+                setImg(response.data.body.attachment);
             })
             .catch(error => {
                 console.log("Boshqa backendinchi topiyla iltomos 😭", error);
@@ -32,17 +34,18 @@ const Navbarcha = () => {
                 {/* Foydalanuvchi profili va boshqa kontentlar uchun joy */}
                 <div className="relative">
                     <button onClick={toggleMenu} className="flex items-center space-x-2 ">
-                        {/* <img
-                                src="/path-to-your-image.jpg" // Bu yerda rasm manzilini ko'rsating
-                                alt="Admin"
-                                className="rounded-full w-10 h-10"
-                            /> */}
-                        <span className="hidden md:block">Admina</span>
+                        <img
+                            src={img}
+                            alt="Admin"
+                            className="rounded-full w-10 h-10"
+                        />
+                        <span className="hidden md:block">{name}</span>
                     </button>
-
                     <div className={`${isOpen ? 'absolute' : ' hidden'}  right-0 mt-2 py-2 w-48 bg-white rounded-xl shadow-xl z-20`}>
                         {/* Menu items */}
-                        <img className="w-full h-1/2 bg-contain" src="" alt="Gift" />
+                        <div className='h-40 bg-black rounded-t-xl flex justify-center items-center'>
+                            <img className="w-20 h-20 bg-contain bg" src={img} alt="Gift" />
+                        </div>
                         <div className="px-6 py-4">
                             <div className="font-bold text-xl mb-2 text-center"></div>
                             <p className="text-gray-700 text-base text-center">
