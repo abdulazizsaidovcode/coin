@@ -7,9 +7,9 @@ function Category() {
     return (
         <div className="bg-gray-100 min-h-screen p-8 w-full">
             <div className="mt-10">
-                <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Category</h2>
+                <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Category</h2>
             </div>
-            <div className=" mb-2 flex justify-between">
+            <div className=" mb-2 flex justify-between items-center flex-wrap">
                 <button id="openMenuButton" className="btm">
                     + Add
                 </button>
@@ -19,7 +19,14 @@ function Category() {
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
                     </div>
-                    <input type="search" id="search" class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
+                    <input
+                        type="search"
+                        id="search"
+                        className="block w-full p-3 ps-10 text-sm border border-gray-300 rounded-lg 
+                        bg-gray-50 focus:outline-0 duration-300 focus:border-blue-500  
+                        dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 
+                        dark:focus:border-blue-500"
+                        placeholder="Search" />
                 </div>
             </div>
             <CategoryTable />
