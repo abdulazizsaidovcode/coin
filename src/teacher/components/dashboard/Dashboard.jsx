@@ -14,6 +14,7 @@ const Dashboard = () => {
     const [topStudent, setTopStudent] = useState(null);
     const [topGroup, setTopGroup] = useState(null);
     const [pl, setPl] = useState(null);
+    const [name, setName] = useState([]);
 
     useEffect(() => {
         setConfig();
@@ -38,7 +39,6 @@ const Dashboard = () => {
             .then((res) => setPl(res.data.body))
             .catch((err) => console.log(err));
     }, []);
-    const [name, setName] = useState("");
 
     useEffect(() => {
         axios
@@ -50,6 +50,8 @@ const Dashboard = () => {
                 console.log("Boshqa backendinchi topiyla iltimos 😭", error);
             });
     }, []);
+
+    console.log(name);
 
     return (
         <>
