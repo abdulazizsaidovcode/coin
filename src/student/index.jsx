@@ -18,9 +18,9 @@ import StudentNavbar from "./studentnavbar";
 
 function Student() {
   return (
-    <div className="flex">
+    <div className="flex w-full">
       <StudentSidebar />
-      <div>
+      <div className="w-full">
         <StudentNavbar />
         <Routes>
           <Route path="/student/dashboard" element={<StudentDashboard />} />

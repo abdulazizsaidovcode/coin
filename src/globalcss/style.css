@@ -2,12 +2,19 @@ wd-50 {
     width: 50% !important;
 }
 .btm {
-    padding: 10px 50px !important;
+    padding: 10px 45px !important;
     color: #fff;
     border: none;
-    border-radius: 5px;
-    background-color: #0c8ce9;
-    
+    border-radius: 8px;
+    background-color: #32C12F;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: all .3s;
+
+    &:active {
+      transform: scale(.9);
+    }
 }
 
 .table-top {
