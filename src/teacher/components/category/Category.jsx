@@ -1,7 +1,7 @@
-// import React from "react";
+import React, { useState } from 'react';
 import CategoryTable from "../category-table/CategoryTable";
 import "../../../globalcss/style.css";
-import React from 'react';
+import AddModalCanvas from "../offcanvas/Offcanvas";
 
 function Category() {
     return (
@@ -10,7 +10,9 @@ function Category() {
                 <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Category</h2>
             </div>
             <div className=" mb-2 flex justify-between items-center flex-wrap">
-                <button id="openMenuButton" className="btm">
+                <button
+                    id="openMenuButton"
+                    className="btm">
                     + Add
                 </button>
                 <div class="relative">

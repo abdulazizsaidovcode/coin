@@ -41,9 +41,9 @@ const CategoryTable = () => {
                                 </tr>
                             </thead>
                             <tbody className="text-gray-700">
-                                {categories.map((category, index) => (
-                                    <tr key={category.id}>
-                                        <td className="py-4 px-6 border-b border-gray-200">{index + 1}</td>
+                                {categories.map((category, i) => (
+                                    <tr key={category.id} className='even:bg-slate-100 hover:bg-slate-200 duration-150'>
+                                        <td className="py-4 px-6 border-b border-gray-200">{i + 1}</td>
                                         <td className="py-4 px-6 border-b border-gray-200">
                                             <img src={category.avatarUrl} alt="avatar" className="h-10 w-10 rounded-full" />
                                         </td>
@@ -59,8 +59,8 @@ const CategoryTable = () => {
                                             />
                                         </td>
                                         <td className="py-4 px-6 border-b border-gray-200">
-                                            <button className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline">Edit</button>
-                                            <button className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline ml-3">Delete</button>
+                                            <button className="text-sm bg-yellow-500 hover:bg-yellow-600 duration-200 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline">Edit</button>
+                                            <button className="text-sm bg-red-500 hover:bg-red-700 duration-200 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline ml-3">Delete</button>
                                         </td>
                                     </tr>
                                 ))}
