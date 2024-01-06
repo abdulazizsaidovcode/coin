@@ -5,7 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {},
+      colors: {
+        profileColor: "#271E4A"
+      },
       fontFamily: {
         inika: ["Inika", "serif"],
       },
