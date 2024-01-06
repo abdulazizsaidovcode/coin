@@ -1,23 +1,20 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import CategoryTable from "../components/categorytable";
 import GiftCard from "../components/card";
-import UserProfile from "./usercard";
+import UserProfile from "./studentGift/Giftcard";
 import TotalCoins from "../components/Total coins";
 import TopGroup from "../components/TopGroups";
 import TopTeachers from "../components/Topteachers";
-import Category from "../components/category";
 import Offcanvas from "../components/ofcanvas";
-import Gift from "../components/gift";
-import Exchange from "../components/exchange";
 import TotalCoinForStudent from "../components/totalconforstudent";
-import Message from "../components/message";
 import StudentSidebar from "./sidebar/Studentsitebar";
 import StudentDashboard from "../components/studentdashboard";
 import StudentNavbar from "./studentnavbar";
 import StudentGroup from "./studentcategory";
 import Studentmessage from "./Studentmessage";
 import StudentTest from "./studenttest";
+import StudentGift from "./studentGift/Giftcard";
+import StudentExchange from "./studentExchange";
 
 function Student() {
   return (
@@ -35,8 +32,8 @@ function Student() {
           <Route path="/student/topteachers" element={<TopTeachers />} />
           <Route path="/student/test" element={<StudentTest />} />
           <Route path="/student/offcanvas" element={<Offcanvas />} />
-          <Route path="/student/gift" element={<Gift />} />
-          <Route path="/student/exchange" element={<Exchange />} />
+          <Route path="/student/gift" element={<StudentGift />} />
+          <Route path="/student/exchange" element={<StudentExchange />} />
           <Route path="/student/message" element={<Studentmessage />} />
           <Route path="/student/totalcoinforstudent" element={<TotalCoinForStudent />} />
         </Routes>

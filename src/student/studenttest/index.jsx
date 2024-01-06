@@ -1,5 +1,5 @@
 import Studetsrate from "../../components/studentdashboard/Studentsrate";
-import StudentTestCard from "../usercard";
+import StudentTestCard from "../studentGift/Giftcard";
 
 function StudentTest() {
     return (
