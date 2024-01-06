@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { config, setConfig, url } from "../api/api";
 import axios from "axios";
+import avatar from "../../assits/opacha.jpg";
 
 const Navbarcha = () => {
   const [name, setName] = useState([]);
@@ -34,15 +35,15 @@ const Navbarcha = () => {
           {/* Foydalanuvchi profili va boshqa kontentlar uchun joy */}
           <div className="relative">
             <button onClick={toggleMenu} className="flex items-center space-x-2 ">
-              <img src="" alt="Admin" className="rounded-full w-10 h-10" />
+              <img src={avatar} alt="Admin" className="rounded-full w-10 h-10" />
               <span className="hidden md:block">{name.fullName}</span>
             </button>
             <div
-              className={`${isOpen ? "absolute" : "hidden"} 
-             right-0 mt-2 py-2 w-80 bg-white rounded-xl shadow-xl z-20`}>
+              className={`${isOpen ? "absolute duration-500" : "hidden"} 
+              right-0 mt-2 py-2 w-80 bg-white rounded-xl shadow-xl z-20`}>
               {/* Menu items */}
               <div className="h-40 bg-profileColor rounded-t-xl flex justify-center items-center">
-                <img className="w-20 h-20 bg-contain bg" src="" alt="Gift" />
+                <img className="w-20 h-20 rounded-full" src={avatar} alt="Gift" />
               </div>
               <div className="px-6 py-2">
                 <div className="font-bold text-xl mb-2 text-center">{name.fullName}</div>
