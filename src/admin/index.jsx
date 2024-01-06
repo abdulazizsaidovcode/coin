@@ -18,6 +18,8 @@ import FalsePage from "../components/falsepage";
 import Navbarcha from "../components/navbar/Navbar";
 
 function Admin() {
+  const getme = sessionStorage.getItem("getMeInfo")
+  console.log("get mega " + getme);
   return (
     <div className="flex w-full">
       <SidebarTemplate isAdmin={true} />

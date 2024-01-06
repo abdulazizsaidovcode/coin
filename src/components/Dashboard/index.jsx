@@ -45,6 +45,8 @@ const Dashboard = () => {
       .get(url + "user/getMe", config)
       .then((response) => {
         setName(response.data.body.fullName);
+        sessionStorage.setItem("getMeInfo", response.data.body.fullName)
+        
       })
       .catch((error) => {
         console.log("Boshqa backendinchi topiyla iltimos 😭", error);
