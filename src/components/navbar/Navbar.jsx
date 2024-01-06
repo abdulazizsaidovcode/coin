@@ -43,9 +43,8 @@ const Navbarcha = () => {
             <span className="hidden md:block">{name}</span>
           </button>
           <div
-            className={`${
-              isOpen ? "absolute" : " hidden"
-            }  right-0 mt-2 py-2 w-48 bg-white rounded-xl shadow-xl z-20`}
+            className={`${isOpen ? "absolute" : " hidden"
+              }  right-0 mt-2 py-2 w-48 bg-white rounded-xl shadow-xl z-20`}
           >
             {/* Menu items */}
             <div className="h-40 bg-black rounded-t-xl flex justify-center items-center">
@@ -61,12 +60,12 @@ const Navbarcha = () => {
             </div>
             <div className="px-6 pt-4 text-center">
               <button className="btm"
-              onClick={() => {
-                setIsLoading(true);
-                setTimeout(() => {
+                onClick={() => {
+                  setIsLoading(true);
+                  setTimeout(() => {
                     setIsLoading(false);
-                  }, 3000); 
-              }}>
+                  }, 3000);
+                }}>
                 {isLoading ? (
                   <p>
                     <svg
