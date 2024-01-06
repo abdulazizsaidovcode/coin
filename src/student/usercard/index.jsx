@@ -1,13 +1,13 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle, faThumbsUp, faClock, faHistory } from '@fortawesome/free-solid-svg-icons';
-import img from "../../assits/itca.jpg"
+import img from "../../assits/IT-CA-logo.png"
 
 const UserCard = ({ phone, email, course, coinValue, coinCost, questionCount, thumbsUpCount, timeSpent, timeRemaining }) => {
     return (
-        <div className="bg-white rounded-3xl shadow-xl overflow-hidden w-full md:w-1/4 p-4 m-2">
+        <div className="bg-white rounded-3xl shadow-xl overflow-hidden w-96 p-4 m-2">
             <div className=" text-white text-xl font-bold p-4">
-                <img className='w-full h-60 bg-cover' src={img} alt="" />
+                <img className='w-full h-40 bg-contain' src={img} alt="" />
             </div>
             <div className="p-4 flex justify-between items-center text-xs">
                 <span>{phone}</span>
@@ -55,7 +55,7 @@ const UserCard = ({ phone, email, course, coinValue, coinCost, questionCount, th
     );
 };
 
-const UserProfile = () => {
+const StudentTestCard = () => {
     const userInfo = {
         phone: '+998 99-264-62-62',
         email: 'javokhirkoziboyev',
@@ -69,7 +69,7 @@ const UserProfile = () => {
     };
 
     return (
-        <div className="flex flex-wrap justify-center items-center">
+        <div className="flex flex-wrap justify-between items-center">
             <UserCard {...userInfo} />
             <UserCard {...userInfo} />
             <UserCard {...userInfo} />
@@ -77,4 +77,4 @@ const UserProfile = () => {
     );
 };
 
-export default UserProfile;
+export default StudentTestCard;

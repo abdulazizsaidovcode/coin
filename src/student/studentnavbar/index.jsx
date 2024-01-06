@@ -38,14 +38,10 @@ const StudentNavbar = () => {
             {/* Navbar va boshqa tarkibiy qismlar */}
 
             {/* Foydalanuvchi ma'lumotlarini ko'rsatish qismi */}
-            <div className="container mx-auto px-4 py-4">
-                <div className="flex justify-between bg-white p-6 rounded-lg shadow-lg">
+            <div className="container mx-auto">
+                <div className="w-full flex justify-between bg-white p-2">
                     <div className="flex items-center space-x-1">
-                        <input
-                            type="search"
-                            placeholder="Search..."
-                            className="px-4 py-2 w-96 border rounded-md text-sm outline-none"
-                        />
+                        <input type="search" id="search" class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
                     </div>
                     {/* Bu yerda foydalanuvchi bilan bog'liq boshqa harakatlar uchun tugmalar yoki linklar qo'yilishi mumkin */}
                     <button onClick={toggleMenu} className="flex items-center space-x-2 ">
