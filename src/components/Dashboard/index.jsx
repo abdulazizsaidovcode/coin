@@ -4,7 +4,7 @@ import TopStudent from "../Topstudents";
 import TopTeachers from "../Topteachers";
 import TotalCoins from "../Total coins";
 import axios from "axios";
-import {config, setConfig, url} from "../api/api";
+import {config, getTopGroup, getTopStudent, getTopTeacher, setConfig, url} from "../api/api";
 import TopLoading from "../Topteachers/TopLoading";
 import {toast} from "react-toastify";
 
@@ -21,18 +21,9 @@ function Dashboard() {
             .get(url + "user/statistic", config)
             .then((res) => setSTMGSize(res.data.body))
             .catch(() => toast.warning("internetga blan aloqani tekshirig!"));
-        axios
-            .get(url + "user/top/teachers", config)
-            .then((res) => setTopTeacher(res.data.body))
-            .catch((err) => console.log(err));
-        axios
-            .get(url + "user/top/student", config)
-            .then((res) => setTopStudent(res.data.body))
-            .catch((err) => console.log(err));
-        axios
-            .get(url + "group/topGroupsForAdmin", config)
-            .then((res) => setTopGroup(res.data.body))
-            .catch((err) => console.log(err));
+        getTopTeacher(setTopTeacher);
+        getTopStudent(setTopStudent);
+        getTopGroup(setTopGroup);
         axios
             .get(url + "coin/history/course/statistics", config)
             .then((res) => setPl(res.data.body))
@@ -46,7 +37,6 @@ function Dashboard() {
             .then((response) => {
                 setName(response.data.body.fullName);
                 sessionStorage.setItem("getMeInfo", response.data.body.fullName)
-
             })
             .catch((error) => {
                 console.log("Boshqa backendinchi topiyla iltimos 😭", error);
