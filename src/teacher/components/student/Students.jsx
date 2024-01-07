@@ -67,8 +67,8 @@ const Students = () => {
                                 <th className="py-3 px-6">#</th>
                                 <th className="py-3 px-6">Full Name</th>
                                 <th className="py-3 px-6">Group</th>
-                                <th className="py-3 px-6">Cion</th>
                                 <th className="py-3 px-6">Phone Number</th>
+                                <th className="py-3 px-6">Coin</th>
                                 <th className="py-3 px-6">Task</th>
                                 <th className="py-3 px-6">Exschange</th>
                             </tr>

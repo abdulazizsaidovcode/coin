@@ -4,12 +4,8 @@ import { byId, config, getFile, setConfig, url } from '../../../components/api/a
 import avatar from "../../../assits/opacha.jpg";
 import { toast } from 'react-toastify';
 
-const initialCategories = [
-    { id: 1, name: 'Front-End', description: 'Tashqi qism', programmingLanguage: 'JavaScript', active: true },
-];
-
 const CategoryTable = () => {
-    const [categories, setCategories] = useState(initialCategories);
+    const [categories, setCategories] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
     const [categoryInfo, setCategoryInfo] = useState([]);
@@ -185,61 +181,66 @@ const CategoryTable = () => {
                         <div className="overflow-x-auto">
                             <table className="min-w-full bg-white">
                                 <thead className="bg-gray-800 text-white">
-                                    <tr>
+                                    <tr className='text-center'>
                                         {/* Table Headers */}
-                                        <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">No</th>
-                                        <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Photo</th>
-                                        <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Name</th>
-                                        {/* <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Description</th> */}
-                                        <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">P.L</th>
-                                        <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Active</th>
-                                        <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Action</th>
+                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">No</th>
+                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Photo</th>
+                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Name</th>
+                                        {/* <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Description</th> */}
+                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">P.L</th>
+                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Active</th>
+                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody className="text-gray-700">
-                                    {categories.map((category, i) => (
-                                        <tr key={category.id} className='even:bg-slate-100 hover:bg-slate-200 duration-150'>
-                                            <td className="py-3 px-6 border-b border-gray-200">{i + 1}</td>
-                                            <td className="py-3 px-6 border-b border-gray-200">
-                                                <img
-                                                    src={category.attachmentId === null
-                                                        ? avatar
-                                                        : getFile + category.attachmentId}
-                                                    alt="avatar"
-                                                    className="h-16 w-16 rounded-full" />
-                                            </td>
-                                            <td className="py-3 px-6 border-b border-gray-200">
-                                                {category.name === null ? "Yo'q" : category.name}
-                                            </td>
-                                            {/* <td className="py-4 px-6 border-b border-gray-200">{category.description}</td> */}
-                                            <td className="py-3 px-6 border-b border-gray-200">
-                                                {category.programmingLanguage === null ? "Yo'q" : category.programmingLanguage}
-                                            </td>
-                                            <td className="py-3 px-6 border-b border-gray-200">
-                                                <input
-                                                    type="checkbox"
-                                                    checked={category.active}
-                                                    onChange={() => toggleActive(category.id)}
-                                                    className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-0"
-                                                />
-                                            </td>
-                                            <td className="py-3 px-6 border-b border-gray-200">
-                                                <button
-                                                    onClick={() => {
-                                                        openModalEdit();
-                                                        setCategoryInfo(category);
-                                                    }}
-                                                    className="text-sm bg-yellow-500 hover:bg-yellow-600 duration-200 text-white 
+                                    {categories.length !== 0 ?
+                                        categories.map((category, i) => (
+                                            <tr key={category.id} className='even:bg-slate-200 hover:bg-slate-300 duration-200 text-center'>
+                                                <td className="py-3 px-6 border-b border-gray-200">{i + 1}</td>
+                                                <td className="py-3 px-6 border-b border-gray-200 flex justify-center items-center">
+                                                    <img
+                                                        src={category.attachmentId === null
+                                                            ? avatar
+                                                            : getFile + category.attachmentId}
+                                                        alt="avatar"
+                                                        className="h-16 w-16 rounded-full" />
+                                                </td>
+                                                <td className="py-3 px-6 border-b border-gray-200">
+                                                    {category.name === null ? "Yo'q" : category.name}
+                                                </td>
+                                                {/* <td className="py-4 px-6 border-b border-gray-200">{category.description}</td> */}
+                                                <td className="py-3 px-6 border-b border-gray-200">
+                                                    {category.programmingLanguage === null ? "Yo'q" : category.programmingLanguage}
+                                                </td>
+                                                <td className="py-3 px-6 border-b border-gray-200">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={category.active}
+                                                        onChange={() => toggleActive(category.id)}
+                                                        className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-0"
+                                                    />
+                                                </td>
+                                                <td className="py-3 px-6 border-b border-gray-200">
+                                                    <button
+                                                        onClick={() => {
+                                                            openModalEdit();
+                                                            setCategoryInfo(category);
+                                                        }}
+                                                        className="text-sm bg-yellow-500 hover:bg-yellow-600 duration-200 text-white 
                                                     py-1 px-3 rounded focus:outline-none focus:shadow-outline">Edit</button>
-                                                <button
-                                                    className="text-sm bg-red-500 hover:bg-red-700 duration-200 text-white py-1 px-3 
+                                                    <button
+                                                        className="text-sm bg-red-500 hover:bg-red-700 duration-200 text-white py-1 px-3 
                                                     rounded focus:outline-none focus:shadow-outline ml-3" onClick={() => {
-                                                        openModal();
-                                                        setCategoryInfo(category)
-                                                    }}>Delete</button>
-                                            </td>
+                                                            openModal();
+                                                            setCategoryInfo(category)
+                                                        }}>Delete</button>
+                                                </td>
+                                            </tr>
+                                        )) :
+                                        <tr className='even:bg-slate-200 hover:bg-slate-300 duration-200'>
+                                            <td colSpan="6" className="py-3 text-center px-6 font-inika font-medium text-lg tracking-wider leading-10">loading...</td>
                                         </tr>
-                                    ))}
+                                    }
                                 </tbody>
                             </table>
                         </div>
