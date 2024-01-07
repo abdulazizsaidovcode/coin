@@ -1,28 +1,38 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { config, url } from '../api/api';
+import { toast } from 'react-toastify';
 
 
 
-const initialCategories = [
-  { id: 1, name: 'Front-End', description: 'Tashqi qism', programmingLanguage: 'React', active: true },
-  { id: 2, name: 'Back-End', description: 'Orqa qism', programmingLanguage: 'Java', active: false },
-  { id: 3, name: 'Back-End', description: 'Orqa qism', programmingLanguage: 'Java', active: true },
-  { id: 4, name: 'Back-End', description: 'Orqa qism', programmingLanguage: 'Java', active: false },
-  { id: 5, name: 'Back-End', description: 'Orqa qism', programmingLanguage: 'Java', active: true },
-  { id: 6, name: 'Back-End', description: 'Orqa qism', programmingLanguage: 'Java', active: false },
-];
 
 const CategoryTable = () => {
-  const [categories, setCategories] = useState(initialCategories);
+  const [categories, setCategories] = useState([]);
 
+  useEffect(() => {
+    getCategory();
+  }, [])
   // Function to toggle the active state
-  const toggleActive = (id) => {
-    setCategories(categories.map(category => {
-      if (category.id === id) {
-        return { ...category, active: !category.active };
-      }
-      return category;
-    }));
+  const getCategory = () => {
+    axios.get(url + "category/list", config)
+      .then((res) => {
+        setCategories(res.data.body)
+        console.log(res.data.body);
+      })
+      .catch((err) => {
+        toast.dismiss("Category not found!")
+      })
   };
+
+  const categoryActive = (id) => {
+    axios.put(url + "category/reset/" + id, config)
+      .then((res) => {
+        toast.success("good")
+      })
+      .catch((err) => {
+        toast.error("false");
+      })
+  }
 
   return (
     <div className="min-h-screen w-full bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
@@ -33,10 +43,9 @@ const CategoryTable = () => {
               <thead className="bg-gray-800 text-white">
                 <tr>
                   {/* Table Headers */}
-                  <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">No</th>
+                  <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">N/1</th>
                   <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Photo</th>
                   <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Name</th>
-                  <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Description</th>
                   <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">P.L</th>
                   <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Active</th>
                   <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Action</th>
@@ -50,13 +59,12 @@ const CategoryTable = () => {
                       <img src={category.avatarUrl} alt="avatar" className="h-10 w-10 rounded-full" />
                     </td>
                     <td className="py-4 px-6 border-b border-gray-200">{category.name}</td>
-                    <td className="py-4 px-6 border-b border-gray-200">{category.description}</td>
                     <td className="py-4 px-6 border-b border-gray-200">{category.programmingLanguage}</td>
                     <td className="py-4 px-6 border-b border-gray-200">
                       <input
                         type="checkbox"
                         checked={category.active}
-                        onChange={() => toggleActive(category.id)}
+                        onChange={() => categoryActive(category.id)}
                         className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-0"
                       />
                     </td>
