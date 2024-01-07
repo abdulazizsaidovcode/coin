@@ -1,14 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { config, setConfig, url } from '../../../components/api/api';
+import { byId, config, setConfig, url } from '../../../components/api/api';
 import avatar from "../../../assits/itca.jpg";
+import { Link } from 'react-router-dom';
 
-const initialCategories = [
-    { id: 1, name: 'Front-End', description: 'Tashqi qism', programmingLanguage: 'JavaScript', active: true },
+const initialGroups = [
+    { id: 1, name: 'Front-End', coin: '0' },
 ];
 
 const GroupsTable = () => {
-    const [categories, setCategories] = useState(initialCategories);
+    const [groups, setGroups] = useState(initialGroups);
 
     useEffect(() => {
         setConfig();
@@ -16,13 +17,16 @@ const GroupsTable = () => {
     }, []);
 
     const getCategory = () => {
-        axios.get(url + "category/teacher/category/list", config)
-            .then(res => setCategories(res.data.body))
+        axios.get(url + "group/teacher", config)
+            .then(res => setGroups(res.data.body))
             .catch(() => console.log("kelmadi"))
     }
 
+    const goStudent = () => byId("goStudent").click();
+
     return (
         <>
+            <Link to="/teacher/student" id='goStudent'></Link>
             {/* //  px-4 sm:px-6 lg:px-8 */}
             <div className="w-full bg-gray-100 py-8">
                 <div className="w-full mx-auto">
@@ -40,8 +44,8 @@ const GroupsTable = () => {
                                     </tr>
                                 </thead>
                                 <tbody className="text-gray-700">
-                                    {categories.map((category, i) => (
-                                        <tr key={category.id} className='even:bg-slate-100 hover:bg-slate-200 duration-150'>
+                                    {groups.map((group, i) => (
+                                        <tr key={group.id} className='even:bg-slate-100 hover:bg-slate-200 duration-150'>
                                             <td className="py-3 px-6 border-b border-gray-200">{i + 1}</td>
                                             <td className="py-3 px-6 border-b border-gray-200">
                                                 <img
@@ -50,13 +54,15 @@ const GroupsTable = () => {
                                                     className="h-16 w-16 rounded-full" />
                                             </td>
                                             <td className="py-3 px-6 border-b border-gray-200">
-                                                {category.name === null ? "Yo'q" : category.name}
+                                                {group.name === null ? "Yo'q" : group.name}
                                             </td>
                                             <td className="py-3 px-6 border-b border-gray-200">
-                                                {category.programmingLanguage === null ? "Yo'q" : category.programmingLanguage}
+                                                {group.coin === null ? "Yo'q" : group.coin}
                                             </td>
                                             <td className="py-3 px-6 border-b border-gray-200">
-                                                <button className='btm'>More</button>
+                                                <button className='btm' onClick={() => {
+                                                    goStudent();
+                                                }}>More</button>
                                             </td>
                                         </tr>
                                     ))}
