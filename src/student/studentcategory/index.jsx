@@ -1,26 +1,19 @@
-import React, { useState } from 'react';
-import { config, url } from '../../components/api/api';
+import React, { useEffect, useState } from 'react';
+import { config, setConfig, url } from '../../components/api/api';
 import axios from 'axios';
-import TotalCoins from '../../components/Total coins';
 import Studentstatistic from './statisctic';
 
-// Demo uchun ba'zi ma'lumotlar
-
-// Filterlar uchun kategoriyalar va guruhlar
-
-const StudentGroup = ({}) => {
+const StudentGroup = () => {
   const [topStudent, setTopStudent] = useState([]);
-  // Checkbox holatini o'zgartirish uchun handler
-  const getExchange = () => {
-    axios.get(url + "user/top/student", config) 
-      .then((res) => {
-        setTopStudent(res.data.body)
-        console.log(topStudent);
-      })
-      .catch((err) => {
-        console.log("boshqa back endchi topiyla" + err);
-      })
-  };
+    useEffect(() => {
+        setConfig();
+        axios.get(url + "user/top/student", config)
+            .then(res => {
+              setTopStudent(res.data.body);
+              console.log(topStudent);
+            })
+            .catch(err => console.log("Boshqa backendinchi topiyla iltomos 😭", err));
+    }, []);
 
   // Kategoriyalar va guruhlar bo'yicha filtrlash funksiyalari
 
@@ -54,12 +47,11 @@ const StudentGroup = ({}) => {
             <tr className='rounded-s-2xl'>
               <th className="py-3 px-6 text-left rounded-tl-3xl">No</th>
               <th className="py-3 px-6 text-left">Photo</th>
-              <th className="py-3 px-6 text-left">Gift name</th>
-              <th className="py-3 px-6 text-left">name</th>
-              <th className="py-3 px-6 text-center">Cion</th>
-              <th className="py-3 px-6 text-center">Date</th>
-              <th className="py-3 px-6 text-center">Active</th>
-              <th className="py-3 px-6 text-center rounded-tr-3xl">Info</th>
+              <th className="py-3 px-6 text-left">Full name</th>
+              <th className="py-3 px-6 text-center">Group</th>
+              <th className="py-3 px-6 text-center">Exchange</th>
+              <th className="py-3 px-6 text-center">Task</th>
+              <th className="py-3 px-6 text-center rounded-tr-3xl">rade</th>
             </tr>
           </thead>
           <tbody className="text-gray-600 font-light">
@@ -67,9 +59,8 @@ const StudentGroup = ({}) => {
               <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-100">
                 <td className="py-3 px-6 text-left whitespace-nowrap">{index + 1}</td>
                 <td className="py-3 px-6 text-left"><img src={topStudent.imgurl} alt="nofound" /></td>
-                <td className="py-3 px-6 text-left">{topStudent.giftname}</td>
-                <td className="py-3 px-6 text-left">{topStudent.name}</td>
-                <td className="py-3 px-6 text-left">{topStudent.Coin}</td>
+                <td className="py-3 px-6 text-left">{topStudent.fullName}</td>
+                <td className="py-3 px-6 text-left">{topStudent.coin}</td>
                 <td className="py-3 px-6 text-left">{topStudent.date}</td>
                 <td className="py-3 px-6 text-center">
                   <input
@@ -78,7 +69,7 @@ const StudentGroup = ({}) => {
                     checked={topStudent.active}
                   />
                 </td>
-                <td className="py-3 px-6 text-center">
+                <td className="py-3 px-6 text-center bo">
                   <div className="flex item-center justify-center">
                     <button className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline">info</button>
                   </div>

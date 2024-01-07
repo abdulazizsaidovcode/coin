@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const url = "http://137.184.13.215/";
+export const url = "http://192.168.149.27/";
 
 export const getFile = "http://137.184.13.215/attachment/getFile/";
 
