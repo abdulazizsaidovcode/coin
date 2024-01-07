@@ -44,7 +44,7 @@ function Studentmessage() {
     return (
         <div className="container mx-auto p-8 bg-gray-100 h-screen">
             {/* Tartiblash tugmalari */}
-            <div className="mt-10">
+            <div className="mb-10">
                 <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Message</h2>
             </div>
             <div className="flex justify-between items-center mb-4">

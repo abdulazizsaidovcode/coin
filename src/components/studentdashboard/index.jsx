@@ -21,6 +21,9 @@ function StudentDashboard() {
 
     return (
         <div className="bg-gray-100 min-h-screen p-4 sm:p-8  w-full">
+            <div className="mb-10">
+                <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Dashboard</h2>
+            </div>
             <div className="w-full py-5">
                 <Studetsrate/>
             </div>
