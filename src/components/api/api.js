@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const url = "http://137.184.13.215/";
+export const url = "http://192.168.149.27/";
 
 export const getFile = `${url}attachment/getFile/`;
 
@@ -12,6 +12,7 @@ export const config = {
     }
 }
 
+//              top
 export function getTopGroupForAdmin(setTopGroup) {
     axios.get(url + "group/topGroupsForAdmin", config)
         .then((res) => setTopGroup(res.data.body))
@@ -36,6 +37,7 @@ export function getTopStudent(setTopStudent) {
         .catch((err) => console.log(err));
 }
 
+//                  test
 export function getTestCategoryId(categoryId, setTestByCategory) {
     axios.get(url + "test/student/category/test?categoryId=" + categoryId, config)
         .then((res) => setTestByCategory(res.data.body))
@@ -45,6 +47,12 @@ export function getTestCategoryId(categoryId, setTestByCategory) {
 export function getTestCategory(setTestCategory) {
     axios.get(url + "test/student/category/block", config)
         .then((res) => setTestCategory(res.data.body))
+        .catch((err) => console.log(err));
+}
+
+export function getOneTest(testId, setTest) {
+    axios.get(url + "test/one/" + testId, config)
+        .then((res) => setTest(res.data.body))
         .catch((err) => console.log(err));
 }
 
