@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { config, setConfig, url } from "../api/api";
+import { byId, config, setConfig, url } from "../api/api";
 import axios from "axios";
 import avatar from "../../assits/opacha.jpg";
+import { Link } from "react-router-dom";
 
 const Navbarcha = () => {
   const [name, setName] = useState([]);
@@ -20,8 +21,11 @@ const Navbarcha = () => {
     setIsOpen(!isOpen);
   };
 
+  const logOut = () => byId("logout").click();
+
   return (
     <div className="bg-gray-100 w-full">
+      <Link to="/" id="logout"></Link>
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between bg-white py-5 px-8 w-full">
           {/* Qidiruv maydoni */}
@@ -44,6 +48,10 @@ const Navbarcha = () => {
               {/* Menu items */}
               <div className="h-40 bg-profileColor rounded-t-xl flex justify-center items-center">
                 <img className="w-20 h-20 rounded-full" src={avatar} alt="Gift" />
+                <span className="absolute right-3 top-3 hover:text-gray-200 duration-200 text-white cursor-pointer"
+                  onClick={toggleMenu}>
+                  <i className="fa-solid fa-xmark"></i>
+                </span>
               </div>
               <div className="px-6 py-2">
                 <div className="font-bold text-xl mb-2 text-center">{name.fullName}</div>
@@ -57,9 +65,12 @@ const Navbarcha = () => {
               <div className=" mt-2 text-center">
                 <button className="btm mr-5">Edit</button>
                 <button
-                  className="bg-red-500 text-white font-bold rounded-lg py-2.5 px-7"
-                  onClick={toggleMenu}
-                >Close</button>
+                  className="bg-red-500 text-white font-bold rounded-lg py-2.5 px-7 active:scale-90 duration-200"
+                  onClick={() => {
+                    logOut();
+                    sessionStorage.clear();
+                  }}
+                >log out</button>
               </div>
             </div>
           </div>
