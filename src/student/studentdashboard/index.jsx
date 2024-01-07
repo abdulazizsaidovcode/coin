@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
-import StudentsTotalcoin from "./Totalcoins";
+import StudentsTotalcoin from "./Totalcoins/index.jsx";
 import Studetsrate from "./Studentsrate/index.jsx";
 import Studentcoinstatistic from "./Studentcoinstatistic/index.jsx";
-import TopGroup from "../TopGroups/index.jsx";
-import {getStudentStatistics, getTopGroupForTeacher, getTopStudent, setConfig} from "../api/api";
-import TopLoading from "../Topteachers/TopLoading";
-import TopStudent from "../Topstudents";
+import TopGroup from "../../components/TopGroups/index.jsx";
+import {getStudentStatistics, getTopGroupForTeacher, getTopStudent, setConfig} from "../../components/api/api.js";
+import TopLoading from "../../components/Topteachers/TopLoading.js";
+import TopStudent from "../../components/Topstudents/index.jsx";
 
 function StudentDashboard() {
 

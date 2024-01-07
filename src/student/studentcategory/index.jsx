@@ -26,13 +26,13 @@ const StudentGroup = ({}) => {
   return (
     <div className="p-8 w-full bg-gray-100">
       <div className="mb-10">
-        <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Group</h2>
+        <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Exchange</h2>
       </div>
       <div className='flex justify-around mb-10 px-10'>
         <div className='w-5/12 text-5xl flex items-center h-64'>
           MY group
         </div>
-        <div className='w-5/12 all-shadow up h-64'>
+        <div className='w-5/12 shadow-xl up h-64'>
             <Studentstatistic/>
         </div>
       </div>
@@ -79,7 +79,7 @@ const StudentGroup = ({}) => {
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex item-center justify-center">
-                    <button className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none foall-shadow-outline">info</button>
+                    <button className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline">info</button>
                   </div>
                 </td>
               </tr>

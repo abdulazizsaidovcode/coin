@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { config, url } from "../../components/api/api.js";
 import opacha from "../../assits/opacha.jpg"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell, faCheckCircle, faClock, faDonate, faDotCircle } from '@fortawesome/free-solid-svg-icons';
 
 const StudentNavbar = () => {
     // Foydalanuvchi ma'lumotlari uchun alohida state o'zgaruvchilari
@@ -41,10 +43,16 @@ const StudentNavbar = () => {
             <div className="container mx-auto">
                 <div className="w-full flex justify-between bg-white p-2">
                     <div className="flex items-center space-x-1">
-                        <input type="search" id="search" class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
-                    </div>
+                        <div class="relative">
+
+                        </div>                    </div>
                     {/* Bu yerda foydalanuvchi bilan bog'liq boshqa harakatlar uchun tugmalar yoki linklar qo'yilishi mumkin */}
                     <button onClick={toggleMenu} className="flex items-center space-x-2 ">
+                        <FontAwesomeIcon icon={faCheckCircle} className="text-2xl mr-2 text-gray-800" />
+                        <div className='relative mt-1'>
+                            <div className='w-2 h-2 bg-red-400 rounded-full absolute right-2 '><a href=""></a></div>
+                            <FontAwesomeIcon icon={faBell} className="text-2xl mr-2 text-gray-800" />
+                        </div>
                         <img src={opacha} alt="Admin" className="rounded-full border p-1 w-12 h-12" />
                         <span className="hidden md:block">{fullName}</span>
                     </button>
