@@ -17,7 +17,7 @@ function StudentsTotalcoin() {
     // }, []);
 
     return (
-        <div className="StudentsTotalcoin bg-white rounded-lg p-4 shadow-md w-6/12 h-80">
+        <div className="StudentsTotalcoin bg-white rounded-lg p-4 all-shadow w-6/12 h-80">
             <div className="flex items-center mb-4 sm:mb-0 ">
                 <div>
                     <div className=" rounded-2xl bg bg-yellow-100 px-8 py-3">

@@ -14,7 +14,7 @@ const TopGroup = ({topGroups}) => {
     }, []);
 
     return (
-        <div className="h-96 bg-white rounded-lg shadow-md p-4">
+        <div className="h-96 bg-white rounded-lg all-shadow p-4">
             <div className="flex justify-between items-center mb-2">
                 <h2 className="text-lg font-bold">Top Group</h2>
                 <span>...</span>

@@ -7,7 +7,7 @@ import StudentTestCardIn from './Studenttestcardin';
 function StudentTestCard({ name, role, course, price, description, questions, likes, timeSpent, totalCourseTime }) {
     return (
         <>
-            <div className="bg-white rounded-lg shadow-lg p-3 max-w-sm w-72">
+            <div className="bg-white rounded-lg all-shadow p-3 max-w-sm w-72">
                 <div className="flex justify-center items-center space-x-4 w-full h-40">
                     <img src={rasm} alt="Profile" className=" h-full w-full " />
                 </div>
