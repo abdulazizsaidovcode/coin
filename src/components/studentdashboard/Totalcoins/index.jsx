@@ -3,7 +3,7 @@ import axios from "axios";
 import {config, url} from "../../api/api";
 import "./style.css"
 
-function StudentsTotalcoin() {
+function StudentsTotalcoin({studentStatistics}) {
     // const [name, setName] = useState("");
 
     // useEffect(() => {
@@ -26,7 +26,7 @@ function StudentsTotalcoin() {
                 </div>
                 <div className="flex flex-col ml-3">
                     <span className="text-sm text-gray-600 ">Total coin</span>
-                    <span className="text-lg font-semibold">3255</span>
+                    <span className="text-lg font-semibold">{studentStatistics.coin}</span>
                 </div>
             </div>
             <div className="flex items-center   mb-4 sm:mb-0 ">
@@ -34,8 +34,8 @@ function StudentsTotalcoin() {
                     <i className="fa-solid fa-trophy text-yellow-300 text-2xl"></i>
                 </div>
                 <div className="flex flex-col ml-3">
-                    <span className="text-sm text-gray-600 ">Total coin</span>
-                    <span className="text-lg font-semibold">3255</span>
+                    <span className="text-sm text-gray-600 ">Rate</span>
+                    <span className="text-lg font-semibold">{studentStatistics.rate}</span>
                 </div>
             </div>
             <div className="flex items-center mb-4 sm:mb-0 ">
@@ -43,8 +43,8 @@ function StudentsTotalcoin() {
                     <i className="fa-solid fa-clock text-blue-500 text-2xl"></i>
                 </div>
                 <div className="flex flex-col ml-3">
-                    <span className="text-sm text-gray-600 ">Total coin</span>
-                    <span className="text-lg font-semibold">3255</span>
+                    <span className="text-sm text-gray-600 ">Learning time</span>
+                    <span className="text-lg font-semibold">{studentStatistics.time}</span>
                 </div>
             </div>
             <div className="flex items-center  mb-4 sm:mb-0 ">
@@ -52,8 +52,8 @@ function StudentsTotalcoin() {
                     <i className="fa-solid fa-check-circle text-green-500 text-2xl"></i>
                 </div>
                 <div className="flex flex-col ml-3">
-                    <span className="text-sm text-gray-600 ">Total coin</span>
-                    <span className="text-lg font-semibold">3255</span>
+                    <span className="text-sm text-gray-600 ">Completed course</span>
+                    <span className="text-lg font-semibold">{studentStatistics.completedCourse}</span>
                 </div>
             </div>
         </div>
