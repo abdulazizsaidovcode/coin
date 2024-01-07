@@ -13,10 +13,10 @@ import StudentNavbar from "./studentnavbar";
 import StudentGroup from "./studentcategory";
 import Studentmessage from "./Studentmessage";
 import StudentTest from "./studenttest";
-import StudentGift from "./studentGift/Giftcard";
 import StudentExchange from "./studentExchange";
 import TableWithFilters from "../components/student";
 import StudentStartTest from "./studenttest/studentstarttest";
+import StudentGift from "./studentGift";
 
 function Student() {
   return (

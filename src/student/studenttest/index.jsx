@@ -27,7 +27,7 @@ function StudentTest() {
                        className="block w-64 p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="Search"/>
             </div>
-            <Studetsrate/>
+            <Studetsrate />
             <div className="mt-10">
                 {testCategory && testCategory.map((item, i) => <StudentTestCard key={i} category={item}/>)}
             </div>
