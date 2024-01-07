@@ -4,7 +4,7 @@ import TopStudent from "../Topstudents";
 import TopTeachers from "../Topteachers";
 import TotalCoins from "../Total coins";
 import axios from "axios";
-import {config, setConfig, url} from "../api/api";
+import { config, setConfig, url } from "../api/api";
 import TopLoading from "../Topteachers/TopLoading";
 import { toast } from "react-toastify";
 import Navbarcha from "../navbar/Navbar";
@@ -41,16 +41,18 @@ const Dashboard = () => {
     }, []);
     const [name, setName] = useState("");
 
-    useEffect(() => {
-        axios
-            .get(url + "user/getMe", config)
-            .then((response) => {
-                setName(response.data.body.fullName);
-            })
-            .catch((error) => {
-                console.log("Boshqa backendinchi topiyla iltimos 😭", error);
-            });
-    }, []);
+  useEffect(() => {
+    axios
+      .get(url + "user/getMe", config)
+      .then((response) => {
+        setName(response.data.body.fullName);
+        sessionStorage.setItem("getMeInfo", response.data.body.fullName)
+
+      })
+      .catch((error) => {
+        console.log("Boshqa backendinchi topiyla iltimos 😭", error);
+      });
+  }, []);
 
   return (
     <>

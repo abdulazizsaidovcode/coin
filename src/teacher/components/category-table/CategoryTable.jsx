@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { config, url } from '../../../components/api/api';
 
 const initialCategories = [
     { id: 1, name: 'Front-End', description: 'Tashqi qism', programmingLanguage: 'React', active: true },
@@ -21,6 +23,16 @@ const CategoryTable = () => {
             return category;
         }));
     };
+    // useEffect(() => {
+    //     getCategory();
+    // }, []);
+
+    // const getCategory = () => {
+    //     axios.get(url + "category/teacher/category/list", config)
+    //         .then(res => setCategories(res.data.body))
+    //         .catch(() => console.log("kelmadi"))
+    // }
+    // console.log(categories);
 
     return (
         <div className="min-h-screen w-full bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">

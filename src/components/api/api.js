@@ -1,4 +1,4 @@
-export const url = "http://172.20.10.7/";
+export const url = "http://137.184.13.215/swagger-ui/index.html#/";
 
 export const byId = (id) => document.getElementById(id);
 
