@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { config, getFile, setConfig, url } from '../../../components/api/api';
+import { byId, config, getFile, setConfig, url } from '../../../components/api/api';
 import avatar from "../../../assits/opacha.jpg";
 import { toast } from 'react-toastify';
-import EditModalCanvas from "../offcanvas/Offcanvas";
 
 const initialCategories = [
     { id: 1, name: 'Front-End', description: 'Tashqi qism', programmingLanguage: 'JavaScript', active: true },
@@ -42,6 +41,33 @@ const CategoryTable = () => {
             .catch(() => console.log("kelmadi"))
     }
 
+    // edit category
+    const editCategory = async () => {
+        const img = new FormData();
+        img.append('file', byId('attachmentId').files[0]);
+        const editData = {
+            attachmentId: 0,
+            name: byId("category-name").value,
+            categoryId: 1,
+            programmingLanguage: byId("programmingLanguage").value
+        }
+
+        if (img.get('file') !== 'undefined')
+            await axios.post(url + "attachment/upload", img, config)
+                .then(res => editData.attachmentId = res.data.body)
+                .catch(() => console.log("img ketmadi"))
+
+        await axios.put(url + "category/update/" + categoryInfo.id, editData, config)
+            .then(() => {
+                closeModalEdit();
+                toast.success("Category saccessfulliy edited!")
+            })
+            .catch(() => {
+                toast.error("Xatolik yuz berdi!!!")
+                // console.log(editData);
+            })
+    }
+
     // deleteCategory
     const deleteCategory = () => {
         axios.delete(url + "category/active/" + categoryInfo.id, config)
@@ -51,7 +77,7 @@ const CategoryTable = () => {
             })
             .catch((err) => {
                 toast.error("xatolik yuz berdi")
-                console.log(err);
+                // console.log(err);
             })
     }
 
@@ -131,7 +157,8 @@ const CategoryTable = () => {
                             </label>
                             <select id="programmingLanguage" className='mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full'>
                                 <option selected disabled>
-                                    {categoryInfo.programmingLanguage !== null ? categoryInfo.programmingLanguage
+                                    {categoryInfo.programmingLanguage !== null
+                                        ? categoryInfo.programmingLanguage
                                         : "No programming language"}
                                 </option>
                                 <option value="JAVA_SCRIPT">JavaScript</option>
@@ -144,7 +171,7 @@ const CategoryTable = () => {
                             <button onClick={closeModalEdit} className="font-semibold bg-yellow-500 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
                                 Close
                             </button>
-                            <button className="font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300">
+                            <button onClick={editCategory} className="font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300">
                                 Saqlash
                             </button>
                         </div>
@@ -172,23 +199,23 @@ const CategoryTable = () => {
                                 <tbody className="text-gray-700">
                                     {categories.map((category, i) => (
                                         <tr key={category.id} className='even:bg-slate-100 hover:bg-slate-200 duration-150'>
-                                            <td className="py-4 px-6 border-b border-gray-200">{i + 1}</td>
-                                            <td className="py-4 px-6 border-b border-gray-200">
+                                            <td className="py-3 px-6 border-b border-gray-200">{i + 1}</td>
+                                            <td className="py-3 px-6 border-b border-gray-200">
                                                 <img
                                                     src={category.attachmentId === null
                                                         ? avatar
                                                         : getFile + category.attachmentId}
                                                     alt="avatar"
-                                                    className="h-10 w-10 rounded-full" />
+                                                    className="h-16 w-16 rounded-full" />
                                             </td>
-                                            <td className="py-4 px-6 border-b border-gray-200">
+                                            <td className="py-3 px-6 border-b border-gray-200">
                                                 {category.name === null ? "Yo'q" : category.name}
                                             </td>
                                             {/* <td className="py-4 px-6 border-b border-gray-200">{category.description}</td> */}
-                                            <td className="py-4 px-6 border-b border-gray-200">
+                                            <td className="py-3 px-6 border-b border-gray-200">
                                                 {category.programmingLanguage === null ? "Yo'q" : category.programmingLanguage}
                                             </td>
-                                            <td className="py-4 px-6 border-b border-gray-200">
+                                            <td className="py-3 px-6 border-b border-gray-200">
                                                 <input
                                                     type="checkbox"
                                                     checked={category.active}
@@ -196,7 +223,7 @@ const CategoryTable = () => {
                                                     className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-0"
                                                 />
                                             </td>
-                                            <td className="py-4 px-6 border-b border-gray-200">
+                                            <td className="py-3 px-6 border-b border-gray-200">
                                                 <button
                                                     onClick={() => {
                                                         openModalEdit();
