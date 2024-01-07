@@ -9,15 +9,16 @@ import Studentstatistic from './statisctic';
 // Filterlar uchun kategoriyalar va guruhlar
 
 const StudentGroup = ({}) => {
-  const [exchange, setExchange] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [selectedGroup, setSelectedGroup] = useState('All');
-
+  const [topStudent, setTopStudent] = useState([]);
   // Checkbox holatini o'zgartirish uchun handler
   const getExchange = () => {
-    axios.get(url + "exchange", config) 
+    axios.get(url + "user/top/student", config) 
       .then((res) => {
-        setExchange(res.data)
+        setTopStudent(res.data.body)
+        console.log(topStudent);
+      })
+      .catch((err) => {
+        console.log("boshqa back endchi topiyla" + err);
       })
   };
 
@@ -62,19 +63,19 @@ const StudentGroup = ({}) => {
             </tr>
           </thead>
           <tbody className="text-gray-600 font-light">
-            {exchange.length && exchange.map((item, index) => (
+            { topStudent.map((item, index) => (
               <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-100">
                 <td className="py-3 px-6 text-left whitespace-nowrap">{index + 1}</td>
-                <td className="py-3 px-6 text-left"><img src={item.imgurl} alt="nofound" /></td>
-                <td className="py-3 px-6 text-left">{item.giftname}</td>
-                <td className="py-3 px-6 text-left">{item.name}</td>
-                <td className="py-3 px-6 text-left">{item.Coin}</td>
-                <td className="py-3 px-6 text-left">{item.date}</td>
+                <td className="py-3 px-6 text-left"><img src={topStudent.imgurl} alt="nofound" /></td>
+                <td className="py-3 px-6 text-left">{topStudent.giftname}</td>
+                <td className="py-3 px-6 text-left">{topStudent.name}</td>
+                <td className="py-3 px-6 text-left">{topStudent.Coin}</td>
+                <td className="py-3 px-6 text-left">{topStudent.date}</td>
                 <td className="py-3 px-6 text-center">
                   <input
                     type="checkbox"
                     className="form-checkbox h-5 w-5 text-blue-600 rounded"
-                    checked={item.active}
+                    checked={topStudent.active}
                   />
                 </td>
                 <td className="py-3 px-6 text-center">
