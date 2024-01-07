@@ -11,7 +11,7 @@ export const config = {
         Authorization: sessionStorage.getItem("jwtToken"),
     }
 }
-
+    
 export function getTopGroupForAdmin(setTopGroup) {
     axios
         .get(url + "group/topGroupsForAdmin", config)

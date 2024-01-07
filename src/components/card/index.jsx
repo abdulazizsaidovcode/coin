@@ -1,59 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../globalcss/style.css";
+import { url } from "../api/api";
+import axios from "axios";
+import { config } from "@fortawesome/fontawesome-svg-core";
 
 const GiftCard = () => {
-  const initialCategories = [
-    {
-      id: 1,
-      imageUrl: "Front-End",
-      giftName: "mishka1",
-      coins: "200",
-      description: "zor narsa1",
-    },
-    {
-      id: 2,
-      imageUrl: "Front-End",
-      giftName: "mishka2",
-      coins: "200",
-      description: "zor narsa2",
-    },
-    {
-      id: 3,
-      imageUrl: "Front-End",
-      giftName: "mishka3",
-      coins: "200",
-      description: "zor narsa3",
-    },
-    {
-      id: 4,
-      imageUrl: "Front-End",
-      giftName: "mishka4",
-      coins: "200",
-      description: "zor narsa4",
-    },
-    {
-      id: 5,
-      imageUrl: "Front-End",
-      giftName: "mishka5",
-      coins: "200",
-      description: "zor narsa5",
-    },
-  ];
 
-  const [categories, setCategories] = useState(initialCategories);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modalni ochish va yopish uchun holat
+  const [gifts, setGifts] = useState([]); // Sifr
 
-  // Function to toggle the active state
-  const toggleActive = (id) => {
-    setCategories(
-      categories.map((category) => {
-        if (category.id === id) {
-          return { ...category, active: !category.active };
-        }
-        return category;
+  useEffect(() => {
+    getGift()
+  }, [])
+
+
+  function getGift() {
+    axios
+      .get(
+        url + "gift",
+        config
+      )
+      .then((res) => {
+        setGifts(res.data.body.object);
+        console.log(res.data);
       })
-    );
-  };
+      .catch(() => {});
+  }
+
 
   // Modalni ochish va yopish uchun funksiyalar
   const openModal = () => {
@@ -66,28 +39,33 @@ const GiftCard = () => {
 
   return (
     <div className="flex flex-wrap justify-around">
-      {categories.map((category) => (
+      {gifts.map((item, i) => (
         <div
-          key={category.id}
-          className="w-80 h-96 rounded-xl overflow-hidden shadow-xl m-4 up"
+          key={i}
+          className="w-80 rounded-xl overflow-hidden shadow-xl m-4 up"
         >
           <img
             className="w-full h-1/2 bg-contain"
-            src={category.imageUrl}
+            src="https://images.pexels.com/photos/1666065/pexels-photo-1666065.jpeg?cs=srgb&dl=pexels-george-dolgikh-1666065.jpg&fm=jpg"
+            // src={item.attachmentId != null ? item.attachmentId : "https://images.pexels.com/photos/1666065/pexels-photo-1666065.jpeg?cs=srgb&dl=pexels-george-dolgikh-1666065.jpg&fm=jpg"}
             alt="Gift"
           />
-          <div className="px-6 py-4">
+          <div className="px-6 py-3">
             <div className="font-bold text-xl mb-2 text-center">
-              {category.giftName}
+              {item.name}
             </div>
             <p className="text-gray-700 text-base text-center">
-              {category.coins}
-              <br />
-              {category.description}
+              {item.description.length > 50 ? item.description.substring(0, 50) : item.description}
+            </p>
+            <p className="text-gray-900 font-bold mt-3 text-center">
+              {item.rate} coin
             </p>
           </div>
-          <div className="px-6 pt-4 text-center">
-            <button onClick={openModal} className="btm">
+          <div className="px-6 pt-4  text-center">
+          <button onClick={closeModal} className="btm-close me-3 align-bottom">
+              Delete
+            </button>
+            <button onClick={closeModal} className="btm align-bottom">
               Edit
             </button>
           </div>
@@ -149,41 +127,33 @@ const GiftCard = () => {
                     htmlFor="price"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Price
+                    Rate
                   </label>
                   <input
                     type="number"
-                    name="price"
-                    id="price"
+                    name="rate"
+                    id="rate"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="$2999"
+                    placeholder="100"
                     required=""
                   />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
-                  <label
-                    htmlFor="category"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Category
+                  <label className="block mb-2 text-sm font-medium text-gray-900">
+                    Image
                   </label>
-                  <select
-                    id="category"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  >
-                    <option selected="">Select category</option>
-                    <option value="TV">TV/Monitors</option>
-                    <option value="PC">PC</option>
-                    <option value="GA">Gaming/Console</option>
-                    <option value="PH">Phones</option>
-                  </select>
+                  <input
+                    id="image"
+                    type="file"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  />
                 </div>
                 <div className="col-span-2">
                   <label
                     htmlFor="description"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Product Description
+                    Gift Description
                   </label>
                   <textarea
                     id="description"
@@ -195,8 +165,11 @@ const GiftCard = () => {
               </div>
               <div className="flex justify-end">
                 <button className="btm-close me-2 bg-red-900">Close</button>
-                <button type="submit" className="btm">
-                  Save
+                <button
+                 
+                  className="btm"
+                >
+                  Add
                 </button>
               </div>
             </div>
