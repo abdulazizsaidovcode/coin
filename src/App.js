@@ -5,38 +5,43 @@ import Admin from "./admin/index"
 import Teacher from "./teacher/index"
 import Student from "./student/index"
 import {byId} from "./components/api/api";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import FalsePage from "./components/falsepage"
 
 function App() {
-
-    function SidebarControl() {
-        if (sessionStorage.getItem('role') === 'ROLE_SUPER_ADMIN') return <Admin/>
-        if (sessionStorage.getItem('role') === 'ROLE_TEACHER') return <Teacher/>
-        if (sessionStorage.getItem('role') === 'ROLE_USER') return <Student/>
-    }
+    const [path, setPath] = useState(false);
 
     return (
         <div className="flex">
             <Routes>
                 <Route path="/" element={<SignIn/>}/>
                 {/*yullarga utishga ruxsat berishni nazorat qilish*/}
-                <Route path='/admin/*' element={<Scan role='ROLE_SUPER_ADMIN'/>}/>
-                <Route path='/teacher/*' element={<Scan role='ROLE_TEACHER'/>}/>
-                <Route path='/student/*' element={<Scan role='ROLE_USER'/>}/>
+                <Route path='/admin/*' element={<Scan role='ROLE_SUPER_ADMIN' setPath={setPath}/>}/>
+                <Route path='/teacher/*' element={<Scan role='ROLE_TEACHER' setPath={setPath}/>}/>
+                <Route path='/student/*' element={<Scan role='ROLE_USER' setPath={setPath}/>}/>
                 <Route path='*' element={<FalsePage/>}/>
             </Routes>
-            <SidebarControl/>
+            {path && <SidebarControl role={sessionStorage.getItem('role')}/>}
         </div>
     )
 }
 
-function Scan({role}) {
+function Scan({role, setPath}) {
+    setPath(true);
     useEffect(() => {
         if (sessionStorage.getItem('role') !== role) byId('default').click();
     }, []);
 
     return <Link to='/' id='default'/>
+}
+
+function SidebarControl({role}) {
+    switch (role) {
+        case 'ROLE_SUPER_ADMIN': return <Admin/>
+        case 'ROLE_TEACHER': return <Teacher/>
+        case 'ROLE_USER': return <Student/>
+        default: return <>Hello</>
+    }
 }
 
 export default App;
