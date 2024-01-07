@@ -26,7 +26,7 @@ function Offcanvas() {
         const addData = {
             attachmentId: 0,
             name: byId("category-name").value,
-            categoryId: byId("categoryId").value,
+            categoryId: 1,
             programmingLanguage: byId("programmingLanguage").value
         }
 
@@ -47,8 +47,8 @@ function Offcanvas() {
     }
 
     return (
-        <div className='ml-64'>
-            <button id="openMenuButton">Open Menu</button>
+        <div>
+            <button id="openMenuButton"></button>
             {isMenuOpen && (
                 <div className="fixed inset-0 z-50 overflow-hidden">
                     <div className="absolute inset-0 overflow-hidden">

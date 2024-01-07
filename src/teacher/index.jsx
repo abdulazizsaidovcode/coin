@@ -16,6 +16,8 @@ import Exchange from "./components/exchange/Exchange";
 import Message from "./components/message/Message";
 import TotalCoinForStudent from "./components/total-coin-for-student/TotalCoinForStudent";
 import FalsePage from "./components/false-page/FalsePage";
+import Groups from "./components/group/Group";
+import Students from "./components/student/Students";
 
 function Teacher() {
     return (
@@ -24,7 +26,7 @@ function Teacher() {
             <div className="w-full">
                 <Navbarcha />
                 <Routes >
-                    <Route path="/teacher/CategoryTable" element={<CategoryTable />} />
+                    {/* <Route path="/teacher/CategoryTable" element={<CategoryTable />} /> */}
                     <Route path="/teacher/dashboard" element={<Dashboard />} />
                     <Route path="/teacher/giftCard" element={<GiftCard />} />
                     <Route path="/teacher/usercard" element={<UserProfile />} />
@@ -32,7 +34,9 @@ function Teacher() {
                     <Route path="/teacher/topgroup" element={<TopGroup />} />
                     <Route path="/teacher/topteachers" element={<TopTeachers />} />
                     <Route path="/teacher/category" element={<Category />} />
-                    <Route path="/teacher/offcanvas" element={<Offcanvas />} />
+                    <Route path="/teacher/group" element={<Groups />} />
+                    <Route path="/teacher/student" element={<Students />} />
+                    {/* <Route path="/teacher/offcanvas" element={<Offcanvas />} /> */}
                     <Route path="/teacher/gift" element={<Gift />} />
                     <Route path="/teacher/exchange" element={<Exchange />} />
                     <Route path="/teacher/message" element={<Message />} />
