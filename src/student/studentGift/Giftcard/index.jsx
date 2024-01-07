@@ -35,7 +35,7 @@ const StudentGiftCard = () => {
   return (
     <div className="flex flex-wrap justify-around bg-gray-100 pt-10">
       {categories.map(category => (
-        <div key={category.id} className="w-80 h-96 rounded-xl overflow-hidden shadow-xl m-4 up">
+        <div key={category.id} className="w-80 h-96 rounded-xl overflow-hidden all-shadow m-4 up">
           <img className="w-full h-1/2 bg-contain" src={category.imageUrl} alt="Gift" />
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2 text-center">{category.giftName}</div>

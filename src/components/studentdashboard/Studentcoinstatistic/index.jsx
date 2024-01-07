@@ -61,7 +61,7 @@ function Studentcoinstatistic() {
   };
 
   return (
-    <div style={chartStyle}>
+    <div style={chartStyle} className='all-shadow'>
       <ReactECharts option={option} style={{ width: '100%', height: '100%' }} />
     </div>
   );
