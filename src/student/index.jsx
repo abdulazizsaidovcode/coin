@@ -13,8 +13,10 @@ import StudentNavbar from "./studentnavbar";
 import StudentGroup from "./studentcategory";
 import Studentmessage from "./Studentmessage";
 import StudentTest from "./studenttest";
-import StudentGift from "./studentGift/Giftcard";
 import StudentExchange from "./studentExchange";
+import TableWithFilters from "../components/student";
+import StudentStartTest from "./studenttest/studentstarttest";
+import StudentGift from "./studentGift";
 
 function Student() {
   return (
@@ -36,6 +38,7 @@ function Student() {
           <Route path="/student/exchange" element={<StudentExchange />} />
           <Route path="/student/message" element={<Studentmessage />} />
           <Route path="/student/totalcoinforstudent" element={<TotalCoinForStudent />} />
+          <Route path="/student/teststart" element={<StudentStartTest />} />
         </Routes>
       </div>
     </div>

@@ -5,7 +5,7 @@ function Studetsrate() {
     // Adjust the icon components as necessary to match your setup.
 
     return (
-        <div className="bg-white rounded-full p-4 flex justify-around items-center shadow">
+        <div className="bg-white rounded-full p-4 flex justify-around items-center all-shadow">
             <div className="flex items-center sm:items-start  mb-4 sm:mb-0 ">
                 <div className="rounded-2xl bg-gray-200 px-5 py-2">
                     <i class="fa-solid fa-dollar-sign text-4xl"></i>

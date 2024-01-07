@@ -4,8 +4,8 @@ import StudentGiftCard from "./Giftcard";
 
 function StudentGift() {
     return (
-        <div className="bg-gray-100 min-h-screen p-8 w-full ">
-            <div className="mt-10">
+        <div className="bg-gray-100 h-screen p-8 w-full ">
+            <div className="mb-10">
                 <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Gift</h2>
             </div>
             <div className=" mb-2 flex justify-between">
@@ -21,7 +21,7 @@ function StudentGift() {
                     <input type="search" id="search" class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
                 </div>
             </div>
-            <StudentGiftCard/>
+            <StudentGiftCard />
         </div>
     );
 }

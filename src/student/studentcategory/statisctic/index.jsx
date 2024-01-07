@@ -1,7 +1,6 @@
-// TotalCoins.js
-
 import React from 'react';
 import EChartsReact from 'echarts-for-react';
+import "../../../globalcss/style.css"
 
 const Studentstatistic = () => {
 
@@ -25,7 +24,7 @@ const Studentstatistic = () => {
       };
 
     return (
-        <div className="bg-white rounded-lg shadow-md p-2">
+        <div className="bg-white rounded-lg all-shadow p-2">
             <div style={{ height: '250px', width: '100%' }}>
                 <EChartsReact option={option} style={{ height: '100%', width: '100%' }} />
             </div>
