@@ -34,8 +34,7 @@ function Student() {
           <Route path="/student/topteachers" element={<TopTeachers />} />
           <Route path="/student/test" element={<StudentTest />} />
           <Route path="/student/offcanvas" element={<Offcanvas />} />
-          {/* <Route path="/student/gift" element={<StudentGift />} /> */}
-          <Route path="/student/giift" element={<StudentGift />} />
+          <Route path="/student/gift" element={<StudentGift />} />
           <Route path="/student/exchange" element={<StudentExchange />} />
           <Route path="/student/message" element={<Studentmessage />} />
           <Route path="/student/totalcoinforstudent" element={<TotalCoinForStudent />} />
