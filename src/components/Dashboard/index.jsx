@@ -15,8 +15,6 @@ function Dashboard() {
     const [topGroup, setTopGroup] = useState(null);
     const [pl, setPl] = useState(null);
 
-    console.log('kelli')
-
     useEffect(() => {
         setConfig();
         axios
