@@ -55,7 +55,7 @@ function Studentmessage() {
             {/* Xabarlar ro'yxatini ko'rsatish */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {messages.map(message => (
-                    <div key={message.id} className="border rounded shadow p-3">
+                    <div key={message.id} className="border rounded all-shadow p-3">
                         <h2 className="font-bold text-lg mb-3">{message.groupName}</h2>
                         <p className="text-gray-700 text-base">{message.content}</p>
                         <div className="text-right">

@@ -1,5 +1,5 @@
 import Studetsrate from "../../components/studentdashboard/Studentsrate";
-import StudentTestCard from "../studentGift/Giftcard";
+import StudentTestCard from "./studenttestcard";
 
 function StudentTest() {
     return (
@@ -10,7 +10,22 @@ function StudentTest() {
             </div>
             <Studetsrate />
             <div className="mt-10">
-                <StudentTestCard />
+                <StudentTestCard
+                    name="Javokhir Kozimov"
+                    role="IT and Business"
+                    phoneNumber="+998-99-264-62-62"
+                    socialMedia={{
+                        instagram: "javohirkkoziboyev",
+                        twitter: "javohirkkoziboyev"
+                    }}
+                    course="Java Core"
+                    price="500 C / 350 C"
+                    description="Description"
+                    questions={20}
+                    likes={15}
+                    timeSpent="7h 39m"
+                    totalCourseTime="5 h 15m"
+                />
             </div>
         </div>
     );

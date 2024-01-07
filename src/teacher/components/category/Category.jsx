@@ -32,6 +32,7 @@ function Category() {
                 </div>
             </div>
             <CategoryTable />
+            <AddModalCanvas />
         </div>
     );
 }

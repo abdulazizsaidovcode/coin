@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const url = "http://192.168.149.27/";
 
+export const getFile = "attachment/getFile/";
+
 export const byId = (id) => document.getElementById(id);
 
 export const config = {
