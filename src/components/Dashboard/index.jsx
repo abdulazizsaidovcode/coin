@@ -4,7 +4,7 @@ import TopStudent from "../Topstudents";
 import TopTeachers from "../Topteachers";
 import TotalCoins from "../Total coins";
 import axios from "axios";
-import {config, getTopGroup, getTopStudent, getTopTeacher, setConfig, url} from "../api/api";
+import {config, getTopGroupForAdmin, getTopStudent, getTopTeacher, setConfig, url} from "../api/api";
 import TopLoading from "../Topteachers/TopLoading";
 import {toast} from "react-toastify";
 
@@ -23,7 +23,7 @@ function Dashboard() {
             .catch(() => toast.warning("internetga blan aloqani tekshirig!"));
         getTopTeacher(setTopTeacher);
         getTopStudent(setTopStudent);
-        getTopGroup(setTopGroup);
+        getTopGroupForAdmin(setTopGroup);
         axios
             .get(url + "coin/history/course/statistics", config)
             .then((res) => setPl(res.data.body))

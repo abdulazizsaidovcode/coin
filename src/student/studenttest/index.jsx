@@ -4,8 +4,8 @@ import StudentTestCard from "./studenttestcard";
 function StudentTest() {
     return (
         <div className="bg-gray-100 pb-10 p-8">
-            <div className="flex justify-between items-middle py-6">
-                <h1 className="text-4xl">test</h1>
+            <div className="flex justify-between items-middle">
+                <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Gift</h2>
                 <input type="search" id="search" class="block w-64 p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
             </div>
             <Studetsrate />
