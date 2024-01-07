@@ -45,7 +45,7 @@ const GroupsTable = () => {
                                 </thead>
                                 <tbody className="text-gray-700">
                                     {groups.map((group, i) => (
-                                        <tr key={group.id} className='even:bg-slate-100 hover:bg-slate-200 duration-150'>
+                                        <tr key={group.id} className='even:bg-slate-100 hover:bg-slate-200 duration-200'>
                                             <td className="py-3 px-6 border-b border-gray-200">{i + 1}</td>
                                             <td className="py-3 px-6 border-b border-gray-200">
                                                 <img
@@ -62,6 +62,7 @@ const GroupsTable = () => {
                                             <td className="py-3 px-6 border-b border-gray-200">
                                                 <button className='btm' onClick={() => {
                                                     goStudent();
+                                                    sessionStorage.setItem("studentInfo", group.id)
                                                 }}>More</button>
                                             </td>
                                         </tr>

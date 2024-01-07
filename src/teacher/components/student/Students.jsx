@@ -1,4 +1,32 @@
+import axios from "axios";
+import { config, setConfig, url } from "../../../components/api/api";
+import { useState } from "react";
+import { useEffect } from "react";
+
 const Students = () => {
+
+    const getStudentInfo = sessionStorage.getItem("studentInfo")
+    const [groupId, setGroupId] = useState(getStudentInfo);
+    const [group, setGroup] = useState([]);
+    const [student, setStudent] = useState([]);
+
+    useEffect(() => {
+        setConfig();
+        getGroup();
+        getStudent();
+    }, []);
+
+    const getGroup = () => {
+        axios.get(url + "group/teacher", config)
+            .then(res => setGroup(res.data.body))
+            .catch(() => console.log("kelmadi"))
+    }
+
+    const getStudent = () => {
+        axios.get(url + "group/students/" + groupId, config)
+            .then(res => setStudent(res.data.body))
+            .catch(() => console.log("kelmadi"))
+    }
     return (
         <div className="p-8 w-full bg-studentTableBg min-h-full">
             <div className=" mb-4 flex justify-between items-center">
@@ -16,18 +44,22 @@ const Students = () => {
                         placeholder="Search" />
                 </div>
             </div>
-
             <div>
                 <div className="mb-4">
                     <div className='flex mb-2 flex-wrap'>
-                        <button
-                            className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
-                            bg-purple-500 text-white hover:bg-purple-700 active:scale-90 focus:outline-none focus:bg-purple-600 duration-300">
-                            button
-                        </button>
+                        {group.map((item, i) =>
+                            <button
+                                onClick={() => {
+                                    setGroupId(item.id)
+                                }}
+                                key={i}
+                                className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
+                              bg-purple-500 text-white hover:bg-purple-700 active:scale-90 focus:outline-none focus:bg-purple-600 duration-300">
+                                {item.name}
+                            </button>
+                        )}
                     </div>
                 </div>
-
                 <div className="w-full mt-8 shadow-md rounded-3xl overflow-hidden">
                     <table className="w-full">
                         <thead className="bg-gray-800 text-white rounded-t-2xl uppercase text-sm leading-normal">
@@ -42,15 +74,22 @@ const Students = () => {
                             </tr>
                         </thead>
                         <tbody className="text-gray-600 font-light">
-                            <tr className="border-b border-gray-200 text-center hover:bg-gray-100 duration-300">
-                                <td className="py-3 px-6">1</td>
-                                <td className="py-3 px-6">Full Name</td>
-                                <td className="py-3 px-6">Group</td>
-                                <td className="py-3 px-6">Cion</td>
-                                <td className="py-3 px-6">Phone Number</td>
-                                <td className="py-3 px-6">Task</td>
-                                <td className="py-3 px-6">Exschange</td>
-                            </tr>
+                            {student.length !== 0 ?
+                                student.map((item, i) =>
+                                    <tr key={item.id} className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
+                                        <td className="py-3 px-6">{i + 1}</td>
+                                        <td className="py-3 px-6">{item.fullName}</td>
+                                        <td className="py-3 px-6">{item.groupName}</td>
+                                        <td className="py-3 px-6">{item.phoneNumber}</td>
+                                        <td className="py-3 px-6">{item.coin}</td>
+                                        <td className="py-3 px-6">{item.task}</td>
+                                        <td className="py-3 px-6">{item.numberOfExchange}</td>
+                                    </tr>
+                                ) :
+                                <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
+                                    <td className="py-3 px-6 font-inika font-medium text-lg tracking-wider leading-10" colSpan="7">loading...</td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
