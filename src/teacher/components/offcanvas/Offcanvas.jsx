@@ -1,4 +1,7 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { byId, config, url } from '../../../components/api/api';
+import { toast } from 'react-toastify';
 
 function Offcanvas() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,6 +18,33 @@ function Offcanvas() {
             button.removeEventListener('click', toggleMenu);
         };
     }, []);
+
+    // add category
+    const addCategory = async () => {
+        const img = new FormData();
+        img.append('file', byId('attachmentId').files[0]);
+        const addData = {
+            attachmentId: 0,
+            name: byId("category-name").value,
+            categoryId: byId("categoryId").value,
+            programmingLanguage: byId("programmingLanguage").value
+        }
+
+        if (img.get('file') !== 'undefined')
+            await axios.post(url + "attachment/upload", img, config)
+                .then(res => addData.attachmentId = res.data.body)
+                .catch(() => console.log("img ketmadi"))
+
+        await axios.post(url + "category/save", addData, config)
+            .then(() => {
+                toggleMenu();
+                toast.success("Category saccessfulliy saved!")
+            })
+            .catch(() => {
+                toast.error("Xatolik yuz berdi!!!")
+                // console.log(addData);
+            })
+    }
 
     return (
         <div className='ml-64'>
@@ -45,10 +75,12 @@ function Offcanvas() {
                                             </div>
                                             <div className="bg-white p-6 mt-10 rounded-lg font-inika">
                                                 <label className="block text-sm font-medium text-gray-700">Choose file</label>
-                                                <input type="file"
+                                                <input
+                                                    id='attachmentId'
+                                                    type="file"
                                                     className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
-                                                        file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-50
-                                                        file:text-gray-700 hover:file:bg-gray-100" />
+                                                    file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-50
+                                                    file:text-gray-700 hover:file:bg-gray-100" />
 
                                                 <label for="category-name" className="block mt-7 text-sm font-medium text-gray-700">
                                                     Category name
@@ -84,7 +116,7 @@ function Offcanvas() {
                                                     <button
                                                         onClick={toggleMenu}
                                                         className="mr-3 bg-red-600 py-2.5 px-5 font-bold rounded-lg text-white active:scale-90 duration-300">Close</button>
-                                                    <button className="btm">Save</button>
+                                                    <button className="btm" onClick={addCategory}>Save</button>
                                                 </div>
                                             </div>
                                         </div>
