@@ -8,7 +8,7 @@ import TopTeachers from "../components/Topteachers";
 import Offcanvas from "../components/ofcanvas";
 import TotalCoinForStudent from "../components/totalconforstudent";
 import StudentSidebar from "./sidebar/Studentsitebar";
-import StudentDashboard from "../components/studentdashboard";
+import StudentDashboard from "./studentdashboard";
 import StudentNavbar from "./studentnavbar";
 import StudentGroup from "./studentcategory";
 import Studentmessage from "./Studentmessage";
