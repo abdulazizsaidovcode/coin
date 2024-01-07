@@ -1,9 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { byId, config, getFile, setConfig, url } from '../../../components/api/api';
-import avatar from "../../../assits/opacha.jpg";
-import { toast } from 'react-toastify';
-import EditModalCanvas from "../offcanvas/Offcanvas";
+import { config, setConfig, url } from '../../../components/api/api';
+import avatar from "../../../assits/itca.jpg";
 
 const initialCategories = [
     { id: 1, name: 'Front-End', description: 'Tashqi qism', programmingLanguage: 'JavaScript', active: true },
@@ -47,9 +45,7 @@ const GroupsTable = () => {
                                             <td className="py-3 px-6 border-b border-gray-200">{i + 1}</td>
                                             <td className="py-3 px-6 border-b border-gray-200">
                                                 <img
-                                                    src={category.attachmentId === null
-                                                        ? avatar
-                                                        : getFile + category.attachmentId}
+                                                    src={avatar}
                                                     alt="avatar"
                                                     className="h-16 w-16 rounded-full" />
                                             </td>

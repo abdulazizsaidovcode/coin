@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { byId, config, getFile, setConfig, url } from '../../../components/api/api';
 import avatar from "../../../assits/opacha.jpg";
 import { toast } from 'react-toastify';
-import EditModalCanvas from "../offcanvas/Offcanvas";
 
 const initialCategories = [
     { id: 1, name: 'Front-End', description: 'Tashqi qism', programmingLanguage: 'JavaScript', active: true },
