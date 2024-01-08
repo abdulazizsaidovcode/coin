@@ -26,7 +26,7 @@ const StudentGroup = () => {
         <div className='w-5/12 text-5xl flex items-center h-64'>
           MY group
         </div>
-        <div className='w-5/12 shadow-xl up h-64'>
+        <div className='w-5/12 all-shadow up h-64'>
             <Studentstatistic/>
         </div>
       </div>

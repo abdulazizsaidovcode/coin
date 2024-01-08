@@ -3,12 +3,13 @@ import { config, setConfig, url } from '../../../components/api/api';
 import axios from 'axios';
 
 function Studetsrate() {
-    const [coin, setCoinsRate] = useState({});
+    const [coin, setCoinsRate] = useState([]);
     useEffect(() => {
         setConfig();
         axios.get(url + "user/rate/statistics", config)
             .then(res => {
                 setCoinsRate(res.data.body);
+                console.log(coin);
             })
             .catch(err => console.log("Boshqa backendinchi topiyla iltomos 😭", err));
     }, []);
