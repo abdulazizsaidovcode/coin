@@ -3,11 +3,14 @@ import "../../globalcss/style.css";
 import { url } from "../api/api";
 import axios from "axios";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import { toast } from "react-toastify";
 
 const GiftCard = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false); // Modalni ochish va yopish uchun holat
+  const [deleteModal, setDeleteModal] = useState(false); // Modalni ochish va yopish uchun holat
   const [gifts, setGifts] = useState([]); // Sifr
+  const [giftId, setGiftid] = useState([]); // Sifr
 
   useEffect(() => {
     getGift()
@@ -15,6 +18,33 @@ const GiftCard = () => {
 
 
   function getGift() {
+    axios
+      .get(
+        url + "gift",
+        config
+      )
+      .then((res) => {
+        setGifts(res.data.body.object);
+        console.log(res.data);
+      })
+      .catch(() => {});
+  }
+
+  const deleteGift = (id) => {
+    axios
+      .delete(
+        url + "gift/delete/" + id,
+        config
+      )
+      .then(() => {
+        toast.success("Succesfully delete gift!")
+      })
+      .catch(() => {
+        toast.error("Something is wrong!")
+      });
+  }
+
+  function editGift() {
     axios
       .get(
         url + "gift",
@@ -37,6 +67,14 @@ const GiftCard = () => {
     setIsModalOpen(false);
   };
 
+  const opendelete = () => {
+    setDeleteModal(true);
+  };
+
+  const closedelete = () => {
+    setDeleteModal(false);
+  };
+
   return (
     <div className="flex flex-wrap justify-around">
       {gifts.map((item, i) => (
@@ -50,7 +88,7 @@ const GiftCard = () => {
             // src={item.attachmentId != null ? item.attachmentId : "https://images.pexels.com/photos/1666065/pexels-photo-1666065.jpeg?cs=srgb&dl=pexels-george-dolgikh-1666065.jpg&fm=jpg"}
             alt="Gift"
           />
-          <div className="px-6 py-3">
+          <div className="px-6 py-2">
             <div className="font-bold text-xl mb-2 text-center">
               {item.name}
             </div>
@@ -62,10 +100,13 @@ const GiftCard = () => {
             </p>
           </div>
           <div className="px-6 pt-4  text-center">
-          <button onClick={closeModal} className="btm-close me-3 align-bottom">
+          <button onClick={() => {
+            opendelete()
+            setGiftid(item.id)
+          }} className="btm-close me-3 align-bottom mb-3">
               Delete
             </button>
-            <button onClick={closeModal} className="btm align-bottom">
+            <button onClick={closeModal} className="btm align-bottom mb-3">
               Edit
             </button>
           </div>
@@ -164,12 +205,67 @@ const GiftCard = () => {
                 </div>
               </div>
               <div className="flex justify-end">
-                <button className="btm-close me-2 bg-red-900">Close</button>
+                <button className="btm-close me-2 bg-red-900" onClick={closeModal}>Close</button>
                 <button
-                 
                   className="btm"
                 >
                   Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* delete Modal */}
+      {deleteModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 ">
+          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+            <div className="flex">
+              <h2 className="text-lg font-semibold text-gray-900 p-2">
+                Delete gift
+              </h2>
+              <button
+                onClick={closeModal}
+                className="text-gray-400 m-2 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-toggle="crud-modal"
+              >
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span className="sr-only">Close modal</span>
+              </button>
+            </div>
+
+            {/* delete Modal body */}
+            <div className="p-4 md:p-5">
+              <div className="grid gap-4 mb-4 grid-cols-2">
+                <div className="col-span-2">
+                              dbcb cjec ecbc eu  ihe o e o b eob  c ccicb3icbiucb 
+                </div>
+              </div>
+              <div className="flex justify-end">
+                <button className="btm-close me-2 bg-red-900" onClick={closedelete}>No</button>
+                <button
+                  onClick={() => {
+                    deleteGift(giftId)
+                    closedelete()
+                  }}
+                  className="btm"
+                >
+                  Yes
                 </button>
               </div>
             </div>
