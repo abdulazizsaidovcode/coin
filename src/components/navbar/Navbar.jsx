@@ -3,6 +3,8 @@ import { byId, config, setConfig, url } from "../api/api";
 import axios from "axios";
 import avatar from "../../assits/opacha.jpg";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Navbarcha = () => {
   const [name, setName] = useState([]);
@@ -26,8 +28,8 @@ const Navbarcha = () => {
   return (
     <div className="bg-gray-100 w-full">
       <Link to="/" id="logout"></Link>
-      <div className="container mx-auto">
-        <div className="flex justify-between bg-white py-5 px-8 w-full fixed z-50">
+      <div className="w-full container">
+        <div className="flex justify-between bg-white py-3 px-8  z-50 w-full">
           {/* Qidiruv maydoni */}
           <div className="flex items-center space-x-1 ">
             <div class="relative">
@@ -40,11 +42,18 @@ const Navbarcha = () => {
             </div>
           </div>
           {/* Foydalanuvchi profili va boshqa kontentlar uchun joy */}
-          <div className="relative">
-            <button onClick={toggleMenu} className="flex items-center space-x-2 ">
-              <img src={avatar} alt="Admin" className="rounded-full w-10 h-10" />
-              <span className="hidden md:block">{name.fullName}</span>
-            </button>
+          <div className="relative left-0">
+            <div className="flex items-center">
+              <FontAwesomeIcon icon={faCheckCircle} className="text-2xl mr-2 text-gray-800" />
+              <div className='relative mt-1'>
+                <div className='w-2 h-2 bg-red-400 rounded-full absolute right-2 '><a href=""></a></div>
+                <FontAwesomeIcon icon={faBell} className="text-2xl mr-2 text-gray-800" />
+              </div>
+              <button onClick={toggleMenu} className="flex items-center space-x-2 ">
+                <img src={avatar} alt="Admin" className="rounded-full w-12 h-12 p-1 border" />
+                <span className="hidden md:block">{name.fullName}</span>
+              </button>
+            </div>
             <div
               className={`${isOpen ? "absolute duration-500" : "hidden"} 
               right-0 mt-2 py-2 w-80 bg-white rounded-xl shadow-xl z-20`}>
@@ -78,7 +87,7 @@ const Navbarcha = () => {
             </div>
           </div>
         </div>
-        <div className="px-8 pt-36">
+        <div className="px-8 pt-8">
           <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800">
             Hi {name.fullName}
           </h1>
