@@ -17,7 +17,7 @@ const CategoryTable = (categories, getCategory) => {
   const closeModal = () => {
     setIsModalOpen(false);
   }
-  console.log("salom hammaga"+categories);
+  console.log("salom hammaga" + categories);
   // Function to toggle the active state
   
 

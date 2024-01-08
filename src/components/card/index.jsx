@@ -8,6 +8,10 @@ const GiftCard = ({ gifts, getGift }) => {
   const [deleteModal, setDeleteModal] = useState(false); // Modalni ochish va yopish uchun holat
   const [editModal, setEditModal] = useState(false); // Modalni ochish va yopish uchun holat
   const [giftId, setGiftid] = useState([]); // Sifr
+  const [giftIn, setGiftIn] = useState([]); // Sifr
+
+ 
+
 
   const deleteGift = () => {
     axios.delete(url + "gift/delete/" + giftId, config)
@@ -18,13 +22,15 @@ const GiftCard = ({ gifts, getGift }) => {
       .catch(() => {
         toast.error("Something is wrong!");
       });
-    console.log(giftId);
   };
+
+  
+
 
   function editGift() {
     axios
       .put(
-        url + "gift/save/" + giftId,
+        url + "gift/update/" + giftId,
         {
           name: document.getElementById("name").value,
           attachmentId: 1,
@@ -102,6 +108,7 @@ const GiftCard = ({ gifts, getGift }) => {
               onClick={() => {
                 openEdit();
                 setGiftid(item.id);
+                setGiftIn(item)
               }}
               className="btm align-bottom mb-3"
             >
