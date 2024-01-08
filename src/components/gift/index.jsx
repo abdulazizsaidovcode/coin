@@ -16,7 +16,7 @@ function Gift() {
   function getGift() {
     axios.get(url + "gift", config)
       .then((res) => {
-        setGifts(res.data.body.object);
+        setGifts(res.data.body.object.reverse());
       })
       .catch(() => {});
   }
