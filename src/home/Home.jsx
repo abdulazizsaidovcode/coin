@@ -12,7 +12,7 @@ function Home() {
 
     return (
         <div>
-            <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+            <nav className="bg-white border-gray-200 px-2 sm:px-4 py-5 dark:bg-gray-900 ">
                 <div className="container flex flex-wrap justify-between items-center mx-auto">
                     <a href="https://flowbite.com/" className="flex items-center">
                         <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
@@ -82,14 +82,16 @@ function Home() {
                 {/* fourth section end */}
 
 
-                                <div className='flex justify-center  flex-col flex-wrap px-20 '>
+                {/* fiveth section start */}
+                <div className='flex justify-center  flex-col flex-wrap px-20 '>
                     <img src={bginput} className='flex flex-wrap items-center inputlar ' width={200}></img>
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                         <rect width="40" height="40" fill="white" />
                         <path d="M36.6968 22.1633L30.1651 25.86L24.3067 20.0383L30.2118 14.17L36.6968 17.84C37.0795 18.0564 37.3979 18.3706 37.6194 18.7504C37.841 19.1302 37.9577 19.562 37.9577 20.0017C37.9577 20.4413 37.841 20.8731 37.6194 21.2529C37.3979 21.6327 37.0795 21.9469 36.6968 22.1633ZM2.22842 1.53999C2.10473 1.84025 2.04131 2.16191 2.04175 2.48665V37.515C2.04175 37.8767 2.11675 38.2133 2.24842 38.515L20.8401 20.0367L2.22842 1.53999ZM22.5734 18.315L28.0034 12.9183L5.75008 0.324986C5.2731 0.050878 4.71757 -0.054238 4.17342 0.0266523L22.5734 18.315ZM22.5734 21.76L4.24008 39.9817C4.73675 40.0417 5.26008 39.955 5.75008 39.6767L27.9568 27.11L22.5734 21.76Z" fill="black" />
                     </svg>
                 </div>
-
+                {/* fiveth section end */}
+                
 
 
 
