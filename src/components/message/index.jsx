@@ -1,85 +1,195 @@
-// import axios from 'axios';
-// import React, { useState, useEffect } from 'react';
-// import { config, url } from '../api/api';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { byId, config, url } from '../api/api';
+import { toast } from 'react-toastify';
 
-// // Dastlabki ma'lumotlar ro'yxati
-// const [initialMessages, setInitialMessages] = useState(initialMessages);
+// Dastlabki ma'lumotlar ro'yxati
 
-// const getMessage = () => {
-//     axios.get(url + "message", config)
-        
-// }
 
-// function Message() {
-//     const [messages, setMessages] = useState(initialMessages);
-//     const [sortType, setSortType] = useState('date'); // 'date' yoki 'time'
-//     const [isAscending, setIsAscending] = useState(false); // O'sish tartibi bo'yicha tartiblash
+function Message() {
+    const [messages, setMessages] = useState([]);
+    const [group, setGroup] = useState([])
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-//     useEffect(() => {
-//         const sortMessages = () => {
-//             const sortedMessages = [...messages].sort((a, b) => {
-//                 let comparison = 0;
+  // Modalni ochish va yopish uchun funksiyalar
+  const openModal = () => {
+    setIsModalOpen(true);
+  }
 
-//                 if (sortType === 'date') {
-//                     // Sana bo'yicha tartiblash
-//                     const dateA = new Date(a.dateTime).setHours(0, 0, 0, 0);
-//                     const dateB = new Date(b.dateTime).setHours(0, 0, 0, 0);
-//                     comparison = dateA - dateB;
-//                 } else if (sortType === 'time') {
-//                     // Vaqt bo'yicha tartiblash (sana inobatga olinmaydi)
-//                     const timeA = new Date(a.dateTime).getTime() % (24 * 60 * 60 * 1000);
-//                     const timeB = new Date(b.dateTime).getTime() % (24 * 60 * 60 * 1000);
-//                     comparison = timeA - timeB;
-//                 }
+  const closeModal = () => {
+    setIsModalOpen(false);
+  }
 
-//                 return isAscending ? comparison : -comparison;
-//             });
-//             setMessages(sortedMessages);
-//         };
 
-//         sortMessages();
-//     }, [sortType, isAscending, messages]);
+    useEffect(() => {
+        getCategory()
+        getGroup()
+    }, []);
 
-//     // Tartiblash turini va yo'nalishini o'zgartirish
-//     const changeSort = (type) => {
-//         setSortType(type);
-//         setIsAscending(type === sortType ? !isAscending : false);
-//     };
+    const getCategory = () => {
+        axios.get(url + "message" , config) 
+            .then((res) => {
+                setMessages(res.data.body.object.reverse())
+                console.log(res.data.body.object);
+            })
+            .catch((err) => console.log(err))
+    }
 
-//     return (
-//         <div className="container mx-auto p-8">
-//             {/* Tartiblash tugmalari */}
+    const getCategory2 = () => {
+        axios.get(url + "message" , config) 
+            .then((res) => {
+                setMessages(res.data.body.object)
+                console.log(res.data.body.object);
+            })
+            .catch((err) => console.log(err))
+    }
+
+    const addMessaga = () => {
+        axios.post(url + "message/save", {
+            description: byId("message").value,
+            groupId: byId("groupId").value
+        }, config)
+        .then(() => {
+            toast.success("Message succesfully send!")
+        })
+        .catch(() => {
+            toast.error("Error while sending message!");
+            });
+    }
+
+    const getGroup = () => {
+        axios.get(url + "group", config)
+            .then((res) => {
+                console.log(res.data.body.object);
+                setGroup(res.data.body.object)
+            })
+            .catch(() => {})
+    }
+    // Tartiblash turini va yo'nalishini o'zgartirish
+   
+
+    return (
+        <div className="container mx-auto p-8">
+            {/* Tartiblash tugmalari */}
            
-//             <div className="mt-3">
-//                 <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Message</h2>
-//             </div>
-//             <div className="flex justify-between items-center mb-4">
-//                 {/* Tartiblash tugmalari */}
-//                 <button className='btm'> +Add</button>
-//                 <div>
-//                     <button onClick={() => changeSort('date')} className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-//                         Sort by Date {sortType === 'date' && (isAscending ? '⬆️' : '⬇️')}
-//                     </button>
-//                     <button onClick={() => changeSort('time')} className="bg-green-500 ml-4 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-//                         Sort by Time {sortType === 'time' && (isAscending ? '⬆️' : '⬇️')}
-//                     </button>
-//                 </div>
-//             </div>
+            <div className="mt-3">
+                <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Message</h2>
+            </div>
+            <div className="flex justify-between items-center mb-4">
+                {/* Tartiblash tugmalari */}
+                <button className='btm'onClick={openModal}> +Add</button>
+                <div>
+                    <button onClick={getCategory}  className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    New posts first
+                        {/* {sortType === 'date' && (isAscending ? '⬆️' : '⬇️')} */}
+                    </button>
+                    <button onClick={getCategory2} className="bg-green-500 ml-4 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    Old posts first
+                        {/* {sortType === 'time' && (isAscending ? '⬆️' : '⬇️')} */}
+                    </button>
+                </div>
+            </div>
 
-//             {/* Xabarlar ro'yxatini ko'rsatish */}
-//             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-//                 {messages.map(message => (
-//                     <div key={message.id} className="border rounded shadow p-3">
-//                         <h2 className="font-bold text-lg mb-3">{message.groupName}</h2>
-//                         <p className="text-gray-700 text-base">{message.content}</p>
-//                         <div className="text-right">
-//                             <span className="text-sm font-semibold">{new Date(message.dateTime).toLocaleString()}</span>
-//                         </div>
-//                     </div>
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// }
+            {/* Xabarlar ro'yxatini ko'rsatish */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {messages.map((item, i) => (
+                    <div key={i} className="border rounded shadow p-3">
+                        <h2 className="font-bold text-lg mb-3">{item.groupId}</h2>
+                        <p className="text-gray-700 text-base">{item.description}</p>
+                        <div className="text-right">
+                            <span className="text-sm font-semibold">{item.date}</span>
+                        </div>
+                    </div>
+                ))}
+            </div>
 
-// export default Message;
+
+            {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 ">
+          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+            <div className="flex">
+              <h2 className="text-lg font-semibold text-gray-900 p-2">
+                Create New Product
+              </h2>
+              <button
+                onClick={closeModal}
+                className="text-gray-400 m-2 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-toggle="crud-modal"
+              >
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span className="sr-only">Close modal</span>
+              </button>
+            </div>
+
+            {/* Modal body */}
+            <div className="p-4 md:p-5">
+              <div className="grid gap-4 mb-4 grid-cols-2">
+                
+                <div className="col-span-2 sm:col-span-1">
+                  <label
+                    htmlFor="category"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Category
+                  </label>
+                  <select
+                    id="groupId"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  >
+                    <option selected disabled>Select category</option>
+                    {group.map((item, i) => 
+                       <option key={i} value={item.id}>{item.name}</option>
+                    )}
+
+                   
+                  </select>
+                </div>
+                <div className="col-span-2">
+                  <label
+                    htmlFor="description"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Product Description
+                  </label>
+                  <textarea
+                    id="message"
+                    rows="4"
+                    className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Write product description here"
+                  ></textarea>
+                </div>
+              </div>
+              <div className="flex justify-end">
+              <button onClick={closeModal} className="btm-close me-2 bg-red-900">
+                Close
+              </button>
+              <button onClick={() => {
+                addMessaga()
+                closeModal()
+              }} className="btm">
+                Save
+              </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+        </div>
+    );
+}
+
+export default Message;
