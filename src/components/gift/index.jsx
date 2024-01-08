@@ -7,20 +7,16 @@ import { toast } from "react-toastify";
 
 function Gift() {
   const [isModalOpen, setIsModalOpen] = useState(false); // Modalni ochish va yopish uchun holat
-  const [gifts, setGifts] = useState([]); // Sifod
-  
+  const [gifts, setGifts] = useState(null); // Sifod
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getGift();
+  }, []);
 
   function getGift() {
-    axios
-      .get(
-        url + "gift",
-        config
-      )
+    axios.get(url + "gift", config)
       .then((res) => {
         setGifts(res.data.body.object);
-        console.log(res.data);
       })
       .catch(() => {});
   }
@@ -39,7 +35,7 @@ function Gift() {
       )
       .then(() => {
         toast.success("Successfully added!");
-        getGift()
+        getGift();
       })
       .catch(() => {
         toast.error("Failed to add gift card!");
@@ -89,7 +85,7 @@ function Gift() {
           />
         </div>
       </div>
-      <GiftCard />
+      {gifts && <GiftCard gifts={gifts} getGift={getGift}/>}
 
       {/* Modal */}
       {isModalOpen && (

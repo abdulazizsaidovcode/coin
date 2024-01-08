@@ -1,71 +1,48 @@
 import React, { useEffect, useState } from "react";
 import "../../globalcss/style.css";
-import { url } from "../api/api";
+import { config, url } from "../api/api";
 import axios from "axios";
-import { config } from "@fortawesome/fontawesome-svg-core";
 import { toast } from "react-toastify";
 
-const GiftCard = () => {
-
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modalni ochish va yopish uchun holat
+const GiftCard = ({ gifts, getGift }) => {
   const [deleteModal, setDeleteModal] = useState(false); // Modalni ochish va yopish uchun holat
-  const [gifts, setGifts] = useState([]); // Sifr
+  const [editModal, setEditModal] = useState(false); // Modalni ochish va yopish uchun holat
   const [giftId, setGiftid] = useState([]); // Sifr
 
-  useEffect(() => {
-    getGift()
-  }, [])
-
-
-  function getGift() {
-    axios
-      .get(
-        url + "gift",
-        config
-      )
-      .then((res) => {
-        setGifts(res.data.body.object);
-        console.log(res.data);
-      })
-      .catch(() => {});
-  }
-
-  const deleteGift = (id) => {
-    axios
-      .delete(
-        url + "gift/delete/" + id,
-        config
-      )
+  const deleteGift = () => {
+    axios.delete(url + "gift/delete/" + giftId, config)
       .then(() => {
-        toast.success("Succesfully delete gift!")
+        toast.success("Succesfully delete gift!");
+        getGift();
       })
       .catch(() => {
-        toast.error("Something is wrong!")
+        toast.error("Something is wrong!");
       });
-  }
+    console.log(giftId);
+  };
 
   function editGift() {
     axios
-      .get(
-        url + "gift",
+      .put(
+        url + "gift/save/" + giftId,
+        {
+          name: document.getElementById("name").value,
+          attachmentId: 1,
+          rate: document.getElementById("rate").value,
+          description: document.getElementById("description").value,
+        },
         config
       )
-      .then((res) => {
-        setGifts(res.data.body.object);
-        console.log(res.data);
+      .then(() => {
+        toast.success("Successfully edit gift!");
+        getGift();
       })
-      .catch(() => {});
+      .catch(() => {
+        toast.error("Failed to edit gift!");
+      });
   }
 
-
   // Modalni ochish va yopish uchun funksiyalar
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
 
   const opendelete = () => {
     setDeleteModal(true);
@@ -74,6 +51,16 @@ const GiftCard = () => {
   const closedelete = () => {
     setDeleteModal(false);
   };
+
+  const openEdit = () => {
+    setEditModal(true);
+  };
+
+  const closeEdit = () => {
+    setEditModal(false);
+  };
+
+  console.log(gifts);
 
   return (
     <div className="flex flex-wrap justify-around">
@@ -93,27 +80,38 @@ const GiftCard = () => {
               {item.name}
             </div>
             <p className="text-gray-700 text-base text-center">
-              {item.description.length > 50 ? item.description.substring(0, 50) : item.description}
+              {item.description.length > 50
+                ? item.description.substring(0, 50)
+                : item.description}
             </p>
             <p className="text-gray-900 font-bold mt-3 text-center">
               {item.rate} coin
             </p>
           </div>
           <div className="px-6 pt-4  text-center">
-          <button onClick={() => {
-            opendelete()
-            setGiftid(item.id)
-          }} className="btm-close me-3 align-bottom mb-3">
+            <button
+              onClick={() => {
+                opendelete();
+                setGiftid(item.id);
+              }}
+              className="btm-close me-3 align-bottom mb-3"
+            >
               Delete
             </button>
-            <button onClick={closeModal} className="btm align-bottom mb-3">
+            <button
+              onClick={() => {
+                openEdit();
+                setGiftid(item.id);
+              }}
+              className="btm align-bottom mb-3"
+            >
               Edit
             </button>
           </div>
         </div>
       ))}
       {/* Modal */}
-      {isModalOpen && (
+      {editModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 ">
           <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
@@ -121,7 +119,7 @@ const GiftCard = () => {
                 Create New Product
               </h2>
               <button
-                onClick={closeModal}
+                onClick={closeEdit}
                 className="text-gray-400 m-2 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-toggle="crud-modal"
               >
@@ -205,8 +203,17 @@ const GiftCard = () => {
                 </div>
               </div>
               <div className="flex justify-end">
-                <button className="btm-close me-2 bg-red-900" onClick={closeModal}>Close</button>
                 <button
+                  className="btm-close me-2 bg-red-900"
+                  onClick={closeEdit}
+                >
+                  Close
+                </button>
+                <button
+                  onClick={() => {
+                    editGift();
+                    closeEdit();
+                  }}
                   className="btm"
                 >
                   Add
@@ -226,7 +233,7 @@ const GiftCard = () => {
                 Delete gift
               </h2>
               <button
-                onClick={closeModal}
+                onClick={closedelete}
                 className="text-gray-400 m-2 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-toggle="crud-modal"
               >
@@ -253,15 +260,20 @@ const GiftCard = () => {
             <div className="p-4 md:p-5">
               <div className="grid gap-4 mb-4 grid-cols-2">
                 <div className="col-span-2">
-                              dbcb cjec ecbc eu  ihe o e o b eob  c ccicb3icbiucb 
+                  dbcb cjec ecbc eu ihe o e o b eob c ccicb3icbiucb
                 </div>
               </div>
               <div className="flex justify-end">
-                <button className="btm-close me-2 bg-red-900" onClick={closedelete}>No</button>
+                <button
+                  className="btm-close me-2 bg-red-900"
+                  onClick={closedelete}
+                >
+                  No
+                </button>
                 <button
                   onClick={() => {
-                    deleteGift(giftId)
-                    closedelete()
+                    deleteGift();
+                    closedelete();
                   }}
                   className="btm"
                 >

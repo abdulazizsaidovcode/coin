@@ -4,7 +4,6 @@ import "../../globalcss/style.css"
 import React, { useState } from 'react';
 
 function Category() {
-    const [isLoading, setIsLoading] = useState(false);
 
     return (
         <div className="bg-gray-100 min-h-screen p-8 w-full">

@@ -24,7 +24,7 @@ const CategoryTable = () => {
   }, [])
   // Function to toggle the active state
   const getCategory = () => {
-    axios.get(url + "category/list", config)
+    axios.get(url + "category/father/category", config)
       .then((res) => {
         setCategories(res.data.body)
         console.log(res.data.body);
@@ -35,11 +35,11 @@ const CategoryTable = () => {
   };
 
   const categoryActive = (id) => {
-    axios.put(url + "category/reset/" + id, config)
-      .then((res) => {
+    axios.post(url + "category/reset/" + id, config)
+      .then(() => {
         toast.success("good")
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error("false");
       })
   }
