@@ -57,7 +57,7 @@ const StudentGroup = () => {
                   <input
                     type="checkbox"
                     className="form-checkbox h-5 w-5 text-blue-600 rounded"
-                    checked={student.active}
+                    checked={`${student.active ? 'checked' : ''}`}
                     readOnly
                   />
                 </td>
