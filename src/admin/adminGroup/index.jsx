@@ -1,6 +1,6 @@
 // import React from "react";
 import "../../globalcss/style.css"
-import React, { useState } from 'react';
+import React from 'react';
 import AdminGroupTable from "./categorytable";
 
 function AdminGroup() {
