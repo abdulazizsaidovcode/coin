@@ -82,7 +82,7 @@ function Home() {
                 {/* fourth section end */}
 
 
-                <div className='flex justify-center  flex-col flex-wrap px-20 '>
+                                <div className='flex justify-center  flex-col flex-wrap px-20 '>
                     <img src={bginput} className='flex flex-wrap items-center inputlar ' width={200}></img>
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                         <rect width="40" height="40" fill="white" />
