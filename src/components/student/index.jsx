@@ -37,6 +37,9 @@ const AdminStudent = () => {
 
   return (
     <div className=" p-8 w-full bg-gray-100 h-screen">
+      <div className="mt-10">
+        <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Student</h2>
+      </div>
       <div className=" mb-4 flex justify-between">
         <button className="btm">+ Add</button>
         <div class="relative">
