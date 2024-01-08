@@ -1,39 +1,14 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { config, url } from '../api/api';
 
 // Dastlabki ma'lumotlar ro'yxati
-const initialMessages = [
-    {
-        id: 1,
-        groupName: 'Alpha',
-        dateTime: '1023-12-11T15:00:00Z',
-        content: 'Lorem ipsum dolor sit amet...'
-    },
-    {
-        id: 2,
-        groupName: 'Beta',
-        dateTime: '2013-12-10T15:45:00Z',
-        content: 'Consectetur adipiscing elit...'
-    },
-    {
-        id: 3,
-        groupName: 'jeta',
-        dateTime: '2020-12-10T15:45:00Z',
-        content: 'Consectetur adipiscing elit...'
-    },
-    {
-        id: 4,
-        groupName: 'kBeta',
-        dateTime: '2022-12-10T15:45:00Z',
-        content: 'Consectetur adipiscing elit...'
-    },
-    {
-        id: 5,
-        groupName: 'qBeta',
-        dateTime: '2003-12-10T15:45:00Z',
-        content: 'Consectetur adipiscing elit...'
-    },
-    // Qo'shimcha xabarlar...
-];
+const [initialMessages, setInitialMessages] = useState(initialMessages);
+
+const getMessage = () => {
+    axios.get(url + "message", config)
+        
+}
 
 function Message() {
     const [messages, setMessages] = useState(initialMessages);
@@ -74,11 +49,8 @@ function Message() {
     return (
         <div className="container mx-auto p-8">
             {/* Tartiblash tugmalari */}
-            <div className=" mb-7">
-                <h1 className="text-3xl font-semibold text-gray-800">Hi Admin(a)</h1>
-                <span className="text-sm text-gray-600">Welcome back to Coin system dashboard</span>
-            </div>
-            <div className="mt-10">
+           
+            <div className="mt-3">
                 <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Message</h2>
             </div>
             <div className="flex justify-between items-center mb-4">
