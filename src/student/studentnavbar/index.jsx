@@ -44,7 +44,6 @@ const StudentNavbar = () => {
                 <div className="w-full flex justify-between bg-white p-2">
                     <div className="flex items-center space-x-1">
                         <div class="relative">
-
                         </div>                    </div>
                     {/* Bu yerda foydalanuvchi bilan bog'liq boshqa harakatlar uchun tugmalar yoki linklar qo'yilishi mumkin */}
                     <button onClick={toggleMenu} className="flex items-center space-x-2 ">

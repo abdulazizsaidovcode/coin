@@ -12,7 +12,7 @@ const initialData = [
 const categories = ['All', 'F-1', 'found-2', 'G-1', 'G-4', 'g_6'];
 const groups = ['All', 'Front-End', 'Back-End', 'Foundation', '3D-max'];
 
-const TableWithFilters = () => {
+const AdminStudent = () => {
   const [data, setData] = useState(initialData);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedGroup, setSelectedGroup] = useState('All');
@@ -36,13 +36,9 @@ const TableWithFilters = () => {
   };
 
   return (
-    <div className=" p-8 w-full">
-      <div className=" mb-4">
-        <h1 className="text-3xl font-semibold text-gray-800">Hi Admin(a)</h1>
-        <span className="text-sm text-gray-600">Welcome back to Coin system dashboard</span>
-      </div>
+    <div className=" p-8 w-full bg-gray-100 h-screen">
       <div className="mt-10">
-        <h2 className="text-3xl font-extrabold text-gray-900 mb-4">students</h2>
+        <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Student</h2>
       </div>
       <div className=" mb-4 flex justify-between">
         <button className="btm">+ Add</button>
@@ -89,13 +85,13 @@ const TableWithFilters = () => {
         {/* Jadval */}
         <table className="w-full rounded-3xl rounded-t-3xl shadow-md .table-top">
           <thead className="bg-gray-800 text-white rounded-t-2xl uppercase text-sm leading-normal">
-            <tr>
-              <th className="py-3 px-6 text-left">No</th>
+            <tr className='rounded-t-2xl'>
+              <th className="py-3 px-6 text-left rounded-tl-2xl">No</th>
               <th className="py-3 px-6 text-left">Name</th>
               <th className="py-3 px-6 text-left">Description</th>
               <th className="py-3 px-6 text-left">Cion</th>
               <th className="py-3 px-6 text-center">Active</th>
-              <th className="py-3 px-6 text-center">Actions</th>
+              <th className="py-3 px-6 text-center rounded-tr-2xl">Actions</th>
             </tr>
           </thead>
           <tbody className="text-gray-600 font-light">
@@ -129,4 +125,4 @@ const TableWithFilters = () => {
   );
 };
 
-export default TableWithFilters;
+export default AdminStudent;

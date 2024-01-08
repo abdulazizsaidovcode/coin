@@ -15,6 +15,8 @@ import TotalCoinForStudent from "../components/totalconforstudent";
 import Message from "../components/message";
 import FalsePage from "../components/falsepage";
 import Navbarcha from "../components/navbar/Navbar";
+import AdminGroup from "./adminGroup";
+import AdminStudent from "../components/student";
 
 function Admin() {
   const getme = sessionStorage.getItem("getMeInfo")
@@ -26,6 +28,8 @@ function Admin() {
         <Navbarcha />
         <Routes >
           <Route path="/admin/CategoryTable" element={<CategoryTable />} />
+          <Route path="/admin/group" element={<AdminGroup />} />
+          <Route path="/admin/student" element={<AdminStudent />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/giftCard" element={<GiftCard />} />
           <Route path="/admin/totalcoins" element={<TotalCoins />} />
