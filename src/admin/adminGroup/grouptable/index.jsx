@@ -40,7 +40,6 @@ const AdminGroupTable = () => {
                   <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">No</th>
                   <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Photo</th>
                   <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Name</th>
-                  <th className="py-3 px-6 text-center text-xs font-medium uppercase tracking-wider">Group</th>
                   <th className="py-3 px-6 text-center text-xs font-medium uppercase tracking-wider">Coins</th>
                   <th className="py-3 px-6 text-center text-xs font-medium uppercase tracking-wider">Tasks</th>
                   <th className="py-3 px-6 text-center text-xs font-medium uppercase tracking-wider">Active</th>
@@ -55,7 +54,6 @@ const AdminGroupTable = () => {
                       <img src={group.imgurl} alt="Group" className="h-10 w-10 rounded-full" />
                     </td>
                     <td className="py-3 px-6 text-left">{group.name}</td>
-                    <td className="py-3 px-6 text-center">{group.groupName}</td>
                     <td className="py-3 px-6 text-center">{group.coin}</td>
                     <td className="py-3 px-6 text-center">{group.task}</td>
                     <td className="py-3 px-6 text-center">
@@ -67,7 +65,10 @@ const AdminGroupTable = () => {
                       />
                     </td>
                     <td className="py-3 px-6 text-center">
-                      <button className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+                      <button className="text-sm bg-red-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+                        edit
+                      </button>
+                      <button className=" ml-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline">
                         Info
                       </button>
                     </td>

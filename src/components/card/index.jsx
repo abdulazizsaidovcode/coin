@@ -10,7 +10,7 @@ const GiftCard = ({ gifts, getGift }) => {
   const [giftId, setGiftid] = useState([]); // Sifr
   const [giftIn, setGiftIn] = useState([]); // Sifr
 
- 
+
 
 
   const deleteGift = () => {
@@ -24,7 +24,7 @@ const GiftCard = ({ gifts, getGift }) => {
       });
   };
 
-  
+
 
 
   function editGift() {
