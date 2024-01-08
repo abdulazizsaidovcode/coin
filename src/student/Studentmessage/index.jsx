@@ -44,7 +44,7 @@ function Studentmessage() {
     return (
         <div className="container mx-auto p-8 bg-gray-100 h-screen">
             {/* Tartiblash tugmalari */}
-            <div className="mt-10">
+            <div className="mb-10">
                 <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Message</h2>
             </div>
             <div className="flex justify-between items-center mb-4">
@@ -55,7 +55,7 @@ function Studentmessage() {
             {/* Xabarlar ro'yxatini ko'rsatish */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {messages.map(message => (
-                    <div key={message.id} className="border rounded shadow p-3">
+                    <div key={message.id} className="border rounded all-shadow p-3">
                         <h2 className="font-bold text-lg mb-3">{message.groupName}</h2>
                         <p className="text-gray-700 text-base">{message.content}</p>
                         <div className="text-right">
