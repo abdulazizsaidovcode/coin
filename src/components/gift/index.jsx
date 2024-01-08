@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 function Gift() {
   const [isModalOpen, setIsModalOpen] = useState(false); // Modalni ochish va yopish uchun holat
   const [gifts, setGifts] = useState([]); // Sifod
+  
 
   useEffect(() => {}, []);
 
