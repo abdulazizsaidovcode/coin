@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 
 
-const CategoryTable = (categories, getCategory) => {
+const CategoryTable = (categories) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Modalni ochish va yopish uchun funksiyalar
@@ -49,11 +49,11 @@ const CategoryTable = (categories, getCategory) => {
                 </tr>
               </thead>
               <tbody className="text-gray-700">
-                {categories && categories.map((category, index) => (
-                  <tr key={category.id}>
+                {categories.length && categories.map((category, index) => (
+                  <tr key={index}>
                     <td className="py-4 px-6 border-b border-gray-200">{index + 1}</td>
                     <td className="py-4 px-6 border-b border-gray-200">
-                      <img src={category.avatarUrl} alt="avatar" className="h-10 w-10 rounded-full" />
+                      <img src={category.attachmentId} alt="avatar" className="h-10 w-10 rounded-full" />
                     </td>
                     <td className="py-4 px-6 border-b border-gray-200">{category.name}</td>
                     <td className="py-4 px-6 border-b border-gray-200">{category.programmingLanguage}</td>
