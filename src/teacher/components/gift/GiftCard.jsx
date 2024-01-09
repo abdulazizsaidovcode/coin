@@ -1,43 +1,48 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../../../globalcss/style.css";
 import giftImg from "../../../assits/itca.jpg";
+import axios from 'axios';
+import { config, getFile, setConfig, url } from '../../../components/api/api';
 
 const GiftCard = () => {
-    const initialCategories = [
-        { id: 1, imageUrl: 'Front-End', giftName: 'mishka1', coins: '200', description: "zor narsa1" },
-        { id: 2, imageUrl: 'Front-End', giftName: 'mishka2', coins: '200', description: "zor narsa2" },
-        { id: 3, imageUrl: 'Front-End', giftName: 'mishka3', coins: '200', description: "zor narsa3" },
-        { id: 4, imageUrl: 'Front-End', giftName: 'mishka4', coins: '200', description: "zor narsa4" },
-        { id: 5, imageUrl: 'Front-End', giftName: 'mishka5', coins: '200', description: "zor narsa5" },
-    ];
-
-    const [categories, setCategories] = useState(initialCategories);
+    const [gifts, setGifts] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const openModal = () => {
-        setIsModalOpen(true);
+    useEffect(() => {
+        setConfig();
+        getGifts();
+    }, []);
+
+    const openModal = () => setIsModalOpen(true)
+    const closeModal = () => setIsModalOpen(false)
+
+    // get gifts
+    const getGifts = () => {
+        axios.get(url + "gift", config)
+            .then(res => setGifts(res.data.body.object))
+            .catch(() => console.log("kelmadi"))
     }
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-    }
+    // console.log(gifts);
 
     return (
         <div className="w-full flex flex-wrap justify-evenly mt-10 font-inika">
-            {categories.length !== 0 ?
-                categories.map((category, i) => (
-                    <div key={category.id} className="w-1/4 h-96 rounded-xl overflow-hidden shadow-md hover:shadow-xl duration-300 mr-3 mb-8">
-                        <img className="w-full h-1/2 object-cover" src={giftImg} alt="Gift" />
+            {gifts.length !== 0 ?
+                gifts.map((item) => (
+                    <div key={item.id} className="w-1/4 h-96 rounded-xl overflow-hidden shadow-md hover:shadow-xl duration-300 mr-3 mb-8">
+                        <img className="w-full h-1/2 object-cover"
+                            src={item.attachmentId === null ?
+                                giftImg : getFile + item.attachmentId} alt="Gift" />
                         <div className="px-6 py-4">
-                            <div className="font-bold text-xl mb-2 text-center">{category.giftName}</div>
+                            <div className="font-bold text-xl mb-2 text-center">{item.name}</div>
                             <p className="text-gray-700 text-base text-center">
-                                {category.coins}<br />
-                                {category.description}
+                                {item.rate} coin
+                                {/* {item.description} */}
                             </p>
                         </div>
                         <div className="px-6 pt-4 text-center">
                             <button onClick={openModal} className="btm">
-                                Exchange
+                                Gift Info
                             </button>
                         </div>
                     </div>

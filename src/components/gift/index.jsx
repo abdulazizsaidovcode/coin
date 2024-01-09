@@ -33,7 +33,7 @@ function Gift() {
   function addGift() {
     axios
       .post(
-        url + "gift/save",
+        url + "gift/save4",
         {
           name: document.getElementById("name").value,
           attachmentId: 1,

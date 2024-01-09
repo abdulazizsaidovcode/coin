@@ -7,15 +7,15 @@ import axios from 'axios';
 
 function Studentcoinstatistic() {
   const [coin, setCoinsRate] = useState([]);
-    useEffect(() => {
-        setConfig();
-        axios.get(url + "user/", config)
-            .then(res => {
-                setCoinsRate(res.data.body);
-                console.log(coin);
-            })
-            .catch(err => console.log("Boshqa backendinchi topiyla iltomos 😭", err));
-    }, []);
+  useEffect(() => {
+    setConfig();
+    axios.get(url + "coin/history/course/statistics", config)
+      .then(res => {
+        setCoinsRate(res.data.body);
+      })
+      .catch(err => console.log("Boshqa backendinchi topiyla iltomos 😭", err));
+  }, []);
+
 
   const option = {
     backgroundColor: '#ffffff', // Background color of the chart
@@ -35,7 +35,7 @@ function Studentcoinstatistic() {
     xAxis: [ // Configuration for the x-axis
       {
         type: 'category',
-        data: ['Dec', 'Jan', 'Feb', 'March', 'Apr'],
+        data: [""+ coin && coin.map(coincha => coincha.MONTH)],
         axisTick: {
           alignWithLabel: true,
         },
@@ -51,34 +51,34 @@ function Studentcoinstatistic() {
         name: 'Direct',
         type: 'bar',
         barWidth: '60%',
-        data: [10, 52, 200, 334, 390],
-        itemStyle: {
-          color: new echarts.graphic.LinearGradient( // Gradient color for the bars
-            0, 0, 0, 1,
-            [
-              { offset: 0, color: '#83bff6' },
-              { offset: 0.5, color: '#188df0' },
-              { offset: 1, color: '#188df0' }
-            ]
-          )
-        },
-      },
+        data: [+(coin && coin.map(coincha => coincha.coin))],
+    itemStyle: {
+      color: new echarts.graphic.LinearGradient( // Gradient color for the bars
+        0, 0, 0, 1,
+        [
+          { offset: 0, color: '#83bff6' },
+          { offset: 0.5, color: '#188df0' },
+          { offset: 1, color: '#188df0' }
+        ]
+      )
+    },
+  },
     ],
-  };
+};
 
-  // Style for the wrapping div to simulate border-radius
-  const chartStyle = {
-    height: 320, // Height of the chart
-    borderRadius: 10, // Border-radius for rounded corners
-    overflow: 'hidden', // Ensures the chart doesn't overflow the rounded corners
-    border: '0px solid #ccc', // Optional: Adds a border around the outer div if desired
-  };
+// Style for the wrapping div to simulate border-radius
+const chartStyle = {
+  height: 320, // Height of the chart
+  borderRadius: 10, // Border-radius for rounded corners
+  overflow: 'hidden', // Ensures the chart doesn't overflow the rounded corners
+  border: '0px solid #ccc', // Optional: Adds a border around the outer div if desired
+};
 
-  return (
-    <div style={chartStyle} className='all-shadow'>
-      <ReactECharts option={option} style={{ width: '100%', height: '100%' }} />
-    </div>
-  );
+return (
+  <div style={chartStyle} className='all-shadow'>
+    <ReactECharts option={option} style={{ width: '100%', height: '100%' }} />
+  </div>
+);
 }
 
 export default Studentcoinstatistic;

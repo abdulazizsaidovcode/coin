@@ -2,6 +2,7 @@ import axios from "axios";
 import { config, setConfig, url } from "../../../components/api/api";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Icon } from "@iconify/react";
 
 const Students = () => {
 
@@ -87,7 +88,15 @@ const Students = () => {
                                     </tr>
                                 ) :
                                 <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
-                                    <td className="py-3 px-6 font-inika font-medium text-lg tracking-wider leading-10" colSpan="7">loading...</td>
+                                    <td className='py-3 px-6'></td>
+                                    <td className='py-3 px-6'></td>
+                                    <td className='py-3 px-6'></td>
+                                    <td className="py-3 px-6 flex justify-center font-inika font-medium text-lg tracking-wider leading-10">
+                                        <Icon icon="eos-icons:three-dots-loading" width="50" />
+                                    </td>
+                                    <td className='py-3 px-6'></td>
+                                    <td className='py-3 px-6'></td>
+                                    <td className='py-3 px-6'></td>
                                 </tr>
                             }
                         </tbody>

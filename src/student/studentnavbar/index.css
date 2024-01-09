@@ -1,20 +1,80 @@
-.anim{
-    animation: anim1 3s  infinite;
+.anim {
+    animation: anim1 3s infinite;
 }
 
 @keyframes anim1 {
     0% {
         transform: translateX(0px);
     }
+
     1% {
         transform: translateX(-2px);
         transform: rotate(10deg);
     }
+
     2% {
         transform: translateX(0px);
     }
-    
+
     100% {
         transform: translateX(0px);
     }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.close-button {
+    float: right;
+    font-size: 1.5rem;
+}
+
+.profile-picture img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.cancel-button,
+.save-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px;
+    border: none;
+    color: white;
+}
+
+.cancel-button {
+    background-color: #ccc;
+}
+
+.save-button {
+    background-color: #5c6bc0;
 }

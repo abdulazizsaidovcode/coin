@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import '../../globalcss/style.css';
-import {config, setConfig} from '../../components/api/api';
+import { config, setConfig, url } from '../../components/api/api';
 import axios from 'axios';
 import {toast} from 'react-toastify';
 import AdminGroupTable from "./categorytable";
