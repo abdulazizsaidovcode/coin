@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import '../../globalcss/style.css';
-import { config, setConfig, url } from '../../components/api/api';
+import {config, setConfig} from '../../components/api/api';
 import axios from 'axios';
-import { toast } from 'react-toastify';
-import AdminGroupTable from './grouptable';
+import {toast} from 'react-toastify';
+import AdminGroupTable from "./categorytable";
 
 const AdminGroup = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,8 +17,8 @@ const AdminGroup = () => {
     const closeModal = () => setIsModalOpen(false);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        const {name, value} = e.target;
+        setFormData({...formData, [name]: value});
     };
 
     const handleSubmit = (e) => {
@@ -37,15 +37,14 @@ const AdminGroup = () => {
 
     return (
         <div className="min-h-screen w-full bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-            <button id="openMenuButton" className="btm" onClick={openModal}>
-                + Add
-            </button>
+            <button id="openMenuButton" className="btm" onClick={openModal}>+ Add</button>
             {isModalOpen && (
-                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" onClick={closeModal}>
-                    <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white" onClick={(e) => e.stopPropagation()}>
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+                     onClick={closeModal}>
+                    <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+                         onClick={(e) => e.stopPropagation()}>
                         <h2 className="text-lg leading-6 font-medium text-gray-900 mb-4">Add New Group</h2>
-                        <form onSubmit={handleSubmit} className="space-y-6
-">
+                        <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
                                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
                                 <input
@@ -59,7 +58,8 @@ const AdminGroup = () => {
                                 />
                             </div>
                             <div>
-                                <label htmlFor="categoryId" className="block text-sm font-medium text-gray-700">Category ID</label>
+                                <label htmlFor="categoryId" className="block text-sm font-medium text-gray-700">Category
+                                    ID</label>
                                 <input
                                     type="number"
                                     name="categoryId"
@@ -71,7 +71,8 @@ const AdminGroup = () => {
                                 />
                             </div>
                             <div>
-                                <label htmlFor="teacherId" className="block text-sm font-medium text-gray-700">Teacher ID</label>
+                                <label htmlFor="teacherId" className="block text-sm font-medium text-gray-700">Teacher
+                                    ID</label>
                                 <input
                                     type="number"
                                     name="teacherId"
@@ -94,7 +95,7 @@ const AdminGroup = () => {
                     </div>
                 </div>
             )}
-            <AdminGroupTable />
+            <AdminGroupTable/>
         </div>
     );
 };

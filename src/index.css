@@ -3,3 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.code-error::placeholder {
+    color: #c12f2f;
+}
+
+.code-success::placeholder {
+    color: #32c12f;
+}
+
+.code-no::placeholder {
+    color: white;
+}

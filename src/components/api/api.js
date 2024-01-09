@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const url = "http://137.184.13.215/";
+// export const url = "http://192.168.149.27/";
 
 export const getFile = `${url}attachment/getFile/`;
 
@@ -48,6 +49,21 @@ export function getTestCategory(setTestCategory) {
     axios.get(url + "test/student/category/block", config)
         .then((res) => setTestCategory(res.data.body))
         .catch((err) => console.log(err));
+}
+
+export function sendTestCode(text, testId, setResponse, setLoading, setError) {
+    setLoading(true)
+    axios.post(url + "test/performance/" + testId, {text}, config)
+        .then((res) => {
+            setResponse(res.data.body);
+            setLoading(false);
+            setError(2);
+        })
+        .catch((err) => {
+            setResponse(err.response.data.body);
+            setLoading(false);
+            setError(3);
+        });
 }
 
 export function getOneTest(testId, setTest) {

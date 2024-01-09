@@ -1,8 +1,8 @@
-import Studetsrate from "../../components/studentdashboard/Studentsrate";
 import StudentTestCard from "./studenttestcard";
 import React, {useEffect, useState} from "react";
 import {getTestCategory, getTestCategoryId} from "../../components/api/api";
 import StudentTestCardIn from "./studenttestcard/Studenttestcardin";
+import Studetsrate from "../studentdashboard/Studentsrate";
 
 function StudentTest() {
 

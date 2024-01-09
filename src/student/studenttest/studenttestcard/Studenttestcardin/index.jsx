@@ -13,7 +13,7 @@ function StudentTestCardIn({i, test}) {
         <div className="flex items-center justify-between bg-gray-200 py-3 px-10 rounded-lg all-shadow my-2">
             <div className="flex items-center justify-between w-6/12">
                 <span
-                    className="font-semibold">{i} - {test.question.length > 55 ? test.question.substring(0, 55) + '...' : test.question}</span>
+                    className="font-semibold">{i} - {test.question.length > 40 ? test.question.substring(0, 40) + '...' : test.question}</span>
                 <span className="ml-2 text-sm bg-gray-300 px-2 py-1 rounded">{test.processMinute} min</span>
                 {test.active ? (
                     <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 ml-2 text-2xl"/>
