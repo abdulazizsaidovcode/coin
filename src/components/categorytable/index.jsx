@@ -6,8 +6,7 @@ import { toast } from 'react-toastify';
 
 
 
-const CategoryTable = () => {
-  const [categories, setCategories] = useState([]);
+const CategoryTable = (categories, getCategory) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Modalni ochish va yopish uchun funksiyalar
@@ -18,28 +17,16 @@ const CategoryTable = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   }
-
-  useEffect(() => {
-    getCategory();
-  }, [])
+  console.log("salom hammaga" + categories);
   // Function to toggle the active state
-  const getCategory = () => {
-    axios.get(url + "category/list", config)
-      .then((res) => {
-        setCategories(res.data.body)
-        console.log(res.data.body);
-      })
-      .catch((err) => {
-        toast.dismiss("Category not found!")
-      })
-  };
+  
 
   const categoryActive = (id) => {
-    axios.put(url + "category/reset/" + id, config)
-      .then((res) => {
+    axios.post(url + "category/reset/" + id, config)
+      .then(() => {
         toast.success("good")
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error("false");
       })
   }
@@ -62,7 +49,7 @@ const CategoryTable = () => {
                 </tr>
               </thead>
               <tbody className="text-gray-700">
-                {categories.map((category, index) => (
+                {categories && categories.map((category, index) => (
                   <tr key={category.id}>
                     <td className="py-4 px-6 border-b border-gray-200">{index + 1}</td>
                     <td className="py-4 px-6 border-b border-gray-200">

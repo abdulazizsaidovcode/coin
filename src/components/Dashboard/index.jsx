@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import TopGroup from "../TopGroups";
 import TopStudent from "../Topstudents";
 import TopTeachers from "../Topteachers";
 import TotalCoins from "../Total coins";
 import axios from "axios";
-import {config, getTopGroupForAdmin, getTopStudent, getTopTeacher, setConfig, url} from "../api/api";
+import { config, getTopGroupForAdmin, getTopStudent, getTopTeacher, setConfig, url } from "../api/api";
 import TopLoading from "../Topteachers/TopLoading";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 function Dashboard() {
     const [STMGSize, setSTMGSize] = useState(null);
@@ -46,6 +46,9 @@ function Dashboard() {
     return (
         <>
             <div className="bg-gray-100 min-h-screen p-8  w-full">
+                <div className="mt-10">
+                    <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Dashboard</h2>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
                     <MetricCard
                         title="Number of Students"
@@ -71,32 +74,32 @@ function Dashboard() {
                 <div className="flex flex-col lg:flex-row gap-4 mb-4">
                     <div className="flex-grow">
                         {pl ? (
-                            <TotalCoins pl={pl}/>
+                            <TotalCoins pl={pl} />
                         ) : (
-                            <TotalCoins pl={[{categoryName: "Loading...", coin: 100}]}/>
+                            <TotalCoins pl={[{ categoryName: "Loading...", coin: 100 }]} />
                         )}
                     </div>
                     <div className="flex-grow">
                         {topTeacher ? (
-                            <TopTeachers teacherList={topTeacher}/>
+                            <TopTeachers teacherList={topTeacher} />
                         ) : (
-                            <TopLoading name="Top Teacher"/>
+                            <TopLoading name="Top Teacher" />
                         )}
                     </div>
                 </div>
                 <div className="flex flex-col lg:flex-row gap-4">
                     <div className="flex-grow">
                         {topStudent ? (
-                            <TopStudent students={topStudent}/>
+                            <TopStudent students={topStudent} />
                         ) : (
-                            <TopLoading name="Top Student"/>
+                            <TopLoading name="Top Student" />
                         )}
                     </div>
                     <div className="flex-grow">
                         {topGroup ? (
-                            <TopGroup topGroups={topGroup}/>
+                            <TopGroup topGroups={topGroup} />
                         ) : (
-                            <TopLoading name="Top Group"/>
+                            <TopLoading name="Top Group" />
                         )}
                     </div>
                 </div>
@@ -105,7 +108,7 @@ function Dashboard() {
     );
 };
 
-const MetricCard = ({title, value, icon}) => (
+const MetricCard = ({ title, value, icon }) => (
     <div className="bg-white rounded shadow p-4 flex flex-col items-center justify-between text-center">
         <div>
             <h2 className="text-lg text-gray-700">{title}</h2>

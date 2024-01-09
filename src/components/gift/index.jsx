@@ -7,24 +7,48 @@ import { toast } from "react-toastify";
 
 function Gift() {
   const [isModalOpen, setIsModalOpen] = useState(false); // Modalni ochish va yopish uchun holat
+  const [gifts, setGifts] = useState(null); // Sifod
 
   useEffect(() => {
+    getGift();
+  }, []);
 
-  }, [])
+  function getGift() {
+    axios.get(url + "gift", config)
+      .then((res) => {
+        setGifts(res.data.body.object.reverse());
+      })
+      .catch(() => {});
+  }
+
+  function searchGift() {
+    axios.get(url + "gift/search/" + {name: byId("search").value},  config)
+      .then((res) => {
+        setGifts(res.data.body.object.reverse());
+        console.log(res.data);
+      })
+      .catch(() => {});
+  }
 
   function addGift() {
-    axios.post(url + "gift/save", {
-        name: document.getElementById("name").value,
-        attachmentId: 1,
-        rate: document.getElementById("rate").value,
-        description: document.getElementById("description").value
-    }, config)
-    .then(() => {
-        toast.success('Successfully added!');
-    })
-    .catch(() => {
-        toast.error('Failed to add gift card!')
-    })
+    axios
+      .post(
+        url + "gift/save",
+        {
+          name: document.getElementById("name").value,
+          attachmentId: 1,
+          rate: document.getElementById("rate").value,
+          description: document.getElementById("description").value,
+        },
+        config
+      )
+      .then(() => {
+        toast.success("Successfully added!");
+        getGift();
+      })
+      .catch(() => {
+        toast.error("Failed to add gift card!");
+      });
   }
   // Modalni ochish va yopish uchun funksiyalar
   const openModal = () => {
@@ -37,7 +61,7 @@ function Gift() {
 
   return (
     <div className="bg-gray-100 min-h-screen p-8 w-full ">
-      <div className="mt-10">
+      <div className="mt-3">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Gift</h2>
       </div>
       <div className=" mb-2 flex justify-between">
@@ -64,13 +88,14 @@ function Gift() {
           </div>
           <input
             type="search"
+            onChange={searchGift}
             id="search"
             class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search"
           />
         </div>
       </div>
-      <GiftCard />
+      {gifts && <GiftCard gifts={gifts} getGift={getGift}/>}
 
       {/* Modal */}
       {isModalOpen && (
@@ -133,16 +158,14 @@ function Gift() {
                   <input
                     type="number"
                     name="rate"
-                    id="price"
+                    id="rate"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="100"
                     required=""
                   />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
-                  <label
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
+                  <label className="block mb-2 text-sm font-medium text-gray-900">
                     Image
                   </label>
                   <input
@@ -167,15 +190,16 @@ function Gift() {
                 </div>
               </div>
               <div className="flex justify-end">
-              <button className="btm-close me-2 bg-red-900">
-                Close
-              </button>
-              <button onClick={() => {
-                addGift();
-                closeModal()
-              }} className="btm">
-                Add
-              </button>
+                <button className="btm-close me-2 bg-red-900">Close</button>
+                <button
+                  onClick={() => {
+                    closeModal();
+                    addGift();
+                  }}
+                  className="btm"
+                >
+                  Add
+                </button>
               </div>
             </div>
           </div>

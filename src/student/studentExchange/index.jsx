@@ -1,6 +1,7 @@
 import "../../globalcss/style.css"
 import React from 'react';
 import GiftCard from "../studentGift/Giftcard";
+import StudentExchangeCard from "./exchangecard";
 
 function StudentExchange() {
     return (
@@ -20,7 +21,7 @@ function StudentExchange() {
                     </div>
                 </div>
             </div>
-            <GiftCard />
+            <StudentExchangeCard/>
         </div>
     );
 }

@@ -1,10 +1,31 @@
 // import React from "react";
 import CategoryTable from "../categorytable";
 import "../../globalcss/style.css"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import { url } from "../api/api";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import { toast } from "react-toastify";
 
 function Category() {
-    const [isLoading, setIsLoading] = useState(false);
+
+    const [categories, setCategories] = useState(null)
+
+    useEffect(() => {
+        getCategory()
+    }, [])
+
+    const getCategory = () => {
+        axios.get(url + "category/father/category", config)
+          .then((res) => {
+            setCategories(res.data.body.object)
+            console.log(res.data.body.object);
+          })
+          .catch(() => {
+            toast.dismiss("Category not found!")
+          })
+      };
+      console.log("category" + categories);
 
     return (
         <div className="bg-gray-100 min-h-screen p-8 w-full">
@@ -24,7 +45,7 @@ function Category() {
                     <input type="search" id="search" class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
                 </div>
             </div>
-            <CategoryTable />
+            {categories && <CategoryTable categories={categories} getCategory={getCategory}/>}
         </div>
     );
 }

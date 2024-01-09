@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 import * as echarts from 'echarts'; // Importing echarts
+import { config, setConfig, url } from '../../../components/api/api';
+import axios from 'axios';
+
 
 function Studentcoinstatistic() {
+  const [coin, setCoinsRate] = useState([]);
+    useEffect(() => {
+        setConfig();
+        axios.get(url + "user/", config)
+            .then(res => {
+                setCoinsRate(res.data.body);
+                console.log(coin);
+            })
+            .catch(err => console.log("Boshqa backendinchi topiyla iltomos 😭", err));
+    }, []);
+
   const option = {
     backgroundColor: '#ffffff', // Background color of the chart
     tooltip: {
