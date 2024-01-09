@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { config, setConfig, url } from "../../components/api/api.js";
+import { byId, config, setConfig, url } from "../../components/api/api.js";
 import opacha from "../../assits/opacha.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faCheckCircle, } from '@fortawesome/free-solid-svg-icons';
 import "./index.css";
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const StudentNavbar = () => {
     // Foydalanuvchi ma'lumotlari uchun alohida state o'zgaruvchilari
@@ -15,7 +16,10 @@ const StudentNavbar = () => {
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
-
+    const toggleMenu = () => {
+        setIsOpen(!isOpen);
+    };
+    // get me start
     useEffect(() => {
         setConfig();
         axios.get(url + "user/getMe", config)
@@ -24,11 +28,10 @@ const StudentNavbar = () => {
             })
             .catch(err => console.log("Boshqa backendinchi topiyla iltomos 😭", err));
     }, []);
+    // get me edn
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
 
+    // message start
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
@@ -41,7 +44,32 @@ const StudentNavbar = () => {
             })
             .catch(err => console.log("Backenddan ma'lumot olishda xatolik yuz berdi 😭", err));
     }, []);
+    // message and
 
+
+    // edit me start
+    const editMe = () => {
+        const addData = new FormData();
+        addData.append("lastName", byId("name2").value);
+        addData.append("firstName", byId("name").value);
+        addData.append("phoneNumber", byId("number").value);
+        addData.append("password", byId("password").value);
+        addData.append("prePassword", byId("prePassword").value);
+        addData.append("attachment", byId("file").files[0]);
+
+        axios.put(url + "user/editStudentProfile", addData , config)
+            .then(() => {
+                toast.success("Profile succesfully edit!")
+            })
+            .catch(() => {
+                toast.error("Something is error?")
+            })
+    }
+
+
+
+
+    // edit me and
 
     return (
         <div className="bg-gray-100 w-full">
@@ -69,7 +97,7 @@ const StudentNavbar = () => {
                             <span className="hidden md:block">{name.fullName}</span>
                         </button>
                     </div>
-                    <d iv
+                    <div
                         className={`${isOpen ? "absolute" : " hidden"
                             }  right-0 mt-2 py-2 w-80 bg-white rounded-xl shadow-xl z-20`}
                     >
@@ -98,22 +126,22 @@ const StudentNavbar = () => {
                                             <div className="profile-picture flex justify-center h-40 items-center">
                                                 <img src={opacha} alt="Profile" />
                                             </div>
-
-                                            <input type="text" placeholder="name" value={name.fullName} />
-                                            <input type="text" placeholder="email" value={name.email} />
-                                            <input type="number" placeholder="+998-99-99-99" value={name.phoneNumber} />
-                                            <input type="password" placeholder="Password" value={name.password} />
-                                            <input type="password" placeholder="Confirm Password" />
+                                            <input type="file" id='file' />
+                                            <input type="text" id='name' placeholder="First name" />
+                                            <input type="text" id='name2' placeholder="Last name" />
+                                            <input type="text" id='number' placeholder="+998-99-99-99" />
+                                            <input type="password" id='password' placeholder="Password" />
+                                            <input type="password" id='prePassword' placeholder="Confirm password" />
                                         </div>
                                         <div className="modal-footer">
                                             <button onClick={closeModal} className="cancel-button">Cancel</button>
-                                            <button onClick={closeModal} className="save-button">Save</button>
+                                            <button onClick={editMe} className="save-button">Save</button>
                                         </div>
                                     </div>
                                 </div>
                             )}
                         </div>
-                    </d>
+                    </div>
                 </div>
             </div>
             <div className="px-8 pt-10">
