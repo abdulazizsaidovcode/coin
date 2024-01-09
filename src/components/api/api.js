@@ -1,4 +1,5 @@
 import axios from "axios";
+import {toast} from "react-toastify";
 
 export const url = "http://137.184.13.215/";
 // export const url = "http://192.168.149.27/";
@@ -72,10 +73,61 @@ export function getOneTest(testId, setTest) {
         .catch((err) => console.log(err));
 }
 
+
+//              User
 export function getStudentStatistics(setStudentStatistics) {
     axios.get(url + "user/student/statistics", config)
         .then((res) => setStudentStatistics(res.data.body))
         .catch((err) => console.log(err));
+}
+
+export function getTeacher(setTeacher) {
+    axios.get(url + "user/teacher", config)
+        .then((res) => setTeacher(res.data.body))
+        .catch((err) => console.log(err));
+}
+
+//              Category
+export function getCategory(setCategory) {
+    axios.get(url + "category/father/category?page=0&size=100", config)
+        .then((res) => setCategory(res.data.body.object))
+        .catch((err) => console.log(err));
+}
+
+//                 Group
+export function getGroup(setGroup) {
+    axios.get(url + "group", config)
+        .then(res => {
+            // Backend tuzilishiga qarab, ma'lumotlar yo'li o'zgartirilishi kerak
+            if (res.data && res.data.body && res.data.body.object) setGroup(res.data.body.object);
+            else toast.error("Groups not found!");
+        })
+        .catch(err => {
+            console.error("Error retrieving data 😭", err);
+            toast.error("Error retrieving data!");
+        });
+}
+
+export function addGroup(closeModal, data) {
+    axios.post(url + "group/save", data, config).then(() => {
+        toast.success("Guruh muvoffaqiyatli qo'shildi!");
+        closeModal();
+    }).catch(error => {
+        console.error("Guruh qo'shilmadi 😭", error);
+        toast.error("Ma'lumotlarni yuborishda xatolik!");
+    });
+}
+
+export function editGroup(closeModal, data, id, setGroup) {
+    axios.put(`${url}group/update/${id}`, data, config).then(() => {
+        toast.success("Guruh muvoffaqiyatli o'zgartirildi");
+        closeModal();
+        getGroup(setGroup)
+    }).catch(error => {
+        if (error.response.status === 404) toast.warning("barcha malumotlar tuldirilmagan!")
+        else toast.error("Ma'lumotlarni yuborishda xatolik!");
+        console.error("Guruh qo'shilmadi 😭", error);
+    });
 }
 
 export const setConfig = () => config.headers.Authorization = sessionStorage.getItem("jwtToken");   
