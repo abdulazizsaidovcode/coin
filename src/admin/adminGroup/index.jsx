@@ -3,7 +3,7 @@ import '../../globalcss/style.css';
 import { config, setConfig, url } from '../../components/api/api';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import AdminGroupTable from './grouptable';
+import AdminGroupTable from './categorytable';
 
 const AdminGroup = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
