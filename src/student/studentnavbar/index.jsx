@@ -55,6 +55,7 @@ const StudentNavbar = () => {
         addData.append("phoneNumber", byId("number").value);
         addData.append("password", byId("password").value);
         addData.append("prePassword", byId("prePassword").value);
+        addData.append("attachment", byId("file").files[0]);
 
         axios.put(url + "user/editStudentProfile", addData , config)
             .then(() => {
@@ -125,6 +126,7 @@ const StudentNavbar = () => {
                                             <div className="profile-picture flex justify-center h-40 items-center">
                                                 <img src={opacha} alt="Profile" />
                                             </div>
+                                            <input type="file" id='file' />
                                             <input type="text" id='name' placeholder="First name" />
                                             <input type="text" id='name2' placeholder="Last name" />
                                             <input type="text" id='number' placeholder="+998-99-99-99" />

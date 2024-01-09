@@ -16,12 +16,10 @@ function Category() {
   }, []);
 
   function getCategory() {
-    console.log("ha");
     axios
       .get(url + "category/father/category", config)
       .then((res) => {
         setCategories(res.data.body);
-        console.log(res.data.body);
       })
       .catch(() => {
         toast.dismiss("Category not found!");
