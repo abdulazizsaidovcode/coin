@@ -90,7 +90,7 @@ const CategoryTable = () => {
 
     // category search
     const categorySearch = () => {
-        let searchVal = byId("search").value
+        let searchVal = byId("searchCategory").value
         if (!!searchVal)
             axios.get(url + "category/search?text=" + searchVal, config)
                 .then(res => setCategories(res.data.body))
@@ -205,7 +205,7 @@ const CategoryTable = () => {
                 </button>
                 <input
                     onChange={categorySearch}
-                    id="search"
+                    id="searchCategory"
                     type='search'
                     className="block w-80 p-3 ps-3 text-sm border border-gray-300 rounded-lg 
                     bg-gray-50 focus:outline-0 duration-300 focus:border-blue-500  
