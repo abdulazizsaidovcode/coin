@@ -4,7 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import CategoryTable from "../components/categorytable";
 import Dashboard from "../components/Dashboard";
 import GiftCard from "../components/card";
-import UserProfile from "../components/usercard";
 import TotalCoins from "../components/Total coins";
 import TopGroup from "../components/TopGroups";
 import TopTeachers from "../components/Topteachers";
@@ -18,6 +17,8 @@ import FalsePage from "../components/falsepage";
 import Navbarcha from "../components/navbar/Navbar";
 
 function Admin() {
+  const getme = sessionStorage.getItem("getMeInfo")
+  console.log("get mega " + getme);
   return (
     <div className="flex w-full">
       <SidebarTemplate isAdmin={true} />
@@ -27,7 +28,6 @@ function Admin() {
           <Route path="/admin/CategoryTable" element={<CategoryTable />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/giftCard" element={<GiftCard />} />
-          <Route path="/admin/usercard" element={<UserProfile />} />
           <Route path="/admin/totalcoins" element={<TotalCoins />} />
           <Route path="/admin/topgroup" element={<TopGroup />} />
           <Route path="/admin/topteachers" element={<TopTeachers />} />

@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
-import { config, url } from "../../api/api";
+import {config, url} from "../../api/api";
 import "./style.css"
 
 function StudentsTotalcoin() {
-    const [name, setName] = useState("");
+    // const [name, setName] = useState("");
 
-    useEffect(() => {
-        axios.get(url + "user/getMe", config)
-            .then(response => {
-                setName(response.data.body.fullName);
-            })
-            .catch(error => {
-                console.log("Boshqa backendinchi topiyla iltimos 😭", error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     axios.get(url + "user/getMe", config)
+    //         .then(response => {
+    //             setName(response.data.body.fullName);
+    //         })
+    //         .catch(error => {
+    //             console.log("Boshqa backendinchi topiyla iltimos 😭", error);
+    //         });
+    // }, []);
 
     return (
         <div className="StudentsTotalcoin bg-white rounded-lg p-4 shadow-md w-6/12 h-80">

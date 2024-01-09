@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { config, url } from "../../components/api/api.js";
-import axios from "axios";
-
+import opacha from "../../assits/opacha.jpg"
 
 const StudentNavbar = () => {
-    const [name, setName] = useState("");
+    // Foydalanuvchi ma'lumotlari uchun alohida state o'zgaruvchilari
+    const [fullName, setFullName] = useState('');
+    const [attachment, setAttachment] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [email, setGroupName] = useState('');
+    const [coin, setCoin] = useState('');
 
+    // useEffect orqali komponent yuklanganda bir martalik backenddan ma'lumot olish
     useEffect(() => {
         axios.get(url + "user/getMe", config)
             .then(response => {
-                setName(response.data.body.fullName);
+                // Foydalanuvchi ma'lumotlarini alohida state o'zgaruvchilariga joylaymiz
+                const userData = response.data; // .body olib tashlandi chunki bu struktura backendga bog'liq
+                setFullName(userData.body.fullName);
+                setAttachment(userData.body.attachment);
+                setPhoneNumber(userData.body.phoneNumber);
+                setGroupName(userData.body.email);
+                setCoin(userData.body.coin);
             })
             .catch(error => {
-                console.log("Boshqa backendinchi topiyla iltomos 😭", error);
+                console.error("Backenddan ma'lumot olishda xatolik yuz berdi", error);
             });
     }, []);
-
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -24,45 +35,48 @@ const StudentNavbar = () => {
 
     return (
         <div className="bg-gray-100 w-full">
-            <div className="flex justify-between bg-white py-5 px-8 w-full">
-                {/* Qidiruv maydoni */}
-                <div className="flex items-center space-x-1">
-                    <input type="search" placeholder="Search..." className="px-4 py-2 w-96 border rounded-md text-sm outline-none" />
-                </div>
-                {/* Foydalanuvchi profili va boshqa kontentlar uchun joy */}
-                <div className="relative">
-                    <button onClick={toggleMenu} className="flex items-center space-x-2 ">
-                        {/* <img
-                                src="/path-to-your-image.jpg" // Bu yerda rasm manzilini ko'rsating
-                                alt="Admin"
-                                className="rounded-full w-10 h-10"
-                            /> */}
-                        <span className="hidden md:block">Admina</span>
-                    </button>
+            {/* Navbar va boshqa tarkibiy qismlar */}
 
-                    <div className={`${isOpen ? 'absolute' : ' hidden'}  right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20`}>
+            {/* Foydalanuvchi ma'lumotlarini ko'rsatish qismi */}
+            <div className="container mx-auto">
+                <div className="w-full flex justify-between bg-white p-2">
+                    <div className="flex items-center space-x-1">
+                        <input type="search" id="search" class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
+                    </div>
+                    {/* Bu yerda foydalanuvchi bilan bog'liq boshqa harakatlar uchun tugmalar yoki linklar qo'yilishi mumkin */}
+                    <button onClick={toggleMenu} className="flex items-center space-x-2 ">
+                        <img src={opacha} alt="Admin" className="rounded-full border p-1 w-12 h-12" />
+                        <span className="hidden md:block">{fullName}</span>
+                    </button>
+                    <div
+                        className={`${isOpen ? "absolute" : " hidden"
+                            }  right-0 mt-2 py-2 w-80 bg-white rounded-xl shadow-xl z-20`}
+                    >
                         {/* Menu items */}
-                        <img className="w-full h-1/2 bg-contain" src="" alt="Gift" />
+                        <div className="h-40 bg-black rounded-t-xl flex justify-center items-center">
+                            <img className="w-20 h-20 bg-contain bg rounded-full" src={opacha} alt="Gift" />
+                        </div>
                         <div className="px-6 py-4">
                             <div className="font-bold text-xl mb-2 text-center"></div>
-                            <p className="text-gray-700 text-base text-center">
-                                alosm
-                                <br />
-                                salom
-                            </p>
+                            <p className="text-gray-700 text-base text-center">{email}</p>
+                            <p className="text-gray-700 text-base text-center">{fullName}</p>
+                            <p className="text-gray-700 text-base text-center">{phoneNumber}</p>
+                            <p className="text-gray-700 text-base text-center">{coin}</p>
                         </div>
-                        <div className="px-6 pt-4 text-center">
-                            <button className="btm">
-                                Edit
-                            </button>
+                        <div className="px-6 pt-4 text-center flex justify-between">
+                            <button className='btm'>edit</button>
+                            <button onClick={toggleMenu} className='btm'>exit</button>
                         </div>
                     </div>
-
                 </div>
             </div>
-            <div className="px-8 py-10">
-                <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800">Hi {name} (student)</h1>
-                <span className="text-sm text-gray-600">Welcome back to the Coin system dashboard</span>
+            <div className="px-8 pt-10">
+                <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800">
+                    Hi {fullName}
+                </h1>
+                <span className="text-sm text-gray-600">
+                    Welcome back to the Coin system dashboard
+                </span>
             </div>
         </div>
     );

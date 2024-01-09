@@ -77,22 +77,9 @@ const TopStudent = ({students}) => {
         }) : [].slice(indexOfFirstTeacher, indexOfLastTeacher))
     }, []);
 
-    // let a = {
-    //     active: false,
-    //     coin: 15,
-    //     fullName: "student_6 student_6",
-    //     groupId: 2,
-    //     groupName: "py-30",
-    //     id: 7,
-    //     numberOfExchange: 2,
-    //     task: 2
-    // }
-
-    // Calculating the range of teachers for the current page
     const indexOfLastTeacher = currentPage * teachersPerPage;
     const indexOfFirstTeacher = indexOfLastTeacher - teachersPerPage;
 
-    // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
