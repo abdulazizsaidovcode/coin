@@ -6,9 +6,10 @@ import { toast } from 'react-toastify';
 import { Icon } from '@iconify/react';
 
 const CategoryTable = () => {
-    const [categories, setCategories] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
+    const [categories, setCategories] = useState([]);
+    const [categoriesFafer, setCategoriesFather] = useState([]);
     const [categoryInfo, setCategoryInfo] = useState([]);
 
     // Function to toggle the active state
@@ -29,12 +30,19 @@ const CategoryTable = () => {
 
     useEffect(() => {
         setConfig();
-        getCategory();
+        getCategoryChild();
+        getCategoryFather();
     }, []);
 
-    const getCategory = () => {
-        axios.get(url + "category/teacher/category/list", config)
+    const getCategoryChild = () => {
+        axios.get(url + "category/sub", config)
             .then(res => setCategories(res.data.body))
+            .catch(() => console.log("kelmadi"))
+    }
+
+    const getCategoryFather = () => {
+        axios.get(url + "category/teacher/category/list", config)
+            .then(res => setCategoriesFather(res.data.body))
             .catch(() => console.log("kelmadi"))
     }
 
@@ -45,7 +53,7 @@ const CategoryTable = () => {
         const editData = {
             attachmentId: 0,
             name: byId("category-name").value,
-            categoryId: 1,
+            categoryId: byId("categorySelect").value,
             programmingLanguage: byId("programmingLanguage").value
         }
 
@@ -57,6 +65,7 @@ const CategoryTable = () => {
         await axios.put(url + "category/update/" + categoryInfo.id, editData, config)
             .then(() => {
                 closeModalEdit();
+                getCategoryChild();
                 toast.success("Category saccessfulliy edited!")
             })
             .catch(() => {
@@ -70,12 +79,23 @@ const CategoryTable = () => {
         axios.delete(url + "category/active/" + categoryInfo.id, config)
             .then(() => {
                 closeModal();
+                getCategoryChild();
                 toast.success("delete category")
             })
             .catch((err) => {
                 toast.error("xatolik yuz berdi")
                 // console.log(err);
             })
+    }
+
+    // category search
+    const categorySearch = () => {
+        let searchVal = byId("search").value
+        if (!!searchVal)
+            axios.get(url + "category/search?text=" + searchVal, config)
+                .then(res => setCategories(res.data.body))
+                .catch(err => console.log(err, searchVal))
+        else getCategoryChild();
     }
 
     return (
@@ -143,10 +163,11 @@ const CategoryTable = () => {
                             </label>
                             <select id="categorySelect" className='mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full'>
                                 <option selected disabled>
-                                    {categoryInfo.category
-                                        ? categoryInfo.category
-                                        : "No category"}
+                                    Category select
                                 </option>
+                                {categoriesFafer.map((item) =>
+                                    <option value={item.id}>{item.name}</option>
+                                )}
                             </select>
 
                             <label for="programmingLanguage" className="block text-sm font-medium text-gray-700 mt-7">
@@ -175,7 +196,23 @@ const CategoryTable = () => {
                     </div>
                 </div>
             )}
-            {/* //  px-4 sm:px-6 lg:px-8 */}
+
+            <div className=" mb-2 flex justify-between items-center flex-wrap">
+                <button
+                    id="openMenuButton"
+                    className="btm">
+                    + Add
+                </button>
+                <input
+                    onChange={categorySearch}
+                    id="search"
+                    type='search'
+                    className="block w-80 p-3 ps-3 text-sm border border-gray-300 rounded-lg 
+                    bg-gray-50 focus:outline-0 duration-300 focus:border-blue-500  
+                    dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 
+                    dark:focus:border-blue-500"
+                    placeholder="🔍  Search" />
+            </div>
             <div className="w-full bg-gray-100 py-8">
                 <div className="w-full mx-auto">
                     <div className="bg-white shadow-md rounded-3xl overflow-hidden">
@@ -204,7 +241,7 @@ const CategoryTable = () => {
                                                             ? avatar
                                                             : getFile + category.attachmentId}
                                                         alt="avatar"
-                                                        className="h-16 w-16 rounded-full" />
+                                                        className="h-16 w-16 rounded-full object-cover" />
                                                 </td>
                                                 <td className="py-3 px-6 border-b border-gray-200">
                                                     {category.name === null ? "Yo'q" : category.name}
