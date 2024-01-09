@@ -15,17 +15,18 @@ function Category() {
         getCategory()
     }, [])
 
-    const getCategory = () => {
+    function getCategory() {
+        console.log('ha');
         axios.get(url + "category/father/category", config)
           .then((res) => {
-            setCategories(res.data.body.object)
-            console.log(res.data.body.object);
+            setCategories(res.data.body)
+            console.log(res.data.body);
           })
           .catch(() => {
             toast.dismiss("Category not found!")
           })
       };
-      console.log("category" + categories);
+      console.log("categoryga => " + {categories});
 
     return (
         <div className="bg-gray-100 min-h-screen p-8 w-full">
@@ -45,7 +46,7 @@ function Category() {
                     <input type="search" id="search" class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
                 </div>
             </div>
-            {categories && <CategoryTable categories={categories} getCategory={getCategory}/>}
+            <CategoryTable categories={categories}/>
         </div>
     );
 }
