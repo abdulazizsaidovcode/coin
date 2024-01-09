@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        profileColor: "#271E4A"
+        profileColor: "#271E4A",
+        studentTableBg: "#F3F4F6",
       },
       fontFamily: {
         inika: ["Inika", "serif"],

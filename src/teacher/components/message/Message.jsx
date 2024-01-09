@@ -72,12 +72,8 @@ function Message() {
     };
 
     return (
-        <div className="container mx-auto p-8">
+        <div className="container mx-auto p-8 bg-gray-100 h-screen">
             {/* Tartiblash tugmalari */}
-            <div className=" mb-7">
-                <h1 className="text-3xl font-semibold text-gray-800">Hi Admin(a)</h1>
-                <span className="text-sm text-gray-600">Welcome back to Coin system dashboard</span>
-            </div>
             <div className="mt-10">
                 <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Message</h2>
             </div>
