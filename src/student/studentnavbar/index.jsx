@@ -1,39 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { config, url } from "../../components/api/api.js";
+import { config, setConfig, url } from "../../components/api/api.js";
 import opacha from "../../assits/opacha.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faCheckCircle, faClock, faDonate, faDotCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faCheckCircle, } from '@fortawesome/free-solid-svg-icons';
+import "./index.css";
+import { Link } from 'react-router-dom';
 
 const StudentNavbar = () => {
     // Foydalanuvchi ma'lumotlari uchun alohida state o'zgaruvchilari
-    const [fullName, setFullName] = useState('');
-    const [attachment, setAttachment] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setGroupName] = useState('');
-    const [coin, setCoin] = useState('');
-
-    // useEffect orqali komponent yuklanganda bir martalik backenddan ma'lumot olish
-    useEffect(() => {
-        axios.get(url + "user/getMe", config)
-            .then(response => {
-                // Foydalanuvchi ma'lumotlarini alohida state o'zgaruvchilariga joylaymiz
-                const userData = response.data; // .body olib tashlandi chunki bu struktura backendga bog'liq
-                setFullName(userData.body.fullName);
-                setAttachment(userData.body.attachment);
-                setPhoneNumber(userData.body.phoneNumber);
-                setGroupName(userData.body.email);
-                setCoin(userData.body.coin);
-            })
-            .catch(error => {
-                console.error("Backenddan ma'lumot olishda xatolik yuz berdi", error);
-            });
-    }, []);
+    const [name, setName] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+
+    useEffect(() => {
+        setConfig();
+        axios.get(url + "user/getMe", config)
+            .then(res => {
+                setName(res.data.body);
+            })
+            .catch(err => console.log("Boshqa backendinchi topiyla iltomos 😭", err));
+    }, []);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+
+    const [messages, setMessages] = useState([]);
+
+    useEffect(() => {
+        setConfig();
+        axios.get(url + "message/student", config)
+            .then(res => {
+                if (res.data && res.data.body && res.data.body.object) {
+                    setMessages(res.data.body.object);
+                }
+            })
+            .catch(err => console.log("Backenddan ma'lumot olishda xatolik yuz berdi 😭", err));
+    }, []);
+
 
     return (
         <div className="bg-gray-100 w-full">
@@ -44,18 +52,24 @@ const StudentNavbar = () => {
                 <div className="w-full flex justify-between bg-white p-2">
                     <div className="flex items-center space-x-1">
                         <div class="relative">
-                        </div>                    </div>
+                        </div>       </div>
                     {/* Bu yerda foydalanuvchi bilan bog'liq boshqa harakatlar uchun tugmalar yoki linklar qo'yilishi mumkin */}
-                    <button onClick={toggleMenu} className="flex items-center space-x-2 ">
+                    <div className='flex items-center'>
                         <FontAwesomeIcon icon={faCheckCircle} className="text-2xl mr-2 text-gray-800" />
                         <div className='relative mt-1'>
-                            <div className='w-2 h-2 bg-red-400 rounded-full absolute right-2 '><a href=""></a></div>
-                            <FontAwesomeIcon icon={faBell} className="text-2xl mr-2 text-gray-800" />
+                            {messages.length > 0 ? (
+                                <div className='w-2 h-2 bg-red-400 rounded-full absolute right-2 '><a href=""></a></div>
+                            ) : (
+                                <div></div>
+                            )}
+                            <Link to="/student/message"><FontAwesomeIcon icon={faBell} className={`${messages.length > 0} ` ? "text-2xl mr-2 text-gray-80 anim" : "text-2xl mr-2 text-gray-80"} /></Link>
                         </div>
-                        <img src={opacha} alt="Admin" className="rounded-full border p-1 w-12 h-12" />
-                        <span className="hidden md:block">{fullName}</span>
-                    </button>
-                    <div
+                        <button onClick={toggleMenu} className="flex items-center space-x-2 ">
+                            <img src={opacha} alt="Admin" className="rounded-full border p-1 w-12 h-12" />
+                            <span className="hidden md:block">{name.fullName}</span>
+                        </button>
+                    </div>
+                    <d iv
                         className={`${isOpen ? "absolute" : " hidden"
                             }  right-0 mt-2 py-2 w-80 bg-white rounded-xl shadow-xl z-20`}
                     >
@@ -65,21 +79,46 @@ const StudentNavbar = () => {
                         </div>
                         <div className="px-6 py-4">
                             <div className="font-bold text-xl mb-2 text-center"></div>
-                            <p className="text-gray-700 text-base text-center">{email}</p>
-                            <p className="text-gray-700 text-base text-center">{fullName}</p>
-                            <p className="text-gray-700 text-base text-center">{phoneNumber}</p>
-                            <p className="text-gray-700 text-base text-center">{coin}</p>
+                            <p className="text-gray-700 text-base text-center">{name.email}</p>
+                            <p className="text-gray-700 text-base text-center">{name.fullName}</p>
+                            <p className="text-gray-700 text-base text-center">{name.phoneNumber}</p>
+                            <p className="text-gray-700 text-base text-center">{name.coin}</p>
                         </div>
                         <div className="px-6 pt-4 text-center flex justify-between">
-                            <button className='btm'>edit</button>
                             <button onClick={toggleMenu} className='btm'>exit</button>
+                            <button onClick={openModal} className='btm'>edit</button>
+                            {isModalOpen && (
+                                <div className="modal-overlay" onClick={closeModal}>
+                                    <div className="modal-content" onClick={e => e.stopPropagation()}>
+                                        <div className="modal-header">
+                                            <button onClick={closeModal} className="close-button">&times;</button>
+                                        </div>
+                                        <div className="modal-body">
+                                            {/* Modal Body Content */}
+                                            <div className="profile-picture flex justify-center h-40 items-center">
+                                                <img src={opacha} alt="Profile" />
+                                            </div>
+
+                                            <input type="text" placeholder="name" value={name.fullName} />
+                                            <input type="text" placeholder="email" value={name.email} />
+                                            <input type="number" placeholder="+998-99-99-99" value={name.phoneNumber} />
+                                            <input type="password" placeholder="Password" value={name.password} />
+                                            <input type="password" placeholder="Confirm Password" />
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button onClick={closeModal} className="cancel-button">Cancel</button>
+                                            <button onClick={closeModal} className="save-button">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                    </div>
+                    </d>
                 </div>
             </div>
             <div className="px-8 pt-10">
                 <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800">
-                    Hi {fullName}
+                    Hi {name.fullName}
                 </h1>
                 <span className="text-sm text-gray-600">
                     Welcome back to the Coin system dashboard

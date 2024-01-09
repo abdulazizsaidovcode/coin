@@ -43,26 +43,32 @@ const StudentGroup = () => {
             </tr>
           </thead>
           <tbody className="text-gray-600 font-light">
-            {topStudent.map((student, index) => (
-              <tr key={student.id} className="border-b border-gray-200 hover:bg-gray-100">
-                <td className="py-3 px-6 text-left whitespace-nowrap">{index + 1}</td>
-                <td className="py-3 px-6 text-left">
-                  <img src={student.imgurl} alt="Student" className="h-10 w-10 rounded-full" />
-                </td>
-                <td className="py-3 px-6 text-left">{student.fullName}</td>
-                <td className="py-3 px-6 text-center">{student.groupName}</td>
-                <td className="py-3 px-6 text-center">{student.coin}</td>
-                <td className="py-3 px-6 text-center">{student.task}</td>
-                <td className="py-3 px-6 text-center">
-                  <input
-                    type="checkbox"
-                    className="form-checkbox h-5 w-5 text-blue-600 rounded"
-                    checked={`${student.active ? 'checked' : ''}`}
-                    readOnly
-                  />
-                </td>
+            {topStudent.length > 0 ? (
+              topStudent.map((student, index) => (
+                <tr key={student.id} className="border-b border-gray-200 ">
+                  <td className="py-3 px-6 text-left whitespace-nowrap">{index + 1}</td>
+                  <td className="py-3 px-6 text-left">
+                    <img src={student.imgurl} alt="Student" className="h-10 w-10 rounded-full" />
+                  </td>
+                  <td className="py-3 px-6 text-left">{student.fullName}</td>
+                  <td className="py-3 px-6 text-center">{student.groupName}</td>
+                  <td className="py-3 px-6 text-center">{student.coin}</td>
+                  <td className="py-3 px-6 text-center">{student.task}</td>
+                  <td className="py-3 px-6 text-center">
+                    <input
+                      type="checkbox"
+                      className="form-checkbox h-5 w-5 text-blue-600 rounded"
+                      checked={`${student.active ? 'checked' : ''}`}
+                      readOnly
+                    />
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr className="border-b border-gray-200 ">
+                <td className="py-3 px-6 text-left whitespace-nowrap">Not found 😊</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

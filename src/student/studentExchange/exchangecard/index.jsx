@@ -4,15 +4,14 @@ import { config, setConfig, url } from '../../../components/api/api';
 import axios from 'axios';
 
 const StudentExchangeCard = () => {
-  const [gift, setGift] = useState([]);  // nomini 'setTopStudent' dan 'setGift' ga o'zgartirildi aniqroq bo'lishi uchun
+  const [gift, setGift] = useState([]);
 
   useEffect(() => {
     setConfig();
-    axios.get(url + "exchange", config)
+    axios.get(url + "exchange/user", config)
       .then(res => {
-        // Ma'lumotlarni "body" keyidan so'ng "object" keyi orqali olish
         if (res.data && res.data.body && res.data.body.object) {
-          setGift(res.data.body.object); // gift state'ini yangilash
+          setGift(res.data.body.object);
         }
       })
       .catch(err => console.log("Exchange Backenddan ma'lumot olishda xatolik yuz berdi 😭", err));
@@ -20,18 +19,24 @@ const StudentExchangeCard = () => {
 
   return (
     <div className="flex flex-wrap justify-around bg-gray-100 pt-10">
-      {gift.map(item => ( // 'category' nomi 'item' ga o'zgartirildi tushunarliroq bo'lishi uchun
-        <div key={item.id} className="w-80 h-96 rounded-xl overflow-hidden all-shadow m-4 up">
-          <img className="w-full h-1/2 bg-contain" src={item.attachmentId} alt="Gift" />
-          <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2 text-center">{item.name}</div>
-            <p className="text-gray-700 text-base text-center">
-              Coins: {item.rate}<br />
-              {item.description}
-            </p>
+      {gift.length > 0 ? (
+        gift.map(item => (
+          <div key={item.id} className="w-80 h-96 rounded-xl overflow-hidden all-shadow m-4 up">
+            <img className="w-full h-1/2 bg-contain" src={item.attachmentId} alt="Gift" />
+            <div className="px-6 py-4">
+              <div className="font-bold text-xl mb-2 text-center">{item.name}</div>
+              <div className="font-bold text-xl mb-2 text-center">{item.fullName}</div>
+              <div className="font-bold text-xl mb-2 text-center">{item.groupName}</div>
+              <div className="font-bold text-xl mb-2 text-center">{item.date}</div>
+              <p className="text-gray-700 text-base text-center">Coins: {item.giftRate}</p>
+            </div>
           </div>
+        ))
+      ) : (
+        <div className="text-center w-full">
+          <p className="text-gray-800 text-2xl">Sizda hali sovg'a yo'q 😭</p>
         </div>
-      ))}
+      )}
     </div>
   );
 };

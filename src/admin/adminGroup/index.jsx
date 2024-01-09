@@ -1,31 +1,102 @@
-// import React from "react";
-import "../../globalcss/style.css"
-import React from 'react';
-import AdminGroupTable from "./categorytable";
+import React, { useState } from 'react';
+import '../../globalcss/style.css';
+import { config, setConfig, url } from '../../components/api/api';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import AdminGroupTable from './categorytable';
 
-function AdminGroup() {
+const AdminGroup = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [formData, setFormData] = useState({
+        name: '',
+        categoryId: 0,
+        teacherId: 0
+    });
+
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setConfig();
+        axios.post("http://137.184.13.215/group/save", formData, config)
+            .then(response => {
+                toast.success("Guruh muvoffaqiyatli qo'shildi!");
+                closeModal();
+            })
+            .catch(error => {
+                console.error("Guruh qo'shilmadi 😭", error);
+                toast.error("Ma'lumotlarni yuborishda xatolik!");
+            });
+    };
 
     return (
-        <div className="bg-gray-100 min-h-screen p-8 w-full">
-            <div className="mt-10">
-                <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Group</h2>
-            </div>
-            <div className=" mb-2 flex justify-between">
-                <button id="openMenuButton" className="btm">
-                  + Add
-                </button>
-                <div class="relative">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
+        <div className="min-h-screen w-full bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+            <button id="openMenuButton" className="btm" onClick={openModal}>
+                + Add
+            </button>
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" onClick={closeModal}>
+                    <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white" onClick={(e) => e.stopPropagation()}>
+                        <h2 className="text-lg leading-6 font-medium text-gray-900 mb-4">Add New Group</h2>
+                        <form onSubmit={handleSubmit} className="space-y-6
+">
+                            <div>
+                                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    required
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="categoryId" className="block text-sm font-medium text-gray-700">Category ID</label>
+                                <input
+                                    type="number"
+                                    name="categoryId"
+                                    id="categoryId"
+                                    required
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                                    value={formData.categoryId}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="teacherId" className="block text-sm font-medium text-gray-700">Teacher ID</label>
+                                <input
+                                    type="number"
+                                    name="teacherId"
+                                    id="teacherId"
+                                    required
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                                    value={formData.teacherId}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="flex justify-between">
+                                <button type="button" onClick={closeModal} className="btm">
+                                    Close
+                                </button>
+                                <button type="submit" className="btm">
+                                    Submit
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <input type="search" id="search" class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
                 </div>
-            </div>
+            )}
             <AdminGroupTable />
         </div>
     );
-}
+};
 
 export default AdminGroup;
