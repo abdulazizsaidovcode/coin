@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { byId, config, getFile, setConfig, url } from '../../../components/api/api';
 import avatar from "../../../assits/opacha.jpg";
 import { toast } from 'react-toastify';
+import { Icon } from '@iconify/react';
 
 const CategoryTable = () => {
     const [categories, setCategories] = useState([]);
@@ -212,12 +213,12 @@ const CategoryTable = () => {
                                                 <td className="py-3 px-6 border-b border-gray-200">
                                                     {category.programmingLanguage === null ? "Yo'q" : category.programmingLanguage}
                                                 </td>
-                                                <td className="py-3 px-6 border-b border-gray-200">
+                                                <td className="py-3 pl-6 border-b border-gray-200">
                                                     <input
                                                         type="checkbox"
                                                         checked={category.active}
                                                         onChange={() => toggleActive(category.id)}
-                                                        className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-0"
+                                                        className="form-checkbox h-5 w-5 ml-14 text-blue-600 rounded focus:ring-0"
                                                     />
                                                 </td>
                                                 <td className="py-3 px-6 border-b border-gray-200">
@@ -238,7 +239,14 @@ const CategoryTable = () => {
                                             </tr>
                                         )) :
                                         <tr className='even:bg-slate-200 hover:bg-slate-300 duration-200'>
-                                            <td colSpan="6" className="py-3 text-center px-6 font-inika font-medium text-lg tracking-wider leading-10">loading...</td>
+                                            <td className='py-3 px-6'></td>
+                                            <td className='py-3 px-6'></td>
+                                            <td className='py-3 px-6'></td>
+                                            <td className="py-3 px-6 font-inika font-medium text-lg tracking-wider leading-10">
+                                                <Icon icon="eos-icons:three-dots-loading" width="50" />
+                                            </td>
+                                            <td className='py-3 px-6'></td>
+                                            <td className='py-3 px-6'></td>
                                         </tr>
                                     }
                                 </tbody>
