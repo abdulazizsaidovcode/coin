@@ -1,16 +1,20 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { byId, config, url } from '../../../components/api/api';
+import { byId, config, setConfig, url } from '../../../components/api/api';
 import { toast } from 'react-toastify';
 
 function Offcanvas() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [categoriesFafer, setCategoriesFather] = useState([]);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
     useEffect(() => {
+        setConfig();
+        getCategoryFather();
+
         const button = document.getElementById('openMenuButton');
         button.addEventListener('click', toggleMenu);
 
@@ -19,6 +23,12 @@ function Offcanvas() {
         };
     }, []);
 
+    const getCategoryFather = () => {
+        axios.get(url + "category/teacher/category/list", config)
+            .then(res => setCategoriesFather(res.data.body))
+            .catch(() => console.log("kelmadi"))
+    }
+
     // add category
     const addCategory = async () => {
         const img = new FormData();
@@ -26,7 +36,7 @@ function Offcanvas() {
         const addData = {
             attachmentId: 0,
             name: byId("category-name").value,
-            categoryId: 1,
+            categoryId: byId("categorySelect").value,
             programmingLanguage: byId("programmingLanguage").value
         }
 
@@ -93,8 +103,10 @@ function Offcanvas() {
                                                 </label>
                                                 <select id="categorySelect" className='mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full'>
                                                     <option selected disabled>Category select</option>
+                                                    {categoriesFafer.map((item) =>
+                                                        <option value={item.id}>{item.name}</option>
+                                                    )}
                                                 </select>
-
                                                 <label for="programmingLanguage" className="block text-sm font-medium text-gray-700 mt-7">
                                                     Category programming language
                                                 </label>

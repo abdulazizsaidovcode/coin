@@ -9,7 +9,7 @@ function Studentcoinstatistic() {
   const [coin, setCoinsRate] = useState([]);
   useEffect(() => {
     setConfig();
-    axios.get(url + "coin/history/course/statistics", config)
+    axios.get(url + "coin/history/student/category/coin", config)
       .then(res => {
         setCoinsRate(res.data.body);
       })
@@ -35,7 +35,7 @@ function Studentcoinstatistic() {
     xAxis: [ // Configuration for the x-axis
       {
         type: 'category',
-        data: [""+ coin && coin.map(coincha => coincha.MONTH)],
+        data: [coin[0]],
         axisTick: {
           alignWithLabel: true,
         },
@@ -51,7 +51,7 @@ function Studentcoinstatistic() {
         name: 'Direct',
         type: 'bar',
         barWidth: '60%',
-        data: [+(coin && coin.map(coincha => coincha.coin))],
+        data: [],
     itemStyle: {
       color: new echarts.graphic.LinearGradient( // Gradient color for the bars
         0, 0, 0, 1,

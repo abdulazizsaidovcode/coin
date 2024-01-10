@@ -30,7 +30,6 @@ const StudentNavbar = () => {
     }, []);
     // get me edn
 
-
     // message start
     const [messages, setMessages] = useState([]);
 
@@ -50,23 +49,24 @@ const StudentNavbar = () => {
     // edit me start
     const editMe = () => {
         const addData = new FormData();
+        console.log(byId('file').files[0]);
         addData.append("lastName", byId("name2").value);
         addData.append("firstName", byId("name").value);
         addData.append("phoneNumber", byId("number").value);
         addData.append("password", byId("password").value);
         addData.append("prePassword", byId("prePassword").value);
+        addData.append("file", byId("file").files[0]);
 
-        axios.put(url + "user/editStudentProfile", addData , config)
+        axios.put(url + "user/editStudentProfile", addData, config)
             .then(() => {
                 toast.success("Profile succesfully edit!")
+                closeModal()
             })
-            .catch(() => {
-                toast.error("Something is error?")
+            .catch(err => {
+                if (err.response.status == 409) toast.warning(err.response.data.message)
+                else toast.error("Something is error?")
             })
     }
-
-
-
 
     // edit me and
 
@@ -125,6 +125,7 @@ const StudentNavbar = () => {
                                             <div className="profile-picture flex justify-center h-40 items-center">
                                                 <img src={opacha} alt="Profile" />
                                             </div>
+                                            <input type="file" id='file' />
                                             <input type="text" id='name' placeholder="First name" />
                                             <input type="text" id='name2' placeholder="Last name" />
                                             <input type="text" id='number' placeholder="+998-99-99-99" />

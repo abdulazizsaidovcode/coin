@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+// import { config, url } from "../api/api";
+// import React, { useState, useEffect } from "react";
 import { byId, config, setConfig, url } from "../api/api";
 import axios from "axios";
 import avatar from "../../assits/opacha.jpg";
