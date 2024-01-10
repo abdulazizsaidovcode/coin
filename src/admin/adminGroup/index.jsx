@@ -3,7 +3,6 @@ import "../../globalcss/style.css";
 import { byId, config, setConfig, url } from "../../components/api/api";
 import axios from "axios";
 import { toast } from "react-toastify";
-import AdminGroupTable from "./categorytable";
 
 const AdminGroup = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,7 +15,6 @@ const AdminGroup = () => {
   const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
-    console.log("salom group");
     getCategoryId()
     getTeacher()
     getCategory()
