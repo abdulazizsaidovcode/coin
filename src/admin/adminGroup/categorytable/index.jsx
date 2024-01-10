@@ -49,7 +49,7 @@ const GroupsTable = (teacher, category, groups) => {
                   </tr>
                 </thead>
                 <tbody className="text-gray-700">
-                  {groups.length !== 0 ? (
+                  {/* {groups.length !== 0 ? (
                     groups.map((group, i) => (
                       <tr
                         key={i}
@@ -94,7 +94,7 @@ const GroupsTable = (teacher, category, groups) => {
                       <td className="py-3 px-6"></td>
                       <td className="py-3 px-6"></td>
                     </tr>
-                  )}
+                  )} */}
                 </tbody>
               </table>
             </div>

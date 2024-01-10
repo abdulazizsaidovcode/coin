@@ -26,7 +26,7 @@ const AdminGroup = () => {
     axios
       .get(url + "group", config)
         .then((res) => {
-          setGroups(res.data.body.object)
+          setGroups(res.data.body)
         })
       .catch(() => console.log("kelmadi"));
   };
@@ -64,7 +64,8 @@ const AdminGroup = () => {
     axios
       .get(url + "category/father/category", config)
       .then((res) => {
-        setCategory(res.data.body.object)
+        setCategory(res.data.body)
+        console.log(res.data);
       })
       .catch(() => console.log("kelmadi"));
   };
@@ -77,11 +78,9 @@ const AdminGroup = () => {
       {isModalOpen && (
         <div
           className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
-          onClick={closeModal}
         >
           <div
             className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
-            onClick={(e) => e.stopPropagation()}
           >
             <h2 className="text-lg leading-6 font-medium text-gray-900 mb-4">
               Add New Group
@@ -152,7 +151,7 @@ const AdminGroup = () => {
           </div>
         </div>
       )}
-      {/* {groups && <AdminGroupTable groups={groups}/>} */}
+      
     </div>
   );
 };
