@@ -51,6 +51,7 @@ function Message() {
         }, config)
         .then(() => {
             toast.success("Message succesfully send!")
+            getCategory()
         })
         .catch(() => {
             toast.error("Error while sending message!");
@@ -108,7 +109,7 @@ function Message() {
           <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
-                Create New Product
+                Send message
               </h2>
               <button
                 onClick={closeModal}
@@ -143,13 +144,13 @@ function Message() {
                     htmlFor="category"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Category
+                    Group
                   </label>
                   <select
                     id="groupId"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   >
-                    <option selected disabled>Select category</option>
+                    <option selected disabled>Select group</option>
                     {group.map((item, i) => 
                        <option key={i} value={item.id}>{item.name}</option>
                     )}
@@ -162,13 +163,13 @@ function Message() {
                     htmlFor="description"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Product Description
+                    Write message
                   </label>
                   <textarea
                     id="message"
                     rows="4"
                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Write product description here"
+                    placeholder="Write Write message here"
                   ></textarea>
                 </div>
               </div>

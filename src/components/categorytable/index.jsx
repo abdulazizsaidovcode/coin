@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { config, url } from '../api/api';
 import { toast } from 'react-toastify';
 

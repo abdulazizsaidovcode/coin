@@ -11,6 +11,8 @@ function Category() {
   const [isModalOpen, setIsModalOpen] = useState(false); // Modalni ochish va yopish uchun holat
   const [categories, setCategories] = useState(null);
 
+  const categoryObj = {}
+
   useEffect(() => {
     getCategory();
   }, []);
@@ -20,11 +22,16 @@ function Category() {
       .get(url + "category/father/category", config)
       .then((res) => {
         setCategories(res.data.body);
+        console.log(res.data.body);
       })
       .catch(() => {
         toast.dismiss("Category not found!");
       });
   }
+
+
+
+  console.log("malumotcha  " + categories);
 
   const addCategoty = () => {
     axios.post(

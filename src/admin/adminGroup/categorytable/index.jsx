@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { byId, config, setConfig, url } from "../../../components/api/api";
 import avatar from "../../../assits/itca.jpg";
-import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
 const GroupsTable = (teacher, category, groups) => {

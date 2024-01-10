@@ -152,7 +152,7 @@ const AdminGroup = () => {
           </div>
         </div>
       )}
-      {groups && <AdminGroupTable groups={groups}/>}
+      {/* {groups && <AdminGroupTable groups={groups}/>} */}
     </div>
   );
 };
