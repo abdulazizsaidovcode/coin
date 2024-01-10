@@ -3,6 +3,7 @@ import "../../globalcss/style.css";
 import { byId, config, setConfig, url } from "../../components/api/api";
 import axios from "axios";
 import { toast } from "react-toastify";
+import GroupsTable from "./categorytable";
 
 const AdminGroup = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,34 +11,36 @@ const AdminGroup = () => {
   const [category, setCategory] = useState(null);
   const [groups, setGroups] = useState(null);
 
-
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
-    getCategoryId()
-    getTeacher()
-    getCategory()
-  }, [])
+    getCategoryId();
+    getTeacher();
+    getCategory();
+  }, []);
 
   const getCategory = () => {
     axios
       .get(url + "group", config)
-        .then((res) => {
-          setGroups(res.data.body)
-        })
+      .then((res) => {
+        setGroups(res.data.body.object);
+      })
       .catch(() => console.log("kelmadi"));
   };
-  console.log(" gr malumoti" + groups);
 
   const addGroup = () => {
     setConfig();
     axios
-      .post(url + "group/save", {
-        name: byId("name").value,
-        categoryId: byId("category").value,
-        teacherId: byId("teacher").value
-      }, config)
+      .post(
+        url + "group/save",
+        {
+          name: byId("name").value,
+          categoryId: byId("category").value,
+          teacherId: byId("teacher").value,
+        },
+        config
+      )
       .then((response) => {
         toast.success("Group succesfully add!");
         closeModal();
@@ -48,7 +51,6 @@ const AdminGroup = () => {
       });
   };
 
-  
   const getTeacher = () => {
     axios
       .get(url + "user/teacher", config)
@@ -62,8 +64,7 @@ const AdminGroup = () => {
     axios
       .get(url + "category/father/category", config)
       .then((res) => {
-        setCategory(res.data.body)
-        console.log(res.data);
+        setCategory(res.data.body);
       })
       .catch(() => console.log("kelmadi"));
   };
@@ -74,12 +75,8 @@ const AdminGroup = () => {
         + Add
       </button>
       {isModalOpen && (
-        <div
-          className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
-        >
-          <div
-            className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
-          >
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <h2 className="text-lg leading-6 font-medium text-gray-900 mb-4">
               Add New Group
             </h2>
@@ -110,10 +107,14 @@ const AdminGroup = () => {
                   id="category"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option selected disabled>Select category</option>
-                  {category.length && category.map((item, i) => 
-                  <option key={i} value={item.name}>{item.name}</option>
-                  )}
+                  <option selected disabled>
+                    Select category
+                  </option>
+                  {category && category.map((item, i) => (
+                      <option key={i} value={item.id}>
+                        {item.name}
+                      </option>
+                    ))}
                 </select>
               </div>
               <div className="mt-5">
@@ -127,10 +128,15 @@ const AdminGroup = () => {
                   id="teacher"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option selected disabled>Select teacher</option>
-                   {teacher.length && teacher.map((item, i) => 
-                  <option key={i} value={item.fullName}>{item.fullName}</option>
-                  )}
+                  <option selected disabled>
+                    Select teacher
+                  </option>
+                  {teacher.length &&
+                    teacher.map((item, i) => (
+                      <option key={i} value={item.id}>
+                        {item.fullName}
+                      </option>
+                    ))}
                 </select>
               </div>
               <div className="flex justify-between mt-7">
@@ -149,10 +155,10 @@ const AdminGroup = () => {
           </div>
         </div>
       )}
-      
+
+      {groups && category && teacher && <GroupsTable teacher={teacher} category={category} groups={groups}/>}
     </div>
   );
 };
 
 export default AdminGroup;
-

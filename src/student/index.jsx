@@ -5,7 +5,6 @@ import UserProfile from "./studentGift/Giftcard";
 import TotalCoins from "../components/Total coins";
 import TopGroup from "../components/TopGroups";
 import TopTeachers from "../components/Topteachers";
-import Offcanvas from "../components/ofcanvas";
 import TotalCoinForStudent from "../components/totalconforstudent";
 import StudentSidebar from "./sidebar/Studentsitebar";
 import StudentDashboard from "./studentdashboard";
@@ -33,7 +32,6 @@ function Student() {
           <Route path="/student/topgroup" element={<TopGroup />} />
           <Route path="/student/topteachers" element={<TopTeachers />} />
           <Route path="/student/test" element={<StudentTest />} />
-          <Route path="/student/offcanvas" element={<Offcanvas />} />
           <Route path="/student/gift" element={<StudentGift />} />
           <Route path="/student/exchange" element={<StudentExchange />} />
           <Route path="/student/message" element={<Studentmessage />} />

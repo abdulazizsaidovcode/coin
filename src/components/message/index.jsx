@@ -10,6 +10,7 @@ function Message() {
     const [messages, setMessages] = useState([]);
     const [group, setGroup] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [groupid, setGroupid] = useState([])
 
   // Modalni ochish va yopish uchun funksiyalar
   const openModal = () => {
@@ -94,12 +95,13 @@ function Message() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {messages.map((item, i) => (
                     <div key={i} className="border rounded shadow p-3">
-                        <h2 className="font-bold text-lg mb-3">{item.groupId}</h2>
+                        <h2 className="font-bold text-lg mb-3" >{item.groupId}</h2>
                         <p className="text-gray-700 text-base">{item.description}</p>
                         <div className="text-right">
                             <span className="text-sm font-semibold">{item.date}</span>
                         </div>
                     </div>
+
                 ))}
             </div>
 
