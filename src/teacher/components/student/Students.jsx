@@ -6,7 +6,7 @@ import { Icon } from "@iconify/react";
 
 const Students = () => {
 
-    const getStudentInfo = sessionStorage.getItem("studentInfo")
+    const getStudentInfo = sessionStorage.getItem("studentInfoId")
     const [groupId, setGroupId] = useState(getStudentInfo);
     const [group, setGroup] = useState([]);
     const [student, setStudent] = useState([]);
@@ -23,11 +23,21 @@ const Students = () => {
             .catch(() => console.log("kelmadi"))
     }
 
-    const getStudent = () => {
-        axios.get(url + "group/students/" + groupId, config)
-            .then(res => setStudent(res.data.body))
-            .catch(() => console.log("kelmadi"))
+    const getStudent = (item) => {
+        if (item === undefined) {
+            console.log(url + "group/students/" + item);
+            item = getStudentInfo
+            axios.get(url + "group/students/" + item, config)
+                .then(res => setStudent(res.data.body))
+                .catch(() => console.log("kelmadi"))
+        } else {
+            axios.get(url + "group/students/" + item, config)
+                .then(res => setStudent(res.data.body))
+                .catch(() => console.log("kelmadi"))
+        }
     }
+
+    console.log(student);
     return (
         <div className="p-8 w-full bg-studentTableBg min-h-full">
             <div className=" mb-4 flex justify-between items-center">
@@ -48,12 +58,13 @@ const Students = () => {
             <div>
                 <div className="mb-4">
                     <div className='flex mb-2 flex-wrap'>
-                        {group.map((item, i) =>
+                        {group.map((item) =>
                             <button
-                                onClick={() => {
-                                    setGroupId(item.id)
+                                onClick={async () => {
+                                    // await setGroupId(item.id)
+                                    await getStudent(item.id);
                                 }}
-                                key={i}
+                                key={item.id}
                                 className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
                               bg-purple-500 text-white hover:bg-purple-700 active:scale-90 focus:outline-none focus:bg-purple-600 duration-300">
                                 {item.name}
@@ -75,7 +86,7 @@ const Students = () => {
                             </tr>
                         </thead>
                         <tbody className="text-gray-600 font-light">
-                            {student.length !== 0 ?
+                            {student.length != 0 ?
                                 student.map((item, i) =>
                                     <tr key={item.id} className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
                                         <td className="py-3 px-6">{i + 1}</td>

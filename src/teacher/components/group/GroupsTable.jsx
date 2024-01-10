@@ -24,7 +24,17 @@ const GroupsTable = () => {
     return (
         <>
             <Link to="/teacher/student" id='goStudent'></Link>
-            {/* //  px-4 sm:px-6 lg:px-8 */}
+            <div className=" mb-2 flex justify-between items-center flex-wrap font-inika">
+                <h2 className="text-4xl font-bold text-gray-900">Group</h2>
+                <input
+                    type="search"
+                    id="search"
+                    className="block w-80 p-3 ps-3 text-sm border border-gray-300 rounded-lg 
+                        bg-gray-50 focus:outline-0 duration-300 focus:border-blue-500  
+                        dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 
+                        dark:focus:border-blue-500"
+                    placeholder="🔍  Search" />
+            </div>
             <div className="w-full bg-gray-100 py-8">
                 <div className="w-full mx-auto">
                     <div className="bg-white shadow-md rounded-3xl overflow-hidden">
@@ -60,7 +70,7 @@ const GroupsTable = () => {
                                                 <td className="py-3 px-6 border-b border-gray-200">
                                                     <button className='btm' onClick={() => {
                                                         goStudent();
-                                                        sessionStorage.setItem("studentInfo", group.id)
+                                                        sessionStorage.setItem("studentInfoId", group.id)
                                                     }}>More</button>
                                                 </td>
                                             </tr>

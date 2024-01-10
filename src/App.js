@@ -39,10 +39,14 @@ function Scan({role, setPath}) {
 
 function SidebarControl({role}) {
     switch (role) {
-        case 'ROLE_SUPER_ADMIN': return <Admin/>
-        case 'ROLE_TEACHER': return <Teacher/>
-        case 'ROLE_USER': return <Student/>
-        default: return <>Hello</>
+        case 'ROLE_SUPER_ADMIN':
+            return <Admin/>
+        case 'ROLE_TEACHER':
+            return <Teacher/>
+        case 'ROLE_USER':
+            return <Student/>
+        default:
+            return <>Hello</>
     }
 }
 
