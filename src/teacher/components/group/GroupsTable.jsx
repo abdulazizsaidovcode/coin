@@ -70,7 +70,7 @@ const GroupsTable = () => {
                                                 <td className="py-3 px-6 border-b border-gray-200">
                                                     <button className='btm' onClick={() => {
                                                         goStudent();
-                                                        sessionStorage.setItem("studentInfo", group.id)
+                                                        sessionStorage.setItem("studentInfoId", group.id)
                                                     }}>More</button>
                                                 </td>
                                             </tr>
