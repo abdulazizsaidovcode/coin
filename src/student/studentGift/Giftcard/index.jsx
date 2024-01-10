@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "../../../globalcss/style.css";
 import { config, setConfig, url } from '../../../components/api/api';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const StudentGiftCard = () => {
   const [gift, setGift] = useState([]);  // nomini 'setTopStudent' dan 'setGift' ga o'zgartirildi aniqroq bo'lishi uchun
@@ -17,6 +18,8 @@ const StudentGiftCard = () => {
       })
       .catch(err => console.log("Backenddan ma'lumot olishda xatolik yuz berdi 😭", err));
   }, []);
+
+  
 
   return (
     <div className="flex flex-wrap justify-around bg-gray-100 pt-10">
