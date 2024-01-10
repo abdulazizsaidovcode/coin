@@ -17,6 +17,7 @@ import FalsePage from "../components/falsepage";
 import Navbarcha from "../components/navbar/Navbar";
 import AdminGroup from "./adminGroup";
 import AdminStudent from "../components/student";
+import GrStudents from "./adminGroup/student/Students";
 
 function Admin() {
   const getme = sessionStorage.getItem("getMeInfo")
@@ -40,6 +41,7 @@ function Admin() {
           <Route path="/admin/gift" element={<Gift />} />
           <Route path="/admin/exchange" element={<Exchange />} />
           <Route path="/admin/message" element={<Message />} />
+          <Route path="/admin/student-info" element={<GrStudents />} />
           <Route path="/admin/totalcoinforstudent" element={<TotalCoinForStudent />} />
           <Route path="*" element={<FalsePage />} />
         </Routes>

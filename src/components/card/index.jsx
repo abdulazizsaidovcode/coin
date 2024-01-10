@@ -66,8 +66,6 @@ const GiftCard = ({ gifts, getGift }) => {
     setEditModal(false);
   };
 
-  console.log(gifts);
-
   return (
     <div className="flex flex-wrap justify-around">
       {gifts.map((item, i) => (

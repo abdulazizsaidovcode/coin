@@ -14,7 +14,8 @@ function Gift() {
   }, []);
 
   function getGift() {
-    axios.get(url + "gift", config)
+    axios
+      .get(url + "gift", config)
       .then((res) => {
         setGifts(res.data.body.object.reverse());
       })
@@ -22,18 +23,22 @@ function Gift() {
   }
 
   function searchGift() {
-    axios.get(url + "gift/search/" + {name: byId("search").value},  config)
-      .then((res) => {
-        setGifts(res.data.body.object.reverse());
-        console.log(res.data);
-      })
-      .catch(() => {});
+    let searchItem = byId("searchGift").value;
+    console.log(searchItem);
+    if (!!searchItem)
+      axios
+        .get(`${url}gift/search?name=${searchItem}`)
+        .then((res) => setGifts(res.data.body.object));
+    // .catch(()=>{
+    //   getGift();
+    //   });
+    else getGift();
   }
 
   function addGift() {
     axios
       .post(
-        url + "gift/save4",
+        url + "gift/save",
         {
           name: document.getElementById("name").value,
           attachmentId: 1,
@@ -89,13 +94,13 @@ function Gift() {
           <input
             type="search"
             onChange={searchGift}
-            id="search"
+            id="searchGift"
             class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search"
           />
         </div>
       </div>
-      {gifts && <GiftCard gifts={gifts} getGift={getGift}/>}
+      {gifts && <GiftCard gifts={gifts} getGift={getGift} />}
 
       {/* Modal */}
       {isModalOpen && (
