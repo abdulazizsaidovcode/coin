@@ -43,6 +43,7 @@ const AdminGroup = () => {
       )
       .then((response) => {
         toast.success("Group succesfully add!");
+        getCategory()
         closeModal();
       })
       .catch((error) => {
@@ -156,7 +157,7 @@ const AdminGroup = () => {
         </div>
       )}
 
-      {groups && category && teacher && <GroupsTable teacher={teacher} category={category} groups={groups}/>}
+      {groups && category && teacher && <GroupsTable teacher={teacher} category={category} groups={groups} setGroups={setGroups} getGroup={getCategory}/>}
     </div>
   );
 };

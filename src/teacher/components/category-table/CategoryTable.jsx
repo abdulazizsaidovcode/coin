@@ -5,11 +5,9 @@ import avatar from "../../../assits/opacha.jpg";
 import { toast } from 'react-toastify';
 import { Icon } from '@iconify/react';
 
-const CategoryTable = () => {
+const CategoryTable = ({categories, getCategory1, setCategories}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
-    const [categories, setCategories] = useState([]);
-    const [categoriesFafer, setCategoriesFather] = useState([]);
     const [categoryInfo, setCategoryInfo] = useState([]);
 
     // Function to toggle the active state
@@ -31,18 +29,12 @@ const CategoryTable = () => {
     useEffect(() => {
         setConfig();
         getCategoryChild();
-        getCategoryFather();
+        getCategory1();
     }, []);
 
     const getCategoryChild = () => {
         axios.get(url + "category/sub", config)
             .then(res => setCategories(res.data.body))
-            .catch(() => console.log("kelmadi"))
-    }
-
-    const getCategoryFather = () => {
-        axios.get(url + "category/teacher/category/list", config)
-            .then(res => setCategoriesFather(res.data.body))
             .catch(() => console.log("kelmadi"))
     }
 
@@ -66,6 +58,7 @@ const CategoryTable = () => {
             .then(() => {
                 closeModalEdit();
                 getCategoryChild();
+                getCategory1()
                 toast.success("Category saccessfulliy edited!")
             })
             .catch(() => {
@@ -80,6 +73,7 @@ const CategoryTable = () => {
             .then(() => {
                 closeModal();
                 getCategoryChild();
+                getCategory1()
                 toast.success("delete category")
             })
             .catch((err) => {
@@ -165,7 +159,7 @@ const CategoryTable = () => {
                                 <option selected disabled>
                                     Category select
                                 </option>
-                                {categoriesFafer.map((item) =>
+                                {categories.map((item) =>
                                     <option value={item.id}>{item.name}</option>
                                 )}
                             </select>

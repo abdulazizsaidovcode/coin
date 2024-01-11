@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { byId, config, setConfig, url } from '../../../components/api/api';
 import { toast } from 'react-toastify';
 
-function Offcanvas() {
+function Offcanvas({getCategory1}) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [categoriesFafer, setCategoriesFather] = useState([]);
 
@@ -48,6 +48,7 @@ function Offcanvas() {
         await axios.post(url + "category/save", addData, config)
             .then(() => {
                 toggleMenu();
+                getCategory1()
                 toast.success("Category saccessfulliy saved!")
             })
             .catch(() => {
