@@ -5,19 +5,22 @@ import avatar from "../../../assits/opacha.jpg";
 import { toast } from 'react-toastify';
 import { Icon } from '@iconify/react';
 
-const CategoryTable = ({categories, getCategory1, setCategories}) => {
+const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
     const [categoryInfo, setCategoryInfo] = useState([]);
 
     // Function to toggle the active state
     const toggleActive = (id) => {
-        setCategories(categories.map(category => {
-            if (category.id === id) {
-                return { ...category, active: !category.active };
-            }
-            return category;
-        }));
+        axios.post(url + "category/reset/" + id, config)
+            .then(() => {
+                getCategoryChild();
+                toast.success("Reset category")
+            })
+            .catch((err) => {
+                toast.error("Somesing is error")
+                // console.log(err);
+            })
     };
 
     // Modalni ochish va yopish uchun funksiyalar
@@ -29,14 +32,10 @@ const CategoryTable = ({categories, getCategory1, setCategories}) => {
     useEffect(() => {
         setConfig();
         getCategoryChild();
-        getCategory1();
+        ;
     }, []);
 
-    const getCategoryChild = () => {
-        axios.get(url + "category/sub", config)
-            .then(res => setCategories(res.data.body))
-            .catch(() => console.log("kelmadi"))
-    }
+    
 
     // edit category
     const editCategory = async () => {
@@ -58,7 +57,7 @@ const CategoryTable = ({categories, getCategory1, setCategories}) => {
             .then(() => {
                 closeModalEdit();
                 getCategoryChild();
-                getCategory1()
+                
                 toast.success("Category saccessfulliy edited!")
             })
             .catch(() => {
@@ -73,7 +72,6 @@ const CategoryTable = ({categories, getCategory1, setCategories}) => {
             .then(() => {
                 closeModal();
                 getCategoryChild();
-                getCategory1()
                 toast.success("delete category")
             })
             .catch((err) => {
@@ -225,8 +223,8 @@ const CategoryTable = ({categories, getCategory1, setCategories}) => {
                                     </tr>
                                 </thead>
                                 <tbody className="text-gray-700">
-                                    {categories.length !== 0 ?
-                                        categories.map((category, i) => (
+                                    {categorysub.length !== 0 ?
+                                        categorysub.map((category, i) => (
                                             <tr key={category.id} className='even:bg-slate-200 hover:bg-slate-300 duration-200 text-center'>
                                                 <td className="py-3 px-6 border-b border-gray-200">{i + 1}</td>
                                                 <td className="py-3 px-6 border-b border-gray-200 flex justify-center items-center">

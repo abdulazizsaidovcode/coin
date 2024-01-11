@@ -5,19 +5,22 @@ import avatar from "../../assits/opacha.jpg";
 import { toast } from 'react-toastify';
 import { Icon } from '@iconify/react';
 
-const CategoryTable = ({categories, getCategory1, setCategories}) => {
+const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
     const [categoryInfo, setCategoryInfo] = useState([]);
 
     // Function to toggle the active state
     const toggleActive = (id) => {
-        setCategories(categories.map(category => {
-            if (category.id === id) {
-                return { ...category, active: !category.active };
-            }
-            return category;
-        }));
+        axios.post(url + "category/reset/" + id, config)
+        .then(() => {
+            getCategory1();
+            toast.success("Reset category")
+        })
+        .catch((err) => {
+            toast.error("Somesing is error")
+            // console.log(err);
+        })
     };
 
     // Modalni ochish va yopish uchun funksiyalar
@@ -81,7 +84,7 @@ const CategoryTable = ({categories, getCategory1, setCategories}) => {
         let searchVal = byId("searchCategory").value
         if (!!searchVal)
             axios.get(url + "category/search?text=" + searchVal, config)
-                .then(res => setCategories(res.data.body))
+                .then(res => setCategoriesF(res.data.body))
                 .catch(err => console.log(err, searchVal))
         else getCategory1();
     }
@@ -209,8 +212,8 @@ const CategoryTable = ({categories, getCategory1, setCategories}) => {
                                     </tr>
                                 </thead>
                                 <tbody className="text-gray-700">
-                                    {categories.length !== 0 ?
-                                        categories.map((category, i) => (
+                                    {categoriesF.length !== 0 ?
+                                        categoriesF.map((category, i) => (
                                             <tr key={category.id} className='even:bg-slate-200 hover:bg-slate-300 duration-200 text-center'>
                                                 <td className="py-3 px-6 border-b border-gray-200">{i + 1}</td>
                                                 <td className="py-3 px-6 border-b border-gray-200 flex justify-center items-center">

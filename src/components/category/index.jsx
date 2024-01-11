@@ -6,7 +6,7 @@ import axios from 'axios';
 import AddModalCanvas from "../offcanvas/Offcanvas";
 
 function Category() {
-  const [categories, setCategories] = useState([]);
+  const [categoriesF, setCategoriesF] = useState([]);
 
   useEffect(() => {
     getCategory1()
@@ -15,7 +15,7 @@ function Category() {
 
   const getCategory1 = () => {
     axios.get(url + "category/father/category", config)
-        .then(res => setCategories(res.data.body))
+        .then(res => setCategoriesF(res.data.body))
         .catch(() => console.log("kelmadi"))
 }
 
@@ -26,7 +26,7 @@ function Category() {
             <div className="mt-10">
                 <h2 className="text-3xl font-bold font-inika text-gray-900 mb-6">Category</h2>
             </div>
-            {categories && <CategoryTable categories={categories} setCategories={setCategories} getCategory1={getCategory1}/>}
+            {categoriesF && <CategoryTable categoriesF={categoriesF} setCategoriesF={setCategoriesF} getCategory1={getCategory1}/>}
            <AddModalCanvas getCategory={getCategory1}/>
         </div>
     );

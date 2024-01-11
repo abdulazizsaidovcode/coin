@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { byId, config, url } from '../api/api';
 import { toast } from 'react-toastify';
+import { byId, config, url } from '../../../components/api/api';
 
 // Dastlabki ma'lumotlar ro'yxati
 
@@ -28,7 +28,7 @@ function Message() {
     }, []);
 
     const getCategory = () => {
-        axios.get(url + "message" , config) 
+        axios.get(url + "message/teacher" , config) 
             .then((res) => {
                 setMessages(res.data.body.object.reverse())
                 console.log(res.data.body.object);
@@ -37,7 +37,7 @@ function Message() {
     }
 
     const getCategory2 = () => {
-        axios.get(url + "message" , config) 
+        axios.get(url + "message/teacher" , config) 
             .then((res) => {
                 setMessages(res.data.body.object)
                 console.log(res.data.body.object);
@@ -60,10 +60,10 @@ function Message() {
     }
 
     const getGroup = () => {
-        axios.get(url + "group", config)
+        axios.get(url + "group/teacher  ", config)
             .then((res) => {
-                console.log(res.data.body.object);
-                setGroup(res.data.body.object)
+                console.log(res.data.body);
+                setGroup(res.data.body)
             })
             .catch(() => {})
     }
@@ -95,7 +95,7 @@ function Message() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {messages.map((item, i) => (
                     <div key={i} className="border rounded shadow p-3">
-                        <h2 className="font-bold text-lg mb-3" >{item.groupId}</h2>
+                        <h2 className="font-bold text-lg mb-3" >{item.groupName}</h2>
                         <p className="text-gray-700 text-base">{item.description}</p>
                         <div className="text-right">
                             <span className="text-sm font-semibold">{item.date}</span>
