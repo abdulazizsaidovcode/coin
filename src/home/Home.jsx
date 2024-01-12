@@ -12,7 +12,7 @@ function Home() {
 
     return (
         <div>
-            <nav className="bg-white border-gray-200 px-2 sm:px-4 py-5 dark:bg-gray-900 ">
+            <nav className="bg-blue border-gray-200 px-2 sm:px-4 py-5 dark:bg-gray-900 ">
                 <div className="container flex flex-wrap justify-between items-center mx-auto">
                     <a href="https://flowbite.com/" className="flex items-center">
                         <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
@@ -50,35 +50,43 @@ function Home() {
                 </div>
             </nav>
             <div className='body lex items-center justify-center h-screen w-full'>
+
                 {/* first section start */}
+
                 <div className="flex justify-center items-center flex-col flex-wrap px-20 pt-8">
                     <h1 className='mt-12 coinedu flex-wrap text-xl px-10'>Edu Coin System</h1>
                     <p className='mt-6 paragraf md:w-3/5'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic</p>
                 </div>
+
                 {/* first section end */}
 
 
                 {/* second section start */}
-                <div className='flex justify-center items-center flex-wrap py-20'>
-                    <img src={bgHome} alt='Rasm' className=' flex justify-center items-center w-4/5'>
+                <div className='flex justify-center items-center flex-wrap pt-20'>
+                    <img src={bgHome} alt='Rasm' className=' flex justify-end items-end w-4/4'>
                     </img>
+                   
                 </div>
                 {/* second section end */}
-
-
-                {/* thied section start */}
-                <div className='flex justify-center items-center flex-wrap px-20 '>
-                    <img src={bgHome1} className='flex justify-center items-center bghome ' ></img>
+                <div className=' flex justify-end items-center flex-wrap px-20'>
+                  <img src={bgHome1} alt="rasm"  className='w-2/5 flex justify-end items-end'/>
                 </div>
+               
+                {/* thied section start */}
+                 <div className=''>
+                 <h2 className='flex flex-wrap  flex-col  dowland mt-10 flex flex-wrap justify items flex-col px-6 pt-4'>Download now mobile app</h2>
+                    <p className='flex flex-wrap md:w-3/6 flex-col mt-10 loremE px-6'>Lorem Ipsum is simply dummy text of the printing and 
+                    typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+                     since the 1500s, when an unknown printer took a galley</p>
+                     <div className='flex flex-wrap items'>
+                        <img src={bgPhone} className='flex flex-wrap ' width={500}></img>
+                    </div>
+                 </div>
                 {/* third section end */}
 
 
                 {/* fourth section start */}
-                <div className='flex flex-wrap justify-center flex-col mt-2 px-12'>
-                    <h2 className='flex flex-wrap  flex-col  dowland mt-10'>Download now mobile app</h2>
-                    <p className='flex flex-wrap  flex-col mt-10 loremE'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</p>
-                    <img src={bgPhone} className='flex justify-center items-center flex-wrap phone' width={500}></img>
-                </div>
+               
                 {/* fourth section end */}
 
 
