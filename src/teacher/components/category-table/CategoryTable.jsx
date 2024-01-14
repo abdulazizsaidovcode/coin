@@ -72,10 +72,10 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
             .then(() => {
                 closeModal();
                 getCategoryChild();
-                toast.success("delete category")
+                toast.success("Succes!")
             })
             .catch((err) => {
-                toast.error("xatolik yuz berdi")
+                toast.error("Something is error")
                 // console.log(err);
             })
     }
@@ -106,7 +106,7 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
                         </div>
                         {/* Modal body */}
                         <div className="mt-6 pb-6 border-b font-medium text-lg">
-                            Categoryni o'chirmoqchimisiz?
+                        Are you sure about that?
                         </div>
                         <div className='flex justify-end items-center mt-5'>
                             <button onClick={closeModal} className="font-semibold bg-red-600 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
@@ -246,7 +246,10 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
                                                     <input
                                                         type="checkbox"
                                                         checked={category.active}
-                                                        onChange={() => toggleActive(category.id)}
+                                                        onClick={() => {
+                                                            openModal();
+                                                            setCategoryInfo(category)
+                                                        }}
                                                         className="form-checkbox h-5 w-5 ml-14 text-blue-600 rounded focus:ring-0"
                                                     />
                                                 </td>
@@ -258,12 +261,7 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
                                                         }}
                                                         className="text-sm bg-yellow-500 hover:bg-yellow-600 duration-200 text-white 
                                                     py-1 px-3 rounded focus:outline-none focus:shadow-outline">Edit</button>
-                                                    <button
-                                                        className="text-sm bg-red-500 hover:bg-red-700 duration-200 text-white py-1 px-3 
-                                                    rounded focus:outline-none focus:shadow-outline ml-3" onClick={() => {
-                                                            openModal();
-                                                            setCategoryInfo(category)
-                                                        }}>Delete</button>
+                                                   
                                                 </td>
                                             </tr>
                                         )) :

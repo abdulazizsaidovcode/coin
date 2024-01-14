@@ -10,6 +10,7 @@ function Gift() {
                 <div class="relative">
                     <input
                         id="search"
+                        
                         className="w-80 py-3 ps-3 text-sm border border-gray-300 rounded-lg
                       bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
                         placeholder="🔍   Search" />

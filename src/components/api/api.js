@@ -1,7 +1,7 @@
 import axios from "axios";
 import {toast} from "react-toastify";
 
-export const url = "http://137.184.13.215/";
+export const url = "http://137.184.13.215:8080/";
 // export const url = "http://192.168.149.27/";
 
 export const getFile = `${url}attachment/getFile/`;
@@ -86,6 +86,7 @@ export function getTeacher(setTeacher) {
         .then((res) => setTeacher(res.data.body))
         .catch((err) => console.log(err));
 }
+
 
 //              Category
 export function getCategory(setCategory) {

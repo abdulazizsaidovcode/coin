@@ -28,33 +28,40 @@ function Gift() {
     if (!!searchItem)
       axios
         .get(`${url}gift/search?name=${searchItem}`)
-        .then((res) => setGifts(res.data.body.object));
+        .then((res) => setGifts(res.data.body));
     // .catch(()=>{
     //   getGift();
     //   });
     else getGift();
   }
 
-  function addGift() {
-    axios
-      .post(
-        url + "gift/save",
-        {
-          name: document.getElementById("name").value,
-          attachmentId: 1,
-          rate: document.getElementById("rate").value,
-          description: document.getElementById("description").value,
-        },
-        config
-      )
-      .then(() => {
-        toast.success("Successfully added!");
-        getGift();
-      })
-      .catch(() => {
-        toast.error("Failed to add gift card!");
-      });
-  }
+  const addGift = async () => {
+    const img = new FormData();
+    img.append('file', byId('image').files[0]);
+    const addData = {
+      name: document.getElementById("name").value,
+      attachmentId: 0,
+      rate: document.getElementById("rate").value,
+      description: document.getElementById("description").value,
+    }
+
+    if (img.get('file') !== 'undefined')
+        await axios.post(url + "attachment/upload", img, config)
+            .then(res => addData.attachmentId = res.data.body)
+            .catch(() => console.log("img ketmadi"))
+
+    await axios.post(url + "gift/save", addData, config)
+    .then(() => {
+      toast.success("Successfully added!");
+      getGift();
+    })
+    .catch(() => {
+      toast.error("Failed to add gift card!");
+    });
+}
+
+
+ 
   // Modalni ochish va yopish uchun funksiyalar
   const openModal = () => {
     setIsModalOpen(true);
@@ -108,7 +115,7 @@ function Gift() {
           <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
-                Create New Product
+                Add gift
               </h2>
               <button
                 onClick={closeModal}

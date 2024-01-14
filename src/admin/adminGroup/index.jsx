@@ -57,6 +57,7 @@ const AdminGroup = () => {
       .get(url + "user/teacher", config)
       .then((res) => {
         setTeacher(res.data.body);
+        console.log(res.data.body);
       })
       .catch(() => console.log("kelmadi"));
   };
@@ -67,7 +68,7 @@ const AdminGroup = () => {
       .then((res) => {
         setCategory(res.data.body);
       })
-      .catch(() => console.log("kelmadi"));
+      .catch(() => console.log("kategory kelmadi"));
   };
 
   return (

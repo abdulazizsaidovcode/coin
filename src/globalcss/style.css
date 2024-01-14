@@ -34,6 +34,22 @@ wd-50 {
   }
 }
 
+.btm-info {
+  padding: 10px 40px !important;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  background-color: #075363;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
 .table-top {
   border-top-left-radius: 15rem !important;
   border-top-right-radius: 15rem !important;
