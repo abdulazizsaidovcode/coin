@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // import { config, url } from "../api/api";
 // import React, { useState, useEffect } from "react";
-import { byId, config, setConfig, url } from "../api/api";
+import { byId, config, setConfig, url } from "../../components/api/api";
 import axios from "axios";
 import avatar from "../../assits/opacha.jpg";
 import { Link } from "react-router-dom";
@@ -30,6 +30,22 @@ const Navbarcha = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    setConfig();
+    axios
+      .get(url + "message/student", config)
+      .then((res) => {
+        if (res.data && res.data.body && res.data.body.object) {
+          setMessages(res.data.body.object);
+        }
+      })
+      .catch((err) =>
+        console.log("Backenddan ma'lumot olishda xatolik yuz berdi 😭", err)
+      );
+  }, []);
 
   const editUser = () => {
     let editData = {
@@ -75,10 +91,18 @@ const Navbarcha = () => {
           {/* Foydalanuvchi profili va boshqa kontentlar uchun joy */}
           <div className="relative left-0">
             <div className="flex items-center">
-              <FontAwesomeIcon icon={faCheckCircle} className="text-2xl mr-2 text-gray-800" />
               <div className='relative mt-1'>
                 <div className='w-2 h-2 bg-red-400 rounded-full absolute right-2 '><a href=""></a></div>
-                <FontAwesomeIcon icon={faBell} className="text-2xl mr-2 text-gray-800" />
+                <Link to="/student/message">
+                <FontAwesomeIcon
+                  icon={faBell}
+                  className={
+                    `${messages.length > 0} `
+                      ? "text-2xl mr-2 text-gray-80 anim"
+                      : "text-2xl mr-2 text-gray-80"
+                  }
+                />
+              </Link>
               </div>
               <button onClick={toggleMenu} className="flex items-center space-x-2 ">
                 <img src={avatar} alt="Admin" className="rounded-full w-12 h-12 p-1 border" />
