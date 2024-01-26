@@ -60,7 +60,7 @@ const Navbarcha = () => {
     <div className="bg-gray-100 w-full">
       <Link to="/" id="logout"></Link>
       <div className="w-full container">
-        <div className="flex justify-between bg-white py-3 px-8  z-50 w-full">
+        <div className="flex justify-end bg-white py-3 px-8  z-50 w-full">
           {/* Qidiruv maydoni */}
           {/* <div className="flex items-center space-x-1 ">
             <div class="relative">
