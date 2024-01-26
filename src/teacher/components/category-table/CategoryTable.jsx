@@ -32,7 +32,6 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
     useEffect(() => {
         setConfig();
         getCategoryChild();
-        ;
     }, []);
 
     

@@ -59,7 +59,7 @@ const AdminStudent = () => {
   };
 
   const editUser = () => {
-    let addData = {
+    let editData = {
       firstName: byId("firstName").value,
       lastName: byId("lastName").value,
       email: byId("email").value,
@@ -70,10 +70,10 @@ const AdminStudent = () => {
       friendPhoneNumber: "",
     };
     axios
-      .put(url + "user/update/" + userGetId.id, editData, config)
+      .put(url + "user/update/", editData, config)
       .then(() => {
-        openEditModal();
-        getUsers();BGT
+        // openEditModal();
+        // getUsers();
         toast.success("User information has been changed✔");
       })
       .catch(() => {
