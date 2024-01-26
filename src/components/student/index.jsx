@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 const AdminStudent = () => {
   const [modal, setIsModalOpen] = useState(false);
   const [editModal, setIsModalOpenEdit] = useState(false);
-  const [categoryInfo, setCategoryInfo] = useState([]);
+  const [userId, setUserId] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedGroup, setSelectedGroup] = useState("All");
   const getStudentInfo = sessionStorage.getItem("studentInfoId");
@@ -58,6 +58,8 @@ const AdminStudent = () => {
       });
   };
 
+  console.log(userId);
+
   const editUser = () => {
     let editData = {
       firstName: byId("firstName").value,
@@ -103,7 +105,7 @@ const AdminStudent = () => {
   };
 
   return (
-    <div className=" p-8 w-full bg-gray-100 h-screen">
+    <div className=" p-8 w-full bg-gray-100">
       <div className="mt-10">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Student</h2>
       </div>
@@ -188,7 +190,8 @@ const AdminStudent = () => {
                       <button
                         className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline"
                         onClick={() => {
-                          openModal();
+                          openModalEdit();
+                          setUserId(item)
                         }}
                       >
                         Edit
@@ -196,6 +199,7 @@ const AdminStudent = () => {
                       <button
                         onClick={() => {
                           openModal();
+                          setUserId(item)
                         }}
                         className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline ml-3"
                       >
@@ -403,6 +407,198 @@ const AdminStudent = () => {
                   className="btm"
                 >
                   Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+
+
+      {/* EDIT MODAL */}
+
+      {editModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 ">
+          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+            <div className="flex">
+              <h2 className="text-lg font-semibold text-gray-900 p-2">
+                Edit student
+              </h2>
+              <button
+                onClick={closeModalEdit}
+                className="text-gray-400 m-2 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-toggle="crud-modal"
+              >
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span className="sr-only">Close modal</span>
+              </button>
+            </div>
+
+            {/* Modal body */}
+            <div className="p-4 md:p-5">
+              <div className="grid md:gap-4 mb-4 grid-cols-2">
+                <div className="col-span-2 sm:col-span-1">
+                  <label
+                    htmlFor="name"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    FirstName
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="firstName"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="FirstName"
+                    defaultValue={userId.name}
+                  />
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <label
+                    htmlFor="lastName"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    LastName
+                  </label>
+                  <input
+                    type="text"
+                    name="LastName"
+                    id="lastName"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="LastName"
+                    required=""
+                  />
+                </div>
+
+                <div className="col-span-2">
+                  <label
+                    htmlFor="email"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="text"
+                    name="email"
+                    id="email"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Email"
+                    required=""
+                  />
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <label
+                    htmlFor="phoneNumber"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Phone number
+                  </label>
+                  <input
+                    type="number"
+                    name="phoneNumber"
+                    id="phoneNumber"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="100"
+                    required=""
+                  />
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <label
+                    htmlFor="password"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Password
+                  </label>
+                  <input
+                    type="text"
+                    name="password"
+                    id="password"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Type product name"
+                    required=""
+                  />
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <label
+                    htmlFor="groupId"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Select group
+                  </label>
+                  <select
+                    id="groupId"
+                    className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
+                  >
+                    <option selected disabled>
+                      Choose one...
+                    </option>
+                    {group.length &&
+                      group.map((item, i) => (
+                        <option key={i} value={item.id}>
+                          {item.name}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <label
+                    htmlFor="gender"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Select gender
+                  </label>
+                  <select
+                    id="gender"
+                    className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
+                  >
+                    <option selected disabled>
+                      Choose one...
+                    </option>
+                    <option value="MALE">MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                  </select>
+                </div>
+                <div className="col-span-2">
+                  <label
+                    htmlFor="fNumber"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Friend's phone number
+                  </label>
+                  <input
+                    type="number"
+                    name="name"
+                    id="fNumber"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Type product name"
+                    required=""
+                  />
+                </div>
+              </div>
+              <div className="flex justify-end">
+                <button onClick={closeModalEdit} className="btm-close me-2 bg-red-900">Close</button>
+                <button
+                  onClick={() => {
+                    addUsers();
+                  }}
+                  className="btm"
+                >
+                  Edit
                 </button>
               </div>
             </div>
