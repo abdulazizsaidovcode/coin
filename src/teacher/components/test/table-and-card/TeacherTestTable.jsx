@@ -1,6 +1,11 @@
 import { Icon } from "@iconify/react";
+import EditModal from "../modals/EditModal";
+import { useState } from "react";
 
 function TeacherTestTable() {
+    const [isEditMenuOpen, setEditIsMenuOpen] = useState(false);
+    const toggleEditMenu = () => setEditIsMenuOpen(!isEditMenuOpen);
+
     return (
         <div className="w-full mt-8 shadow-md rounded-3xl overflow-hidden">
             <table className="w-full">
@@ -30,31 +35,37 @@ function TeacherTestTable() {
                         <td className="py-3 px-6">
                             <button
                                 className="bg-yellow-500 rounded-lg px-5 py-1.5 font-semibold text-black shadow-xl hover:bg-yellow-600 active:scale-95 duration-300"
+                                onClick={() => {
+                                    toggleEditMenu();
+                                }}
                             >Edit</button>
                         </td>
                         <td className="py-3 px-6">
-                            <button 
-                            className="bg-red-500 rounded-lg px-5 py-1.5 font-semibold text-black shadow-xl hover:bg-red-600 active:scale-95 duration-300"
+                            <button
+                                className="bg-red-500 rounded-lg px-5 py-1.5 font-semibold text-black shadow-xl hover:bg-red-600 active:scale-95 duration-300"
                             >Delete</button>
                         </td>
                     </tr>
                     {/* ) : */}
-                    {/* <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
-                            <td className='py-3 px-6'></td>
-                            <td className='py-3 px-6'></td>
-                            <td className='py-3 px-6'></td>
-                            <td className='py-3 px-6'></td>
-                            <td className="py-3 px-6 flex justify-center font-inika font-medium text-lg tracking-wider leading-10">
-                                <Icon icon="eos-icons:three-dots-loading" width="50" />
-                            </td>
-                            <td className='py-3 px-6'></td>
-                            <td className='py-3 px-6'></td>
-                            <td className='py-3 px-6'></td>
-                            <td className='py-3 px-6'></td>
-                        </tr> */}
+                    <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
+                        <td className='py-3 px-6'></td>
+                        <td className='py-3 px-6'></td>
+                        <td className='py-3 px-6'></td>
+                        <td className='py-3 px-6'></td>
+                        <td className="py-3 px-6 flex justify-center font-inika font-medium text-lg tracking-wider leading-10">
+                            <Icon icon="eos-icons:three-dots-loading" width="50" />
+                        </td>
+                        <td className='py-3 px-6'></td>
+                        <td className='py-3 px-6'></td>
+                        <td className='py-3 px-6'></td>
+                        <td className='py-3 px-6'></td>
+                    </tr>
                     {/* } */}
                 </tbody>
             </table>
+
+            {/* edit modal */}
+            <EditModal isEditMenuOpen={isEditMenuOpen} toggleEditMenu={toggleEditMenu} />
         </div>
     );
 }
