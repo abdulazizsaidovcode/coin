@@ -27,7 +27,6 @@ const Test = () => {
                 console.log("Error getting test and category");
             })
     }
-    console.log(testAndCategory);
 
     return (
         <div className="bg-gray-100 pb-10 p-8">
@@ -46,6 +45,8 @@ const Test = () => {
             <div className='mt-5'>
                 <TeacherTestTable />
             </div>
+
+            {/* test modals */}
             <AddModal isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
         </div>
     )
