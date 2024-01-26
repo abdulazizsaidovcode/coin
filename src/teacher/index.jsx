@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "../components/sidebar/SidebarTemplate";
+import Sidebar from "./sidebar/SidebarTemplate";
 import { Route, Routes } from "react-router-dom";
 import Navbarcha from "../components/navbar/Navbar";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -11,6 +11,7 @@ import TotalCoinForStudent from "./components/total-coin-for-student/TotalCoinFo
 import FalsePage from "./components/false-page/FalsePage";
 import Groups from "./components/group/Group";
 import Students from "./components/student/Students";
+import Test from "./components/test/Test";
 // import TotalCoins from "./components/total-coins/TotalCoins";
 // import TopGroup from "./components/top-group/TopGroup";
 // import TopTeachers from "./components/top-teachers/TopTeachers";
@@ -37,6 +38,7 @@ function Teacher() {
                     <Route path="/teacher/category" element={<Category />} />
                     <Route path="/teacher/group" element={<Groups />} />
                     <Route path="/teacher/student" element={<Students />} />
+                    <Route path="/teacher/test" element={<Test />} />
                     <Route path="/teacher/gift" element={<Gift />} />
                     <Route path="/teacher/exchange" element={<Exchange />} />
                     <Route path="/teacher/message" element={<Message />} />
