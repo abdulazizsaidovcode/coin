@@ -1,11 +1,39 @@
-import TeacherTestCard from "./TeacherTestCard";
-import TeacherTestTable from "./TeacherTestTable";
+import { useEffect, useState } from "react";
+import AddModal from "./modals/AddModal";
+import TeacherTestCard from "./table-and-card/TeacherTestCard";
+import TeacherTestTable from "./table-and-card/TeacherTestTable";
+import axios from "axios";
+import { config, setConfig, url } from "../../../components/api/api";
 
 const Test = () => {
+    const [testAndCategory, setTestAndCategory] = useState([]);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+    useEffect(() => {
+        setConfig();
+        getTestAndCategory();
+    }, [])
+
+    // getTestAndCategory
+    const getTestAndCategory = () => {
+        axios.get(`${url}test/ofTeacher`, config)
+            .then((response) => {
+                console.log(response.data);
+                setTestAndCategory(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+                console.log("Error getting test and category");
+            })
+    }
+    console.log(testAndCategory);
+
     return (
         <div className="bg-gray-100 pb-10 p-8">
-            <div className=" mb-4 flex justify-between items-center">
-                <h2 className="text-4xl font-bold font-inika text-gray-900 mb-4">Test</h2>
+            <h2 className="text-4xl font-bold font-inika text-gray-900 mb-4 ml-2">Test</h2>
+            <div className="mb-4 flex justify-between items-center">
+                <button className="btm ml-2" onClick={toggleMenu}>Add Test</button>
                 <div class="relative">
                     <input
                         id="search"
@@ -18,6 +46,7 @@ const Test = () => {
             <div className='mt-5'>
                 <TeacherTestTable />
             </div>
+            <AddModal isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
         </div>
     )
 }
