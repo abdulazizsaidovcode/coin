@@ -14,7 +14,7 @@ const AddModal = (props) => {
                                             <div className="px-4 sm:px-6">
                                                 <div className="flex items-start justify-between pt-5 pb-2 border-b">
                                                     <h2 className="text-lg font-semibold font-inika text-gray-900" id="slide-over-heading">
-                                                        Add Category
+                                                        Add Test
                                                     </h2>
                                                     <div className="ml-3 h-7 flex items-center">
                                                         <button onClick={() => { toggleMenu() }} className="bg-transparent rounded-md text-gray-400 hover:text-gray-500 focus:outline-none">
@@ -26,47 +26,49 @@ const AddModal = (props) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="bg-white p-6 mt-10 rounded-lg font-inika">
-                                                <label className="block text-sm font-medium text-gray-700">Choose file</label>
-                                                <input
-                                                    id='attachmentId'
-                                                    type="file"
-                                                    className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
-                                                    file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-50
-                                                    file:text-gray-700 hover:file:bg-gray-100" />
 
-                                                <label for="category-name" className="block mt-7 text-sm font-medium text-gray-700">
-                                                    Category name
-                                                </label>
-                                                <input id="category-name" placeholder="Enter category name"
-                                                    className="mt-1 w-full rounded-md py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
+                                            {/* form inputs */}
+                                            <div className="bg-white p-6 rounded-lg font-inika">
+                                                <label htmlFor="question" className="block text-sm font-medium text-gray-700">Question</label>
+                                                <textarea
+                                                    id="question"
+                                                    placeholder="Enter Question..."
+                                                    rows="4" className="w-full p-2 mt-1 border rounded-md bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"></textarea>
 
-                                                <label for="categorySelect" className="block text-sm font-medium text-gray-700 mt-7">
-                                                    Category select
+                                                <label htmlFor="advice" className="block text-sm font-medium mt-4 text-gray-700">Advice</label>
+                                                <textarea
+                                                    id="advice"
+                                                    placeholder="Enter Advice..."
+                                                    rows="3" className="w-full p-2 mt-1 border rounded-md bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"></textarea>
+
+                                                <label htmlFor="categorySelect" className="block text-sm font-medium text-gray-700 mt-4">
+                                                    Select category
                                                 </label>
-                                                <select id="categorySelect" className='mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full'>
-                                                    <option selected disabled>Category select</option>
+                                                <select id="categorySelect" className='mt-1 p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full'>
+                                                    <option selected disabled>Select category</option>
                                                     {/* {categories.map((item) =>
                                                             <option value={item.id}>{item.name}</option>
                                                         )} */}
                                                 </select>
-                                                <label for="programmingLanguage" className="block text-sm font-medium text-gray-700 mt-7">
-                                                    Category programming language
-                                                </label>
-                                                <select id="programmingLanguage" className='mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full'>
-                                                    <option selected disabled>Category programming language</option>
-                                                    <option value="JAVA_SCRIPT">JavaScript</option>
-                                                    <option value="PYTHON">Python</option>
-                                                    <option value="JAVA">Java</option>
-                                                    <option value="C++">C++</option>
-                                                </select>
 
-                                                <div className="flex items-center mt-7">
-                                                    <input id="active" type="checkbox"
-                                                        className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
-                                                    <label for="active" className="ml-2 text-md text-gray-900 font-medium">Active</label>
+                                                <div className="flex justify-between items-center mt-4">
+                                                    <div className="mr-1">
+                                                        <label htmlFor="teacherTime" className="text-sm font-medium text-gray-700">
+                                                            Time
+                                                        </label>
+                                                        <input id="teacherTime" placeholder="Enter time"
+                                                            className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
+                                                    </div>
+                                                    <div className="ml-1">
+                                                        <label htmlFor="teacherCoin" className="text-sm font-medium text-gray-700">
+                                                            Coin
+                                                        </label>
+                                                        <input id="teacherCoin" placeholder="Enter coin"
+                                                            className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
+                                                    </div>
                                                 </div>
 
+                                                {/* buttons */}
                                                 <div className="flex justify-end mt-10">
                                                     <button
                                                         onClick={() => { toggleMenu() }}
