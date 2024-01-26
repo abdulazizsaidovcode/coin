@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import rasm from "../../../assits/opacha.jpg";
+import rasm from "../../../../assits/opacha.jpg";
 import { faCheckCircle, faClock, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 function TeacherTestCard() {
     return (
         <>
-            <div className="bg-white rounded-lg all-shadow hover:shadow-xl duration-300 overflow-hidden max-w-sm w-72">
+            <div className="bg-white inline-block m-2 rounded-lg all-shadow hover:shadow-xl duration-300 overflow-hidden max-w-sm w-72">
                 <div className="flex justify-center items-center w-full h-44 overflow-hidden">
                     <img src={rasm} alt="Profile" className="h-full w-full hover:scale-110 duration-300" />
                 </div>
