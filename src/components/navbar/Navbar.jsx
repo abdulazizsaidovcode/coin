@@ -62,7 +62,7 @@ const Navbarcha = () => {
       <div className="w-full container">
         <div className="flex justify-between bg-white py-3 px-8  z-50 w-full">
           {/* Qidiruv maydoni */}
-          <div className="flex items-center space-x-1 ">
+          {/* <div className="flex items-center space-x-1 ">
             <div class="relative">
               <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -71,7 +71,7 @@ const Navbarcha = () => {
               </div>
               <input type="search" id="search" class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
             </div>
-          </div>
+          </div> */}
           {/* Foydalanuvchi profili va boshqa kontentlar uchun joy */}
           <div className="relative left-0">
             <div className="flex items-center">
@@ -110,11 +110,13 @@ const Navbarcha = () => {
                  onClick={() => {
                   setUserId(name)
                   openModalEdit()
+                 toggleMenu()
                  }} className="btm mr-5">Edit</button>
                 <button
                   className="bg-red-500 text-white font-bold rounded-lg py-2.5 px-7 active:scale-90 duration-200"
                   onClick={() => {
-                    logOut();
+             
+                     logOut();
                     sessionStorage.clear();
                   }}
                 >log out</button>
