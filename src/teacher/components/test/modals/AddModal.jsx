@@ -68,6 +68,35 @@ const AddModal = (props) => {
                                                     </div>
                                                 </div>
 
+                                                {/* plus inputs */}
+                                                <div className="flex justify-between items-center my-3">
+                                                    <div className="mr-1">
+                                                        <label htmlFor="teacherParam" className="text-sm font-medium text-gray-700">
+                                                            Parametr
+                                                        </label>
+                                                        <input id="teacherParam" placeholder="Enter parametr"
+                                                            className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
+                                                    </div>
+                                                    <div className="ml-1 flex justify-between items-center">
+                                                        <div className="mr-2">
+                                                            <label htmlFor="teacherValue" className="text-sm font-medium text-gray-700">
+                                                                Enter value
+                                                            </label>
+                                                            <input id="teacherValue" placeholder="Enter value"
+                                                                className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
+                                                        </div>
+                                                        <span
+                                                            className="font-bold text-black text-[1.5rem] mt-3 hover:cursor-pointer hover:text-slate-700 duration-300"
+                                                        >+</span>
+                                                    </div>
+                                                </div>
+
+                                                <label htmlFor="teacherAnswer" className="text-sm font-medium text-gray-700">
+                                                    Answer
+                                                </label>
+                                                <input id="teacherAnswer" placeholder="Enter answer"
+                                                    className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
+
                                                 {/* buttons */}
                                                 <div className="flex justify-end mt-10">
                                                     <button
