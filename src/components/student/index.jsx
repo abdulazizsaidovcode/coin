@@ -594,7 +594,7 @@ const AdminStudent = () => {
                 <button onClick={closeModalEdit} className="btm-close me-2 bg-red-900">Close</button>
                 <button
                   onClick={() => {
-                    addUsers();
+                    editUser();
                   }}
                   className="btm"
                 >
