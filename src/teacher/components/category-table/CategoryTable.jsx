@@ -80,6 +80,7 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
     }
 
     // category search
+    // comment teacher category searchda xatolik bor search qilganda boshqa narsalarni olib kelyabdi?
     const categorySearch = () => {
         let searchVal = byId("searchCategory").value
         if (!!searchVal)
@@ -241,7 +242,7 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
                                                 <td className="py-3 px-6 border-b border-gray-200">
                                                     {category.programmingLanguage === null ? "Yo'q" : category.programmingLanguage}
                                                 </td>
-                                                <td className="py-3 pl-6 border-b border-gray-200">
+                                                <td className="py-3 px-6 border-b border-gray-200">
                                                     <input
                                                         type="checkbox"
                                                         checked={category.active}
@@ -249,7 +250,7 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
                                                             openModal();
                                                             setCategoryInfo(category)
                                                         }}
-                                                        className="form-checkbox h-5 w-5 ml-14 text-blue-600 rounded focus:ring-0"
+                                                        className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-0"
                                                     />
                                                 </td>
                                                 <td className="py-3 px-6 border-b border-gray-200">

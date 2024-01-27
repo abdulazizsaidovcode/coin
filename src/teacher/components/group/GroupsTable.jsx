@@ -21,6 +21,13 @@ const GroupsTable = () => {
 
     const goStudent = () => byId("goStudent").click();
 
+    const groupSearchHandler = (e) => {
+        let data = e.target.value;
+        !data ? getCategory() : axios.get(`${url}group/search/${data}`, config)
+            .then(res => setGroups(res.data.body))
+            .catch(() => console.log("kelmadi"))
+    }
+
     return (
         <>
             <Link to="/teacher/student" id='goStudent'></Link>
@@ -29,6 +36,7 @@ const GroupsTable = () => {
                 <input
                     type="search"
                     id="search"
+                    onChange={groupSearchHandler}
                     className="block w-80 p-3 ps-3 text-sm border border-gray-300 rounded-lg 
                         bg-gray-50 focus:outline-0 duration-300 focus:border-blue-500  
                         dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 
