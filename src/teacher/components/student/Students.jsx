@@ -7,7 +7,6 @@ import { Icon } from "@iconify/react";
 const Students = () => {
 
     const getStudentInfo = sessionStorage.getItem("studentInfoId")
-    const [groupId, setGroupId] = useState(getStudentInfo);
     const [group, setGroup] = useState([]);
     const [student, setStudent] = useState([]);
 
@@ -25,19 +24,27 @@ const Students = () => {
 
     const getStudent = (item) => {
         if (item === undefined) {
-            console.log(url + "group/students/" + item);
             item = getStudentInfo
-            axios.get(url + "group/students/" + item, config)
-                .then(res => setStudent(res.data.body))
-                .catch(() => console.log("kelmadi"))
-        } else {
-            axios.get(url + "group/students/" + item, config)
-                .then(res => setStudent(res.data.body))
-                .catch(() => console.log("kelmadi"))
+            axios.get(`${url}group/students/${item}`, config)
+                .then(res => {
+                    if (res.status === 200) setStudent(res.data.body)
+                })
+                .catch((err) => {
+                    if (err.response.status === 409) setStudent('')
+                    console.log("Student kelmadi! catchga tushdi!")
+                })
+        } else if (item >= 0) {
+            axios.get(`${url}group/students/${item}`, config)
+                .then(res => {
+                    if (res.status === 200) setStudent(res.data.body)
+                })
+                .catch((err) => {
+                    if (err.response.status === 409) setStudent('')
+                    console.log("Student kelmadi! catchga tushdi!")
+                })
         }
     }
 
-    console.log(student);
     return (
         <div className="p-8 w-full bg-studentTableBg min-h-full">
             <div className=" mb-4 flex justify-between items-center">
@@ -56,12 +63,11 @@ const Students = () => {
                         {group.map((item) =>
                             <button
                                 onClick={async () => {
-                                    // await setGroupId(item.id)
                                     await getStudent(item.id);
                                 }}
                                 key={item.id}
                                 className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
-                              bg-purple-500 text-white hover:bg-purple-700 active:scale-90 focus:outline-none focus:bg-purple-600 duration-300">
+                              bg-purple-500 text-white hover:bg-purple-700 active:scale-90 focus:outline-none focus:bg-purple-700 duration-300">
                                 {item.name}
                             </button>
                         )}
@@ -98,7 +104,10 @@ const Students = () => {
                                     <td className='py-3 px-6'></td>
                                     <td className='py-3 px-6'></td>
                                     <td className="py-3 px-6 flex justify-center font-inika font-medium text-lg tracking-wider leading-10">
-                                        <Icon icon="eos-icons:three-dots-loading" width="50" />
+                                        {student === ''
+                                            ? 'Student not found 😊'
+                                            : <Icon icon="eos-icons:three-dots-loading" width="50" />
+                                        }
                                     </td>
                                     <td className='py-3 px-6'></td>
                                     <td className='py-3 px-6'></td>

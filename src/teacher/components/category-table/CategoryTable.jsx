@@ -5,7 +5,7 @@ import avatar from "../../../assits/opacha.jpg";
 import { toast } from 'react-toastify';
 import { Icon } from '@iconify/react';
 
-const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub}) => {
+const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysub, filterCategory }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
     const [categoryInfo, setCategoryInfo] = useState([]);
@@ -34,8 +34,6 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
         getCategoryChild();
     }, []);
 
-    
-
     // edit category
     const editCategory = async () => {
         const img = new FormData();
@@ -56,7 +54,6 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
             .then(() => {
                 closeModalEdit();
                 getCategoryChild();
-                
                 toast.success("Category saccessfulliy edited!")
             })
             .catch(() => {
@@ -80,6 +77,7 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
     }
 
     // category search
+    // comment teacher category searchda xatolik bor search qilganda boshqa narsalarni olib kelyabdi?
     const categorySearch = () => {
         let searchVal = byId("searchCategory").value
         if (!!searchVal)
@@ -105,7 +103,7 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
                         </div>
                         {/* Modal body */}
                         <div className="mt-6 pb-6 border-b font-medium text-lg">
-                        Are you sure about that?
+                            Are you sure about that?
                         </div>
                         <div className='flex justify-end items-center mt-5'>
                             <button onClick={closeModal} className="font-semibold bg-red-600 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
@@ -188,7 +186,7 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
                 </div>
             )}
 
-            <div className=" mb-2 flex justify-between items-center flex-wrap">
+            <div className="mb-4 flex justify-between items-center flex-wrap">
                 <button
                     id="openMenuButton"
                     className="btm">
@@ -204,6 +202,17 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
                     dark:focus:border-blue-500"
                     placeholder="🔍  Search" />
             </div>
+            {categories && categories.map(item => (
+                <button
+                    onClick={async () => {
+                        await filterCategory(item.id);
+                    }}
+                    key={item.id}
+                    className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
+                    bg-purple-500 text-white hover:bg-purple-700 active:scale-95 focus:outline-none focus:bg-purple-700 duration-300">
+                    {item.name}
+                </button>
+            ))}
             <div className="w-full bg-gray-100 py-8">
                 <div className="w-full mx-auto">
                     <div className="bg-white shadow-md rounded-3xl overflow-hidden">
@@ -241,7 +250,7 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
                                                 <td className="py-3 px-6 border-b border-gray-200">
                                                     {category.programmingLanguage === null ? "Yo'q" : category.programmingLanguage}
                                                 </td>
-                                                <td className="py-3 pl-6 border-b border-gray-200">
+                                                <td className="py-3 px-6 border-b border-gray-200">
                                                     <input
                                                         type="checkbox"
                                                         checked={category.active}
@@ -249,7 +258,7 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
                                                             openModal();
                                                             setCategoryInfo(category)
                                                         }}
-                                                        className="form-checkbox h-5 w-5 ml-14 text-blue-600 rounded focus:ring-0"
+                                                        className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-0"
                                                     />
                                                 </td>
                                                 <td className="py-3 px-6 border-b border-gray-200">
@@ -260,7 +269,7 @@ const CategoryTable = ({categories, setCategories, getCategoryChild, categorysub
                                                         }}
                                                         className="text-sm bg-yellow-500 hover:bg-yellow-600 duration-200 text-white 
                                                     py-1 px-3 rounded focus:outline-none focus:shadow-outline">Edit</button>
-                                                   
+
                                                 </td>
                                             </tr>
                                         )) :
