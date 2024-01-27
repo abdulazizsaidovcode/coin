@@ -106,14 +106,14 @@ const Exchange = () => {
               <th className="py-3 px-6 text-left">Photo</th>
               <th className="py-3 px-6 text-left">Gift name</th>
               <th className="py-3 px-6 text-left">name</th>
-              <th className="py-3 px-6 text-center">Cion</th>
+              <th className="py-3 px-6 text-center">Coin</th>
               <th className="py-3 px-6 text-center">Date</th>
               <th className="py-3 px-6 text-center">Active</th>
               <th className="py-3 px-6 text-center">Info</th>
             </tr>
           </thead>
           <tbody className="text-gray-600 font-light">
-            {exchange.length && exchange.map((item, index) => (
+            {exchange.length ? exchange.map((item, index) => (
               <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-100">
                 <td className="py-3 px-6 text-left whitespace-nowrap">{index + 1}</td>
                 <td className="py-3 px-6 text-left"><img src={item.imgurl} alt="nofound" /></td>
@@ -134,7 +134,16 @@ const Exchange = () => {
                   </div>
                 </td>
               </tr>
-            ))}
+            )) : (<tr>
+              <th className="py-3 px-6 text-left"></th>
+              <th className="py-3 px-6 text-left"></th>
+              <th className="py-3 px-6 text-left"></th>
+              <th className="py-3 px-6 text-right">Exchange not found</th>
+              <th className="py-3  text-left"></th>
+              <th className="py-3 text-center"></th>
+              <th className="py-3 px-6 text-center"></th>
+              <th className="py-3 px-6 text-center"></th>
+            </tr>)}
           </tbody>
         </table>
       </div>

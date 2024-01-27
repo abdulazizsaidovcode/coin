@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 // import { config, url } from "../api/api";
 // import React, { useState, useEffect } from "react";
 import { byId, config, setConfig, url } from "../../components/api/api";
@@ -7,7 +7,7 @@ import avatar from "../../assits/opacha.jpg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const StudentNavbar = () => {
   const [name, setName] = useState([]);
@@ -20,11 +20,14 @@ const StudentNavbar = () => {
 
   useEffect(() => {
     setConfig();
-    axios.get(url + "user/getMe", config)
-      .then(res => {
+    axios
+      .get(url + "user/getMe", config)
+      .then((res) => {
         setName(res.data.body);
       })
-      .catch(err => console.log("Boshqa backendinchi topiyla iltomos 😭", err));
+      .catch((err) =>
+        console.log("Boshqa backendinchi topiyla iltomos 😭", err)
+      );
   }, []);
 
   const toggleMenu = () => {
@@ -91,37 +94,55 @@ const StudentNavbar = () => {
           {/* Foydalanuvchi profili va boshqa kontentlar uchun joy */}
           <div className="relative left-0">
             <div className="flex items-center">
-              <div className='relative mt-1'>
-                <div className='w-2 h-2 bg-red-400 rounded-full absolute right-2 '><a href=""></a></div>
+              <div className="relative mt-1">
+                <div className="w-2 h-2 bg-red-400 rounded-full absolute right-2 ">
+                  <a href=""></a>
+                </div>
                 <Link to="/student/message">
-                <FontAwesomeIcon
-                  icon={faBell}
-                  className={
-                    `${messages.length > 0} `
-                      ? "text-2xl mr-2 text-gray-80 anim"
-                      : "text-2xl mr-2 text-gray-80"
-                  }
-                />
-              </Link>
+                  <FontAwesomeIcon
+                    icon={faBell}
+                    className={
+                      `${messages.length > 0} `
+                        ? "text-2xl mr-2 text-gray-80 anim"
+                        : "text-2xl mr-2 text-gray-80"
+                    }
+                  />
+                </Link>
               </div>
-              <button onClick={toggleMenu} className="flex items-center space-x-2 ">
-                <img src={avatar} alt="Admin" className="rounded-full w-12 h-12 p-1 border" />
+              <button
+                onClick={toggleMenu}
+                className="flex items-center space-x-2 "
+              >
+                <img
+                  src={avatar}
+                  alt="Admin"
+                  className="rounded-full w-12 h-12 p-1 border"
+                />
                 <span className="hidden md:block">{name.fullName}</span>
               </button>
             </div>
             <div
               className={`${isOpen ? "absolute duration-500" : "hidden"} 
-              right-0 mt-2 py-2 w-80 bg-white rounded-xl shadow-xl z-20`}>
+              right-0 mt-2 py-2 w-80 bg-white rounded-xl shadow-xl z-20`}
+            >
               {/* Menu items */}
               <div className="h-40 bg-profileColor rounded-t-xl flex justify-center items-center">
-                <img className="w-20 h-20 rounded-full" src={avatar} alt="Gift" />
-                <span className="absolute right-3 top-3 hover:text-gray-200 duration-200 text-white cursor-pointer"
-                  onClick={toggleMenu}>
+                <img
+                  className="w-20 h-20 rounded-full"
+                  src={avatar}
+                  alt="Gift"
+                />
+                <span
+                  className="absolute right-3 top-3 hover:text-gray-200 duration-200 text-white cursor-pointer"
+                  onClick={toggleMenu}
+                >
                   <i className="fa-solid fa-xmark"></i>
                 </span>
               </div>
               <div className="px-6 py-2">
-                <div className="font-bold text-xl mb-2 text-center">{name.fullName}</div>
+                <div className="font-bold text-xl mb-2 text-center">
+                  {name.fullName}
+                </div>
                 <p className="text-center text-black">{name.phoneNumber}</p>
                 <p className="text-gray-700 text-center">
                   {name.email}
@@ -131,19 +152,24 @@ const StudentNavbar = () => {
               </div>
               <div className=" mt-2 text-center">
                 <button
-                 onClick={() => {
-                  setUserId(name)
-                  openModalEdit()
-                 toggleMenu()
-                 }} className="btm mr-5">Edit</button>
+                  onClick={() => {
+                    setUserId(name);
+                    openModalEdit();
+                    toggleMenu();
+                  }}
+                  className="btm mr-5"
+                >
+                  Edit
+                </button>
                 <button
                   className="bg-red-500 text-white font-bold rounded-lg py-2.5 px-7 active:scale-90 duration-200"
                   onClick={() => {
-             
-                     logOut();
+                    logOut();
                     sessionStorage.clear();
                   }}
-                >log out</button>
+                >
+                  log out
+                </button>
               </div>
             </div>
           </div>
@@ -177,6 +203,7 @@ const StudentNavbar = () => {
                   fill="none"
                   viewBox="0 0 14 14"
                 >
+
                   <path
                     stroke="currentColor"
                     strokeLinecap="round"
@@ -273,7 +300,7 @@ const StudentNavbar = () => {
                     defaultValue={userId.password}
                   />
                 </div>
-                
+
                 <div className="col-span-2 sm:col-span-1">
                   <label
                     htmlFor="gender"
@@ -292,10 +319,14 @@ const StudentNavbar = () => {
                     <option value="FEMALE">FEMALE</option>
                   </select>
                 </div>
-                
               </div>
               <div className="flex justify-end">
-                <button onClick={closeModalEdit} className="btm-close me-2 bg-red-900">Close</button>
+                <button
+                  onClick={closeModalEdit}
+                  className="btm-close me-2 bg-red-900"
+                >
+                  Close
+                </button>
                 <button
                   onClick={() => {
                     editUser();

@@ -93,7 +93,7 @@ const Navbarcha = () => {
             <div className="flex items-center">
               <div className='relative mt-1'>
                 <div className='w-2 h-2 bg-red-400 rounded-full absolute right-2 '><a href=""></a></div>
-                <Link to="/student/message">
+                <Link to="/admin/message">
                 <FontAwesomeIcon
                   icon={faBell}
                   className={
