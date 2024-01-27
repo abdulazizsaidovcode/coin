@@ -45,14 +45,38 @@ const Students = () => {
         }
     }
 
+    const showHideInputs = () => {
+        let selectValue = document.getElementById("searchSelect").value,
+            studentSearch = document.getElementById("studentSearch");
+
+        if (!selectValue) studentSearch.style.display = "none"
+        else studentSearch.style.display = "inline"
+    }
+
+    const searchHandler = () => {
+        let selectValue = document.getElementById("searchSelect").value,
+            studentSearch = document.getElementById("studentSearch");
+    }
+
     return (
         <div className="p-8 w-full bg-studentTableBg min-h-full">
             <div className=" mb-4 flex justify-between items-center">
-                <h2 className="text-4xl font-bold font-inika text-gray-900 mb-4">students</h2>
+                <h2 className="text-4xl font-bold font-inika text-gray-900 mb-4">Students</h2>
                 <div class="relative">
-                    <input
-                        id="search"
+                    <select
+                        id="searchSelect"
+                        onChange={showHideInputs}
                         className="w-80 py-3 ps-3 text-sm border border-gray-300 rounded-lg
+                        bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300">
+                        <option selected disabled>Search Select</option>
+                        <option value="fistName">Search firstName</option>
+                        <option value="lastName">Search lastName</option>
+                        <option value="phoneNumber">Search phoneNumber</option>
+                    </select>
+                    <input
+                        id="studentSearch"
+                        style={{display: "none"}}
+                        className="w-80 py-3 ps-3 ms-3 text-sm border border-gray-300 rounded-lg
                       bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
                         placeholder="🔍  Search" />
                 </div>
