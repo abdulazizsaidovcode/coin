@@ -70,7 +70,7 @@ function Message() {
     // Tartiblash turini va yo'nalishini o'zgartirish
    
     return (
-        <div className="container mx-auto p-8 bg-gray-100 h-screen">
+        <div className="container  p-8 bg-gray-100 h-screen w-full">
             {/* Tartiblash tugmalari */}
            
             <div className="mt-3">

@@ -73,10 +73,10 @@ const Navbarcha = () => {
   const logOut = () => byId("logout").click();
 
   return (
-    <div className="bg-gray-100 w-full">
+    <div className="bg-gray-100">
       <Link to="/" id="logout"></Link>
-      <div className="w-full container">
-        <div className="flex justify-end bg-white py-3 px-8  z-50 w-full">
+      <div className="">
+        <div className="flex justify-end bg-white py-3 px-8  z-50 " style={{width: "91%"}}>
           {/* Qidiruv maydoni */}
           {/* <div className="flex items-center space-x-1 ">
             <div class="relative">
@@ -108,6 +108,7 @@ const Navbarcha = () => {
                 <img src={avatar} alt="Admin" className="rounded-full w-12 h-12 p-1 border" />
                 <span className="hidden md:block">{name.fullName}</span>
               </button>
+              
             </div>
             <div
               className={`${isOpen ? "absolute duration-500" : "hidden"} 
