@@ -105,7 +105,7 @@ const AdminStudent = () => {
   };
 
   return (
-    <div className=" p-8 w-full bg-gray-100">
+    <div className=" p-8 pb-28 w-full bg-gray-100">
       <div className="mt-10">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Student</h2>
       </div>
@@ -142,7 +142,7 @@ const AdminStudent = () => {
 
       <div>
         <div className="mb-4">
-          <div className="flex mb-2 flex-wrap">
+          <div className="flex mb-2 flex-wrap justify-between">
             {group.map((item) => (
               <button
                 onClick={async () => {
@@ -158,7 +158,7 @@ const AdminStudent = () => {
             ))}
           </div>
         </div>
-        <div className="w-full mt-8 shadow-md rounded-3xl overflow-hidden">
+        <div className="w-full mt-8 shadow-md rounded-3xl overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-800 text-white rounded-t-2xl uppercase text-sm leading-normal">
               <tr>
@@ -186,7 +186,7 @@ const AdminStudent = () => {
                     <td className="py-3 px-6">{item.coin}</td>
                     <td className="py-3 px-6">{item.task}</td>
                     <td className="py-3 px-6">{item.numberOfExchange}</td>
-                    <td className="py-3 px-6 border-b border-gray-200">
+                    <td className="py-3 px-6 border-b border-gray-200 flex justify-center">
                       <button
                         className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline"
                         onClick={() => {

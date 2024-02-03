@@ -45,7 +45,7 @@ function Dashboard() {
 
     return (
         <>
-            <div className="bg-gray-100 min-h-screen p-8  w-full">
+            <div className="bg-gray-100 min-h-screen p-8 pb-28 w-full">
                 <div className="mt-10">
                     <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Dashboard</h2>
                 </div>

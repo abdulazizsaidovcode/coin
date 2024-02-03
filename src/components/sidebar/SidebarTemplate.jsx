@@ -22,7 +22,7 @@ function SidebarTemplate({ isAdmin }) {
       <div
         className={`relative bg-white h-full border-r ${
           isExpanded ? "w-72" : "w-20"
-        } transition-width hidden xl:inline duration-300 z-10 ease-in-out`}
+        } transition-width hidden xl:inline duration-300 z-40 ease-in-out`}
       >
         <div
           className={` bg-white h-full border-r ${
@@ -210,8 +210,8 @@ function SidebarTemplate({ isAdmin }) {
         </div>
       </div>
       {/* <div className="footerBar flex items-end justify-center"> */}
-        <div className=" overflow-y-auto absolute items-center w-full z-20 justify-center">
-          <ul className="flex xl:hidden flex-row items-center fixed  bg-white bottom-0 w-full justify-center">
+        <div className=" overflow-y-auto absolute items-center z-20 justify-center">
+          <ul className="flex xl:hidden flex-row items-center fixed bg-white bottom-0 w-full justify-center">
             {/* Dashboard Link */}
             <li className="py-2">
               <Link
