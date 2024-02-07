@@ -46,7 +46,7 @@ const Exchange = () => {
             </div>
             <div className='flex justify-around mb-10 px-10'>
                 <div className='w-5/12 shadow-xl up'>
-                    <TotalCoins />
+                    {/* <TotalCoins /> */}
                 </div>
                 <div className='w-5/12 shadow-xl up'>
                     <TotalCoinsmonth />

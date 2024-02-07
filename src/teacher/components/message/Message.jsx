@@ -31,7 +31,6 @@ function Message() {
         axios.get(url + "message/teacher" , config) 
             .then((res) => {
                 setMessages(res.data.body.object.reverse())
-                console.log(res.data.body.object);
             })
             .catch((err) => console.log(err))
     }
