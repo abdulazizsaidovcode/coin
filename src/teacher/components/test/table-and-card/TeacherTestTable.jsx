@@ -13,7 +13,7 @@ function TeacherTestTable({ getTestTable, allTestTable }) {
         answerList.push(allTestTable[i].answer)
     }
 
-    console.log(answerList);
+    // console.log(answerList);
     return (
         <div className="w-full mt-8 shadow-md rounded-3xl overflow-hidden">
             <table className="w-full">
