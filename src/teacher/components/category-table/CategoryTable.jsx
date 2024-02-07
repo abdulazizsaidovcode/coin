@@ -76,17 +76,6 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
             })
     }
 
-    // category search
-    // comment teacher category searchda xatolik bor search qilganda boshqa narsalarni olib kelyabdi?
-    const categorySearch = () => {
-        let searchVal = byId("searchCategory").value
-        if (!!searchVal)
-            axios.get(url + "category/search?text=" + searchVal, config)
-                .then(res => setCategories(res.data.body))
-                .catch(err => console.log(err, searchVal))
-        else getCategoryChild();
-    }
-
     return (
         <>
             {isModalOpen && (
@@ -192,7 +181,7 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                     className="btm">
                     + Add
                 </button>
-                <input
+                {/* <input
                     onChange={categorySearch}
                     id="searchCategory"
                     type='search'
@@ -200,7 +189,7 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                     bg-gray-50 focus:outline-0 duration-300 focus:border-blue-500  
                     dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 
                     dark:focus:border-blue-500"
-                    placeholder="🔍  Search" />
+                    placeholder="🔍  Search" /> */}
             </div>
             {categories && categories.map(item => (
                 <button
