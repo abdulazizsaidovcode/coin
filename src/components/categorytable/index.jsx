@@ -184,7 +184,7 @@ const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
                     className="btm">
                     + Add
                 </button>
-                <input
+                {/* <input
                     onChange={categorySearch}
                     id="searchCategory"
                     type='search'
@@ -192,7 +192,7 @@ const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
                     bg-gray-50 focus:outline-0 duration-300 focus:border-blue-500  
                     dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 
                     dark:focus:border-blue-500"
-                    placeholder="🔍  Search" />
+                    placeholder="🔍  Search" /> */}
             </div>
             <div className="w-full bg-gray-100 py-8">
                 <div className="w-full mx-auto">
