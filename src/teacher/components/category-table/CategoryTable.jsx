@@ -274,14 +274,9 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                                             </tr>
                                         )) :
                                         <tr className='even:bg-slate-200 hover:bg-slate-300 duration-200'>
-                                            <td className='py-3 px-6'></td>
-                                            <td className='py-3 px-6'></td>
-                                            <td className='py-3 px-6'></td>
-                                            <td className="py-3 px-6 font-inika font-medium text-lg tracking-wider leading-10">
-                                                <Icon icon="eos-icons:three-dots-loading" width="50" />
+                                            <td className="py-3 px-6 font-inika font-medium text-lg tracking-wider leading-10 text-center" colSpan='6'>
+                                                Category not found 😊
                                             </td>
-                                            <td className='py-3 px-6'></td>
-                                            <td className='py-3 px-6'></td>
                                         </tr>
                                     }
                                 </tbody>

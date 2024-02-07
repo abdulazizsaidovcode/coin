@@ -18,13 +18,11 @@ const Test = () => {
     // getTestAndCategory
     const getTestAndCategory = () => {
         axios.get(`${url}test/ofTeacher`, config)
-            .then((response) => {
-                console.log(response.data);
-                setTestAndCategory(response.data);
+            .then((res) => {
+                setTestAndCategory(res.data.body);
             })
             .catch((error) => {
-                console.log(error);
-                console.log("Error getting test and category");
+                console.log("Error getting test and category: ", error);
             })
     }
 
@@ -35,8 +33,9 @@ const Test = () => {
                 <button className="btm ml-2" onClick={toggleMenu}>Add Test</button>
                 <div class="relative">
                     <input
+                    type="search"
                         id="search"
-                        className="w-80 py-3 ps-3 text-sm border border-gray-300 rounded-lg
+                        className="w-80 py-3 px-3 text-sm border border-gray-300 rounded-lg
                       bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
                         placeholder="🔍  Search" />
                 </div>

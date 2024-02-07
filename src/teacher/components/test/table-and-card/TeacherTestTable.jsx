@@ -47,7 +47,7 @@ function TeacherTestTable() {
                         </td>
                     </tr>
                     {/* ) : */}
-                    <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
+                    {/* <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
                         <td className='py-3 px-6'></td>
                         <td className='py-3 px-6'></td>
                         <td className='py-3 px-6'></td>
@@ -59,7 +59,7 @@ function TeacherTestTable() {
                         <td className='py-3 px-6'></td>
                         <td className='py-3 px-6'></td>
                         <td className='py-3 px-6'></td>
-                    </tr>
+                    </tr> */}
                     {/* } */}
                 </tbody>
             </table>
