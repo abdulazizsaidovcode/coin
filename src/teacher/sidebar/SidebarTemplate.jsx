@@ -6,6 +6,16 @@ import MobileBar from "./mobileBar";
 function SidebarTemplate({ isAdmin }) {
   const [isExpanded, setIsExpanded] = useState(window.innerWidth > 992);
 
+  // kerak bulsa ishlatiladi
+  // const [sidebarActiveDashboard, setSidebarActiveDashboard] = useState(false)
+  // const [sidebarActiveCategory, setSidebarActiveCategory] = useState(false)
+  // const [sidebarActiveGroup, setSidebarActiveGroup] = useState(false)
+  // const [sidebarActiveStudent, setSidebarActiveStudent] = useState(false)
+  // const [sidebarActiveTest, setSidebarActiveTest] = useState(false)
+  // const [sidebarActiveGift, setSidebarActiveGift] = useState(false)
+  // const [sidebarActiveExchange, setSidebarActiveExchange] = useState(false)
+  // const [sidebarActiveMessage, setSidebarActiveMessage] = useState(false)
+
   // Oyna o'lchamini kuzatish
   useEffect(() => {
     const handleResize = () => {
@@ -18,23 +28,26 @@ function SidebarTemplate({ isAdmin }) {
     };
   }, []);
 
+  const styles = {
+    sideBarStylexxl: 'flex items-center h-11 focus:outline-0 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 hover:bg-slate-100 focus:bg-red-600 focus:rounded-2xl focus:border-0 focus:mx-2 focus:text-white focus:tracking-wider duration-200 pr-5',
+    sideBarStylexl: 'flex items-center justify-center h-11 focus:outline-0 text-gray-600 hover:text-gray-800 border-l-4 border-transparent duration-200 hover:bg-slate-100 hover:border-indigo-500 focus:border-l-4 focus:border-indigo-500 focus:bg-slate-100 pr-5',
+    sidebarFlexClass: 'inline-flex justify-center items-center ml-4 text-xl'
+  }
+
   return (
     <>
       <div
-        className={`relative bg-white h-full border-r ${
-          isExpanded ? "w-72" : "w-20"
-        } transition-width hidden xl:inline duration-300 z-40 ease-in-out`}
+        className={`relative bg-white h-full border-r ${isExpanded ? "w-72" : "w-20"
+          } transition-width hidden xl:inline duration-300 z-40 ease-in-out`}
       >
         <div
-          className={` bg-white h-full border-r ${
-            isExpanded ? "w-64" : "w-20"
-          } transition-width duration-300 fixed z-20 ease-in-out`}
+          className={` bg-white h-full border-r ${isExpanded ? "w-64" : "w-20"
+            } transition-width duration-300 fixed z-20 ease-in-out`}
         >
           <div className="flex items-center justify-between h-16 border-b ">
             <img
-              className={`transition-all duration-300 ease-in-out ${
-                isExpanded ? "w-1/2 mx-3" : "hidden"
-              }`}
+              className={`transition-all duration-300 ease-in-out ${isExpanded ? "w-1/2 mx-3" : "hidden"
+                }`}
               src={img}
               alt="Logo"
             />
@@ -68,104 +81,104 @@ function SidebarTemplate({ isAdmin }) {
             </button>
           </div>
           <div className="flex-grow overflow-y-auto">
-          <ul className="flex flex-col py-4">
-                    <li className="px-5">
-                        <div className="flex flex-row items-center h-8">
-                            <div className="text-sm font-light tracking-wide text-gray-500">Menu</div>
-                        </div>
-                    </li>
-                    {/* Dashboard Link */}
-                    <li className='py-2'>
-                        <Link to={`/teacher/dashboard`}
-                            className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
-                            <div className='flex justify-center items-center'>
-                                <span className="inline-flex justify-center items-center ml-4 text-xl">
-                                    <i className="fa-solid fa-house "></i>
-                                </span>
-                            </div>
-                            <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Dashboard</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={`/teacher/category`}
-                            className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
-                            <div className='flex justify-center items-center'>
-                                <span className="inline-flex justify-center items-center ml-4 text-xl">
-                                    <i className="fa-solid fa-keyboard"></i>
-                                </span>
-                            </div>
-                            <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Category</span>
-                        </Link>
-                    </li>
-                    <li className='py-2'>
-                        <Link to={`/teacher/group`}
-                            className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
-                            <div className='flex justify-center items-center'>
-                                <span className="inline-flex justify-center items-center ml-4 text-xl">
-                                    <i className="fa-solid fa-users"></i>
-                                </span>
-                            </div>
-                            <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Group</span>
-                        </Link>
-                    </li>
-                    <li className='py-2'>
-                        <Link to={`/teacher/student`}
-                            className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
-                            <div className='flex justify-center items-center'>
-                                <span className="inline-flex justify-center items-center ml-4 text-xl">
-                                    <i class="fa-solid fa-user"></i>
-                                </span>
-                            </div>
-                            <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Student</span>
-                        </Link>
-                    </li>
-                    <li className='py-2'>
-                        <Link to={`/teacher/test`}
-                            className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
-                            <div className='flex justify-center items-center'>
-                                <span className="inline-flex justify-center items-center ml-4 text-xl">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" viewBox="0 0 24 24">
-                                        <path fill="currentColor" d="M13.325 3.05L8.667 20.432l1.932.518l4.658-17.382zM7.612 18.36l1.36-1.448l-.001-.019l-5.094-4.78l4.79-5.105l-1.458-1.369l-6.16 6.563zm8.776 0l-1.36-1.448l.001-.019l5.094-4.78l-4.79-5.105l1.458-1.369l6.16 6.563z" />
-                                    </svg>
-                                </span>
-                            </div>
-                            <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Test</span>
-                        </Link>
-                    </li>
-                    <li className='py-2'>
-                        <Link to={`/teacher/gift`}
-                            className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
-                            <div className='flex justify-center items-center'>
-                                <span className="flex justify-center items-center ml-4 text-xl ">
-                                    <i className="fa-solid fa-gift"></i>
-                                </span>
-                            </div>
-                            <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>gift</span>
-                        </Link>
-                    </li>
-                    <li className='py-2'>
-                        <Link to={`/teacher/exchange`}
-                            className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
-                            <span className="inline-flex justify-center items-center ml-4 text-xl">
-                                <i className="fa-solid fa-calendar-days"></i>
-                            </span>
-                            <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Exchange</span>
-                        </Link>
-                    </li>
-                    <li className='py-2'>
-                        <Link to={`/teacher/message`}
-                            className={`${isExpanded ? 'flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5' : 'flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5'}`}>
-                            <span className="inline-flex justify-center items-center ml-4 text-xl">
-                                <i className="fa-solid fa-envelope"></i>
-                            </span>
-                            <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Message</span>
-                        </Link>
-                    </li>
-                </ul>
+            <ul className="flex flex-col py-4">
+              <li className="px-5">
+                <div className="flex flex-row items-center h-8">
+                  <div className="text-sm font-light tracking-wide text-gray-500">Menu</div>
+                </div>
+              </li>
+              {/* Dashboard Link */}
+              <li className='py-2'>
+                <Link to={`/teacher/dashboard`}
+                  className={`${isExpanded ? styles.sideBarStylexxl : styles.sideBarStylexl}`}>
+                  <div className='flex justify-center items-center'>
+                    <span className={styles.sidebarFlexClass}>
+                      <i className="fa-solid fa-house "></i>
+                    </span>
+                  </div>
+                  <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Dashboard</span>
+                </Link>
+              </li>
+              <li>
+                <Link to={`/teacher/category`}
+                  className={`${isExpanded ? styles.sideBarStylexxl : styles.sideBarStylexl}`}>
+                  <div className='flex justify-center items-center'>
+                    <span className={styles.sidebarFlexClass}>
+                      <i className="fa-solid fa-keyboard"></i>
+                    </span>
+                  </div>
+                  <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Category</span>
+                </Link>
+              </li>
+              <li className='py-2'>
+                <Link to={`/teacher/group`}
+                  className={`${isExpanded ? styles.sideBarStylexxl : styles.sideBarStylexl}`}>
+                  <div className='flex justify-center items-center'>
+                    <span className={styles.sidebarFlexClass}>
+                      <i className="fa-solid fa-users"></i>
+                    </span>
+                  </div>
+                  <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Group</span>
+                </Link>
+              </li>
+              <li className='py-2'>
+                <Link to={`/teacher/student`}
+                  className={`${isExpanded ? styles.sideBarStylexxl : styles.sideBarStylexl}`}>
+                  <div className='flex justify-center items-center'>
+                    <span className={styles.sidebarFlexClass}>
+                      <i class="fa-solid fa-user"></i>
+                    </span>
+                  </div>
+                  <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Student</span>
+                </Link>
+              </li>
+              <li className='py-2'>
+                <Link to={`/teacher/test`}
+                  className={`${isExpanded ? styles.sideBarStylexxl : styles.sideBarStylexl}`}>
+                  <div className='flex justify-center items-center'>
+                    <span className={styles.sidebarFlexClass}>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M13.325 3.05L8.667 20.432l1.932.518l4.658-17.382zM7.612 18.36l1.36-1.448l-.001-.019l-5.094-4.78l4.79-5.105l-1.458-1.369l-6.16 6.563zm8.776 0l-1.36-1.448l.001-.019l5.094-4.78l-4.79-5.105l1.458-1.369l6.16 6.563z" />
+                      </svg>
+                    </span>
+                  </div>
+                  <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Test</span>
+                </Link>
+              </li>
+              <li className='py-2'>
+                <Link to={`/teacher/gift`}
+                  className={`${isExpanded ? styles.sideBarStylexxl : styles.sideBarStylexl}`}>
+                  <div className='flex justify-center items-center'>
+                    <span className={styles.sidebarFlexClass}>
+                      <i className="fa-solid fa-gift"></i>
+                    </span>
+                  </div>
+                  <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Gift</span>
+                </Link>
+              </li>
+              <li className='py-2'>
+                <Link to={`/teacher/exchange`}
+                  className={`${isExpanded ? styles.sideBarStylexxl : styles.sideBarStylexl}`}>
+                  <span className={styles.sidebarFlexClass}>
+                    <i className="fa-solid fa-calendar-days"></i>
+                  </span>
+                  <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Exchange</span>
+                </Link>
+              </li>
+              <li className='py-2'>
+                <Link to={`/teacher/message`}
+                  className={`${isExpanded ? styles.sideBarStylexxl : styles.sideBarStylexl}`}>
+                  <span className={styles.sidebarFlexClass}>
+                    <i className="fa-solid fa-envelope"></i>
+                  </span>
+                  <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Message</span>
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <MobileBar isAdmin={isAdmin}/>
+      <MobileBar isAdmin={isAdmin} />
       {/* </div> */}
     </>
   );

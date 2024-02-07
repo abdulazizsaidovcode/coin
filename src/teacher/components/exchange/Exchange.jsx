@@ -9,7 +9,7 @@ const Exchange = () => {
     };
 
     return (
-        <div className="p-8 w-full">
+        <div className="p-8 w-full bg-gray-100">
             <div className="mt-10 flex justify-between items-center">
                 <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Exchange</h2>
                 <input
