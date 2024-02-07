@@ -12,13 +12,6 @@ import FalsePage from "./components/false-page/FalsePage";
 import Groups from "./components/group/Group";
 import Students from "./components/student/Students";
 import Test from "./components/test/Test";
-// import TotalCoins from "./components/total-coins/TotalCoins";
-// import TopGroup from "./components/top-group/TopGroup";
-// import TopTeachers from "./components/top-teachers/TopTeachers";
-// import UserProfile from "./components/user-profile/UserProfile";
-// import CategoryTable from "./components/category-table/CategoryTable";
-// import Offcanvas from "./components/offcanvas/Offcanvas";
-// import GiftCard from "./components/gift-card/GiftCard";
 
 function Teacher() {
     return (
@@ -27,13 +20,6 @@ function Teacher() {
             <div className="w-full">
                 <Navbarcha />
                 <Routes >
-                    {/* <Route path="/teacher/CategoryTable" element={<CategoryTable />} /> */}
-                    {/* <Route path="/teacher/giftCard" element={<GiftCard />} /> */}
-                    {/* <Route path="/teacher/offcanvas" element={<Offcanvas />} /> */}
-                    {/* <Route path="/teacher/usercard" element={<UserProfile />} /> */}
-                    {/* <Route path="/teacher/totalcoins" element={<TotalCoins />} /> */}
-                    {/* <Route path="/teacher/topgroup" element={<TopGroup />} /> */}
-                    {/* <Route path="/teacher/topteachers" element={<TopTeachers />} /> */}
                     <Route path="/teacher/dashboard" element={<Dashboard />} />
                     <Route path="/teacher/category" element={<Category />} />
                     <Route path="/teacher/group" element={<Groups />} />

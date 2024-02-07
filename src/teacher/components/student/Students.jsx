@@ -53,9 +53,13 @@ const Students = () => {
         else studentSearch.style.display = "inline"
     }
 
-    const searchHandler = () => {
-        let selectValue = document.getElementById("searchSelect").value,
-            studentSearch = document.getElementById("studentSearch");
+    const searchHandler = (e) => {
+        let selectValue = document.getElementById("searchSelect").value
+
+        let data = e.target.value;
+        !data ? getStudent() : axios.post(`${url}user/filter/teacher?${selectValue}=${data}`, '', config)
+            .then(res => setStudent(res.data.body))
+            .catch(() => console.log("student search bulganda kelmadi!"))
     }
 
     return (
@@ -74,10 +78,12 @@ const Students = () => {
                         <option value="phoneNumber">Search phoneNumber</option>
                     </select>
                     <input
+                        onChange={searchHandler}
+                        type="search"
                         id="studentSearch"
-                        style={{display: "none"}}
-                        className="w-80 py-3 ps-3 ms-3 text-sm border border-gray-300 rounded-lg
-                      bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
+                        style={{ display: "none" }}
+                        className="w-80 py-3 px-3 ms-3 text-sm border border-gray-300 rounded-lg
+                        bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
                         placeholder="🔍  Search" />
                 </div>
             </div>
