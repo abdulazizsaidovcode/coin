@@ -1,5 +1,27 @@
+import { byId } from "../../../../components/api/api";
+
 const AddModal = (props) => {
-    const { toggleMenu, isMenuOpen } = props;
+    const { toggleMenu, isMenuOpen, testCategorySub } = props;
+
+    // add test
+    const addTest = () => {
+        let addData = {
+            id: 0,
+            question: byId('question').value,
+            categoryId: byId('categorySelect').value,
+            processMinute: byId('teacherTime').value,
+            "parameters": ["string"],
+            "answer": [
+                {
+                    "values": ["string"],
+                    "answer": "string"
+                }
+            ],
+            grade: byId('teacherCoin').value,
+            advice: byId('advice').value,
+            active: true
+        }
+    }
     return (
         <div>
             {isMenuOpen && (
@@ -46,9 +68,9 @@ const AddModal = (props) => {
                                                 </label>
                                                 <select id="categorySelect" className='mt-1 p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full'>
                                                     <option selected disabled>Select category</option>
-                                                    {/* {categories.map((item) =>
-                                                            <option value={item.id}>{item.name}</option>
-                                                        )} */}
+                                                    {testCategorySub && testCategorySub.map((item) =>
+                                                        <option value={item.id}>{item.name}</option>
+                                                    )}
                                                 </select>
 
                                                 <div className="flex justify-between items-center mt-4">
