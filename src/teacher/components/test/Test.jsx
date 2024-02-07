@@ -6,24 +6,34 @@ import axios from "axios";
 import { config, setConfig, url } from "../../../components/api/api";
 
 const Test = () => {
-    const [testAndCategory, setTestAndCategory] = useState([]);
+    const [allTestCard, setAllTestCard] = useState([]);
+    const [allTestTable, setAllTestTable] = useState([]);
     const [testCategorySub, setTestCategorySub] = useState([]);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     useEffect(() => {
         setConfig();
-        getTestAndCategory();
+        getAllTestCard();
+        getTestTable();
         getTestCategory();
     }, [])
 
-    // getTestAndCategory
-    const getTestAndCategory = () => {
+    // getAllTestCard
+    const getAllTestCard = () => {
         axios.get(`${url}test/ofTeacher`, config)
-            .then((res) => setTestAndCategory(res.data.body))
+            .then((res) => setAllTestCard(res.data.body))
             .catch((error) => console.log("Error getting test and category: ", error))
     }
-    // getCategoryId
+
+    // get test table
+    const getTestTable = (item) => {
+        axios.get(`${url}test/ofTeacherByCategoryId?categoryId=${item}`, config)
+            .then((res) => setAllTestTable(res.data.body))
+            .catch((error) => console.log("Error getting test and category: ", error))
+    }
+
+    // getCategory
     const getTestCategory = () => {
         axios.get(`${url}category/sub`, config)
             .then((res) => setTestCategorySub(res.data.body))
@@ -41,9 +51,9 @@ const Test = () => {
                     bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
                     placeholder="🔍  Search" />
             </div>
-            <TeacherTestCard />
+            <TeacherTestCard allTestCard={allTestCard} getTestTable={getTestTable} />
             <div className='mt-5'>
-                <TeacherTestTable />
+                <TeacherTestTable allTestTable={allTestTable} getTestTable={getTestTable} />
             </div>
 
             {/* test modals */}

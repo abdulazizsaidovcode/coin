@@ -1,7 +1,34 @@
-import { byId } from "../../../../components/api/api";
+import { useState } from "react";
+import { byId, config, url } from "../../../../components/api/api";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const AddModal = (props) => {
     const { toggleMenu, isMenuOpen, testCategorySub } = props;
+    const [divCount, setDivCount] = useState(1);
+    const [answers, setAnswers] = useState([{ answer: '', values: [] }]);
+
+    const handleInputChange = (index, field, value) => {
+        const updatedAnswers = {...answers};
+        if (field === 'answer') {
+            updatedAnswers[index].answer = value;
+        } else {
+            updatedAnswers[index].values = value.split(',').map(val => val.trim());
+        }
+        setAnswers(updatedAnswers);
+    };
+
+    const handleAddDiv = () => {
+        setDivCount(prevCount => prevCount + 1);
+        setAnswers(prevAnswers => [...prevAnswers, { answer: '', values: [] }]);
+    };
+
+    const handleRemoveDiv = () => {
+        if (divCount > 1) {
+            setDivCount(prevCount => prevCount - 1);
+            setAnswers(prevAnswers => prevAnswers.slice(0, -1));
+        }
+    };
 
     // add test
     const addTest = () => {
@@ -10,18 +37,24 @@ const AddModal = (props) => {
             question: byId('question').value,
             categoryId: byId('categorySelect').value,
             processMinute: byId('teacherTime').value,
-            "parameters": ["string"],
-            "answer": [
-                {
-                    "values": ["string"],
-                    "answer": "string"
-                }
-            ],
+            parameters: [byId('teacherParam').value],
+            answer: answers,
             grade: byId('teacherCoin').value,
             advice: byId('advice').value,
             active: true
         }
+        axios.post(`${url}test`, addData, config)
+            .then(() => {
+                toast.success('Successfully saved the test✔');
+                toggleMenu();
+            })
+            .catch(err => {
+                toast.error('Someting is error❌');
+                console.log(err);
+                console.log(addData);
+            });
     }
+
     return (
         <div>
             {isMenuOpen && (
@@ -73,7 +106,7 @@ const AddModal = (props) => {
                                                     )}
                                                 </select>
 
-                                                <div className="flex justify-between items-center mt-4">
+                                                <div className="flex justify-between items-center my-4">
                                                     <div className="mr-1">
                                                         <label htmlFor="teacherTime" className="text-sm font-medium text-gray-700">
                                                             Time
@@ -90,41 +123,64 @@ const AddModal = (props) => {
                                                     </div>
                                                 </div>
 
+                                                <label htmlFor="teacherParam" className="text-sm font-medium text-gray-700">
+                                                    Parametrs
+                                                </label>
+                                                <input
+                                                    id="teacherParam"
+                                                    placeholder="Enter parametr"
+                                                    className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
+
                                                 {/* plus inputs */}
-                                                <div className="flex justify-between items-center my-3">
-                                                    <div className="mr-1">
-                                                        <label htmlFor="teacherParam" className="text-sm font-medium text-gray-700">
-                                                            Parametr
-                                                        </label>
-                                                        <input id="teacherParam" placeholder="Enter parametr"
-                                                            className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
-                                                    </div>
-                                                    <div className="ml-1 flex justify-between items-center">
-                                                        <div className="mr-2">
-                                                            <label htmlFor="teacherValue" className="text-sm font-medium text-gray-700">
-                                                                Enter value
-                                                            </label>
-                                                            <input id="teacherValue" placeholder="Enter value"
-                                                                className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
+                                                <div className="flex justify-between items-center flex-wrap">
+                                                    {[...Array(divCount)].map((_, index) => (
+                                                        <div key={index} className="flex justify-start w-[96%] mt-4">
+                                                            <div className="mr-1">
+                                                                <label htmlFor={`teacherAnswer${index}`} className="text-sm font-medium text-gray-700">
+                                                                    Answer
+                                                                </label>
+                                                                <input
+                                                                    id={`teacherAnswer${index}`}
+                                                                    placeholder="Enter answer"
+                                                                    className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"
+                                                                    value={answers[index].answer}
+                                                                    onChange={e => handleInputChange(index, 'answer', e.target.value)}
+                                                                />
+                                                            </div>
+                                                            <div className="mr-2">
+                                                                <label htmlFor={`teacherValue${index}`} className="text-sm font-medium text-gray-700">
+                                                                    Enter value
+                                                                </label>
+                                                                <input
+                                                                    id={`teacherValue${index}`}
+                                                                    placeholder="Enter value"
+                                                                    className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"
+                                                                    value={answers[index].values.join(',')}
+                                                                    onChange={e => handleInputChange(index, 'values', e.target.value)}
+                                                                />
+                                                            </div>
                                                         </div>
-                                                        <span
-                                                            className="font-bold text-black text-[1.5rem] mt-3 hover:cursor-pointer hover:text-slate-700 duration-300"
-                                                        >+</span>
+                                                    ))}
+                                                    <div className="w-[4%] leading-5">
+                                                        <button
+                                                            className="font-bold text-black text-[1.5rem] mt-10 
+                                                            hover:text-slate-700 duration-300"
+                                                            onClick={handleAddDiv}
+                                                        >+</button>
+                                                        <button
+                                                            className="font-bold text-black text-[1.8rem]
+                                                            hover:text-slate-700 duration-300"
+                                                            onClick={handleRemoveDiv}
+                                                        >-</button>
                                                     </div>
                                                 </div>
-
-                                                <label htmlFor="teacherAnswer" className="text-sm font-medium text-gray-700">
-                                                    Answer
-                                                </label>
-                                                <input id="teacherAnswer" placeholder="Enter answer"
-                                                    className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
 
                                                 {/* buttons */}
                                                 <div className="flex justify-end mt-10">
                                                     <button
                                                         onClick={() => { toggleMenu() }}
                                                         className="mr-3 bg-red-600 py-2.5 px-5 font-bold rounded-lg text-white active:scale-90 duration-300">Close</button>
-                                                    <button className="btm">Save</button>
+                                                    <button className="btm" onClick={addTest}>Save</button>
                                                 </div>
                                             </div>
                                         </div>
