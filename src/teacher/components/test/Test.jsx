@@ -31,14 +31,11 @@ const Test = () => {
             <h2 className="text-4xl font-bold font-inika text-gray-900 mb-4 ml-2">Test</h2>
             <div className="mb-4 flex justify-between items-center">
                 <button className="btm ml-2" onClick={toggleMenu}>Add Test</button>
-                <div class="relative">
-                    <input
+                <input
                     type="search"
-                        id="search"
-                        className="w-80 py-3 px-3 text-sm border border-gray-300 rounded-lg
-                      bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
-                        placeholder="🔍  Search" />
-                </div>
+                    className="w-80 py-3 px-3 text-sm border border-gray-300 rounded-lg
+                    bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
+                    placeholder="🔍  Search" />
             </div>
             <TeacherTestCard />
             <div className='mt-5'>
