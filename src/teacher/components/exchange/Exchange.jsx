@@ -10,8 +10,13 @@ const Exchange = () => {
 
     return (
         <div className="p-8 w-full">
-            <div className="mt-10">
+            <div className="mt-10 flex justify-between items-center">
                 <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Exchange</h2>
+                <input
+                    type="search"
+                    className="w-80 py-3 px-3 text-sm border border-gray-300 rounded-lg
+                    bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
+                    placeholder="🔍  Search" />
             </div>
             <div className='flex justify-around mb-10 px-10'>
                 <div className='w-5/12 shadow-xl up'>
@@ -50,8 +55,8 @@ const Exchange = () => {
                                 <input
                                     type="checkbox"
                                     className="form-checkbox h-5 w-5 text-blue-600"
-                                    // checked={item.active}
-                                    // onChange={() => toggleActive(item.id)}
+                                // checked={item.active}
+                                // onChange={() => toggleActive(item.id)}
                                 />
                             </td>
                             <td className="py-3 px-6">
