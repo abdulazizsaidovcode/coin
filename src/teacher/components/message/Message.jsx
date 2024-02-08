@@ -7,9 +7,11 @@ function Message() {
   const [messages, setMessages] = useState([]);
   const [group, setGroup] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMore, setIsMore] = useState(false);
 
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
+  const openMore = () => setIsMore(!isMore);
 
   useEffect(() => {
     getCategory()
@@ -46,6 +48,16 @@ function Message() {
       .catch(() => toast.error("Error while sending message!"));
   }
 
+  function cutDescription(description) {
+    const dotIndex = description.indexOf('.');
+
+    if (dotIndex !== -1) {
+      return description.slice(0, dotIndex + 1);
+    } else {
+      return description.slice(0, 50);
+    }
+  }
+
   return (
     <div className="container mx-auto p-8 bg-gray-100 min-h-screen">
       <div className="mt-3">
@@ -67,7 +79,14 @@ function Message() {
         {messages.map((item, i) => (
           <div key={i} className="border rounded shadow p-3">
             <h2 className="font-bold text-lg mb-3" >{item.groupName}</h2>
-            <p className="text-gray-700 text-base">{item.description}</p>
+            <p className="text-gray-700 text-base">
+              {isMore ? item.description : cutDescription(item.description)}
+              {/* {cutDescription(item.description)} */}
+              <span
+                className='font-semibold ms-3 hover:cursor-pointer hover:text-black duration-200'
+                onClick={openMore}
+              >{isMore ? 'back' : 'more'}</span>
+            </p>
             <div className="text-right">
               <span className="text-sm font-semibold">{item.date}</span>
             </div>
