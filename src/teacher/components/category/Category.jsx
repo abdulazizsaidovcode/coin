@@ -15,11 +15,12 @@ function Category() {
   }, [])
 
   const getCategory1 = () => {
-    axios.get(url + "category/teacher/category/list", config)
+    axios.get(url + "category/father", config)
       .then(res => {
         setCategories(res.data.body)
+        console.log(res.data);
       })
-      .catch(() => console.log("kelmadi"))
+      .catch((err) => console.log("Teacher panel category kelmadi: ", err))
   }
 
   const getCategoryChild = () => {
@@ -41,7 +42,7 @@ function Category() {
   }
 
   return (
-    <div className="bg-gray-100 min-h-full p-8 w-full">
+    <div className="bg-gray-100 min-h-screen p-8 w-full">
       <div className="mt-10">
         <h2 className="text-3xl font-bold font-inika text-gray-900 mb-6">Category</h2>
       </div>
