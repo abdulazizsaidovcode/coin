@@ -1,5 +1,13 @@
+import { useState } from "react";
+
 const EditModal = (props) => {
-    const { toggleEditMenu, isEditMenuOpen } = props;
+    const {
+        toggleEditMenu,
+        isEditMenuOpen,
+        isHoveredId,
+        testCategorySub
+    } = props;
+    
     return (
         <div>
             {isEditMenuOpen && (
@@ -32,12 +40,14 @@ const EditModal = (props) => {
                                                 <label htmlFor="questionEdit" className="block text-sm font-medium text-gray-700">Question</label>
                                                 <textarea
                                                     id="questionEdit"
+                                                    defaultValue={isHoveredId && isHoveredId.question}
                                                     placeholder="Enter Question..."
                                                     rows="4" className="w-full p-2 mt-1 border rounded-md bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"></textarea>
 
-                                                <label htmlFor="adviceEdit" className="block text-sm font-medium mt-4 text-gray-700">Advice</label>
+                                                <label htmlFor="adviceEdit" className="block text-sm font-medium mt-4 text-gray-700">Advice (uquvchiga maslahat)</label>
                                                 <textarea
                                                     id="adviceEdit"
+                                                    // default value uchun advice backenddan kelmagan
                                                     placeholder="Enter Advice..."
                                                     rows="3" className="w-full p-2 mt-1 border rounded-md bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"></textarea>
 
@@ -45,57 +55,84 @@ const EditModal = (props) => {
                                                     Select category
                                                 </label>
                                                 <select id="categorySelectEdit" className='mt-1 p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full'>
-                                                    <option selected disabled>Select category</option>
-                                                    {/* {categories.map((item) =>
-                                                            <option value={item.id}>{item.name}</option>
-                                                        )} */}
+                                                    <option selected disabled>{isHoveredId.categoryName}</option>
+                                                    {testCategorySub && testCategorySub.map((item) =>
+                                                        <option value={item.id}>{item.name}</option>
+                                                    )}
                                                 </select>
 
-                                                <div className="flex justify-between items-center mt-4">
+                                                <div className="flex justify-between items-center my-4">
                                                     <div className="mr-1">
                                                         <label htmlFor="teacherTimeEdit" className="text-sm font-medium text-gray-700">
                                                             Time
                                                         </label>
-                                                        <input id="teacherTimeEdit" placeholder="Enter time"
+                                                        <input
+                                                            id="teacherTimeEdit"
+                                                            defaultValue={isHoveredId && isHoveredId.time}
+                                                            placeholder="Enter time"
                                                             className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
                                                     </div>
                                                     <div className="ml-1">
                                                         <label htmlFor="teacherCoinEdit" className="text-sm font-medium text-gray-700">
                                                             Coin
                                                         </label>
-                                                        <input id="teacherCoinEdit" placeholder="Enter coin"
+                                                        <input
+                                                            id="teacherCoinEdit"
+                                                            defaultValue={isHoveredId && isHoveredId.coin}
+                                                            placeholder="Enter coin"
                                                             className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
                                                     </div>
                                                 </div>
+
+                                                <label htmlFor="teacherParamEdit" className="text-sm font-medium text-gray-700">
+                                                    Parametrs (bunga faqat uzgaruvchi kiritilishi(ochilishi) kerak)
+                                                </label>
+                                                <input
+                                                    id="teacherParamEdit"
+                                                    defaultValue={isHoveredId && isHoveredId.attribute}
+                                                    placeholder="Enter parametr"
+                                                    className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
 
                                                 {/* plus inputs */}
-                                                <div className="flex justify-between items-center my-3">
-                                                    <div className="mr-1">
-                                                        <label htmlFor="teacherParamEdit" className="text-sm font-medium text-gray-700">
-                                                            Parametr
-                                                        </label>
-                                                        <input id="teacherParamEdit" placeholder="Enter parametr"
-                                                            className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
-                                                    </div>
-                                                    <div className="ml-1 flex justify-between items-center">
-                                                        <div className="mr-2">
-                                                            <label htmlFor="teacherValueEdit" className="text-sm font-medium text-gray-700">
-                                                                Enter value
-                                                            </label>
-                                                            <input id="teacherValueEdit" placeholder="Enter value"
-                                                                className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
+                                                <div className="flex justify-between items-center flex-wrap">
+                                                    {isHoveredId.answer.map((item, i) => (
+                                                        <div className="flex justify-start w-[100%] mt-4">
+                                                            <div className="mr-1">
+                                                                <label htmlFor={`teacherAnswer${i}`} className="text-sm font-medium text-gray-700">
+                                                                    Answer
+                                                                </label>
+                                                                <input
+                                                                    id={`teacherAnswer${i}`}
+                                                                    placeholder="Enter answer"
+                                                                    defaultValue={item}
+                                                                    className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"
+                                                                />
+                                                            </div>
+                                                            <div className="mr-2">
+                                                                <label htmlFor={`teacherValue${i}`} className="text-sm font-medium text-gray-700">
+                                                                    Enter value
+                                                                </label>
+                                                                <input
+                                                                    id={`teacherValue${i}`}
+                                                                    placeholder="Enter value"
+                                                                    className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"
+                                                                />
+                                                            </div>
                                                         </div>
-                                                        <span
-                                                            className="font-bold text-black text-[1.5rem] mt-3 hover:cursor-pointer hover:text-slate-700 duration-300"
-                                                        >+</span>
-                                                    </div>
+                                                    ))}
+                                                    {/* <div className="w-[4%] leading-5">
+                                                        <button
+                                                            className="font-bold text-black text-[1.5rem] mt-10 
+                                                            hover:text-slate-700 duration-300"
+                                                            onClick={handleAddDiv}
+                                                        >+</button>
+                                                        <button
+                                                            className="font-bold text-black text-[1.8rem]
+                                                            hover:text-slate-700 duration-300"
+                                                            onClick={handleRemoveDiv}
+                                                        >-</button>
+                                                    </div> */}
                                                 </div>
-
-                                                <label htmlFor="teacherAnswerEdit" className="text-sm font-medium text-gray-700">
-                                                    Answer
-                                                </label>
-                                                <input id="teacherAnswerEdit" placeholder="Enter answer"
-                                                    className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
 
                                                 {/* buttons */}
                                                 <div className="flex justify-end mt-10">

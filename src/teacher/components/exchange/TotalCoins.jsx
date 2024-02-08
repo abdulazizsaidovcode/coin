@@ -3,8 +3,8 @@ import EChartsReact from 'echarts-for-react';
 
 const TotalCoins = ({ pl }) => {
 
-    const [pn, setPn] = useState(['nima', 'yana']);
-    const [data, setData] = useState(['data', 'dataset']);
+    const [pn, setPn] = useState(null);
+    const [data, setData] = useState(null);
 
     // useEffect(() => {
     //     setPn(pl.map(p => p.categoryName));
@@ -26,14 +26,28 @@ const TotalCoins = ({ pl }) => {
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: pn ? pn : []
+            data: pn ? pn : [
+                {name: 'Yanver'},
+                {name: 'Fevral'},
+                {name: 'Mart'},
+                {name: 'Aprel'},
+                {name: 'May'},
+                {name: 'Iyun'}
+            ]
         },
         series: [
             {
                 name: 'Access From',
                 type: 'pie',
                 radius: '50%',
-                data: data ? data : [],
+                data: data ? data : [
+                    {value: 4, name: 'Yanver'},
+                    {value: 10, name: 'Fevral'},
+                    {value: 7, name: 'Mart'},
+                    {value: 8, name: 'Aprel'},
+                    {value: 5, name: 'May'},
+                    {value: 11, name: 'Iyun'}
+                ],
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,

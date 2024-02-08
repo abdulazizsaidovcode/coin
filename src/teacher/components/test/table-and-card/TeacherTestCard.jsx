@@ -3,7 +3,7 @@ import rasm from "../../../../assits/opacha.jpg";
 import { faClock, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { getFile } from '../../../../components/api/api';
 
-function TeacherTestCard({ allTestCard, getTestTable }) {
+function TeacherTestCard({ allTestCard, getTestTable, setTableHeddin }) {
     return (
         <>
             {allTestCard ?
@@ -34,7 +34,8 @@ function TeacherTestCard({ allTestCard, getTestTable }) {
                             </div>
                             <button className="btm" onClick={() => {
                                 getTestTable(item.categoryId);
-                            }}>See</button>
+                                setTableHeddin(true);
+                            }}>View tests</button>
                         </div>
                     </div>
                 )) :

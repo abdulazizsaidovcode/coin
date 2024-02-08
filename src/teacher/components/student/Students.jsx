@@ -62,7 +62,7 @@ const Students = () => {
     }
 
     return (
-        <div className="p-8 w-full bg-studentTableBg min-h-full">
+        <div className="p-8 w-full bg-studentTableBg min-h-screen">
             <div className=" mb-4 flex justify-between items-center">
                 <h2 className="text-4xl font-bold font-inika text-gray-900 mb-4">Students</h2>
                 <div class="relative">
