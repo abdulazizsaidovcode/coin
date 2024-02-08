@@ -1,19 +1,17 @@
-// TotalCoins.js
-
 import React, { useEffect, useState } from 'react';
 import EChartsReact from 'echarts-for-react';
 
 const TotalCoins = ({ pl }) => {
 
-    const [pn, setPn] = useState(null);
-    const [data, setData] = useState(null);
+    const [pn, setPn] = useState(['nima', 'yana']);
+    const [data, setData] = useState(['data', 'dataset']);
 
-    useEffect(() => {
-        setPn(pl.map(p => p.categoryName));
-        setData(pl.map(p => {
-            return { value: p.coin, name: p.categoryName }
-        }))
-    }, [pl]);
+    // useEffect(() => {
+    //     setPn(pl.map(p => p.categoryName));
+    //     setData(pl.map(p => {
+    //         return { value: p.coin, name: p.categoryName }
+    //     }))
+    // }, [pl]);
 
     const option = {
         title: {

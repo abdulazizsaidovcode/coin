@@ -18,31 +18,31 @@ const Exchange = () => {
                     bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
                     placeholder="🔍  Search" />
             </div>
-            <div className='flex justify-around mb-10 px-10'>
-                <div className='w-5/12 shadow-xl up'>
-                    {/* <TotalCoins /> */}
+            <div className='flex justify-between my-14'>
+                <div className='w-6/12 shadow-xl up duration-300 rounded-lg mr-4'>
+                    <TotalCoins />
                 </div>
-                <div className='w-5/12 shadow-xl up'>
+                <div className='w-6/12 shadow-xl up duration-300 rounded-lg ml-4'>
                     <TotalCoinsmonth />
                 </div>
             </div>
 
             <div>
-                <table className="w-full">
+                <table className="w-full rounded-3xl shadow-lg overflow-hidden">
                     <thead className="bg-gray-800 text-white uppercase text-sm leading-normal">
                         <tr>
-                            <th className="py-3 px-6">No</th>
-                            <th className="py-3 px-6">Photo</th>
-                            <th className="py-3 px-6">Gift name</th>
+                            <th className="py-3 px-6">#</th>
+                            <th className="py-3 px-6">photo</th>
+                            <th className="py-3 px-6">gift name</th>
                             <th className="py-3 px-6">name</th>
-                            <th className="py-3 px-6">Cion</th>
-                            <th className="py-3 px-6">Date</th>
-                            <th className="py-3 px-6">Active</th>
-                            <th className="py-3 px-6">Info</th>
+                            <th className="py-3 px-6">coin</th>
+                            <th className="py-3 px-6">date</th>
+                            <th className="py-3 px-6">active</th>
+                            <th className="py-3 px-6">action</th>
                         </tr>
                     </thead>
                     <tbody className="text-gray-600 font-light">
-                        <tr className="border-b border-gray-200 hover:bg-gray-100">
+                        <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
                             <th className="py-3 px-6">1</th>
                             <td className="py-3 px-6">
                                 <img src='' alt="nofound" />
@@ -61,7 +61,7 @@ const Exchange = () => {
                             </td>
                             <td className="py-3 px-6">
                                 <div className="flex item-center justify-center">
-                                    <button className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline">info</button>
+                                    <button className="text-sm bg-blue-500 hover:bg-blue-600 text-white active:scale-95 tracking-widest rounded-lg shadow-lg font-semibold py-1.5 px-4 duration-300">info</button>
                                 </div>
                             </td>
                         </tr>
