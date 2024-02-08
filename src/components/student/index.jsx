@@ -15,13 +15,14 @@ const AdminStudent = () => {
   const [groupId, setGroupId] = useState("");
   const [group, setGroup] = useState([]);
   const [student, setStudent] = useState([]);
+  const [originalStudent, setOriginalStudent] = useState([]);
+
 
   useEffect(() => {
     setConfig();
     getGroup();
     getStudent();
   }, []);
-
   // Modalni ochish va yopish uchun funksiyalar
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -100,9 +101,19 @@ const AdminStudent = () => {
   const getStudent = () => {
     axios
       .get(url + "user", config)
-      .then((res) => setStudent(res.data.body.object))
+      .then((res) => {
+        setStudent(res.data.body.object);
+        setOriginalStudent(res.data.body.object); // Bu qatordan foydalaning
+      })
       .catch(() => console.log("kelmadi"));
   };
+  const filterStudents = (search) => {
+    const searchText = search.target.value.toLowerCase();
+    const filteredStudents = originalStudent.filter((item) =>
+      item.fullName.toLowerCase().includes(searchText)
+    );
+    setStudent(filteredStudents);
+  }
 
   return (
     <div className=" p-8 pb-28 w-full bg-gray-100">
@@ -134,9 +145,11 @@ const AdminStudent = () => {
           <input
             type="search"
             id="search"
-            class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="block w-full p-4 ps-10 text-sm border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search"
+            onChange={filterStudents}
           />
+
         </div>
       </div>
 
@@ -173,7 +186,13 @@ const AdminStudent = () => {
               </tr>
             </thead>
             <tbody className="text-gray-600 font-light">
-              {student.length != 0 ? (
+              {student.length === 0 ? (
+                <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
+                  <td colSpan="8" className="py-3 px-6">
+                    No result
+                  </td>
+                </tr>
+              ) : (
                 student.map((item, i) => (
                   <tr
                     key={item.id}
@@ -191,7 +210,7 @@ const AdminStudent = () => {
                         className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline"
                         onClick={() => {
                           openModalEdit();
-                          setUserId(item)
+                          setUserId(item);
                         }}
                       >
                         Edit
@@ -199,7 +218,7 @@ const AdminStudent = () => {
                       <button
                         onClick={() => {
                           openModal();
-                          setUserId(item)
+                          setUserId(item);
                         }}
                         className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline ml-3"
                       >
@@ -208,20 +227,9 @@ const AdminStudent = () => {
                     </td>
                   </tr>
                 ))
-              ) : (
-                <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
-                  <td className="py-3 px-6"></td>
-                  <td className="py-3 px-6"></td>
-                  <td className="py-3 px-6"></td>
-                  <td className="py-3 px-6 flex justify-center font-inika font-medium text-lg tracking-wider leading-10">
-                    <Icon icon="eos-icons:three-dots-loading" width="50" />
-                  </td>
-                  <td className="py-3 px-6"></td>
-                  <td className="py-3 px-6"></td>
-                  <td className="py-3 px-6"></td>
-                </tr>
               )}
             </tbody>
+
           </table>
         </div>
       </div>
