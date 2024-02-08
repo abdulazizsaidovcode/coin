@@ -1,32 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "../../../globalcss/style.css";
 import giftImg from "../../../assits/itca.jpg";
-import axios from "axios";
-import { config, getFile, setConfig, url } from "../../../components/api/api";
+import { getFile } from "../../../components/api/api";
 
-const GiftCard = () => {
-  const [gifts, setGifts] = useState([]);
+const GiftCard = ({ gifts }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toShow, setItemToShow] = useState("");
 
-  useEffect(() => {
-    setConfig();
-    getGifts();
-  }, []);
-
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
-  // get gifts
-  const getGifts = () => {
-    axios
-      .get(url + "gift", config)
-      .then((res) => setGifts(res.data.body.object))
-      .catch(() => console.log("kelmadi"));
-  };
-
-  // console.log(gifts);
-  
 
   return (
     <div className="w-full flex flex-wrap justify-evenly mt-10 font-inika">
@@ -88,8 +70,9 @@ const GiftCard = () => {
       ) : (
         <div className="w-1/4 h-96 rounded-xl overflow-hidden shadow-md hover:shadow-xl duration-300 mr-3 mb-8">
           <img className="w-full h-52 object-cover" src={giftImg} alt="Gift" />
-          <div className="px-6 pt-10 w-full flex justify-center items-center">
-            <div className="font-bold text-xl mb-2 text-center">
+          <p className="text-center mt-3">Gift not found 😊</p>
+          <div className="px-6 pt-4 w-full flex justify-center items-center">
+            <div className="font-bold text-xl text-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="80"
