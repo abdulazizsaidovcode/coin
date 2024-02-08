@@ -23,16 +23,7 @@ function Gift() {
   }
 
   function searchGift() {
-    let searchItem = byId("searchGift").value;
-    console.log(searchItem);
-    if (!!searchItem)
-      axios
-        .get(`${url}gift/search?name=${searchItem}`)
-        .then((res) => setGifts(res.data.body));
-    // .catch(()=>{
-    //   getGift();
-    //   });
-    else getGift();
+    
   }
 
   const addGift = async () => {
