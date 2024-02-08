@@ -54,10 +54,9 @@ const Students = () => {
     }
 
     const searchHandler = (e) => {
-        let selectValue = document.getElementById("searchSelect").value
-
+        let selectValue = document.getElementById("searchSelect").value;
         let data = e.target.value;
-        !data ? getStudent() : axios.post(`${url}user/filter/teacher?${selectValue}=${data}`, '', config)
+        !data ? getStudent() : axios.get(`${url}user/filter/teacher?${selectValue}=${data}`, config)
             .then(res => setStudent(res.data.body))
             .catch(() => console.log("student search bulganda kelmadi!"))
     }
@@ -117,7 +116,7 @@ const Students = () => {
                             </tr>
                         </thead>
                         <tbody className="text-gray-600 font-light">
-                            {student.length != 0 ?
+                            {student ?
                                 student.map((item, i) =>
                                     <tr key={item.id} className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
                                         <td className="py-3 px-6">{i + 1}</td>
@@ -130,18 +129,9 @@ const Students = () => {
                                     </tr>
                                 ) :
                                 <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
-                                    <td className='py-3 px-6'></td>
-                                    <td className='py-3 px-6'></td>
-                                    <td className='py-3 px-6'></td>
-                                    <td className="py-3 px-6 flex justify-center font-inika font-medium text-lg tracking-wider leading-10">
-                                        {student === ''
-                                            ? 'Student not found 😊'
-                                            : <Icon icon="eos-icons:three-dots-loading" width="50" />
-                                        }
+                                    <td colSpan='7' className="py-3 px-6 font-inika font-medium text-lg tracking-wider leading-10 text-center">
+                                        Student not found 😊
                                     </td>
-                                    <td className='py-3 px-6'></td>
-                                    <td className='py-3 px-6'></td>
-                                    <td className='py-3 px-6'></td>
                                 </tr>
                             }
                         </tbody>

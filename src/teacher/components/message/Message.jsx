@@ -39,7 +39,7 @@ function Message() {
         axios.get(url + "message/teacher" , config) 
             .then((res) => {
                 setMessages(res.data.body.object)
-                console.log(res.data.body.object);
+                // console.log(res.data.body.object);
             })
             .catch((err) => console.log(err))
     }
@@ -61,7 +61,7 @@ function Message() {
     const getGroup = () => {
         axios.get(url + "group/teacher  ", config)
             .then((res) => {
-                console.log(res.data.body);
+                // console.log(res.data.body);
                 setGroup(res.data.body)
             })
             .catch(() => {})
