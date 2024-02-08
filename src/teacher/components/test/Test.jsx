@@ -10,6 +10,8 @@ const Test = () => {
     const [allTestTable, setAllTestTable] = useState([]);
     const [testCategorySub, setTestCategorySub] = useState([]);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [tableHeddin, setTableHeddin] = useState(false);
+
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     useEffect(() => {
@@ -51,13 +53,28 @@ const Test = () => {
                     bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
                     placeholder="🔍  Search" />
             </div>
-            <TeacherTestCard allTestCard={allTestCard} getTestTable={getTestTable} />
+            <div className="mt-10">
+                <TeacherTestCard
+                    allTestCard={allTestCard}
+                    getTestTable={getTestTable}
+                    setTableHeddin={setTableHeddin}
+                />
+            </div>
             <div className='mt-5'>
-                <TeacherTestTable allTestTable={allTestTable} getTestTable={getTestTable} />
+                <TeacherTestTable
+                    allTestTable={allTestTable}
+                    testCategorySub={testCategorySub}
+                    tableHeddin={tableHeddin}
+                    getTestTable={getTestTable}
+                />
             </div>
 
             {/* test modals */}
-            <AddModal isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} testCategorySub={testCategorySub} />
+            <AddModal
+                isMenuOpen={isMenuOpen}
+                testCategorySub={testCategorySub}
+                toggleMenu={toggleMenu}
+            />
         </div>
     )
 }

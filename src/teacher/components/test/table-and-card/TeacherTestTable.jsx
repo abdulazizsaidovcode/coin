@@ -2,15 +2,15 @@ import { Icon } from "@iconify/react";
 import EditModal from "../modals/EditModal";
 import { useState } from "react";
 
-function TeacherTestTable({ getTestTable, allTestTable }) {
+function TeacherTestTable({ getTestTable, testCategorySub, allTestTable, tableHeddin }) {
     const [isEditMenuOpen, setEditIsMenuOpen] = useState(false);
     const [isHoveredId, setIsHoveredId] = useState([]);
 
     const toggleEditMenu = () => setEditIsMenuOpen(!isEditMenuOpen);
 
     return (
-        <div className="w-full mt-8 shadow-md rounded-3xl overflow-hidden">
-            <table className="w-full">
+        <div className={`w-full ${tableHeddin ? 'visible mt-8 shadow-md rounded-3xl overflow-hidden' : 'hidden'}`}>
+            <table className={`w-full`}>
                 <thead className="bg-gray-800 text-white rounded-t-2xl uppercase text-sm leading-normal">
                     <tr>
                         <th className="py-3 px-6">#</th>
@@ -32,8 +32,8 @@ function TeacherTestTable({ getTestTable, allTestTable }) {
                                 <td className="py-3 px-6">{item.time}</td>
                                 <td className="py-3 px-6">{item.coin}</td>
                                 <td className="py-3 px-6">{item.categoryName}</td>
-                                <td className="py-3 px-6">{item.attribute}</td>
-                                <td className="py-3 px-6 relative">{item.answer}</td>
+                                <td className="py-3 px-6">{` ${item.attribute} `}</td>
+                                <td className="py-3 px-6 relative">{`${item.answer}`}</td>
                                 <td className="py-3 px-6">
                                     <button
                                         className="bg-yellow-500 rounded-lg px-5 py-1.5 font-semibold text-black shadow-xl hover:bg-yellow-600 active:scale-95 duration-300"
@@ -63,7 +63,12 @@ function TeacherTestTable({ getTestTable, allTestTable }) {
             </table>
 
             {/* edit modal */}
-            <EditModal isEditMenuOpen={isEditMenuOpen} toggleEditMenu={toggleEditMenu} isHoveredId={isHoveredId} />
+            <EditModal
+                toggleEditMenu={toggleEditMenu}
+                isEditMenuOpen={isEditMenuOpen}
+                testCategorySub={testCategorySub}
+                isHoveredId={isHoveredId}
+            />
         </div>
     );
 }
