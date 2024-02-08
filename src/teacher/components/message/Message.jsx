@@ -77,17 +77,17 @@ function Message() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
         {messages.map((item, i) => (
-          <div key={i} className="border rounded shadow p-3">
+          <div key={i} className="border rounded shadow hover:shadow-lg duration-300 hover:scale-[102%] p-3 relative">
             <h2 className="font-bold text-lg mb-3" >{item.groupName}</h2>
-            <p className="text-gray-700 text-base">
+            <p className="text-gray-700 text-base mb-6">
               {isMore ? item.description : cutDescription(item.description)}
               {/* {cutDescription(item.description)} */}
               <span
-                className='font-semibold ms-3 hover:cursor-pointer hover:text-black duration-200'
+                className='font-bold tracking-wide ms-3 hover:cursor-pointer hover:text-black duration-200'
                 onClick={openMore}
               >{isMore ? 'back' : 'more'}</span>
             </p>
-            <div className="text-right">
+            <div className="absolute bottom-2 right-3">
               <span className="text-sm font-semibold">{item.date}</span>
             </div>
           </div>
