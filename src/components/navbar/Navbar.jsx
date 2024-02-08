@@ -71,6 +71,7 @@ const Navbarcha = () => {
       });
   };
 
+
   const logOut = () => byId("logout").click();
 
   return (

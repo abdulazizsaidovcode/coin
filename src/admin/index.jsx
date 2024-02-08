@@ -1,11 +1,6 @@
 import React from "react";
 import SidebarTemplate from "../components/sidebar/SidebarTemplate";
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "../components/Dashboard";
-import GiftCard from "../components/card";
-import TotalCoins from "../components/Total coins";
-import TopGroup from "../components/TopGroups";
-import TopTeachers from "../components/Topteachers";
 import Category from "../components/category";
 import Gift from "../components/gift";
 import Exchange from "../components/exchange";
@@ -16,6 +11,7 @@ import Navbarcha from "../components/navbar/Navbar";
 import AdminGroup from "./adminGroup";
 import AdminStudent from "../components/student";
 import GrStudents from "./adminGroup/student/Students";
+import Dashboard from "../components/dashboard/Dashboard";
 
 function Admin() {
   const getme = sessionStorage.getItem("getMeInfo")
@@ -29,10 +25,6 @@ function Admin() {
           <Route path="/admin/group" element={<AdminGroup />} />
           <Route path="/admin/student" element={<AdminStudent />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/giftCard" element={<GiftCard />} />
-          <Route path="/admin/totalcoins" element={<TotalCoins />} />
-          <Route path="/admin/topgroup" element={<TopGroup />} />
-          <Route path="/admin/topteachers" element={<TopTeachers />} />
           <Route path="/admin/category" element={<Category />} />
           <Route path="/admin/gift" element={<Gift />} />
           <Route path="/admin/exchange" element={<Exchange />} />
