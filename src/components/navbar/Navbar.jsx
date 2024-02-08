@@ -77,9 +77,9 @@ const Navbarcha = () => {
     <div className="bg-gray-100">
       <Link to="/" id="logout"></Link>
       <div className="">
-        <div className="flex py-2 lg:py-0 justify-between lg:justify-end fixed items-center w-full left-0 z-20 bg-white px-8 ">
+        <div className="flex xl:py-2 justify-between xl:justify-end fixed items-center w-full left-0 z-20 bg-white px-8 ">
           {/* Qidiruv maydoni */}
-          <div className="flex lg:hidden items-center space-x-1 w-32 h-20">
+          <div className="flex xl:hidden items-center space-x-1 w-32 h-20">
             <img className=' object-cover' src={logo} alt="logo" />
           </div> 
           <div className="relative left-0">
