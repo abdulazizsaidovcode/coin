@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react";
 import EditModal from "../modals/EditModal";
 import { useState } from "react";
 
