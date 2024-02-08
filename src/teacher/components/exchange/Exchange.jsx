@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TotalCoins from '../total-coins/TotalCoins';
+import TotalCoins from './TotalCoins';
 import TotalCoinsmonth from './total-coin-month';
 
 const Exchange = () => {
