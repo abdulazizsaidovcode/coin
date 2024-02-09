@@ -175,7 +175,7 @@ const StudentNavbar = () => {
           </div>
         </div>
         <div className="px-8 pt-8">
-          <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800">
+          <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800 capitalize">
             Hi {name.fullName}
           </h1>
           <span className="text-sm text-gray-600">
