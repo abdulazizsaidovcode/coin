@@ -5,7 +5,7 @@ import { config, setConfig, url } from "../../../components/api/api";
 import axios from "axios";
 
 function Gift() {
-    const [gifts, setGifts] = useState([]);
+    const [gifts, setGifts] = useState(null);
 
     useEffect(() => {
         setConfig();
