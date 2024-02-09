@@ -26,7 +26,7 @@ const StudentNavbar = () => {
         setName(res.data.body);
       })
       .catch((err) =>
-        console.log("Boshqa backendinchi topiyla iltomos 😭", err)
+        console.log(err)
       );
   }, []);
 
@@ -118,7 +118,7 @@ const StudentNavbar = () => {
                   alt="Admin"
                   className="rounded-full w-12 h-12 p-1 border"
                 />
-                <span className="hidden md:block">{name.fullName}</span>
+                <span className="hidden md:block capitalize">{name.fullName}</span>
               </button>
             </div>
             <div
@@ -140,7 +140,7 @@ const StudentNavbar = () => {
                 </span>
               </div>
               <div className="px-6 py-2">
-                <div className="font-bold text-xl mb-2 text-center">
+                <div className="font-bold text-xl mb-2 text-center capitalize">
                   {name.fullName}
                 </div>
                 <p className="text-center text-black">{name.phoneNumber}</p>
@@ -168,14 +168,14 @@ const StudentNavbar = () => {
                     sessionStorage.clear();
                   }}
                 >
-                  log out
+                  Log out
                 </button>
               </div>
             </div>
           </div>
         </div>
         <div className="px-8 pt-8">
-          <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800">
+          <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800 capitalize">
             Hi {name.fullName}
           </h1>
           <span className="text-sm text-gray-600">
@@ -185,7 +185,7 @@ const StudentNavbar = () => {
       </div>
 
       {editModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 ">
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-20 ">
           <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
@@ -320,20 +320,21 @@ const StudentNavbar = () => {
                   </select>
                 </div>
               </div>
-              <div className="flex justify-end">
+              <div className="flex justify-between">
                 <button
                   onClick={closeModalEdit}
-                  className="btm-close me-2 bg-red-900"
+                  className="btm-close me-2 bg-red-900 "
                 >
                   Close
                 </button>
                 <button
+                  
                   onClick={() => {
                     editUser();
                   }}
                   className="btm"
                 >
-                  Edit
+                  Save
                 </button>
               </div>
             </div>

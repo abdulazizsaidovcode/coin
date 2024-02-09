@@ -5,7 +5,7 @@ import { config, setConfig, url } from "../../../components/api/api";
 import axios from "axios";
 
 function Gift() {
-    const [gifts, setGifts] = useState([]);
+    const [gifts, setGifts] = useState(null);
 
     useEffect(() => {
         setConfig();
@@ -24,7 +24,7 @@ function Gift() {
         let data = e.target.value
         !data ? getGifts() :
             axios.get(`${url}gift/search?name=${data}`, config)
-                .then(res => setGifts(res.data.body))
+                .then(res => res.data.body.length === 0 ? setGifts(null) : setGifts(res.data.body))
                 .catch(err => console.log('Teacher panel gift filterda error: ', err));
     }
 
@@ -41,7 +41,7 @@ function Gift() {
                         placeholder="🔍   Search" />
                 </div>
             </div>
-            <GiftCard gifts={gifts} />
+             <GiftCard gifts={gifts} />
         </div>
     );
 }

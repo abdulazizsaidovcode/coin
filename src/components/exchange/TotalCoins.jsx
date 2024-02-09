@@ -1,5 +1,3 @@
-// TotalCoins.js
-
 import React, { useEffect, useState } from 'react';
 import EChartsReact from 'echarts-for-react';
 
@@ -8,12 +6,12 @@ const TotalCoins = ({ pl }) => {
     const [pn, setPn] = useState(null);
     const [data, setData] = useState(null);
 
-    useEffect(() => {
-        setPn(pl.map(p => p.categoryName));
-        setData(pl.map(p => {
-            return { value: p.coin, name: p.categoryName }
-        }))
-    }, [pl]);
+    // useEffect(() => {
+    //     setPn(pl.map(p => p.categoryName));
+    //     setData(pl.map(p => {
+    //         return { value: p.coin, name: p.categoryName }
+    //     }))
+    // }, [pl]);
 
     const option = {
         title: {
@@ -28,14 +26,28 @@ const TotalCoins = ({ pl }) => {
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: pn ? pn : [{ categoryName: 'Loading...' }]
+            data: pn ? pn : [
+                {name: 'Yanver'},
+                {name: 'Fevral'},
+                {name: 'Mart'},
+                {name: 'Aprel'},
+                {name: 'May'},
+                {name: 'Iyun'}
+            ]
         },
         series: [
             {
                 name: 'Access From',
                 type: 'pie',
                 radius: '50%',
-                data: data ? data : [{ coin: 100, categoryName: "Loading..." }],
+                data: data ? data : [
+                    {value: 4, name: 'Yanver'},
+                    {value: 10, name: 'Fevral'},
+                    {value: 7, name: 'Mart'},
+                    {value: 8, name: 'Aprel'},
+                    {value: 5, name: 'May'},
+                    {value: 11, name: 'Iyun'}
+                ],
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,

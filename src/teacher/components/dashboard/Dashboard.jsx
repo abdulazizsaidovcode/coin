@@ -14,41 +14,24 @@ const Dashboard = () => {
     const [topStudent, setTopStudent] = useState(null);
     const [topGroup, setTopGroup] = useState(null);
     const [pl, setPl] = useState(null);
-    const [name, setName] = useState([]);
 
     useEffect(() => {
         setConfig();
-        axios
-            .get(url + "user/statistic", config)
+        axios.get(url + "user/statistic", config)
             .then((res) => setSTMGSize(res.data.body))
             .catch(() => toast.warning("internetga blan aloqani tekshirig!"));
-        axios
-            .get(url + "user/top/teachers", config)
+        axios.get(url + "user/top/teachers", config)
             .then((res) => setTopTeacher(res.data.body))
             .catch((err) => console.log(err));
-        axios
-            .get(url + "user/top/student", config)
+        axios.get(url + "user/top/student", config)
             .then((res) => setTopStudent(res.data.body))
             .catch((err) => console.log(err));
-        axios
-            .get(url + "group/topGroupsForAdmin", config)
+        axios.get(url + "group/top-groups-for-teacher", config)
             .then((res) => setTopGroup(res.data.body))
             .catch((err) => console.log(err));
-        axios
-            .get(url + "coin/history/course/statistics", config)
+        axios.get(url + "coin/history/course/statistics", config)
             .then((res) => setPl(res.data.body))
             .catch((err) => console.log(err));
-    }, []);
-
-    useEffect(() => {
-        axios
-            .get(url + "user/getMe", config)
-            .then((response) => {
-                setName(response.data.body.fullName);
-            })
-            .catch((error) => {
-                console.log("Boshqa backendinchi topiyla iltimos 😭", error);
-            });
     }, []);
 
     return (

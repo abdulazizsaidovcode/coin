@@ -3,29 +3,28 @@ import React, { useEffect, useState } from 'react';
 import { byId, config, setConfig, url } from '../../../components/api/api';
 import avatar from "../../../assits/itca.jpg";
 import { Link } from 'react-router-dom';
-import { Icon } from '@iconify/react';
 
 const GroupsTable = () => {
-    const [groups, setGroups] = useState([]);
+    const [groups, setGroups] = useState(null);
 
     useEffect(() => {
         setConfig();
-        getCategory();
+        getGroup();
     }, []);
 
-    const getCategory = () => {
+    const getGroup = () => {
         axios.get(url + "group/teacher", config)
             .then(res => setGroups(res.data.body))
-            .catch(() => console.log("kelmadi"))
+            .catch(() => console.log("Teacher panel group kelmadi"))
     }
 
     const goStudent = () => byId("goStudent").click();
 
     const groupSearchHandler = (e) => {
         let data = e.target.value;
-        !data ? getCategory() : axios.get(`${url}group/search/${data}`, config)
-            .then(res => setGroups(res.data.body))
-            .catch(() => console.log("kelmadi"))
+        !data ? getGroup() : axios.get(`${url}group/search/${data}`, config)
+            .then(res => res.data.body.length === 0 ? setGroups(null) : setGroups(res.data.body))
+            .catch(() => console.log("Teacher panel group kelmadi"))
     }
 
     return (
@@ -50,8 +49,7 @@ const GroupsTable = () => {
                             <table className="min-w-full bg-white">
                                 <thead className="bg-gray-800 text-white">
                                     <tr>
-                                        {/* Table Headers */}
-                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">No</th>
+                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">#</th>
                                         <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Photo</th>
                                         <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Name</th>
                                         <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Coin</th>
@@ -59,22 +57,15 @@ const GroupsTable = () => {
                                     </tr>
                                 </thead>
                                 <tbody className="text-gray-700">
-                                    {groups.length !== 0 ?
+                                    {groups ?
                                         groups.map((group, i) => (
                                             <tr key={group.id} className='even:bg-slate-100 hover:bg-slate-200 duration-200 text-center'>
                                                 <td className="py-3 px-6 border-b border-gray-200">{i + 1}</td>
                                                 <td className="py-3 px-6 border-b border-gray-200 flex justify-center items-center">
-                                                    <img
-                                                        src={avatar}
-                                                        alt="avatar"
-                                                        className="h-16 w-16 rounded-full" />
+                                                    <img src={avatar} alt="avatar" className="h-16 w-16 rounded-full" />
                                                 </td>
-                                                <td className="py-3 px-6 border-b border-gray-200">
-                                                    {group.name === null ? "Yo'q" : group.name}
-                                                </td>
-                                                <td className="py-3 px-6 border-b border-gray-200">
-                                                    {group.coin === null ? "Yo'q" : group.coin}
-                                                </td>
+                                                <td className="py-3 px-6 border-b border-gray-200">{group.name}</td>
+                                                <td className="py-3 px-6 border-b border-gray-200">{group.coin}</td>
                                                 <td className="py-3 px-6 border-b border-gray-200">
                                                     <button className='btm' onClick={() => {
                                                         goStudent();
@@ -84,13 +75,9 @@ const GroupsTable = () => {
                                             </tr>
                                         )) :
                                         <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
-                                            <td className='py-3 px-6'></td>
-                                            <td className='py-3 px-6'></td>
-                                            <td className="py-3 px-6 font-inika text-center flex justify-center font-medium text-lg tracking-wider leading-10">
-                                                <Icon icon="eos-icons:three-dots-loading" width="50" />
+                                            <td colSpan='5' className="py-3 px-6 font-inika text-center font-medium text-lg tracking-wider leading-10">
+                                                Group not found 😊
                                             </td>
-                                            <td className='py-3 px-6'></td>
-                                            <td className='py-3 px-6'></td>
                                         </tr>
                                     }
                                 </tbody>

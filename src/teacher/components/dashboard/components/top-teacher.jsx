@@ -9,7 +9,7 @@ export const CircularProgress = ({ percentage, color }) => {
     const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
     return (
-        <div className="flex items-center space-x-2">
+        <div className="flex justify-center items-center space-x-2">
             <svg height={radius * 2} width={radius * 2}>
                 <circle
                     stroke="#e6e6e6"
@@ -52,7 +52,7 @@ const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
                     <li key={number} className="mr-2">
                         <button
                             onClick={() => paginate(number)}
-                            className="text-white hover:text-blue-600 hover:underline px-3 py-1 rounded bg-blue-500"
+                            className="text-white hover:text-blue-600 hover:bg-slate-200 hover:font-extrabold font-semibold shadow-xl duration-200 hover:underline px-3 py-1 rounded-lg bg-blue-500"
                         >
                             {number}
                         </button>
@@ -105,7 +105,7 @@ const TopTeachers = ({ teacherList }) => {
                                 <td className="px-5 py-3 whitespace-nowrap text-gray-500">{index + 1}</td>
                                 <td className="px-5 py-3 whitespace-nowrap text-gray-500">{teacher.teacherName}</td>
                                 <td className="px-5 py-3 whitespace-nowrap text-gray-500">{teacher.numberOfStudent}</td>
-                                <td className="px-5 py-3 whitespace-nowrap text-right">
+                                <td className="px-5 py-3 whitespace-nowrap">
                                     <CircularProgress percentage={teacher.rate} color={teacher.color} />
                                 </td>
                             </tr>

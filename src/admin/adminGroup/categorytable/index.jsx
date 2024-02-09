@@ -107,7 +107,7 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
                   </tr>
                 </thead>
                 <tbody className="text-gray-700">
-                  {groups.length !== 0 ? (
+                  {groups &&
                     groups.map((group, i) => (
                       <tr
                         key={i}
@@ -156,18 +156,7 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
                           </button>
                         </td>
                       </tr>
-                    ))
-                  ) : (
-                    <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
-                      <td className="py-3 px-6"></td>
-                      <td className="py-3 px-6"></td>
-                      <td className="py-3 px-6 font-inika text-center flex justify-center font-medium text-lg tracking-wider leading-10">
-                        <Icon icon="eos-icons:three-dots-loading" width="50" />
-                      </td>
-                      <td className="py-3 px-6"></td>
-                      <td className="py-3 px-6"></td>
-                    </tr>
-                  )}
+                    ))}
                 </tbody>
               </table>
             </div>
@@ -291,14 +280,14 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
             </div>
             {/* Modal body */}
             <div className="mt-6 pb-6 border-b font-medium text-lg">
-              Categoryni o'chirmoqchimisiz?
+              Do you want to delete this group?
             </div>
             <div className="flex justify-end items-center mt-5">
               <button
                 onClick={closeModalDelete}
                 className="font-semibold bg-red-600 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300"
               >
-                Close
+                No
               </button>
               <button
                 onClick={deleteGroup}

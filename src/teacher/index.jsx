@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "./sidebar/SidebarTemplate";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Navbarcha from "../components/navbar/Navbar";
 import Dashboard from "./components/dashboard/Dashboard";
 import Category from "./components/category/Category";
@@ -14,6 +14,12 @@ import Students from "./components/student/Students";
 import Test from "./components/test/Test";
 
 function Teacher() {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+    
     return (
         <div className="flex w-full">
             <Sidebar />

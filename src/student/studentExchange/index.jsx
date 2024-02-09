@@ -1,14 +1,21 @@
 import "../../globalcss/style.css"
-import React from 'react';
+import React, { useState } from 'react';
 import GiftCard from "../studentGift/Giftcard";
 import StudentExchangeCard from "./exchangecard";
+
+const Exchange = () =>{
+    const [data,setData] = useState([]);
+    const toggleActive = (id) =>{
+        setData(data.map(item => item.id === id ? {...item, active: !item.active} : item));
+    }
+}
 
 function StudentExchange() {
     return (
         <div className="bg-gray-100 min-h-screen p-8 w-full ">
             <div className="flex justify-between items-center">
                 <div>
-                    <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Exchange</h2>
+                    <h2 className="text-4xl font-bold font-inika text-gray-900 mb-4">Exchange</h2>
                 </div>
                 <div className=" mb-2 flex justify-between">
                     <div class="relative">
