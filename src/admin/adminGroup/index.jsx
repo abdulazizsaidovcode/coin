@@ -25,8 +25,9 @@ const AdminGroup = () => {
       .get(url + "group", config)
       .then((res) => {
         setGroups(res.data.body.object);
+        console.log(res.data.body.object);
       })
-      .catch(() => console.log("kelmadi"));
+      .catch((err) => {});
   };
 
   const addGroup = () => {
@@ -43,7 +44,7 @@ const AdminGroup = () => {
       )
       .then((response) => {
         toast.success("Group succesfully add!");
-        getCategory()
+        getCategory();
         closeModal();
       })
       .catch((error) => {
@@ -57,14 +58,23 @@ const AdminGroup = () => {
       .get(url + "user/teacher", config)
       .then((res) => {
         setTeacher(res.data.body);
-        console.log(res.data.body);
       })
       .catch(() => console.log("kelmadi"));
   };
 
+  const groupSearchHandler = (e) => {
+    let data = e.target.value;
+    !data
+      ? getCategory()
+      : axios
+          .get(`${url}group/search/${data}`, config)
+          .then((res) => setGroups(res.data.body))
+          .catch(() => console.log("kelmadi"));
+  };
+
   const getCategoryId = () => {
     axios
-      .get(url + "category/father/category", config)
+      .get(url + "category/father", config)
       .then((res) => {
         setCategory(res.data.body);
       })
@@ -73,9 +83,21 @@ const AdminGroup = () => {
 
   return (
     <div className="min-h-screen w-full bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <button id="openMenuButton" className="btm" onClick={openModal}>
-        + Add
-      </button>
+      <div className=" mb-2 flex justify-between items-center flex-wrap font-inika">
+        <button id="openMenuButton" className="btm" onClick={openModal}>
+          + Add
+        </button>
+        <input
+          type="search"
+          id="search"
+          onChange={groupSearchHandler}
+          className="block w-80 p-3 ps-3 text-sm border border-gray-300 rounded-lg 
+                        bg-gray-50 focus:outline-0 duration-300 focus:border-blue-500  
+                        dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 
+                        dark:focus:border-blue-500"
+          placeholder="🔍  Search"
+        />
+      </div>
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
           <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
@@ -112,7 +134,8 @@ const AdminGroup = () => {
                   <option selected disabled>
                     Select category
                   </option>
-                  {category && category.map((item, i) => (
+                  {category &&
+                    category.map((item, i) => (
                       <option key={i} value={item.id}>
                         {item.name}
                       </option>
@@ -133,7 +156,7 @@ const AdminGroup = () => {
                   <option selected disabled>
                     Select teacher
                   </option>
-                  {teacher.length &&
+                  {teacher &&
                     teacher.map((item, i) => (
                       <option key={i} value={item.id}>
                         {item.fullName}
@@ -157,8 +180,17 @@ const AdminGroup = () => {
           </div>
         </div>
       )}
-
-      {groups && category && teacher && <GroupsTable teacher={teacher} category={category} groups={groups} setGroups={setGroups} getGroup={getCategory}/>}
+      {groups ? (
+        <GroupsTable
+          teacher={teacher}
+          category={category}
+          groups={groups}
+          setGroups={setGroups}
+          getGroup={getCategory}
+        />
+      ) : (
+        "FFFFFfff"
+      )}
     </div>
   );
 };
