@@ -1,7 +1,14 @@
 import "../../globalcss/style.css"
-import React from 'react';
+import React, { useState } from 'react';
 import GiftCard from "../studentGift/Giftcard";
 import StudentExchangeCard from "./exchangecard";
+
+const Exchange = () =>{
+    const [data,setData] = useState([]);
+    const toggleActive = (id) =>{
+        setData(data.map(item => item.id === id ? {...item, active: !item.active} : item));
+    }
+}
 
 function StudentExchange() {
     return (
