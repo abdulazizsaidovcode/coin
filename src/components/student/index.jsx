@@ -5,7 +5,7 @@ import { byId, config, getFile, setConfig, url } from "../api/api";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const AdminStudent = () => {
+const                              AdminStudent = () => {
   const [modal, setIsModalOpen] = useState(false);
   const [editModal, setIsModalOpenEdit] = useState(false);
   const [userId, setUserId] = useState([]);
