@@ -31,12 +31,13 @@ function Category() {
   const filterCategory = (item) => {
     axios.get(`${url}category/sub`, config)
       .then(res => {
-        console.log();
-        if (res.status === 200) setCategoriesub(res.data.body.filter(c => c.categoryId == item))
+        res.data.body.filter(c => c.categoryId == item).length === 0
+          ? setCategoriesub(null)
+          : setCategoriesub(res.data.body.filter(c => c.categoryId == item))
       })
       .catch((err) => {
-        if (err.response.status === 409) setCategoriesub('')
-        console.log("Cub category kelmadi! catchga tushdi!")
+        if (err.response.status === 409) setCategoriesub(null)
+        console.log("Teacher panel cub category kelmadi! catchga tushdi!")
       })
   }
 
