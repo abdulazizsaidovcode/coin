@@ -220,7 +220,7 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                                     </tr>
                                 </thead>
                                 <tbody className="text-gray-700">
-                                    {categorysub.length !== 0 ?
+                                    {categorysub ?
                                         categorysub.map((category, i) => (
                                             <tr key={category.id} className='even:bg-slate-200 hover:bg-slate-300 duration-200 text-center'>
                                                 <td className="py-3 px-6 border-b border-gray-200">{i + 1}</td>

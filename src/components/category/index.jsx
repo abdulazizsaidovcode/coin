@@ -14,7 +14,7 @@ function Category() {
 
 
   const getCategory1 = () => {
-    axios.get(url + "category/father/category", config)
+    axios.get(url + "category/father", config)
         .then(res => setCategoriesF(res.data.body))
         .catch(() => console.log("kelmadi"))
 }

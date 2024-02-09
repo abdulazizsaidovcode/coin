@@ -2,24 +2,22 @@ import React, { useEffect, useState } from 'react';
 import CategoryTable from "../category-table/CategoryTable";
 import "../../../globalcss/style.css";
 import AddModalCanvas from "../offcanvas/Offcanvas";
-import { config, url } from '../../../components/api/api';
+import { config, setConfig, url } from '../../../components/api/api';
 import axios from 'axios';
 
 function Category() {
-  const [categories, setCategories] = useState([]);
-  const [categorysub, setCategoriesub] = useState([]);
+  const [categories, setCategories] = useState(null);
+  const [categorysub, setCategoriesub] = useState(null);
 
   useEffect(() => {
+    setConfig();
     getCategory1()
     getCategoryChild()
   }, [])
 
   const getCategory1 = () => {
     axios.get(url + "category/father", config)
-      .then(res => {
-        setCategories(res.data.body)
-        console.log(res.data);
-      })
+      .then(res => setCategories(res.data.body))
       .catch((err) => console.log("Teacher panel category kelmadi: ", err))
   }
 
@@ -33,6 +31,7 @@ function Category() {
   const filterCategory = (item) => {
     axios.get(`${url}category/sub`, config)
       .then(res => {
+        console.log();
         if (res.status === 200) setCategoriesub(res.data.body.filter(c => c.categoryId == item))
       })
       .catch((err) => {
