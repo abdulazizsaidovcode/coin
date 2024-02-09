@@ -19,7 +19,7 @@ function Studentmessage() {
     return (
         <div className=" mx-auto p-8 bg-gray-100 h-screen">
             <div className="mb-10">
-                <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Message</h2>
+                <h2 className="text-4xl font-bold font-inika text-gray-900 mb-4">Message</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -7,7 +7,7 @@ function StudentGift() {
         <div className="bg-gray-100 h-screen p-8 w-full ">
             <div className=" mb-2 flex justify-between">
                 <div>
-                    <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Gift</h2>
+                    <h2 className="text-4xl font-bold font-inika text-gray-900 mb-4">Gift</h2>
                 </div>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex  ps-3 mt-5 pointer-events-none">
