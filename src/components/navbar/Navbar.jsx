@@ -110,7 +110,7 @@ const Navbarcha = () => {
               {/* Menu items */}
               <div className="h-40 bg-profileColor rounded-t-xl flex justify-center items-center">
                 <img className="w-20 h-20 rounded-full" src={avatar} alt="Gift" />
-                <span className="absolute right-3 top-3 hover:text-gray-200 duration-200 text-white cursor-pointer"
+                <span className="absolute right-3 top-3 hover:text-gray-200 duration-200 text-white cursor-pointer "
                   onClick={toggleMenu}>
                   <i className="fa-solid fa-xmark"></i>
                 </span>
@@ -138,13 +138,13 @@ const Navbarcha = () => {
                      logOut();
                     sessionStorage.clear();
                   }}
-                >log out</button>
+                >Log out</button>
               </div>
             </div>
           </div>
         </div>
         <div className="px-8 pt-28">
-          <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800">
+          <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800 capitalize">
             Hi {name.fullName}
           </h1>
           <span className="text-sm text-gray-600">

@@ -118,7 +118,7 @@ const StudentNavbar = () => {
                   alt="Admin"
                   className="rounded-full w-12 h-12 p-1 border"
                 />
-                <span className="hidden md:block">{name.fullName}</span>
+                <span className="hidden md:block capitalize">{name.fullName}</span>
               </button>
             </div>
             <div
@@ -140,7 +140,7 @@ const StudentNavbar = () => {
                 </span>
               </div>
               <div className="px-6 py-2">
-                <div className="font-bold text-xl mb-2 text-center">
+                <div className="font-bold text-xl mb-2 text-center capitalize">
                   {name.fullName}
                 </div>
                 <p className="text-center text-black">{name.phoneNumber}</p>
@@ -168,14 +168,14 @@ const StudentNavbar = () => {
                     sessionStorage.clear();
                   }}
                 >
-                  log out
+                  Log out
                 </button>
               </div>
             </div>
           </div>
         </div>
         <div className="px-8 pt-8">
-          <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800">
+          <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800 capitalize">
             Hi {name.fullName}
           </h1>
           <span className="text-sm text-gray-600">

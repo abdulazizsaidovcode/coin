@@ -75,7 +75,7 @@ function StudentSidebar() {
                                         <i class="fa-solid fa-gift"></i>
                                     </span>
                                 </div>
-                                <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>gift</span>
+                                <span className={`ml-2 ${isExpanded ? 'block' : 'hidden'}`}>Gift</span>
                             </Link>
                         </li>
                         <li className='py-2'>
