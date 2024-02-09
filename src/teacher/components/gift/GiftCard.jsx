@@ -10,8 +10,6 @@ const GiftCard = ({ gifts }) => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  if (gifts.length === 0) gifts = null
-
   return (
     <div className="w-full flex flex-wrap justify-evenly mt-10 font-inika">
       {gifts ? (

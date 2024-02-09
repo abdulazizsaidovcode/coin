@@ -24,7 +24,7 @@ function Gift() {
         let data = e.target.value
         !data ? getGifts() :
             axios.get(`${url}gift/search?name=${data}`, config)
-                .then(res => setGifts(res.data.body))
+                .then(res => res.data.body.length === 0 ? setGifts(null) : setGifts(res.data.body))
                 .catch(err => console.log('Teacher panel gift filterda error: ', err));
     }
 
