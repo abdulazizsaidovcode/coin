@@ -26,7 +26,7 @@ const StudentNavbar = () => {
         setName(res.data.body);
       })
       .catch((err) =>
-        console.log("Boshqa backendinchi topiyla iltomos 😭", err)
+        console.log(err)
       );
   }, []);
 
@@ -320,20 +320,21 @@ const StudentNavbar = () => {
                   </select>
                 </div>
               </div>
-              <div className="flex justify-end">
+              <div className="flex justify-between">
                 <button
                   onClick={closeModalEdit}
-                  className="btm-close me-2 bg-red-900"
+                  className="btm-close me-2 bg-red-900 "
                 >
                   Close
                 </button>
                 <button
+                  
                   onClick={() => {
                     editUser();
                   }}
                   className="btm"
                 >
-                  Edit
+                  Save
                 </button>
               </div>
             </div>
