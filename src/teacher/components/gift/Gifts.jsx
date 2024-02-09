@@ -41,7 +41,7 @@ function Gift() {
                         placeholder="🔍   Search" />
                 </div>
             </div>
-            <GiftCard gifts={gifts} />
+             <GiftCard gifts={gifts} />
         </div>
     );
 }

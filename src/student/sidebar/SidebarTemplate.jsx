@@ -1,37 +1,74 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import img from '../../assits//IT-CA-logo.png'; // O'zgartiring, agar yo'l noto'g'ri bo'lsa
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import img from "../../assits/IT-CA-logo.png"; // O'zgartiring, agar yo'l noto'g'ri bo'lsa
+import MobileBar from "./mobileBar";
 
-function StudentSidebar() {
-    const [isExpanded, setIsExpanded] = useState(window.innerWidth > 992);
-    // Oyna o'lchamini kuzatish
-    useEffect(() => {
-        const handleResize = () => {
-            setIsExpanded(window.innerWidth > 992);
-        };
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-    return (
-        <>
-            
-            <div className={`bg-white h-full border-r ${isExpanded ? 'w-64' : 'w-20'} transition-width duration-300 ease-in-out`}>
-                <div className="flex items-center justify-between h-16 border-b py-9">
-                    <img className={`transition-all duration-300 ease-in-out ${isExpanded ? 'w-3/5 ' : 'hidden'}`} src={img} alt="Logo" />
-                    <button onClick={() => setIsExpanded(!isExpanded)} className="p-2 rounded-full focus:outline-none focus:bg-gray-100 hover:bg-gray-100 mr-2 ml-5">
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            {isExpanded ? (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                            ) : (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 8h16M4 16h16" />
-                            )}
-                        </svg>
-                    </button>
-                </div>
-                <div className="flex-grow overflow-y-auto">
-                    <ul className="flex flex-col py-4">
+function Studentsitebar({ isAdmin }) {
+  const [isExpanded, setIsExpanded] = useState(window.innerWidth > 992);
+
+  // Oyna o'lchamini kuzatish
+  useEffect(() => {
+    const handleResize = () => {
+      setIsExpanded(window.innerWidth > 992);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <>
+      <div
+        className={`relative bg-white h-full border-r ${
+          isExpanded ? "w-72" : "w-20"
+        } transition-width hidden xl:inline duration-300 z-40 ease-in-out`}
+      >
+        <div
+          className={` bg-white h-full border-r ${
+            isExpanded ? "w-64" : "w-20"
+          } transition-width duration-300 fixed z-20 ease-in-out`}
+        >
+          <div className="flex items-center justify-between h-16 border-b ">
+            <img
+              className={`transition-all duration-300 ease-in-out ${
+                isExpanded ? "w-1/2 mx-3" : "hidden"
+              }`}
+              src={img}
+              alt="Logo"
+            />
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="p-2 rounded-full focus:outline-none focus:bg-gray-100 hover:bg-gray-100 mr-2 ml-5"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {isExpanded ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 8h16M4 16h16"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
+          <div className="flex-grow overflow-y-auto">
+          <ul className="flex flex-col py-4">
                         <li className="px-5">
                             <div className="flex flex-row items-center h-8">
                                 <div className="text-sm font-light tracking-wide text-gray-500">Menu</div>
@@ -95,10 +132,13 @@ function StudentSidebar() {
                             </Link>
                         </li>
                     </ul>
-                </div>
-            </div>
-        </>
-    );
+          </div>
+        </div>
+      </div>
+      <MobileBar isAdmin={isAdmin}/>
+      {/* </div> */}
+    </>
+  );
 }
 
-export default StudentSidebar;
+export default Studentsitebar;

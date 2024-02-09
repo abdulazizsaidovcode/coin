@@ -6,7 +6,6 @@ import TotalCoins from "../components/Total coins";
 import TopGroup from "../components/TopGroups";
 import TopTeachers from "../components/Topteachers";
 import TotalCoinForStudent from "../components/totalconforstudent";
-import StudentSidebar from "./sidebar/Studentsitebar";
 import StudentDashboard from "./studentdashboard";
 import StudentNavbar from "./studentnavbar";
 import StudentGroup from "./studentcategory";
@@ -16,11 +15,12 @@ import StudentExchange from "./studentExchange";
 import TableWithFilters from "../components/student";
 import StudentStartTest from "./studenttest/studentstarttest";
 import StudentGift from "./studentGift";
+import Studentsitebar from "./sidebar/SidebarTemplate";
 
 function Student() {
   return (
     <div className="flex w-full">
-      <StudentSidebar />
+      <Studentsitebar />
       <div className="w-full">
         <StudentNavbar />
         <Routes>

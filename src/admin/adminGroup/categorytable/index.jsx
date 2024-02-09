@@ -280,14 +280,14 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
             </div>
             {/* Modal body */}
             <div className="mt-6 pb-6 border-b font-medium text-lg">
-              Categoryni o'chirmoqchimisiz?
+              Do you want to delete this group?
             </div>
             <div className="flex justify-end items-center mt-5">
               <button
                 onClick={closeModalDelete}
                 className="font-semibold bg-red-600 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300"
               >
-                Close
+                No
               </button>
               <button
                 onClick={deleteGroup}

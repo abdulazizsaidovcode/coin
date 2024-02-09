@@ -22,9 +22,14 @@ function Gift() {
       .catch(() => {});
   }
 
-  function searchGift() {
-    
-  }
+  // giftFilter
+  const searchGift = (e) => {
+    let data = e.target.value
+    !data ? getGift() :
+        axios.get(`${url}gift/search?name=${data}`, config)
+            .then(res => res.data.body.length === 0 ? setGifts(null) : setGifts(res.data.body))
+            .catch(err => console.log('Teacher panel gift filterda error: ', err));
+}
 
   const addGift = async () => {
     const img = new FormData();
@@ -98,7 +103,7 @@ function Gift() {
           />
         </div>
       </div>
-      {gifts && <GiftCard gifts={gifts} getGift={getGift} />}
+      <GiftCard gifts={gifts} getGift={getGift} />
 
       {/* Modal */}
       {isModalOpen && (

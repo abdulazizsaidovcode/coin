@@ -45,7 +45,7 @@ const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
             attachmentId: 0,
             name: byId("category-name").value,
             categoryId: 0,
-            programmingLanguage: byId("programmingLanguage").value
+            programmingLanguage: null,
         }
 
         if (img.get('file') !== 'undefined')
@@ -151,7 +151,7 @@ const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
 
                             
 
-                            <label for="programmingLanguage" className="block text-sm font-medium text-gray-700 mt-7">
+                            {/* <label for="programmingLanguage" className="block text-sm font-medium text-gray-700 mt-7">
                                 Category programming language
                             </label>
                             <select id="programmingLanguage" className='mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full'>
@@ -164,7 +164,7 @@ const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
                                 <option value="PYTHON">Python</option>
                                 <option value="JAVA">Java</option>
                                 <option value="C++">C++</option>
-                            </select>
+                            </select> */}
                         </div>
                         <div className='flex justify-end items-center mt-5'>
                             <button onClick={closeModalEdit} className="font-semibold bg-yellow-500 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
@@ -206,7 +206,6 @@ const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
                                         <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Photo</th>
                                         <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Name</th>
                                         {/* <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Description</th> */}
-                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">P.L</th>
                                         <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Active</th>
                                         <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Action</th>
                                     </tr>
@@ -228,9 +227,7 @@ const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
                                                     {category.name === null ? "Yo'q" : category.name}
                                                 </td>
                                                 {/* <td className="py-4 px-6 border-b border-gray-200">{category.description}</td> */}
-                                                <td className="py-3 px-6 border-b border-gray-200">
-                                                    {category.programmingLanguage === null ? "Yo'q" : category.programmingLanguage}
-                                                </td>
+                                               
                                                 <td className="py-3 pl-6 border-b border-gray-200">
                                                     <input
                                                         type="checkbox"
@@ -255,7 +252,6 @@ const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
                                             </tr>
                                         )) :
                                         <tr className='even:bg-slate-200 hover:bg-slate-300 duration-200'>
-                                            <td className='py-3 px-6'></td>
                                             <td className='py-3 px-6'></td>
                                             <td className='py-3 px-6'></td>
                                             <td className="py-3 px-6 font-inika font-medium text-lg tracking-wider leading-10">

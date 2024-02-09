@@ -1,4 +1,3 @@
-import { useState } from "react";
 
 const EditModal = (props) => {
     const {

@@ -76,7 +76,8 @@ const AdminGroup = () => {
     axios
       .get(url + "category/father", config)
       .then((res) => {
-        setCategory(res.data.body);
+         setCategory(res.data.body);
+         console.log(res.data.body);
       })
       .catch(() => console.log("kategory kelmadi"));
   };
@@ -196,3 +197,10 @@ const AdminGroup = () => {
 };
 
 export default AdminGroup;
+
+
+
+
+
+
+

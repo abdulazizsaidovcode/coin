@@ -3,15 +3,15 @@ import SidebarTemplate from "../components/sidebar/SidebarTemplate";
 import { Route, Routes } from "react-router-dom";
 import Category from "../components/category";
 import Gift from "../components/gift";
-import Exchange from "../components/exchange";
 import TotalCoinForStudent from "../components/totalconforstudent";
 import Message from "../components/message";
-import FalsePage from "../components/falsepage";
 import Navbarcha from "../components/navbar/Navbar";
 import AdminGroup from "./adminGroup";
 import AdminStudent from "../components/student";
 import GrStudents from "./adminGroup/student/Students";
 import Dashboard from "../components/dashboard/Dashboard";
+import Exchange from "../components/exchange/Exchange";
+import FalsePage from "../teacher/components/false-page/FalsePage";
 
 function Admin() {
   const getme = sessionStorage.getItem("getMeInfo")
