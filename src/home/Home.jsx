@@ -53,7 +53,7 @@ function Home() {
             </div>
             {/* Nav end */}
             {/* fiirst section start */}
-            <div className="h-full">
+            <div className="">
                 <div className="body">
                     <div className="flex items-center flex-col md:px-96">
                         <p className="text-white text-5xl mt-10">Edu Coin System</p>
@@ -73,7 +73,7 @@ function Home() {
             </div>
             {/* fiirst section end */}
             {/* second section start */}
-            <div style={{ fontFamily: 'Inika' }} className="lg:flex md:px-20 hari">
+            <div style={{ fontFamily: 'Inika' }} className="lg:flex mt-96 md:px-20 hari">
                 <div className="">
                     <div>
                         <p className="text-5xl">Download now mobile app</p>
