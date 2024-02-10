@@ -2,6 +2,7 @@ import axios from "axios";
 import { config, setConfig, url } from "../../../components/api/api";
 import { useState } from "react";
 import { useEffect } from "react";
+import TopLoading from "../dashboard/components/loading";
 
 const Students = () => {
 
@@ -131,8 +132,10 @@ const Students = () => {
                                     </tr>
                                 ) :
                                 <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
-                                    <td colSpan='7' className="py-3 px-6 font-inika font-medium text-lg tracking-wider leading-10 text-center">
-                                        Student not found 😊
+                                    <td colSpan='7' className="font-inika font-medium text-xl tracking-wider leading-10 text-center">
+                                        <span className='inline-block min-h-[2em] w-full py-3 flex-auto cursor-wait animate-[pulse_1s_ease-in-out_infinite] bg-[rgba(133,214,251,0.3)]'>
+                                            Student not found 😊
+                                        </span>
                                     </td>
                                 </tr>
                             }

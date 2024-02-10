@@ -8,7 +8,7 @@ function TopLoading({ name }) {
     
     return (
         <div className='bg-white rounded-lg shadow-md px-5 py-5'>
-            <div className="px-5 py-4 border-b border-gray-200">
+            <div className="py-4 border-b border-gray-200">
                 <div className="text-lg font-medium text-gray-900">{name}</div>
             </div>
             <span className={stylis.loadingStyles}></span>

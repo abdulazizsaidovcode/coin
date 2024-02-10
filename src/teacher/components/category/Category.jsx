@@ -4,6 +4,7 @@ import "../../../globalcss/style.css";
 import AddModalCanvas from "../offcanvas/Offcanvas";
 import { config, setConfig, url } from '../../../components/api/api';
 import axios from 'axios';
+import TopLoading from '../dashboard/components/loading';
 
 function Category() {
   const [categories, setCategories] = useState(null);
@@ -46,8 +47,26 @@ function Category() {
       <div className="mt-10">
         <h2 className="text-3xl font-bold font-inika text-gray-900 mb-6">Category</h2>
       </div>
-      {categories && <CategoryTable filterCategory={filterCategory} categories={categories} setCategories={setCategories} getCategory1={getCategory1} getCategoryChild={getCategoryChild} categorysub={categorysub} />}
-      {categories && <AddModalCanvas getCategory={getCategory1} categories={categories} getCategorySub={getCategoryChild} />}
+      {categorysub ? (
+        <CategoryTable
+          filterCategory={filterCategory}
+          categories={categories}
+          setCategories={setCategories}
+          getCategory1={getCategory1}
+          getCategoryChild={getCategoryChild}
+          categorysub={categorysub}
+        />
+      ) : (
+        <TopLoading name='Teacher categores' />
+      )}
+
+      {categories &&
+        <AddModalCanvas
+          getCategory={getCategory1}
+          categories={categories}
+          getCategorySub={getCategoryChild}
+        />
+      }
     </div>
   );
 }

@@ -4,6 +4,7 @@ import TotalCoinsmonth from './total-coin-month';
 import axios from 'axios';
 import { config, setConfig, url } from '../../../components/api/api';
 import ExchangeTable from './ExchangeTable';
+import TopLoading from '../dashboard/components/loading';
 
 const Exchange = () => {
     const [exchangeTable, setExchangeTable] = useState(null);
@@ -44,7 +45,11 @@ const Exchange = () => {
                 </div>
             </div>
 
-            <ExchangeTable exchangeTable={exchangeTable} toggleActive={toggleActive} />
+            {exchangeTable ? (
+                <ExchangeTable exchangeTable={exchangeTable} toggleActive={toggleActive} />
+            ) : (
+                <TopLoading name='Exchange information'  />
+            )}
         </div>
     );
 };

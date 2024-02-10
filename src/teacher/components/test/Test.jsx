@@ -4,6 +4,7 @@ import TeacherTestCard from "./table-and-card/TeacherTestCard";
 import TeacherTestTable from "./table-and-card/TeacherTestTable";
 import axios from "axios";
 import { config, setConfig, url } from "../../../components/api/api";
+import TopLoading from "../dashboard/components/loading";
 
 const Test = () => {
     const [allTestCard, setAllTestCard] = useState(null);
@@ -61,12 +62,16 @@ const Test = () => {
                 />
             </div>
             <div className='mt-5'>
-                <TeacherTestTable
-                    allTestTable={allTestTable}
-                    testCategorySub={testCategorySub}
-                    tableHeddin={tableHeddin}
-                    getTestTable={getTestTable}
-                />
+                {allTestTable ? (
+                    <TeacherTestTable
+                        allTestTable={allTestTable}
+                        testCategorySub={testCategorySub}
+                        tableHeddin={tableHeddin}
+                        getTestTable={getTestTable}
+                    />
+                ) : (
+                    <TopLoading name='Category related tests' />
+                )}
             </div>
 
             {/* test modals */}

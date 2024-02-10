@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { byId, config, setConfig, url } from '../../../components/api/api';
 import avatar from "../../../assits/itca.jpg";
 import { Link } from 'react-router-dom';
+import TopLoading from '../dashboard/components/loading';
 
 const GroupsTable = () => {
     const [groups, setGroups] = useState(null);
@@ -46,42 +47,46 @@ const GroupsTable = () => {
                 <div className="w-full mx-auto">
                     <div className="bg-white shadow-md rounded-3xl overflow-hidden">
                         <div className="overflow-x-auto">
-                            <table className="min-w-full bg-white">
-                                <thead className="bg-gray-800 text-white">
-                                    <tr>
-                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">#</th>
-                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Photo</th>
-                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Name</th>
-                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Coin</th>
-                                        <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">More</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="text-gray-700">
-                                    {groups ?
-                                        groups.map((group, i) => (
-                                            <tr key={group.id} className='even:bg-slate-100 hover:bg-slate-200 duration-200 text-center'>
-                                                <td className="py-3 px-6 border-b border-gray-200">{i + 1}</td>
-                                                <td className="py-3 px-6 border-b border-gray-200 flex justify-center items-center">
-                                                    <img src={avatar} alt="avatar" className="h-16 w-16 rounded-full" />
-                                                </td>
-                                                <td className="py-3 px-6 border-b border-gray-200">{group.name}</td>
-                                                <td className="py-3 px-6 border-b border-gray-200">{group.coin}</td>
-                                                <td className="py-3 px-6 border-b border-gray-200">
-                                                    <button className='btm' onClick={() => {
-                                                        goStudent();
-                                                        sessionStorage.setItem("studentInfoId", group.id)
-                                                    }}>More</button>
+                            {groups ? (
+                                <table className="min-w-full bg-white">
+                                    <thead className="bg-gray-800 text-white">
+                                        <tr>
+                                            <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">#</th>
+                                            <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Photo</th>
+                                            <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Name</th>
+                                            <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Coin</th>
+                                            <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">More</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="text-gray-700">
+                                        {groups ?
+                                            groups.map((group, i) => (
+                                                <tr key={group.id} className='even:bg-slate-100 hover:bg-slate-200 duration-200 text-center'>
+                                                    <td className="py-3 px-6 border-b border-gray-200">{i + 1}</td>
+                                                    <td className="py-3 px-6 border-b border-gray-200 flex justify-center items-center">
+                                                        <img src={avatar} alt="avatar" className="h-16 w-16 rounded-full" />
+                                                    </td>
+                                                    <td className="py-3 px-6 border-b border-gray-200">{group.name}</td>
+                                                    <td className="py-3 px-6 border-b border-gray-200">{group.coin}</td>
+                                                    <td className="py-3 px-6 border-b border-gray-200">
+                                                        <button className='btm' onClick={() => {
+                                                            goStudent();
+                                                            sessionStorage.setItem("studentInfoId", group.id)
+                                                        }}>More</button>
+                                                    </td>
+                                                </tr>
+                                            )) :
+                                            <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
+                                                <td colSpan='5' className="py-3 px-6 font-inika text-center font-medium text-lg tracking-wider leading-10">
+                                                    Group not found 😊
                                                 </td>
                                             </tr>
-                                        )) :
-                                        <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
-                                            <td colSpan='5' className="py-3 px-6 font-inika text-center font-medium text-lg tracking-wider leading-10">
-                                                Group not found 😊
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
+                                        }
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <TopLoading name='Teacher Groups' />
+                            )}
                         </div>
                     </div>
                 </div>
