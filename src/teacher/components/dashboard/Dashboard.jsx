@@ -23,13 +23,13 @@ const Dashboard = () => {
         axios.get(url + "user/top/teachers", config)
             .then((res) => setTopTeacher(res.data.body))
             .catch((err) => console.log(err));
-        axios.get(url + "user/top/student", config)
+        axios.get(url + "user/teacher/top/users", config)
             .then((res) => setTopStudent(res.data.body))
             .catch((err) => console.log(err));
         axios.get(url + "group/top-groups-for-teacher", config)
             .then((res) => setTopGroup(res.data.body))
             .catch((err) => console.log(err));
-        axios.get(url + "coin/history/course/statistics", config)
+        axios.get(url + "coin/history/teacher/group/statistics", config)
             .then((res) => setPl(res.data.body))
             .catch((err) => console.log(err));
     }, []);
@@ -60,14 +60,14 @@ const Dashboard = () => {
                     />
                 </div>
                 <div className="flex flex-col lg:flex-row gap-4 mb-4">
-                    <div className="flex-grow">
+                    <div className="flex-grow lg:w-[60%]">
                         {pl ? (
                             <TotalCoins pl={pl} />
                         ) : (
                             <TotalCoins pl={[{ categoryName: "Loading...", coin: 100 }]} />
                         )}
                     </div>
-                    <div className="flex-grow">
+                    <div className="flex-grow lg:w-[40%]">
                         {topTeacher ? (
                             <TopTeachers teacherList={topTeacher} />
                         ) : (
@@ -76,14 +76,14 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="flex flex-col lg:flex-row gap-4">
-                    <div className="flex-grow">
+                    <div className="flex-grow lg:w-[60%]">
                         {topStudent ? (
                             <TopStudent students={topStudent} />
                         ) : (
                             <TopLoading name="Top Student" />
                         )}
                     </div>
-                    <div className="flex-grow">
+                    <div className="flex-grow lg:w-[40%]">
                         {topGroup ? (
                             <TopGroup topGroups={topGroup} />
                         ) : (

@@ -4,6 +4,7 @@ import "../../globalcss/style.css";
 import { byId, config, getFile, setConfig, url } from '../api/api';
 import axios from 'axios';
 import AddModalCanvas from "../offcanvas/Offcanvas";
+import NotFound from '../../NotFound.js';
 
 function Category() {
   const [categoriesF, setCategoriesF] = useState([]);
@@ -26,7 +27,7 @@ function Category() {
             <div className="mt-10">
                 <h2 className="text-3xl font-bold font-inika text-gray-900 mb-6">Category</h2>
             </div>
-            {categoriesF && <CategoryTable categoriesF={categoriesF} setCategoriesF={setCategoriesF} getCategory1={getCategory1}/>}
+            {categoriesF ? <CategoryTable categoriesF={categoriesF} setCategoriesF={setCategoriesF} getCategory1={getCategory1}/> : <NotFound/>}
            <AddModalCanvas getCategory={getCategory1}/>
         </div>
     );

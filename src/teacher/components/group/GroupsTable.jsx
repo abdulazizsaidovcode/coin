@@ -22,7 +22,7 @@ const GroupsTable = () => {
 
     const groupSearchHandler = (e) => {
         let data = e.target.value;
-        !data ? getGroup() : axios.get(`${url}group/search/${data}`, config)
+        !data ? getGroup() : axios.get(`${url}group/search/for/teacher/${data}`, config)
             .then(res => res.data.body.length === 0 ? setGroups(null) : setGroups(res.data.body))
             .catch(() => console.log("Teacher panel group kelmadi"))
     }
