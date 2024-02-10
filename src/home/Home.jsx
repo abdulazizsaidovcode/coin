@@ -5,7 +5,7 @@ import img2 from "./img/image 1.png";
 import img3 from "./img/Rectangle.png";
 import img4 from "./img/Rectangle 103.png";
 import { Button } from "flowbite-react";
-import "./Home.css";
+import "./home.css";
 
 function Home() {
     const [menuOpen, setMenuOpen] = useState(false);
