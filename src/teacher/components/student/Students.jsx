@@ -2,13 +2,13 @@ import axios from "axios";
 import { config, setConfig, url } from "../../../components/api/api";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Icon } from "@iconify/react";
 
 const Students = () => {
 
     const getStudentInfo = sessionStorage.getItem("studentInfoId")
     const [group, setGroup] = useState([]);
     const [student, setStudent] = useState([]);
+    const [studentId, setStudentId] = useState(null);
 
     useEffect(() => {
         setConfig();
@@ -56,9 +56,10 @@ const Students = () => {
     const searchHandler = (e) => {
         let selectValue = document.getElementById("searchSelect").value;
         let data = e.target.value;
-        !data ? getStudent() : axios.get(`${url}user/filter/teacher?${selectValue}=${data}`, config)
-            .then(res => setStudent(res.data.body))
-            .catch(() => console.log("student search bulganda kelmadi!"))
+        !data ? getStudent() :
+            axios.get(`${url}user/filter/teacher?${selectValue}=${data}&groupId=${studentId === null ? getStudentInfo : studentId}`, config)
+                .then(res => setStudent(res.data.body))
+                .catch(() => console.log("student search bulganda kelmadi!"))
     }
 
     return (
@@ -93,6 +94,7 @@ const Students = () => {
                             <button
                                 onClick={async () => {
                                     await getStudent(item.id);
+                                    await setStudentId(item.id);
                                 }}
                                 key={item.id}
                                 className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl

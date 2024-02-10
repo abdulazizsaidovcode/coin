@@ -4,7 +4,8 @@ const EditModal = (props) => {
         toggleEditMenu,
         isEditMenuOpen,
         isHoveredId,
-        testCategorySub
+        testCategorySub,
+        getTestTable
     } = props;
     
     return (
