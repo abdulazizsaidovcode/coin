@@ -30,7 +30,7 @@ const Students = () => {
                     if (res.status === 200) setStudent(res.data.body)
                 })
                 .catch((err) => {
-                    if (err.response.status === 409) setStudent('')
+                    setStudent(null)
                     console.log("Student kelmadi! catchga tushdi!")
                 })
         } else if (item >= 0) {
@@ -39,7 +39,7 @@ const Students = () => {
                     if (res.status === 200) setStudent(res.data.body)
                 })
                 .catch((err) => {
-                    if (err.response.status === 409) setStudent('')
+                    setStudent(null)
                     console.log("Student kelmadi! catchga tushdi!")
                 })
         }
