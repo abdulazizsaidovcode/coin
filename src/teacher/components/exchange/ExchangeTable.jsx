@@ -8,8 +8,8 @@ const ExchangeTable = ({ exchangeTable, toggleActive }) => {
                 <tr className='text-center'>
                     <th className="py-3 ps-3">#</th>
                     <th className="py-3">photo</th>
+                    <th className="py-3">full name</th>
                     <th className="py-3">gift name</th>
-                    <th className="py-3">name</th>
                     <th className="py-3">group name</th>
                     <th className="py-3">rate</th>
                     <th className="py-3">date</th>
@@ -28,8 +28,8 @@ const ExchangeTable = ({ exchangeTable, toggleActive }) => {
                                     src={item.attachmentId === null ? images : getFile + item.attachmentId}
                                     alt="nofound" />
                             </td>
-                            <td className="py-2">{item.giftName}</td>
                             <td className="py-2">{item.fullName}</td>
+                            <td className="py-2">{item.giftName}</td>
                             <td className="py-2">{item.groupName}</td>
                             <td className="py-2">{item.giftRate}</td>
                             <td className="py-2">{item.date}</td>

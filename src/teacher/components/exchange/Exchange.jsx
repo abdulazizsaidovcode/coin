@@ -7,9 +7,6 @@ import ExchangeTable from './ExchangeTable';
 
 const Exchange = () => {
     const [exchangeTable, setExchangeTable] = useState(null);
-    const toggleActive = (id) => {
-        setExchangeTable(exchangeTable.map(item => item.id === id ? { ...item, active: !item.active } : item));
-    };
 
     useEffect(() => {
         setConfig();
@@ -23,10 +20,15 @@ const Exchange = () => {
             .catch(err => console.log('Teacher panel exchange get qilishda error: ', err))
     }
 
+    // active ni chiqarish uchun
+    const toggleActive = (id) => {
+        setExchangeTable(exchangeTable.map(item => item.id === id ? { ...item, active: !item.active } : item));
+    };
+
     return (
         <div className="p-8 w-full bg-gray-100">
             <div className="mt-10 flex justify-between items-center">
-                <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Exchange</h2>
+                <h2 className="text-4xl font-bold font-mono text-gray-900 mb-4">Exchange</h2>
                 <input
                     type="search"
                     className="w-80 py-3 px-3 text-sm border border-gray-300 rounded-lg
