@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TotalCoins from './TotalCoins';
 import TotalCoinsmonth from './total-coin-month';
+import axios from 'axios';
+import { config, setConfig, url } from '../../../components/api/api';
+import ExchangeTable from './ExchangeTable';
 
 const Exchange = () => {
-    const [data, setData] = useState([]);
+    const [exchangeTable, setExchangeTable] = useState(null);
     const toggleActive = (id) => {
-        setData(data.map(item => item.id === id ? { ...item, active: !item.active } : item));
+        setExchangeTable(exchangeTable.map(item => item.id === id ? { ...item, active: !item.active } : item));
     };
+
+    useEffect(() => {
+        setConfig();
+        getExchangeTable();
+    }, []);
+
+    // get exchange table
+    const getExchangeTable = () => {
+        axios.get(`${url}exchange/teacher?page=0&size=10`, config)
+            .then(res => setExchangeTable(res.data.body.object))
+            .catch(err => console.log('Teacher panel exchange get qilishda error: ', err))
+    }
 
     return (
         <div className="p-8 w-full bg-gray-100">
@@ -27,47 +42,7 @@ const Exchange = () => {
                 </div>
             </div>
 
-            <div>
-                <table className="w-full rounded-3xl shadow-lg overflow-hidden">
-                    <thead className="bg-gray-800 text-white uppercase text-sm leading-normal">
-                        <tr>
-                            <th className="py-3 px-6">#</th>
-                            <th className="py-3 px-6">photo</th>
-                            <th className="py-3 px-6">gift name</th>
-                            <th className="py-3 px-6">name</th>
-                            <th className="py-3 px-6">coin</th>
-                            <th className="py-3 px-6">date</th>
-                            <th className="py-3 px-6">active</th>
-                            <th className="py-3 px-6">action</th>
-                        </tr>
-                    </thead>
-                    <tbody className="text-gray-600 font-light">
-                        <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
-                            <th className="py-3 px-6">1</th>
-                            <td className="py-3 px-6">
-                                <img src='' alt="nofound" />
-                            </td>
-                            <td className="py-3 px-6">giftname</td>
-                            <td className="py-3 px-6">name</td>
-                            <td className="py-3 px-6">Coin</td>
-                            <td className="py-3 px-6">date</td>
-                            <td className="py-3 px-6">
-                                <input
-                                    type="checkbox"
-                                    className="form-checkbox h-5 w-5 text-blue-600"
-                                // checked={item.active}
-                                // onChange={() => toggleActive(item.id)}
-                                />
-                            </td>
-                            <td className="py-3 px-6">
-                                <div className="flex item-center justify-center">
-                                    <button className="text-sm bg-blue-500 hover:bg-blue-600 text-white active:scale-95 tracking-widest rounded-lg shadow-lg font-semibold py-1.5 px-4 duration-300">info</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <ExchangeTable exchangeTable={exchangeTable} toggleActive={toggleActive} />
         </div>
     );
 };
