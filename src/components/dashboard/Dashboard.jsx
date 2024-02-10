@@ -4,7 +4,7 @@ import TopStudent from "./components/top-student";
 import TopTeachers from "./components/top-teacher";
 import TotalCoins from "./components/total-coin";
 import axios from "axios";
-import { config, setConfig, url } from "../../components/api/api";
+import { config, setConfig, url } from "../api/api"
 import TopLoading from "./components/loading";
 import { toast } from "react-toastify";
 
@@ -14,41 +14,24 @@ const Dashboard = () => {
     const [topStudent, setTopStudent] = useState(null);
     const [topGroup, setTopGroup] = useState(null);
     const [pl, setPl] = useState(null);
-    const [name, setName] = useState([]);
 
     useEffect(() => {
         setConfig();
-        axios
-            .get(url + "user/statistic", config)
+        axios.get(url + "user/statistic", config)
             .then((res) => setSTMGSize(res.data.body))
             .catch(() => toast.warning("internetga blan aloqani tekshirig!"));
-        axios
-            .get(url + "user/top/teachers", config)
+        axios.get(url + "user/top/teachers", config)
             .then((res) => setTopTeacher(res.data.body))
             .catch((err) => console.log(err));
-        axios
-            .get(url + "user/top/student", config)
+        axios.get(url + "user/top/student", config)
             .then((res) => setTopStudent(res.data.body))
             .catch((err) => console.log(err));
-        axios
-            .get(url + "group/topGroupsForAdmin", config)
+        axios.get(url + "group/topGroupsForAdmin", config)
             .then((res) => setTopGroup(res.data.body))
             .catch((err) => console.log(err));
-        axios
-            .get(url + "coin/history/course/statistics", config)
+        axios.get(url + "coin/history/course/statistics", config)
             .then((res) => setPl(res.data.body))
             .catch((err) => console.log(err));
-    }, []);
-
-    useEffect(() => {
-        axios
-            .get(url + "user/getMe", config)
-            .then((response) => {
-                setName(response.data.body.fullName);
-            })
-            .catch((error) => {
-                console.log("Boshqa backendinchi topiyla iltimos 😭", error);
-            });
     }, []);
 
     return (
@@ -77,14 +60,14 @@ const Dashboard = () => {
                     />
                 </div>
                 <div className="flex flex-col lg:flex-row gap-4 mb-4">
-                    <div className="flex-grow">
+                    <div className="flex-grow lg:w-[60%]">
                         {pl ? (
                             <TotalCoins pl={pl} />
                         ) : (
                             <TotalCoins pl={[{ categoryName: "Loading...", coin: 100 }]} />
                         )}
                     </div>
-                    <div className="flex-grow">
+                    <div className="flex-grow lg:w-[40%]">
                         {topTeacher ? (
                             <TopTeachers teacherList={topTeacher} />
                         ) : (
@@ -93,14 +76,14 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="flex flex-col lg:flex-row gap-4">
-                    <div className="flex-grow">
+                    <div className="flex-grow lg:w-[60%]">
                         {topStudent ? (
                             <TopStudent students={topStudent} />
                         ) : (
                             <TopLoading name="Top Student" />
                         )}
                     </div>
-                    <div className="flex-grow">
+                    <div className="flex-grow lg:w-[40%]">
                         {topGroup ? (
                             <TopGroup topGroups={topGroup} />
                         ) : (

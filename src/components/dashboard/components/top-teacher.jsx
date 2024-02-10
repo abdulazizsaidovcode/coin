@@ -9,7 +9,7 @@ export const CircularProgress = ({ percentage, color }) => {
     const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
     return (
-        <div className="flex items-center space-x-2">
+        <div className="flex justify-center items-center space-x-2">
             <svg height={radius * 2} width={radius * 2}>
                 <circle
                     stroke="#e6e6e6"
@@ -52,7 +52,7 @@ const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
                     <li key={number} className="mr-2">
                         <button
                             onClick={() => paginate(number)}
-                            className="text-white hover:text-blue-600 hover:underline px-3 py-1 rounded bg-blue-500"
+                            className="text-white hover:text-blue-600 hover:bg-slate-200 hover:font-extrabold font-bold shadow-xl duration-200 hover:underline px-3 py-1 mt-2 rounded-lg bg-blue-500"
                         >
                             {number}
                         </button>
@@ -63,14 +63,12 @@ const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
     );
 };
 
-// Main Component
 const TopTeachers = ({ teacherList }) => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [teachersPerPage] = useState(5);
     const [currentTeachers, setCurrentTeachers] = useState([])
 
-    // Calculating the range of teachers for the current page
     const indexOfLastTeacher = currentPage * teachersPerPage;
     const indexOfFirstTeacher = indexOfLastTeacher - teachersPerPage;
 
@@ -81,7 +79,6 @@ const TopTeachers = ({ teacherList }) => {
         }) : [].slice(indexOfFirstTeacher, indexOfLastTeacher));
     }, []);
 
-    // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
@@ -93,19 +90,19 @@ const TopTeachers = ({ teacherList }) => {
                 <table className="min-w-full">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Students</th>
-                            <th>rate</th>
+                            <th className='py-2'>#</th>
+                            <th className='py-2'>Name</th>
+                            <th className='py-2'>Students</th>
+                            <th className='py-2'>Rate</th>
                         </tr>
                     </thead>
                     <tbody>
                         {currentTeachers.map((teacher, index) => (
                             <tr key={index} className="border-t border-gray-200 text-center">
-                                <td className="px-5 py-3 whitespace-nowrap text-gray-500">{index + 1}</td>
-                                <td className="px-5 py-3 whitespace-nowrap text-gray-500">{teacher.teacherName}</td>
-                                <td className="px-5 py-3 whitespace-nowrap text-gray-500">{teacher.numberOfStudent}</td>
-                                <td className="px-5 py-3 whitespace-nowrap text-right">
+                                <td className="py-2 whitespace-nowrap text-gray-500">{index + 1}</td>
+                                <td className="py-2 whitespace-nowrap text-gray-500">{teacher.teacherName}</td>
+                                <td className="py-2 whitespace-nowrap text-gray-500">{teacher.numberOfStudent}</td>
+                                <td className="py-2 whitespace-nowrap">
                                     <CircularProgress percentage={teacher.rate} color={teacher.color} />
                                 </td>
                             </tr>

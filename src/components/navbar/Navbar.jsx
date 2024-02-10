@@ -1,32 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 // import { config, url } from "../api/api";
 // import React, { useState, useEffect } from "react";
-import { byId, config, setConfig, url } from "../../components/api/api";
+import {
+  byId,
+  config,
+  getFile,
+  setConfig,
+  url,
+} from "../../components/api/api";
 import axios from "axios";
 import avatar from "../../assits/opacha.jpg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { toast } from 'react-toastify';
-import logo from "../../assits/IT-CA-logo.png"
+import { toast } from "react-toastify";
+import logo from "../../assits/IT-CA-logo.png";
+import Loader from "../../assits/loader";
 
 const Navbarcha = () => {
   const [name, setName] = useState([]);
   const [editModal, setIsModalOpenEdit] = useState(false);
   const [userId, setUserId] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setloading] = useState(false);
 
   const openModalEdit = () => setIsModalOpenEdit(true);
   const closeModalEdit = () => setIsModalOpenEdit(false);
 
   useEffect(() => {
     setConfig();
-    axios.get(url + "user/getMe", config)
-      .then(res => {
+    getMe();
+  }, []);
+
+  const getMe = () => {
+    axios
+      .get(url + "user/getMe", config)
+      .then((res) => {
         setName(res.data.body);
       })
-      .catch(err => console.log("Boshqa backendinchi topiyla iltomos 😭", err));
-  }, []);
+      .catch((err) =>
+        console.log("Boshqa backendinchi topiyla iltomos 😭", err)
+      );
+  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -49,28 +64,29 @@ const Navbarcha = () => {
   }, []);
 
   const editUser = () => {
-    let editData = {
-      firstName: byId("firstName").value,
-      lastName: byId("lastName").value,
-      email: byId("email").value,
-      password: byId("password").value,
-      phoneNumber: byId("phoneNumber").value,
-      groupId: byId("groupId").value,
-      gender: byId("gender").value,
-      friendPhoneNumber: "",
-    };
+    let editData = new FormData();
+    editData.append("firstName", byId("firstName").value);
+    editData.append("lastName", byId("lastName").value);
+    editData.append("phoneNumber", byId("phoneNumber").value);
+    editData.append("password", byId("password").value);
+    editData.append("prePassword", byId("prePassword").value);
+    editData.append("file", byId("file").files[0]);
+
+    setloading(true);
+
     axios
-      .put(url + "user/update/", editData, config)
+      .put(url + "user/edit/user/profile", editData, config)
       .then(() => {
-        // openEditModal();
-        // getUsers();
+        setloading(true);
+        closeModalEdit();
+        getMe();
         toast.success("User information has been changed✔");
       })
       .catch(() => {
+        setloading(true);
         toast.error("Something went wrong❓");
       });
   };
-
 
   const logOut = () => byId("logout").click();
 
@@ -81,42 +97,63 @@ const Navbarcha = () => {
         <div className="flex xl:py-2 justify-between xl:justify-end fixed items-center w-full left-0 z-20 bg-white px-8 ">
           {/* Qidiruv maydoni */}
           <div className="flex xl:hidden items-center space-x-1 w-32 h-20">
-            <img className=' object-cover' src={logo} alt="logo" />
-          </div> 
+            <img className=" object-cover" src={logo} alt="logo" />
+          </div>
           <div className="relative left-0">
             <div className="flex items-center">
-              <div className='relative mt-1'>
-                <div className='w-2 h-2 bg-red-400 rounded-full absolute right-2 '><a href=""></a></div>
+              <div className="relative mt-1">
+                <div className="w-2 h-2 bg-red-400 rounded-full absolute right-2 ">
+                  <a href=""></a>
+                </div>
                 <Link to="/admin/message">
-                <FontAwesomeIcon
-                  icon={faBell}
-                  className={
-                    `${messages.length > 0} `
-                      ? "text-2xl mr-2 text-gray-80 anim"
-                      : "text-2xl mr-2 text-gray-80"
-                  }
-                />
-              </Link>
+                  <FontAwesomeIcon
+                    icon={faBell}
+                    className={
+                      `${messages.length > 0} `
+                        ? "text-2xl mr-2 text-gray-80 anim"
+                        : "text-2xl mr-2 text-gray-80"
+                    }
+                  />
+                </Link>
               </div>
-              <button onClick={toggleMenu} className="flex items-center space-x-2 ">
-                <img src={avatar} alt="Admin" className="rounded-full w-12 h-12 p-1 border" />
+              <button
+                onClick={toggleMenu}
+                className="flex items-center space-x-2 "
+              >
+                <img
+                  src={
+                    name.attachmentId === null
+                      ? avatar
+                      : getFile + name.attachmentId
+                  }
+                  alt="avatar"
+                  className="rounded-full w-12 h-12 p-1 border"
+                />
                 <span className="hidden md:block">{name.fullName}</span>
               </button>
-              
             </div>
             <div
               className={`${isOpen ? "absolute duration-500" : "hidden"} 
-              right-0 mt-2 py-2 w-80 bg-white rounded-xl shadow-xl z-20`}>
+              right-0 mt-2 py-2 w-80 bg-white rounded-xl shadow-xl z-20`}
+            >
               {/* Menu items */}
               <div className="h-40 bg-profileColor rounded-t-xl flex justify-center items-center">
-                <img className="w-20 h-20 rounded-full" src={avatar} alt="Gift" />
-                <span className="absolute right-3 top-3 hover:text-gray-200 duration-200 text-white cursor-pointer "
-                  onClick={toggleMenu}>
+                <img
+                  className="w-20 h-20 rounded-full"
+                  src={avatar}
+                  alt="Gift"
+                />
+                <span
+                  className="absolute right-3 top-3 hover:text-gray-200 duration-200 text-white cursor-pointer "
+                  onClick={toggleMenu}
+                >
                   <i className="fa-solid fa-xmark"></i>
                 </span>
               </div>
               <div className="px-6 py-2">
-                <div className="font-bold text-xl mb-2 text-center">{name.fullName}</div>
+                <div className="font-bold text-xl mb-2 text-center">
+                  {name.fullName}
+                </div>
                 <p className="text-center text-black">{name.phoneNumber}</p>
                 <p className="text-gray-700 text-center">
                   {name.email}
@@ -126,19 +163,24 @@ const Navbarcha = () => {
               </div>
               <div className=" mt-2 text-center">
                 <button
-                 onClick={() => {
-                  setUserId(name)
-                  openModalEdit()
-                 toggleMenu()
-                 }} className="btm mr-5">Edit</button>
+                  onClick={() => {
+                    setUserId(name);
+                    openModalEdit();
+                    toggleMenu();
+                  }}
+                  className="btm mr-5"
+                >
+                  Edit
+                </button>
                 <button
                   className="bg-red-500 text-white font-bold rounded-lg py-2.5 px-7 active:scale-90 duration-200"
                   onClick={() => {
-             
-                     logOut();
+                    logOut();
                     sessionStorage.clear();
                   }}
-                >Log out</button>
+                >
+                  Log out
+                </button>
               </div>
             </div>
           </div>
@@ -158,7 +200,7 @@ const Navbarcha = () => {
           <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
-                Edit student
+                Edit profile
               </h2>
               <button
                 onClick={closeModalEdit}
@@ -222,22 +264,6 @@ const Navbarcha = () => {
 
                 <div className="col-span-2">
                   <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Email"
-                    defaultValue={userId.email}
-                  />
-                </div>
-                <div className="col-span-2 sm:col-span-1">
-                  <label
                     htmlFor="phoneNumber"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
@@ -248,10 +274,11 @@ const Navbarcha = () => {
                     name="phoneNumber"
                     id="phoneNumber"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="100"
+                    placeholder="phoneNumber"
                     defaultValue={userId.phoneNumber}
                   />
                 </div>
+
                 <div className="col-span-2 sm:col-span-1">
                   <label
                     htmlFor="password"
@@ -260,7 +287,7 @@ const Navbarcha = () => {
                     Password
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     name="password"
                     id="password"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -268,36 +295,52 @@ const Navbarcha = () => {
                     defaultValue={userId.password}
                   />
                 </div>
-                
                 <div className="col-span-2 sm:col-span-1">
                   <label
-                    htmlFor="gender"
+                    htmlFor="prePassword"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Select gender
+                    Confirm password
                   </label>
-                  <select
-                    id="gender"
-                    className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
-                  >
-                    <option selected disabled>
-                      Choose one...
-                    </option>
-                    <option value="MALE">MALE</option>
-                    <option value="FEMALE">FEMALE</option>
-                  </select>
+                  <input
+                    type="password"
+                    name="prePassword"
+                    id="prePassword"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="100"
+                    defaultValue={userId.password}
+                  />
                 </div>
-                
+                <div className="col-span-2 sm:col-span-1">
+                  <label
+                    htmlFor="file"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Profile image
+                  </label>
+                  <input
+                    type="file"
+                    name="file"
+                    id="file"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="100"
+                  />
+                </div>
               </div>
               <div className="flex justify-end">
-                <button onClick={closeModalEdit} className="btm-close me-2 bg-red-900">Close</button>
+                <button
+                  onClick={closeModalEdit}
+                  className="btm-close me-2 bg-red-900"
+                >
+                  Close
+                </button>
                 <button
                   onClick={() => {
                     editUser();
                   }}
                   className="btm"
                 >
-                  Edit
+                  {loading ? <Loader/> : "Edit"}
                 </button>
               </div>
             </div>

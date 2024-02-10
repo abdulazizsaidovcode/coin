@@ -154,6 +154,25 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li className="py-2">
                 <Link
+                  to={`/${isAdmin ? "admin" : "teacher"}/teacher`}
+                  className={`${
+                    isExpanded
+                      ? "flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
+                      : "flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
+                  }`}
+                >
+                  <div className="flex justify-center items-center">
+                    <span className="inline-flex justify-center items-center ml-4 text-xl">
+                    <i class="fa-solid fa-user-tie"></i>
+                    </span>
+                  </div>
+                  <span className={`ml-2 ${isExpanded ? "block" : "hidden"}`}>
+                    Teacher
+                  </span>
+                </Link>
+              </li>
+              <li className="py-2">
+                <Link
                   to={`/${isAdmin ? "admin" : "teacher"}/gift`}
                   className={`${
                     isExpanded
