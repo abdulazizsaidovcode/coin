@@ -12,6 +12,7 @@ import GrStudents from "./adminGroup/student/Students";
 import Dashboard from "../components/dashboard/Dashboard";
 import Exchange from "../components/exchange/Exchange";
 import FalsePage from "../teacher/components/false-page/FalsePage";
+import AdminTeacher from "../components/teacher";
 
 function Admin() {
   const getme = sessionStorage.getItem("getMeInfo")
@@ -24,6 +25,7 @@ function Admin() {
         <Routes >
           <Route path="/admin/group" element={<AdminGroup />} />
           <Route path="/admin/student" element={<AdminStudent />} />
+          <Route path="/admin/teacher" element={<AdminTeacher />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/category" element={<Category />} />
           <Route path="/admin/gift" element={<Gift />} />

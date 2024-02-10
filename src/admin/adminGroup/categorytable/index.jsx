@@ -4,7 +4,7 @@ import { byId, config, setConfig, url } from "../../../components/api/api";
 import avatar from "../../../assits/itca.jpg";
 import { toast } from "react-toastify";
 import NotFound from "../../../NotFound";
-import Loader from "../../../assits/loader"
+import Loader from "../../../assits/loader";
 
 const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,12 +55,12 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
         toast.success("Group succesfully edit!");
         closeModal();
         getGroup();
-        setLoading(false)
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Something is error 😭", error);
         toast.error("Something is error 😭");
-        setLoading(false)
+        setLoading(false);
       });
   };
 
@@ -71,11 +71,11 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
         closeModalDelete();
         getGroup();
         toast.success("delete group");
-        setLoading(false)
+        setLoading(false);
       })
       .catch((err) => {
         toast.error("xatolik yuz berdi");
-        setLoading(false)
+        setLoading(false);
         // console.log(err);
       });
   };
@@ -144,24 +144,28 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
                           />
                         </td> */}
                         <td className="py-3 px-6 border-b border-gray-200">
-                          <button
-                            className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline"
-                            onClick={() => {
-                              setGroupId(group);
-                              openModal();
-                            }}
-                          >
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => {
-                              setGroupId(group);
-                              openModalDelete();
-                            }}
-                            className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline ml-3"
-                          >
-                            Delete
-                          </button>
+                          <div className="flex gap-7 justify-center">
+                            <button
+                              className="text-sm bg-yellow-500 hover:bg-yellow-600 duration-200 text-white 
+                            py-2 px-5 rounded focus:outline-none focus:shadow-outline"
+                              onClick={() => {
+                                setGroupId(group);
+                                openModal();
+                              }}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() => {
+                                setGroupId(group);
+                                openModalDelete();
+                              }}
+                              className="text-sm bg-red-500 hover:bg-red-600 duration-200 text-white 
+                            py-2 px-5 rounded focus:outline-none focus:shadow-outline"
+                            >
+                              Delete
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))
@@ -169,10 +173,12 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
                     <tr>
                       <td></td>
                       <td></td>
-                      <td className="flex justify-center"> <NotFound /></td>
+                      <td className="flex justify-center">
+                        {" "}
+                        <NotFound />
+                      </td>
                       <td></td>
                       <td></td>
-                     
                     </tr>
                   )}
                 </tbody>
@@ -257,11 +263,14 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
                 >
                   Close
                 </button>
-                <button onClick={() => {
-                  setLoading(true)
-                  editGroup()
-                }} className="btm">
-                  {loading ? <Loader/> : "Save"}
+                <button
+                  onClick={() => {
+                    setLoading(true);
+                    editGroup();
+                  }}
+                  className="btm"
+                >
+                  {loading ? <Loader /> : "Save"}
                 </button>
               </div>
             </div>
@@ -304,20 +313,17 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
               Do you want to delete this group?
             </div>
             <div className="flex justify-between mt-5">
-              <button
-                onClick={closeModalDelete}
-                className="btm-close"
-              >
+              <button onClick={closeModalDelete} className="btm-close">
                 No
               </button>
               <button
                 onClick={() => {
-                  setLoading(true)
-                  deleteGroup()
+                  setLoading(true);
+                  deleteGroup();
                 }}
                 className="btm"
               >
-                {loading ? <Loader/> : "Yes"}
+                {loading ? <Loader /> : "Yes"}
               </button>
             </div>
           </div>
@@ -328,12 +334,3 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
 };
 
 export default GroupsTable;
-
-
-
-
-
-
-
-
-

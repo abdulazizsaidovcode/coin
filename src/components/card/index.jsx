@@ -11,7 +11,7 @@ const GiftCard = ({ gifts, getGift }) => {
   const [giftId, setGiftid] = useState([]); // Sifr
   const [giftIn, setGiftIn] = useState([]); // Sifr
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [toShow, setItemToShow] = useState("");
+  const [toShow, setItemToShow] = useState([]);
 
   const deleteGift = () => {
     axios
@@ -19,9 +19,11 @@ const GiftCard = ({ gifts, getGift }) => {
       .then(() => {
         toast.success("Succesfully delete gift!");
         getGift();
+        closedelete()
       })
       .catch(() => {
         toast.error("Something is wrong!");
+        closedelete()
       });
   };
 
@@ -76,73 +78,89 @@ const GiftCard = ({ gifts, getGift }) => {
   return (
     <div className="w-full flex flex-wrap justify-evenly mt-10 font-inika">
       {/* <div className="w-full flex flex-wrap justify-evenly mt-10 font-inika"> */}
-        {gifts ? (
-          gifts.map((item) => (
-            <div
-              key={item.id}
-              className="w-1/4 h-96 rounded-xl overflow-hidden shadow-md hover:shadow-xl duration-300 mr-3 mb-8"
-            >
-              <img
-                className="w-full h-1/2 object-cover"
-                src={
-                  item.attachmentId === null
-                    ? giftImg
-                    : getFile + item.attachmentId
-                }
-                alt="Gift"
-              />
-              <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2 text-center">
-                  {item.name}
-                </div>
-                <p className="text-gray-700 text-base text-center">
-                  {item.rate} coin
-                  {/* {item.description} */}
-                </p>
-              </div>
-              <div className="px-6 pt-4 text-center">
-                <button
-                  className="btm-info"
-                  onClick={() => {
-                    openModal();
-                    setItemToShow(item.description);
-                  }}
-                >
-                  Gift Info
-                </button>
-              </div>
-
-              {isModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center z-50">
-                  <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
-                    <div className="mt-6 pb-6 border-b font-medium text-lg">
-                      {toShow}
-                    </div>
-                    <div className="flex justify-end items-center mt-5">
-                      <button
-                        className="font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300"
-                        onClick={closeModal}
-                      >
-                        Ok
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))
-        ) : (
-          <div className="w-1/4 rounded-xl overflow-hidden shadow-md hover:shadow-xl duration-300 mr-3 mb-8">
+      {gifts ? (
+        gifts.map((item) => (
+          <div
+            key={item.id}
+            className="w-1/4 h-96 rounded-xl overflow-hidden shadow-md hover:shadow-xl duration-300 mr-3 mb-8"
+          >
             <img
-              className="w-full h-52 object-cover"
-              src={giftImg}
+              className="w-full h-1/2 object-cover"
+              src={
+                item.attachmentId === null
+                  ? giftImg
+                  : getFile + item.attachmentId
+              }
               alt="Gift"
             />
-            <p className="text-center my-3 font-semibold tracking-wider">
-              Gift not found 😊
-            </p>
+            <div className="px-6 py-4">
+              <div className="font-bold text-xl mb-2 text-center">
+                {item.name}
+              </div>
+              <p className="text-gray-700 text-base text-center">
+                {item.rate} coin
+                {/* {item.description} */}
+              </p>
+            </div>
+            <div className="px-6 pt-4 text-center">
+              <button
+                className="btm-info"
+                onClick={() => {
+                  openModal();
+                  setItemToShow(item);
+                }}
+              >
+                Gift Info
+              </button>
+            </div>
+
+            {isModalOpen && (
+              <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
+                  <div className="mt-6 pb-6 border-b font-medium text-lg">
+                    {toShow.description}
+                  </div>
+                  <div className="flex justify-between items-center mt-5">
+                    <div className="flex gap-10">
+                      <button
+                        className="btm-close"
+                        onClick={() => {
+                          closeModal()
+                          opendelete();
+                          setGiftid(toShow.id);
+                        }}
+                      >
+                        Delete
+                      </button>
+
+                      <button
+                        className="btm"
+                        onClick={() => {
+                          closeModal()
+                          openEdit();
+                          setGiftid(toShow.id);
+                        }}
+                      >
+                        Edit
+                      </button>
+                    </div>
+                    <button className="btm-info" onClick={closeModal}>
+                      Ok
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        ))
+      ) : (
+        <div className="w-1/4 rounded-xl overflow-hidden shadow-md hover:shadow-xl duration-300 mr-3 mb-8">
+          <img className="w-full h-52 object-cover" src={giftImg} alt="Gift" />
+          <p className="text-center my-3 font-semibold tracking-wider">
+            Gift not found 😊
+          </p>
+        </div>
+      )}
       {/* </div> */}
 
       {/* Modal */}
@@ -151,7 +169,7 @@ const GiftCard = ({ gifts, getGift }) => {
           <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
-                Create New Product
+                Edit gift
               </h2>
               <button
                 onClick={closeEdit}
@@ -189,7 +207,7 @@ const GiftCard = ({ gifts, getGift }) => {
                   </label>
                   <input
                     type="text"
-                    defaultValue={giftIn.name}
+                    defaultValue={toShow.name}
                     id="name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Type product name"
@@ -205,7 +223,7 @@ const GiftCard = ({ gifts, getGift }) => {
                   </label>
                   <input
                     type="number"
-                    defaultValue={giftIn.rate}
+                    defaultValue={toShow.rate}
                     id="rate"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="100"
@@ -231,7 +249,7 @@ const GiftCard = ({ gifts, getGift }) => {
                   <textarea
                     id="description"
                     rows="4"
-                    defaultValue={giftIn.description}
+                    defaultValue={toShow.description}
                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Write product description here"
                   ></textarea>
@@ -295,7 +313,7 @@ const GiftCard = ({ gifts, getGift }) => {
             <div className="p-4 md:p-5">
               <div className="grid gap-4 mb-4 grid-cols-2">
                 <div className="col-span-2">
-                  dbcb cjec ecbc eu ihe o e o b eob c ccicb3icbiucb
+                  Do you want to delete this gift?
                 </div>
               </div>
               <div className="flex justify-end">
@@ -308,7 +326,6 @@ const GiftCard = ({ gifts, getGift }) => {
                 <button
                   onClick={() => {
                     deleteGift();
-                    closedelete();
                   }}
                   className="btm"
                 >

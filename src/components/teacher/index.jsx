@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Loader from "../../assits/loader"
 
-const AdminStudent = () => {
+const AdminTeacher = () => {
   const [modal, setIsModalOpen] = useState(false);
   const [editModal, setIsModalOpenEdit] = useState(false);
   const [userId, setUserId] = useState([]);
@@ -20,7 +20,6 @@ const AdminStudent = () => {
   console.log(getStudentInfo);
   useEffect(() => {
     setConfig();
-    getGroup();
     getStudent();
   }, []);
   // Modalni ochish va yopish uchun funksiyalar
@@ -28,13 +27,6 @@ const AdminStudent = () => {
   const closeModal = () => setIsModalOpen(false);
   const openModalEdit = () => setIsModalOpenEdit(true);
   const closeModalEdit = () => setIsModalOpenEdit(false);
-
-  const getGroup = () => {
-    axios
-      .get(url + "group", config)
-      .then((res) => setGroup(res.data.body.object))
-      .catch(() => console.log("gr kelmadi"));
-  };
 
   const addUsers = () => {
     let addData = {
@@ -48,7 +40,7 @@ const AdminStudent = () => {
       friendPhoneNumber: "",
     };
     axios
-      .post(url + "auth/register?ROLE=ROLE_USER", addData, config)
+      .post(url + "auth/register?ROLE=ROLE_TEACHER", addData, config)
       .then(() => {
         closeModal();
         getStudent();
@@ -84,117 +76,33 @@ const AdminStudent = () => {
       });
   };
 
-  const getGroupS = (item) => {
-    setLoading(true)
-    if (item === undefined) {
-        getStudent()
-        setLoading(false)
-    } else if (item >= 0) {
-        axios.get(`${url}group/students/${item}`, config)
-            .then(res => {
-                if (res.status === 200) setStudent(res.data.body)
-                setLoading(false)
-            })
-            .catch((err) => {
-                if (err.response.status === 409) setStudent('')
-                setLoading(false)
-            })
-    }
-}
+  
 
   const getStudent = () => {
     axios
-      .get(url + "user", config)
+      .get(url + "user/teacher", config)
       .then((res) => {
-        setStudent(res.data.body.object);
-        setLoading(false)
+        setStudent(res.data.body);
       })
       .catch(() => console.log("kelmadi"));
-      setLoading(false)
   };
 
-  const showHideInputs = () => {
-    let selectValue = document.getElementById("searchSelect").value,
-      studentSearch = document.getElementById("studentSearch");
-
-    if (!selectValue) studentSearch.style.display = "none";
-    else studentSearch.style.display = "inline";
-  };
-
-  const searchHandler = (e) => {
-    let selectValue = document.getElementById("searchSelect").value;
-    let data = e.target.value;
-    !data
-      ? getStudent()
-      : axios
-          .get(`${url}user/filter/admin?${selectValue}=${data}`, config)
-          .then((res) => setStudent(res.data.body))
-          .catch(() => console.log("student search bulganda kelmadi!"));
-  };
+  
 
   return (
     <div className=" p-8 pb-28 w-full bg-gray-100">
       <div className="mt-10">
-        <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Student</h2>
+        <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Teacher</h2>
       </div>
       <div className=" mb-4 flex justify-between">
         <button className="btm" onClick={openModal}>
           + Add
         </button>
-        <div class="relative">
-          <select
-            id="searchSelect"
-            onChange={showHideInputs}
-            className="w-80 py-3 ps-3 text-sm border border-gray-300 rounded-lg
-                        bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
-          >
-            <option selected disabled>
-              Search Select
-            </option>
-            <option value="fistName">Search firstName</option>
-            <option value="lastName">Search lastName</option>
-            <option value="phoneNumber">Search phoneNumber</option>
-          </select>
-          <input
-            onChange={searchHandler}
-            type="search"
-            id="studentSearch"
-            style={{ display: "none" }}
-            className="w-80 py-3 px-3 ms-3 text-sm border border-gray-300 rounded-lg
-                        bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
-            placeholder="🔍  Search"
-          />
-        </div>
+       
       </div>
 
       <div>
-        <div className="mb-4">
-          <div className="flex mb-2 flex-wrap">
-          <button
-                onClick={() => {
-                  setLoading(true)
-                  getStudent();
-                }}
-                className={`px-10 ${loading ? "py-[20px]" : "py-2.5"}  mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
-                              bg-purple-500 text-white hover:bg-purple-700 active:scale-90 focus:outline-none focus:bg-purple-600 duration-300`}
-              >
-                 {loading ? <Loader/> : "All"}
-              </button>
-            {group.map((item) => (
-              <button
-                onClick={async () => {
-                  await setGroupId(item.id);
-                  getGroupS(item.id);
-                }}
-                key={item.id}
-                className={`px-10 ${loading ? "py-[20px]" : "py-2.5"}  mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
-                              bg-purple-500 text-white hover:bg-purple-700 active:scale-90 focus:outline-none focus:bg-purple-600 duration-300`}
-              >
-               {loading ? <Loader/> : item.name}
-              </button>
-            ))}
-          </div>
-        </div>
+        
         <div className="w-full mt-8 shadow-md rounded-3xl overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-800 text-white rounded-t-2xl uppercase text-sm leading-normal">
@@ -646,4 +554,4 @@ const AdminStudent = () => {
   );
 };
 
-export default AdminStudent;
+export default AdminTeacher;

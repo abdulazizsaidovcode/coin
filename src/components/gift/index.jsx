@@ -25,6 +25,7 @@ function Gift() {
   // giftFilter
   const searchGift = (e) => {
     let data = e.target.value
+    
     !data ? getGift() :
         axios.get(`${url}gift/search?name=${data}`, config)
             .then(res => res.data.body.length === 0 ? setGifts(null) : setGifts(res.data.body))
