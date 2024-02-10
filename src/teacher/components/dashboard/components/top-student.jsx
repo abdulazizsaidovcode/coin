@@ -76,7 +76,6 @@ const TopStudent = ({ students }) => {
         //     return s;
         // }) : [].slice(indexOfFirstTeacher, indexOfLastTeacher))
     }, []);
-    console.log(students);
 
     // let a = {
     //     active: false,
