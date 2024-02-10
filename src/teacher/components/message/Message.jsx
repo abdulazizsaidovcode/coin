@@ -66,10 +66,10 @@ function Message() {
       <div className="flex justify-between items-center mb-4">
         <button className='btm' onClick={openModal}>Add Message</button>
         <div>
-          <button onClick={getCategory} className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button onClick={getCategory} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg duration-200 active:scale-95">
             New posts first
           </button>
-          <button onClick={getCategory2} className="bg-green-500 ml-4 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+          <button onClick={getCategory2} className="bg-green-500 ml-4 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg duration-200 active:scale-95">
             Old posts first
           </button>
         </div>

@@ -6,8 +6,8 @@ import axios from "axios";
 import { config, setConfig, url } from "../../../components/api/api";
 
 const Test = () => {
-    const [allTestCard, setAllTestCard] = useState([]);
-    const [allTestTable, setAllTestTable] = useState([]);
+    const [allTestCard, setAllTestCard] = useState(null);
+    const [allTestTable, setAllTestTable] = useState(null);
     const [testCategorySub, setTestCategorySub] = useState([]);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [tableHeddin, setTableHeddin] = useState(false);
@@ -73,6 +73,7 @@ const Test = () => {
             <AddModal
                 isMenuOpen={isMenuOpen}
                 testCategorySub={testCategorySub}
+                getTestTable={getTestTable}
                 toggleMenu={toggleMenu}
             />
         </div>

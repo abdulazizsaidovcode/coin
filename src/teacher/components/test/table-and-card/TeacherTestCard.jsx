@@ -6,7 +6,7 @@ import { getFile } from '../../../../components/api/api';
 function TeacherTestCard({ allTestCard, getTestTable, setTableHeddin }) {
     return (
         <>
-            {allTestCard.length !== 0 ?
+            {allTestCard ?
                 allTestCard.map((item) => (
                     <div className="bg-white inline-block m-2 rounded-lg all-shadow hover:shadow-xl duration-300 overflow-hidden max-w-sm w-72">
                         <div className="flex justify-center items-center w-full h-44 overflow-hidden">

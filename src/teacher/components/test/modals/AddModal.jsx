@@ -4,12 +4,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const AddModal = (props) => {
-    const { toggleMenu, isMenuOpen, testCategorySub } = props;
+    const { toggleMenu, isMenuOpen, testCategorySub, getTestTable } = props;
+
     const [divCount, setDivCount] = useState(1);
     const [answers, setAnswers] = useState([{ answer: '', values: [] }]);
 
     const handleInputChange = (index, field, value) => {
-        const updatedAnswers = {...answers};
+        const updatedAnswers = [...answers];
         if (field === 'answer') {
             updatedAnswers[index].answer = value;
         } else {
@@ -37,7 +38,7 @@ const AddModal = (props) => {
             question: byId('question').value,
             categoryId: byId('categorySelect').value,
             processMinute: byId('teacherTime').value,
-            parameters: [byId('teacherParam').value],
+            parameters: ['let a', 'let b'],
             answer: answers,
             grade: byId('teacherCoin').value,
             advice: byId('advice').value,
@@ -47,10 +48,11 @@ const AddModal = (props) => {
             .then(() => {
                 toast.success('Successfully saved the test✔');
                 toggleMenu();
+                getTestTable();
             })
             .catch(err => {
                 toast.error('Someting is error❌');
-                console.log(err);
+                console.log('Teacher panel test qushishda xatolik: ', err);
                 console.log(addData);
             });
     }

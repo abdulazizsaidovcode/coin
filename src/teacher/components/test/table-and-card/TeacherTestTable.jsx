@@ -23,7 +23,7 @@ function TeacherTestTable({ getTestTable, testCategorySub, allTestTable, tableHe
                     </tr>
                 </thead>
                 <tbody className="text-gray-600 font-light">
-                    {allTestTable.length !== 0 ?
+                    {allTestTable ?
                         allTestTable.map((item, i) => (
                             <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
                                 <td className="py-3 px-6">{i + 1}</td>
