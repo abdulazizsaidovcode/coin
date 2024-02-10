@@ -4,12 +4,16 @@ import { byId, config, setConfig, url } from "../../components/api/api";
 import axios from "axios";
 import { toast } from "react-toastify";
 import GroupsTable from "./categorytable";
+import { notFound } from "../../assits";
+import NotFound from "../../NotFound";
+import Loader from "../../assits/loader";
 
 const AdminGroup = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [teacher, setTeacher] = useState(null);
   const [category, setCategory] = useState(null);
   const [groups, setGroups] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -25,7 +29,6 @@ const AdminGroup = () => {
       .get(url + "group", config)
       .then((res) => {
         setGroups(res.data.body.object);
-        console.log(res.data.body.object);
       })
       .catch((err) => {});
   };
@@ -46,10 +49,12 @@ const AdminGroup = () => {
         toast.success("Group succesfully add!");
         getCategory();
         closeModal();
+        setLoading(false)
       })
       .catch((error) => {
         console.error("Something is error 😭", error);
         toast.error("Something is error 😭");
+        setLoading(false);
       });
   };
 
@@ -67,8 +72,11 @@ const AdminGroup = () => {
     !data
       ? getCategory()
       : axios
-          .get(`${url}group/search/${data}`, config)
-          .then((res) => setGroups(res.data.body))
+          .get(`${url}group/search/for/admin/${data}`, config)
+          .then((res) => {
+            setGroups(res.data.body)
+            console.log(res.data.body);
+          })
           .catch(() => console.log("kelmadi"));
   };
 
@@ -76,8 +84,8 @@ const AdminGroup = () => {
     axios
       .get(url + "category/father", config)
       .then((res) => {
-         setCategory(res.data.body);
-         console.log(res.data.body);
+        setCategory(res.data.body);
+        console.log(res.data.body);
       })
       .catch(() => console.log("kategory kelmadi"));
   };
@@ -173,34 +181,27 @@ const AdminGroup = () => {
                 >
                   Close
                 </button>
-                <button onClick={addGroup} className="btm">
-                  Add
+                <button onClick={() => {
+                  setLoading(true)
+                  addGroup()
+                }} className="btm">
+                  {loading ? <Loader/> : "Add"}
                 </button>
               </div>
             </div>
           </div>
         </div>
       )}
-      {groups ? (
+      {groups && 
         <GroupsTable
           teacher={teacher}
           category={category}
           groups={groups}
           setGroups={setGroups}
           getGroup={getCategory}
-        />
-      ) : (
-        "FFFFFfff"
-      )}
+        />}
     </div>
   );
 };
 
 export default AdminGroup;
-
-
-
-
-
-
-

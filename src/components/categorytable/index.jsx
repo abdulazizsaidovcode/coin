@@ -4,11 +4,14 @@ import { byId, config, getFile, setConfig, url } from '../api/api';
 import avatar from "../../assits/opacha.jpg";
 import { toast } from 'react-toastify';
 import { Icon } from '@iconify/react';
+import Loader from '../../assits/loader';
 
 const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
     const [categoryInfo, setCategoryInfo] = useState([]);
+    const [loading, setLoading] = useState(false)
+
 
     // Function to toggle the active state
     const toggleActive = (id) => {
@@ -39,6 +42,7 @@ const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
 
     // edit category
     const editCategory = async () => {
+        setLoading(true)
         const img = new FormData();
         img.append('file', byId('attachmentId').files[0]);
         const editData = {
@@ -58,11 +62,14 @@ const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
                 closeModalEdit();
                 getCategory1();
                 toast.success("Category saccessfulliy edited!")
+                setLoading(false)
             })
             .catch(() => {
                 toast.error("Xatolik yuz berdi!!!")
+                setLoading(false)
                 // console.log(editData);
             })
+            setLoading(false)
     }
 
     // deleteCategory
@@ -72,9 +79,11 @@ const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
                 closeModal();
                 getCategory1();
                 toast.success("Succes!")
+                setLoading(false)
             })
             .catch((err) => {
                 toast.error("Something is error!")
+                setLoading(false)
                 // console.log(err);
             })
     }
@@ -107,12 +116,15 @@ const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
                         <div className="mt-6 pb-6 border-b font-medium text-lg">
                         Are you sure about that?
                         </div>
-                        <div className='flex justify-end items-center mt-5'>
-                            <button onClick={closeModal} className="font-semibold bg-red-600 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
-                                Close
+                        <div className='flex justify-between mt-5'>
+                            <button onClick={closeModal} className="btm-close">
+                                No
                             </button>
-                            <button onClick={deleteCategory} className="font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300">
-                                Yes
+                            <button onClick={() => {
+                                setLoading(true)
+                                deleteCategory()
+                            }} className="btm">
+                                {loading ? <Loader/> :  'Yes'}
                             </button>
                         </div>
                     </div>
@@ -166,12 +178,12 @@ const CategoryTable = ({categoriesF, getCategory1, setCategoriesF}) => {
                                 <option value="C++">C++</option>
                             </select> */}
                         </div>
-                        <div className='flex justify-end items-center mt-5'>
-                            <button onClick={closeModalEdit} className="font-semibold bg-yellow-500 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
+                        <div className='flex justify-end gap-10 mt-5'>
+                            <button onClick={closeModalEdit} className="btm-close">
                                 Close
                             </button>
-                            <button onClick={editCategory} className="font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300">
-                                Saqlash
+                            <button onClick={editCategory} className="btm">
+                                {loading ? <Loader /> : "Save"}
                             </button>
                         </div>
                     </div>

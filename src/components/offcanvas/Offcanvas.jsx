@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { byId, config, setConfig, url } from "../api/api";
 import { toast } from "react-toastify";
+import Loader from "../../assits/loader";
 
 function Offcanvas({ getCategory }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [categoriesFafer, setCategoriesFather] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -53,9 +55,11 @@ function Offcanvas({ getCategory }) {
         toggleMenu();
         getCategory();
         toast.success("Category saccessfulliy saved!");
+        setLoading(false)
       })
       .catch(() => {
-        toast.error("Xatolik yuz berdi!!!");
+        toast.error("Something is error?");
+        setLoading(false)
         // console.log(addData);
       });
   };
@@ -68,7 +72,7 @@ function Offcanvas({ getCategory }) {
         <div className="fixed inset-0 flex items-center justify-center z-50">
         <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
             <div className='flex justify-between items-center border-b pb-1'>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Add group</h2>
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Add Category</h2>
                 <button onClick={toggleMenu} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 duration-300 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                     <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -86,7 +90,7 @@ function Offcanvas({ getCategory }) {
                     file:text-gray-700 hover:file:bg-gray-100" />
 
                 <label htmlFor="category-name" className="block mt-7 text-sm font-medium text-gray-700">
-                    Group name
+                    Category name
                 </label>
                 <input
                     id="category"
@@ -95,27 +99,17 @@ function Offcanvas({ getCategory }) {
 
                 
 
-                {/* <label for="programmingLanguage" className="block text-sm font-medium text-gray-700 mt-7">
-                    Category programming language
-                </label>
-                <select id="programmingLanguage" className='mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full'>
-                    <option selected disabled>
-                        {categoryInfo.programmingLanguage !== null
-                            ? categoryInfo.programmingLanguage
-                            : "No programming language"}
-                    </option>
-                    <option value="JAVA_SCRIPT">JavaScript</option>
-                    <option value="PYTHON">Python</option>
-                    <option value="JAVA">Java</option>
-                    <option value="C++">C++</option>
-                </select> */}
+              
             </div>
-            <div className='flex justify-end items-center mt-5'>
-                <button onClick={toggleMenu} className="font-semibold bg-yellow-500 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
+            <div className='flex justify-end gap-10 mt-5'>
+                <button onClick={toggleMenu} className="btm-close">
                     Close
                 </button>
-                <button onClick={addCategory} className="font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300">
-                    Saqlash
+                <button onClick={() => {
+                  setLoading(true)
+                  addCategory()
+                }} className="btm">
+                    {loading ? <Loader/> : "Save"}
                 </button>
             </div>
         </div>

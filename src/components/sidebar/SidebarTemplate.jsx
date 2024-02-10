@@ -23,8 +23,7 @@ function SidebarTemplate({ isAdmin }) {
       <div
         className={`relative bg-white h-full border-r ${
           isExpanded ? "w-72" : "w-20"
-        } transition-width hidden xl:inline duration-300 z-40 ease-in-out`}
-      >
+        } transition-width hidden xl:inline duration-300 z-40 ease-in-out`}>
         <div
           className={` bg-white h-full border-r ${
             isExpanded ? "w-64" : "w-20"
