@@ -29,7 +29,7 @@ function SidebarTemplate({ isAdmin }) {
   }, []);
 
   const styles = {
-    sideBarStylexxl: 'flex items-center h-11 focus:outline-0 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 hover:bg-slate-100 focus:bg-red-600 focus:rounded-2xl focus:border-0 focus:mx-2 focus:text-white focus:tracking-wider duration-200 pr-5',
+    sideBarStylexxl: 'flex items-center h-11 focus:outline-0 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 hover:bg-slate-100 focus:bg-red-600 focus:rounded-2xl focus:border-0 focus:mx-2 focus:text-white focus:tracking-wider focus:font-bold duration-200 pr-5 font-semibold font-mono',
     sideBarStylexl: 'flex items-center justify-center h-11 focus:outline-0 text-gray-600 hover:text-gray-800 border-l-4 border-transparent duration-200 hover:bg-slate-100 hover:border-indigo-500 focus:border-l-4 focus:border-indigo-500 focus:bg-slate-100 pr-5',
     sidebarFlexClass: 'inline-flex justify-center items-center ml-4 text-xl'
   }
