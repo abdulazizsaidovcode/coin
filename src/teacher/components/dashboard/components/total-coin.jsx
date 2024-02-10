@@ -28,14 +28,14 @@ const TotalCoins = ({ pl }) => {
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: pn ? pn : [{ categoryName: 'Loading...' }]
+            data: pn ? pn : [{ name: 'Loading...' }]
         },
         series: [
             {
                 name: 'Access From',
                 type: 'pie',
                 radius: '50%',
-                data: data ? data : [{ coin: 100, categoryName: "Loading..." }],
+                data: data ? data : [{ value: 100, name: "Loading..." }],
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,

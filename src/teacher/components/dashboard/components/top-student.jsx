@@ -52,7 +52,7 @@ const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
                     <li key={number} className="mr-2">
                         <button
                             onClick={() => paginate(number)}
-                            className="text-white hover:text-blue-600 hover:underline px-3 py-1 rounded bg-blue-500"
+                            className="text-white hover:text-blue-600 hover:bg-slate-200 hover:font-extrabold font-bold shadow-xl duration-200 hover:underline px-3 py-1 mt-2 rounded-lg bg-blue-500"
                         >
                             {number}
                         </button>
@@ -71,11 +71,12 @@ const TopStudent = ({ students }) => {
 
 
     useEffect(() => {
-        setCurrentStudents(students ? students.map((s, i) => {
-            s.color = ['#4f46e5', '#6366f1', '#10b981', '#3b82f6'][i % 4];
-            return s;
-        }) : [].slice(indexOfFirstTeacher, indexOfLastTeacher))
+        // setCurrentStudents(students ? students.map((s, i) => {
+        //     s.color = ['#4f46e5', '#6366f1', '#10b981', '#3b82f6'][i % 4];
+        //     return s;
+        // }) : [].slice(indexOfFirstTeacher, indexOfLastTeacher))
     }, []);
+    console.log(students);
 
     // let a = {
     //     active: false,
@@ -88,11 +89,9 @@ const TopStudent = ({ students }) => {
     //     task: 2
     // }
 
-    // Calculating the range of teachers for the current page
     const indexOfLastTeacher = currentPage * teachersPerPage;
     const indexOfFirstTeacher = indexOfLastTeacher - teachersPerPage;
 
-    // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
@@ -104,22 +103,23 @@ const TopStudent = ({ students }) => {
                 <table className="min-w-full">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Full name</th>
-                            <th>Group name</th>
-                            <th>Exchanges</th>
-                            <th>Task</th>
+                            <th className='py-2'>#</th>
+                            <th className='py-2'>Full Name</th>
+                            <th className='py-2'>Group Name</th>
+                            <th className='py-2'>Exchange</th>
+                            <th className='py-2'>Coin</th>
+                            <th className='py-2'>Task</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {currentStudents && currentStudents.map((student, index) => (
+                        {students && students.map((student, index) => (
                             <tr key={index} className="border-t border-gray-200 text-center">
-                                <td className="px-5 py-3 whitespace-nowrap text-gray-500">{index + 1}</td>
-                                <td className="px-5 py-3 whitespace-nowrap text-gray-500">{student.fullName}</td>
-                                <td className="px-5 py-3 whitespace-nowrap text-gray-500">{student.coin}</td>
-                                <td className="px-5 py-3 whitespace-nowrap text-gray-500">{student.groupName}</td>
-                                <td className="px-5 py-3 whitespace-nowrap text-gray-500">{student.numberOfExchange}</td>
-                                <td className="px-5 py-3 whitespace-nowrap text-right">
+                                <td className="text-gray-500 py-2">{index + 1}</td>
+                                <td className="text-gray-500 py-2">{student.fullName}</td>
+                                <td className="text-gray-500 py-2">{student.groupName}</td>
+                                <td className="text-gray-500 py-2">{student.numberOfExchange}</td>
+                                <td className="text-gray-500 py-2">{student.coin}</td>
+                                <td className="flex justify-center py-2">
                                     <CircularProgress percentage={student.task} color={student.color} />
                                 </td>
                             </tr>
