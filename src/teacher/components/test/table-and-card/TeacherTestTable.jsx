@@ -53,6 +53,7 @@ function TeacherTestTable({ getTestTable, testCategorySub, allTestTable, tableHe
                                                 setIsHoveredId(item);
                                             }}
                                             className="bg-red-500 rounded-lg px-5 py-1.5 font-semibold text-black shadow-xl hover:bg-red-600 active:scale-95 duration-300"
+                                            disabled={isDeleteMenuOpen}
                                         >Delete</button>
                                     </td>
                                 </tr>

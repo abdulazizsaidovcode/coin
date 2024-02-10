@@ -1,3 +1,7 @@
+import axios from "axios";
+import { config, url } from "../../../../components/api/api";
+import { toast } from "react-toastify";
+
 const DeleteModal = (props) => {
     const {
         isHoveredId,
@@ -5,9 +9,42 @@ const DeleteModal = (props) => {
         isDeleteMenuOpen,
         toggleDeleteMenu
     } = props;
+    const testCategoryId = sessionStorage.getItem('testCategoryId')
+
+    const deleteTest = () => {
+        axios.delete(`${url}test/${isHoveredId.testId}`, config)
+        .then(() => {
+            toast.success("Succesfully delete test✔");
+            getTestTable(testCategoryId);
+            toggleDeleteMenu();
+        })
+        .catch(err => {
+            toast.error("Something is wrong!");
+            console.log('Teacher panel test delete qilishda error: ', err);
+        })
+    }
+
+    const styles = {
+        btn: 'py-1.5 px-5 rounded-lg font-inika font-semibold shadow-md active:scale-95 duration-200'
+    }
 
     return (
-        <div className={`${isDeleteMenuOpen ? 'visible w-full' : 'hidden'}`}>DeleteModal</div>
+        <div className={`${isDeleteMenuOpen ? '-translate-y-[40rem] translate-x-[25%] fixed w-full' : 'hidden'}`}>
+            <div className="w-[30rem] py-4 px-8 bg-slate-200 rounded-xl shadow-lg shadow-slate-500">
+                <div className="flex justify-between items-center border-b border-slate-400 pb-2">
+                    <p className="text-lg font-semibold font-inika text-gray-900 tracking-wide">Delete Test</p>
+                    <i onClick={toggleDeleteMenu} className="fa-solid fa-xmark fa-xl hover:cursor-pointer hover:opacity-70 duration-200"></i>
+                </div>
+                <div className="mt-3 text-[1.2rem] border-b border-slate-400 pb-2">
+                    Do you want to delete this question? <br />
+                    <p>({isHoveredId.question})</p>
+                </div>
+                <div className="mt-5 flex justify-end items-center">
+                    <button onClick={toggleDeleteMenu} className={`${styles.btn} mr-3 bg-yellow-400 shadow-yellow-700`}>Close</button>
+                    <button onClick={deleteTest} className={`${styles.btn} bg-red-500 shadow-red-700`}>Yes</button>
+                </div>
+            </div>
+        </div>
     )
 }
 
