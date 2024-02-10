@@ -34,6 +34,7 @@ function TeacherTestCard({ allTestCard, getTestTable, setTableHeddin }) {
                             </div>
                             <button className="btm" onClick={() => {
                                 getTestTable(item.categoryId);
+                                sessionStorage.setItem('testCategoryId', item.categoryId);
                                 setTableHeddin(true);
                             }}>View tests</button>
                         </div>
