@@ -8,10 +8,12 @@ import TopLoading from '../dashboard/components/loading';
 
 const Exchange = () => {
     const [exchangeTable, setExchangeTable] = useState(null);
+    const [exchangeStatistics, setExchangeStatistics] = useState(null);
 
     useEffect(() => {
         setConfig();
         getExchangeTable();
+        getCoinMonth();
     }, []);
 
     // get exchange table
@@ -19,6 +21,13 @@ const Exchange = () => {
         axios.get(`${url}exchange/teacher?page=0&size=10`, config)
             .then(res => setExchangeTable(res.data.body.object))
             .catch(err => console.log('Teacher panel exchange get qilishda error: ', err))
+    }
+
+    // get coin month
+    const getCoinMonth = () => {
+        axios.get(`${url}exchange/teacher-group-statistics`, config)
+          .then(res => setExchangeStatistics(res.data.body))
+          .catch(err => console.log('Teacher panel exchange statistikani get qilishda error: ', err))
     }
 
     // active ni chiqarish uchun
@@ -41,7 +50,7 @@ const Exchange = () => {
                     <TotalCoins />
                 </div>
                 <div className='w-6/12 shadow-xl up duration-300 rounded-lg ml-4'>
-                    <TotalCoinsmonth />
+                    <TotalCoinsmonth exchangeStatistics={exchangeStatistics} />
                 </div>
             </div>
 

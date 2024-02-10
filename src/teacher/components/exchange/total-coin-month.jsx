@@ -1,10 +1,8 @@
-// TotalCoins.js
-
-import React from 'react';
 import EChartsReact from 'echarts-for-react';
+import { useState } from 'react';
 
-const TotalCoinsmonth = () => {
-
+const TotalCoinsmonth = ({ exchangeStatistics }) => {
+    const [coinData, setCoinData] = useState(null);
     const option = {
         legend: {},
         tooltip: {},
@@ -19,10 +17,15 @@ const TotalCoinsmonth = () => {
         },
         xAxis: { type: 'category' },
         yAxis: {},
-        // Declare several bar series, each will be mapped
-        // to a column of dataset.source by default.
         series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }]
     };
+
+    // [
+    //     {
+    //         name: 'Matcha Latte',
+    //         value: 43.3
+    //     }
+    // ]
 
     return (
         <div className="bg-white rounded-lg shadow-md p-5">
