@@ -99,6 +99,11 @@ function Home() {
                 </div>
             </div>
             {/* second section end */}
+            {/* third section start */}
+            <div>
+
+            </div>
+            {/* third section end */}
             {/* footer start */}
             <footer className="foot-bg mt-10">
                 <div className="container">
