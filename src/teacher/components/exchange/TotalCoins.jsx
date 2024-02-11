@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import EChartsReact from 'echarts-for-react';
 
-const TotalCoins = ({ pl }) => {
+const TotalCoins = ({ exchangeDiagram }) => {
 
     const [pn, setPn] = useState(null);
     const [data, setData] = useState(null);
 
     // useEffect(() => {
-    //     setPn(pl.map(p => p.categoryName));
-    //     setData(pl.map(p => {
+    //     setPn(exchangeDiagram.map(p => p.categoryName));
+    //     setData(exchangeDiagram.map(p => {
     //         return { value: p.coin, name: p.categoryName }
     //     }))
-    // }, [pl]);
+    // }, [exchangeDiagram]);
 
     const option = {
         title: {
-            text: 'Total coin by courses',
-            subtext: 'Languages',
+            text: 'Exchanges made every month',
+            // subtext: '',
             left: 'center'
         },
         tooltip: {
@@ -26,28 +26,14 @@ const TotalCoins = ({ pl }) => {
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: pn ? pn : [
-                {name: 'Yanver'},
-                {name: 'Fevral'},
-                {name: 'Mart'},
-                {name: 'Aprel'},
-                {name: 'May'},
-                {name: 'Iyun'}
-            ]
+            data: pn ? pn : [{ name: 'Loading...' }]
         },
         series: [
             {
                 name: 'Access From',
                 type: 'pie',
                 radius: '50%',
-                data: data ? data : [
-                    {value: 4, name: 'Yanver'},
-                    {value: 10, name: 'Fevral'},
-                    {value: 7, name: 'Mart'},
-                    {value: 8, name: 'Aprel'},
-                    {value: 5, name: 'May'},
-                    {value: 11, name: 'Iyun'}
-                ],
+                data: data ? data : [{ value: 100, name: 'Loading...' }],
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,
