@@ -2,9 +2,10 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { byId, config, url } from '../../../components/api/api';
+import img from '../../../assits/not-found.png';
 
 function Message() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(null);
   const [group, setGroup] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMore, setIsMore] = useState(false);
@@ -59,7 +60,7 @@ function Message() {
   }
 
   return (
-    <div className="container mx-auto p-8 bg-gray-100 min-h-screen">
+    <div className={`bg-gray-100 container mx-auto p-8 min-h-screen`}>
       <div className="mt-3">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Message</h2>
       </div>
@@ -76,22 +77,27 @@ function Message() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-        {messages.map((item, i) => (
-          <div key={i} className="border rounded shadow hover:shadow-lg duration-300 hover:scale-[102%] p-3 relative">
-            <h2 className="font-bold text-lg mb-3" >{item.groupName}</h2>
-            <p className="text-gray-700 text-base mb-6">
-              {isMore ? item.description : cutDescription(item.description)}
-              {/* {cutDescription(item.description)} */}
-              <span
-                className='font-bold tracking-wide ms-3 hover:cursor-pointer hover:text-black duration-200'
-                onClick={openMore}
-              >{isMore ? 'back' : 'more'}</span>
-            </p>
-            <div className="absolute bottom-2 right-3">
-              <span className="text-sm font-semibold">{item.date}</span>
+        {messages ? (
+          messages.map((item, i) => (
+            <div key={i} className="border rounded shadow hover:shadow-lg duration-300 hover:scale-[102%] p-3 relative">
+              <h2 className="font-bold text-lg mb-3" >{item.groupName}</h2>
+              <p className="text-gray-700 text-base mb-6">
+                {isMore ? item.description : cutDescription(item.description)}
+                <span
+                  className='font-bold tracking-wide ms-3 hover:cursor-pointer hover:text-black duration-200'
+                  onClick={openMore}
+                >{isMore ? 'back' : 'more'}</span>
+              </p>
+              <div className="absolute bottom-2 right-3">
+                <span className="text-sm font-semibold">{item.date}</span>
+              </div>
             </div>
+          ))) : (
+          <div className="translate-x-[120%] mt-10 text-[2rem] flex justify-center items-center flex-col">
+            Message not found 😊
+            <img src={img} alt="img" className='w-64' />
           </div>
-        ))}
+        )}
       </div>
 
       {isModalOpen && (

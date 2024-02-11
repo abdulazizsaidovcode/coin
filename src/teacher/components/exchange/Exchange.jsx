@@ -9,11 +9,13 @@ import TopLoading from '../dashboard/components/loading';
 const Exchange = () => {
     const [exchangeTable, setExchangeTable] = useState(null);
     const [exchangeStatistics, setExchangeStatistics] = useState(null);
+    const [exchangeDiagram, setExchangeDiagram] = useState(null);
 
     useEffect(() => {
         setConfig();
         getExchangeTable();
-        getCoinMonth();
+        getCoinStatistics();
+        getCoinDiagram();
     }, []);
 
     // get exchange table
@@ -24,10 +26,20 @@ const Exchange = () => {
     }
 
     // get coin month
-    const getCoinMonth = () => {
+    const getCoinStatistics = () => {
         axios.get(`${url}exchange/teacher-group-statistics`, config)
-          .then(res => setExchangeStatistics(res.data.body))
-          .catch(err => console.log('Teacher panel exchange statistikani get qilishda error: ', err))
+            .then(res => setExchangeStatistics(res.data.body))
+            .catch(err => console.log('Teacher panel exchange statistikani get qilishda error: ', err))
+    }
+
+    // get coin diagram
+    const getCoinDiagram = () => {
+        axios.get(`${url}exchange/teacher/group/diagram`, config)
+            .then(res => {
+                // setExchangeDiagram(res.data.body)
+                console.log(res.data.body.filter(d => d.data5 !== null));
+            })
+            .catch(err => console.log('Teacher panel exchange diagrammani get qilishda error: ', err))
     }
 
     // active ni chiqarish uchun
@@ -57,7 +69,7 @@ const Exchange = () => {
             {exchangeTable ? (
                 <ExchangeTable exchangeTable={exchangeTable} toggleActive={toggleActive} />
             ) : (
-                <TopLoading name='Exchange information'  />
+                <TopLoading name='Exchange information' />
             )}
         </div>
     );
