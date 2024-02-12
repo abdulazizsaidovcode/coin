@@ -8,16 +8,13 @@ import Loader from "../../assits/loader"
 const AdminTeacher = () => {
   const [modal, setIsModalOpen] = useState(false);
   const [editModal, setIsModalOpenEdit] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
   const [userId, setUserId] = useState([]);
-  const getStudentInfo = sessionStorage.getItem("studentInfoId");
   const [groupId, setGroupId] = useState("");
   const [group, setGroup] = useState([]);
   const [student, setStudent] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
-  console.log("getmtm");
-  console.log(getStudentInfo);
   useEffect(() => {
     setConfig();
     getStudent();
@@ -27,6 +24,8 @@ const AdminTeacher = () => {
   const closeModal = () => setIsModalOpen(false);
   const openModalEdit = () => setIsModalOpenEdit(true);
   const closeModalEdit = () => setIsModalOpenEdit(false);
+  const openModaldelete = () => setDeleteModal(true);
+  const closeModaldelete = () => setDeleteModal(false);
 
   const addUsers = () => {
     let addData = {
@@ -35,7 +34,7 @@ const AdminTeacher = () => {
       email: byId("email").value,
       password: byId("password").value,
       phoneNumber: byId("phoneNumber").value,
-      groupId: byId("groupId").value,
+      groupId: 0,
       gender: byId("gender").value,
       friendPhoneNumber: "",
     };
@@ -51,7 +50,6 @@ const AdminTeacher = () => {
       });
   };
 
-  console.log(userId);
 
   const editUser = () => {
     let editData = {
@@ -60,14 +58,14 @@ const AdminTeacher = () => {
       email: byId("email").value,
       password: byId("password").value,
       phoneNumber: byId("phoneNumber").value,
-      groupId: byId("groupId").value,
+      groupId: 0,
       gender: byId("gender").value,
       friendPhoneNumber: "",
     };
     axios
-      .put(url + "user/update/", editData, config)
+      .put(`${url}user/update${userId}`, editData, config)
       .then(() => {
-        // openEditModal();
+        closeModalEdit()
         // getUsers();
         toast.success("User information has been changed✔");
       })
@@ -87,10 +85,20 @@ const AdminTeacher = () => {
       .catch(() => console.log("kelmadi"));
   };
 
-  
+  const deleteUser = () => {
+    axios
+      .delete(`${url}user/
+      ${userId.id}`, config)
+      .then((res) => {
+        toast.success("Succesfully delete teacher!")
+        closeModaldelete()
+        getStudent()
+      })
+      .catch(() => toast.error("Failed to delete"))
+  };
 
   return (
-    <div className=" p-8 pb-28 w-full bg-gray-100">
+    <div className=" p-8 pb-28 w-full h-screen bg-gray-100">
       <div className="mt-10">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Teacher</h2>
       </div>
@@ -109,7 +117,6 @@ const AdminTeacher = () => {
               <tr>
                 <th className="py-3 px-6">#</th>
                 <th className="py-3 px-6">Full Name</th>
-                <th className="py-3 px-6">Group</th>
                 <th className="py-3 px-6">Phone Number</th>
                 <th className="py-3 px-6">Coin</th>
                 <th className="py-3 px-6">Task</th>
@@ -126,7 +133,6 @@ const AdminTeacher = () => {
                   >
                     <td className="py-3 px-6">{i + 1}</td>
                     <td className="py-3 px-6">{item.fullName}</td>
-                    <td className="py-3 px-6">{item.groupName}</td>
                     <td className="py-3 px-6">{item.phoneNumber}</td>
                     <td className="py-3 px-6">{item.coin}</td>
                     <td className="py-3 px-6">{item.task}</td>
@@ -143,7 +149,7 @@ const AdminTeacher = () => {
                       </button>
                       <button
                         onClick={() => {
-                          openModal();
+                          openModaldelete();
                           setUserId(item);
                         }}
                         className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline ml-3"
@@ -283,28 +289,7 @@ const AdminTeacher = () => {
                     required=""
                   />
                 </div>
-                <div className="col-span-2 sm:col-span-1">
-                  <label
-                    htmlFor="groupId"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Select group
-                  </label>
-                  <select
-                    id="groupId"
-                    className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
-                  >
-                    <option selected disabled>
-                      Choose one...
-                    </option>
-                    {group.length &&
-                      group.map((item, i) => (
-                        <option key={i} value={item.id}>
-                          {item.name}
-                        </option>
-                      ))}
-                  </select>
-                </div>
+            
                 <div className="col-span-2 sm:col-span-1">
                   <label
                     htmlFor="gender"
@@ -323,22 +308,7 @@ const AdminTeacher = () => {
                     <option value="FEMALE">FEMALE</option>
                   </select>
                 </div>
-                <div className="col-span-2">
-                  <label
-                    htmlFor="fNumber"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Friend's phone number
-                  </label>
-                  <input
-                    type="number"
-                    name="name"
-                    id="fNumber"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Type product name"
-                    required=""
-                  />
-                </div>
+               
               </div>
               <div className="flex justify-end">
                 <button className="btm-close me-2 bg-red-900">Close</button>
@@ -405,7 +375,7 @@ const AdminTeacher = () => {
                     id="firstName"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="FirstName"
-                    defaultValue={userId.name}
+                    defaultValue={userId.fullName}
                   />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
@@ -436,6 +406,7 @@ const AdminTeacher = () => {
                     type="text"
                     name="email"
                     id="email"
+                    defaultValue={userId.email}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Email"
                     required=""
@@ -455,6 +426,7 @@ const AdminTeacher = () => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="100"
                     required=""
+                    defaultValue={userId.phoneNumber}
                   />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
@@ -465,36 +437,16 @@ const AdminTeacher = () => {
                     Password
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     name="password"
                     id="password"
+                    defaultValue={userId.password}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Type product name"
                     required=""
                   />
                 </div>
-                <div className="col-span-2 sm:col-span-1">
-                  <label
-                    htmlFor="groupId"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Select group
-                  </label>
-                  <select
-                    id="groupId"
-                    className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
-                  >
-                    <option selected disabled>
-                      Choose one...
-                    </option>
-                    {group.length &&
-                      group.map((item, i) => (
-                        <option key={i} value={item.id}>
-                          {item.name}
-                        </option>
-                      ))}
-                  </select>
-                </div>
+                
                 <div className="col-span-2 sm:col-span-1">
                   <label
                     htmlFor="gender"
@@ -513,22 +465,7 @@ const AdminTeacher = () => {
                     <option value="FEMALE">FEMALE</option>
                   </select>
                 </div>
-                <div className="col-span-2">
-                  <label
-                    htmlFor="fNumber"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Friend's phone number
-                  </label>
-                  <input
-                    type="number"
-                    name="name"
-                    id="fNumber"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Type product name"
-                    required=""
-                  />
-                </div>
+               
               </div>
               <div className="flex justify-end">
                 <button
@@ -544,6 +481,63 @@ const AdminTeacher = () => {
                   className="btm"
                 >
                   Edit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+
+{deleteModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 ">
+          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+            <div className="flex">
+              <h2 className="text-lg font-semibold text-gray-900 p-2">
+                Delete student
+              </h2>
+              <button
+                onClick={closeModaldelete}
+                className="text-gray-400 m-2 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-toggle="crud-modal"
+              >
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span className="sr-only">Close modal</span>
+              </button>
+            </div>
+
+            {/* Modal body */}
+            <div className="p-4 md:p-5">
+              
+              qwertyuiobhy yuhjnm 
+              <div className="flex justify-end">
+                <button
+                  onClick={closeModaldelete}
+                  className="btm-close me-2 bg-red-900"
+                >
+                  No
+                </button>
+                <button
+                  onClick={() => {
+                    deleteUser();
+                  }}
+                  className="btm"
+                >
+                  Yes
                 </button>
               </div>
             </div>
