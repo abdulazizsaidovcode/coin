@@ -24,7 +24,7 @@ function Category() {
 
   const getCategoryChild = () => {
     axios.get(url + "category/sub", config)
-      .then(res => setCategoriesub(res.data.body))
+      .then(res => res.data.body.length === 0 ? setCategoriesub(null) : setCategoriesub(res.data.body))
       .catch(() => console.log("kelmadi"))
   }
 

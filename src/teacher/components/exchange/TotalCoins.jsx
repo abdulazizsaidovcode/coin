@@ -5,18 +5,20 @@ const TotalCoins = ({ exchangeDiagram }) => {
 
     const [pn, setPn] = useState(null);
     const [data, setData] = useState(null);
+    const [month, setMonth] = useState(null);
 
-    // useEffect(() => {
-    //     setPn(exchangeDiagram.map(p => p.categoryName));
-    //     setData(exchangeDiagram.map(p => {
-    //         return { value: p.coin, name: p.categoryName }
-    //     }))
-    // }, [exchangeDiagram]);
+    useEffect(() => {
+        setPn(exchangeDiagram.map(p => p.groupName));
+        setMonth(exchangeDiagram.map(p => p.monthName));
+        setData(exchangeDiagram.map(p => {
+            return { value: p.numberOfExchange, name: p.groupName }
+        }))
+    }, [exchangeDiagram]);
 
     const option = {
         title: {
             text: 'Exchanges made every month',
-            // subtext: '',
+            subtext: month,
             left: 'center'
         },
         tooltip: {
@@ -26,14 +28,14 @@ const TotalCoins = ({ exchangeDiagram }) => {
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: pn ? pn : [{ name: 'Loading...' }]
+            data: pn ? pn : []
         },
         series: [
             {
                 name: 'Access From',
                 type: 'pie',
                 radius: '50%',
-                data: data ? data : [{ value: 100, name: 'Loading...' }],
+                data: data ? data : [],
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,
@@ -46,13 +48,16 @@ const TotalCoins = ({ exchangeDiagram }) => {
     };
 
     return (
-        <div className="bg-white rounded-lg shadow-md p-5">
-            <div style={{ height: '400px', width: '100%', display: "flex", flexDirection: "column" }}>
-                <EChartsReact option={option}
-                    style={{ height: '100%', width: '100%', display: "flex", justifyContent: "center" }} />
+        <>
+            <div className="bg-white rounded-lg shadow-md p-5">
+                <div style={{ height: '400px', width: '100%', display: "flex", flexDirection: "column" }}>
+                    <EChartsReact
+                        option={option}
+                        style={{ height: '100%', width: '100%', display: "flex", justifyContent: "center" }}
+                    />
+                </div>
             </div>
-        </div>
-
+        </>
     );
 };
 

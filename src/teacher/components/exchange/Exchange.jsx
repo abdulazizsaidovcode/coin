@@ -35,10 +35,7 @@ const Exchange = () => {
     // get coin diagram
     const getCoinDiagram = () => {
         axios.get(`${url}exchange/teacher/group/diagram`, config)
-            .then(res => {
-                // setExchangeDiagram(res.data.body)
-                console.log(res.data.body.filter(d => d.data5 !== null));
-            })
+            .then(res => setExchangeDiagram(res.data.body.data5))
             .catch(err => console.log('Teacher panel exchange diagrammani get qilishda error: ', err))
     }
 
@@ -59,7 +56,11 @@ const Exchange = () => {
             </div>
             <div className='flex justify-between my-14'>
                 <div className='w-6/12 shadow-xl up duration-300 rounded-lg mr-4'>
-                    <TotalCoins exchangeDiagram={exchangeDiagram} />
+                    {exchangeDiagram ? (
+                        <TotalCoins exchangeDiagram={exchangeDiagram} />
+                    ) : (
+                        <TotalCoins exchangeDiagram={[{ groupName: "Loading...", numberOfExchange: 100 }]} />
+                    )}
                 </div>
                 <div className='w-6/12 shadow-xl up duration-300 rounded-lg ml-4'>
                     <TotalCoinsmonth exchangeStatistics={exchangeStatistics} />
