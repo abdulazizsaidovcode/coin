@@ -36,6 +36,7 @@ const ExchangeTable = ({ exchangeTable, toggleActive }) => {
                             <td className="py-2">
                                 <input
                                     type="checkbox"
+                                    disabled={true}
                                     className="form-checkbox h-5 w-5 text-blue-600"
                                     checked={item.active}
                                     onChange={() => toggleActive(item.id)}

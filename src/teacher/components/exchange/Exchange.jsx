@@ -8,10 +8,14 @@ import TopLoading from '../dashboard/components/loading';
 
 const Exchange = () => {
     const [exchangeTable, setExchangeTable] = useState(null);
+    const [exchangeStatistics, setExchangeStatistics] = useState(null);
+    const [exchangeDiagram, setExchangeDiagram] = useState(null);
 
     useEffect(() => {
         setConfig();
         getExchangeTable();
+        getCoinStatistics();
+        getCoinDiagram();
     }, []);
 
     // get exchange table
@@ -19,6 +23,20 @@ const Exchange = () => {
         axios.get(`${url}exchange/teacher?page=0&size=10`, config)
             .then(res => setExchangeTable(res.data.body.object))
             .catch(err => console.log('Teacher panel exchange get qilishda error: ', err))
+    }
+
+    // get coin month
+    const getCoinStatistics = () => {
+        axios.get(`${url}exchange/teacher-group-statistics`, config)
+            .then(res => setExchangeStatistics(res.data.body))
+            .catch(err => console.log('Teacher panel exchange statistikani get qilishda error: ', err))
+    }
+
+    // get coin diagram
+    const getCoinDiagram = () => {
+        axios.get(`${url}exchange/teacher/group/diagram`, config)
+            .then(res => setExchangeDiagram(res.data.body.data5))
+            .catch(err => console.log('Teacher panel exchange diagrammani get qilishda error: ', err))
     }
 
     // active ni chiqarish uchun
@@ -38,17 +56,21 @@ const Exchange = () => {
             </div>
             <div className='flex justify-between my-14'>
                 <div className='w-6/12 shadow-xl up duration-300 rounded-lg mr-4'>
-                    <TotalCoins />
+                    {exchangeDiagram ? (
+                        <TotalCoins exchangeDiagram={exchangeDiagram} />
+                    ) : (
+                        <TotalCoins exchangeDiagram={[{ groupName: "Loading...", numberOfExchange: 100 }]} />
+                    )}
                 </div>
                 <div className='w-6/12 shadow-xl up duration-300 rounded-lg ml-4'>
-                    <TotalCoinsmonth />
+                    <TotalCoinsmonth exchangeStatistics={exchangeStatistics} />
                 </div>
             </div>
 
             {exchangeTable ? (
                 <ExchangeTable exchangeTable={exchangeTable} toggleActive={toggleActive} />
             ) : (
-                <TopLoading name='Exchange information'  />
+                <TopLoading name='Exchange information' />
             )}
         </div>
     );

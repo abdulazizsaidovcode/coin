@@ -24,7 +24,7 @@ function Category() {
 
   const getCategoryChild = () => {
     axios.get(url + "category/sub", config)
-      .then(res => setCategoriesub(res.data.body))
+      .then(res => res.data.body.length === 0 ? setCategoriesub(null) : setCategoriesub(res.data.body))
       .catch(() => console.log("kelmadi"))
   }
 
@@ -47,7 +47,7 @@ function Category() {
       <div className="mt-10">
         <h2 className="text-3xl font-bold font-inika text-gray-900 mb-6">Category</h2>
       </div>
-      {categorysub ? (
+      {categories ? (
         <CategoryTable
           filterCategory={filterCategory}
           categories={categories}

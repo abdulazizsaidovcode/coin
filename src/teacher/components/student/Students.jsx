@@ -133,7 +133,7 @@ const Students = () => {
                                 ) :
                                 <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
                                     <td colSpan='7' className="font-inika font-medium text-xl tracking-wider leading-10 text-center">
-                                        <span className='inline-block min-h-[2em] w-full py-3 flex-auto cursor-wait animate-[pulse_1s_ease-in-out_infinite] bg-[rgba(133,214,251,0.3)]'>
+                                        <span className='inline-block min-h-[2em] w-full py-3 flex-auto cursor-wait animate-[pulse_1s_ease-in-out_infinite] bg-[rgba(113,203,245,0.3)]'>
                                             Student not found 😊
                                         </span>
                                     </td>
