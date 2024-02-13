@@ -75,7 +75,7 @@ function Home() {
                 <div className="">
                     <div className="sass">
                         <p className="sm:text-5xl text-3xl">Download now mobile app</p>
-                        <p className="ll sm:text-3xl mt-10 w-9/12">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</p>
+                        <p className="ll sm:text-3xl mt-10 md:w-9/12">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</p>
                     </div>
                     <div className="flex justify-between flex-wrap lg:w-7/12 mt-10">
                         <Button className="btn-2 sm:w-72 sm:h-20 text-slate-950 mb-5">
@@ -134,13 +134,13 @@ function Home() {
                             <div className="end-box">
                                 <h5>Ijtimoiy tarmoqlarimiz</h5>
                                 <div className="iconka flex">
-                                    <div className="aa ms-2">
+                                    <div className="aa ms-2 cursor-pointer">
                                         <i className="text-2xl fa-brands text-white fa-facebook"></i>
                                     </div>
-                                    <div className="aa ms-2">
+                                    <div className="aa ms-2 cursor-pointer">
                                         <i className="text-2xl fa-brands text-white fa-instagram"></i>
                                     </div>
-                                    <div className="aa ms-2">
+                                    <div className="aa ms-2 cursor-pointer">
                                         <i className="text-2xl fa-brands text-white fa-telegram"></i>
                                     </div>
                                 </div>
@@ -150,8 +150,8 @@ function Home() {
                 </div>
                 <hr className="hr" />
                 <div className="container text-white sm:px-36" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <p>©1997, 29-maktab.</p>
-                    <p>Powered by: <a href="">IT City Academy</a></p>
+                    <p>©2024, COIN.</p>
+                    <p>Powered by: <a href="https://itcityacademy.uz">IT City Academy</a></p>
                 </div>
             </footer>
             {/* footer end */}
