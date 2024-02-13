@@ -3,7 +3,7 @@ import { getFile } from '../../../components/api/api';
 
 const ExchangeTable = ({ exchangeTable, toggleActive }) => {
     return (
-        <div className='rounded-3xl shadow-lg overflow-hidden w-full mb-20 lg:mb-6'>
+        <div className='rounded-3xl shadow-lg overflow-hidden w-full mb-20 lg:mb-10'>
             <div className='overflow-x-auto'>
                 <table className="min-w-full">
                     <thead className="bg-gray-800 text-white uppercase text-sm leading-normal">

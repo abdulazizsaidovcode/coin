@@ -29,19 +29,17 @@ function Gift() {
     }
 
     return (
-        <div className="bg-gray-100 min-h-screen p-8 w-full ">
-            <div className="mb-6 flex justify-between items-center">
-                <h2 className="text-4xl font-bold font-inika text-gray-900 mb-4">Gift</h2>
-                <div class="relative">
-                    <input
-                        onChange={giftFilter}
-                        type="search"
-                        className="w-80 py-3 px-3 text-sm border border-gray-300 rounded-lg
-                        bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
-                        placeholder="🔍   Search" />
-                </div>
+        <div className="bg-gray-100 min-h-screen p-8 w-full">
+            <div className="mb-6 flex justify-between items-center flex-wrap gap-5">
+                <h2 className="text-4xl font-bold font-inika text-gray-900">Gift</h2>
+                <input
+                    onChange={giftFilter}
+                    type="search"
+                    className="w-full sm:w-80 py-3 px-3 text-sm border border-gray-300 rounded-lg
+                    bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
+                    placeholder="🔍  Search" />
             </div>
-             <GiftCard gifts={gifts} />
+            <GiftCard gifts={gifts} />
         </div>
     );
 }
