@@ -63,7 +63,18 @@ const Exchange = () => {
                     )}
                 </div>
                 <div className='w-6/12 shadow-xl up duration-300 rounded-lg ml-4'>
-                    <TotalCoinsmonth exchangeStatistics={exchangeStatistics} />
+                    {exchangeStatistics ? (
+                        <TotalCoinsmonth exchangeStatistics={exchangeStatistics} />
+                    ) : (
+                        <TotalCoinsmonth
+                            exchangeStatistics={[{
+                                groupName: "Loading...",
+                                numberOfExchange: 0,
+                                monthName: 'Loading...',
+                                year: 'loading...'
+                            }]}
+                        />
+                    )}
                 </div>
             </div>
 

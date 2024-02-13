@@ -14,7 +14,7 @@ const ExchangeTable = ({ exchangeTable, toggleActive }) => {
                     <th className="py-3">rate</th>
                     <th className="py-3">date</th>
                     <th className="py-3">active</th>
-                    <th className="py-3">action</th>
+                    {/* <th className="py-3">action</th> */}
                 </tr>
             </thead>
             <tbody className="text-gray-600 font-light">
@@ -42,11 +42,11 @@ const ExchangeTable = ({ exchangeTable, toggleActive }) => {
                                     onChange={() => toggleActive(item.id)}
                                 />
                             </td>
-                            <td className="py-2">
+                            {/* <td className="py-2">
                                 <div className="flex item-center justify-center">
                                     <button className="text-sm bg-blue-500 hover:bg-blue-600 text-white active:scale-95 tracking-widest rounded-lg shadow-lg font-semibold py-1.5 px-4 duration-300">info</button>
                                 </div>
-                            </td>
+                            </td> */}
                         </tr>
                     )) : (
                         <tr className='border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200 w-full'>
