@@ -46,14 +46,7 @@ const Exchange = () => {
 
     return (
         <div className="p-8 w-full bg-gray-100">
-            <div className="mt-10 flex justify-between items-center">
-                <h2 className="text-4xl font-bold font-mono text-gray-900 mb-4">Exchange</h2>
-                <input
-                    type="search"
-                    className="w-80 py-3 px-3 text-sm border border-gray-300 rounded-lg
-                    bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
-                    placeholder="🔍  Search" />
-            </div>
+            <h2 className="text-4xl font-bold font-mono text-gray-900 mt-5">Exchange</h2>
             <div className='flex justify-between my-14'>
                 <div className='w-6/12 shadow-xl up duration-300 rounded-lg mr-4'>
                     {exchangeDiagram ? (
@@ -76,6 +69,31 @@ const Exchange = () => {
                         />
                     )}
                 </div>
+            </div>
+
+            <div className='flex flex-col flex-wrap lg:flex-row mt-16 mb-5 w-full gap-5'>
+                <input
+                    type="search"
+                    className="w-[32%] p-3 text-sm border border-gray-300 rounded-lg
+                    bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
+                    placeholder="🔍  Search"
+                />
+                <select
+                    className="w-[32%] p-3 text-sm border border-gray-300 rounded-lg
+                    bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300">
+                    <option selected disabled>Search Group</option>
+                    <option>Search firstName</option>
+                    <option>Search lastName</option>
+                    <option>Search phoneNumber</option>
+                </select>
+                <select
+                    className="w-[32%] p-3 text-sm border border-gray-300 rounded-lg
+                    bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300">
+                    <option selected disabled>Search Gift</option>
+                    <option>Search firstName</option>
+                    <option>Search lastName</option>
+                    <option>Search phoneNumber</option>
+                </select>
             </div>
 
             {exchangeTable ? (
