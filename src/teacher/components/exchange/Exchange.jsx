@@ -66,7 +66,14 @@ const Exchange = () => {
                     {exchangeStatistics ? (
                         <TotalCoinsmonth exchangeStatistics={exchangeStatistics} />
                     ) : (
-                        <TotalCoinsmonth />
+                        <TotalCoinsmonth
+                            exchangeStatistics={[{
+                                groupName: "Loading...",
+                                numberOfExchange: 0,
+                                monthName: 'Loading...',
+                                year: 'loading...'
+                            }]}
+                        />
                     )}
                 </div>
             </div>
