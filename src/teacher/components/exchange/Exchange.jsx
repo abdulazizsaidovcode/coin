@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TotalCoins from './TotalCoins';
 import TotalCoinsmonth from './total-coin-month';
 import axios from 'axios';
-import { config, setConfig, url } from '../../../components/api/api';
+import { byId, config, setConfig, url } from '../../../components/api/api';
 import ExchangeTable from './ExchangeTable';
 import TopLoading from '../dashboard/components/loading';
 
@@ -10,12 +10,14 @@ const Exchange = () => {
     const [exchangeTable, setExchangeTable] = useState(null);
     const [exchangeStatistics, setExchangeStatistics] = useState(null);
     const [exchangeDiagram, setExchangeDiagram] = useState(null);
+    const [group, setGroup] = useState(null);
 
     useEffect(() => {
         setConfig();
         getExchangeTable();
         getCoinStatistics();
         getCoinDiagram();
+        getGroups();
     }, []);
 
     // get exchange table
@@ -43,6 +45,17 @@ const Exchange = () => {
     const toggleActive = (id) => {
         setExchangeTable(exchangeTable.map(item => item.id === id ? { ...item, active: !item.active } : item));
     };
+
+    const getGroups = () => {
+        axios.get(`${url}group/teacher`, config)
+            .then(res => setGroup(res.data.body))
+            .catch(err => console.log('Teacher panel exchangesda error: ', err))
+    }
+
+    // exchange filter
+    const exchangeFilter = (e) => {
+        console.log(byId('searchGroup').value);
+    }
 
     return (
         <div className="p-8 w-full bg-gray-100">
@@ -74,25 +87,19 @@ const Exchange = () => {
             <div className='flex flex-col flex-wrap lg:flex-row mt-16 mb-5 w-full gap-5'>
                 <input
                     type="search"
-                    className="w-[32%] p-3 text-sm border border-gray-300 rounded-lg
+                    className="w-[30%] p-3 text-sm border border-gray-300 rounded-lg
                     bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
                     placeholder="🔍  Search"
                 />
                 <select
-                    className="w-[32%] p-3 text-sm border border-gray-300 rounded-lg
+                    id='searchGroup'
+                    onChange={exchangeFilter}
+                    className="w-[30%] p-3 text-sm border border-gray-300 rounded-lg
                     bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300">
                     <option selected disabled>Search Group</option>
-                    <option>Search firstName</option>
-                    <option>Search lastName</option>
-                    <option>Search phoneNumber</option>
-                </select>
-                <select
-                    className="w-[32%] p-3 text-sm border border-gray-300 rounded-lg
-                    bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300">
-                    <option selected disabled>Search Gift</option>
-                    <option>Search firstName</option>
-                    <option>Search lastName</option>
-                    <option>Search phoneNumber</option>
+                    {group && group.map(item => (
+                        <option key={item.id} value={item.id}>{item.name}</option>
+                    ))}
                 </select>
             </div>
 
