@@ -1,17 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TotalCoins from './TotalCoins';
 import TotalCoinsmonth from './total-coin-month';
+import axios from 'axios';
+import { config, setConfig, url } from '../api/api';
+import ExchangeTable from './ExchangeTable';
+import TopLoading from '../dashboard/components/loading';
 
 const Exchange = () => {
-    const [data, setData] = useState([]);
+    const [exchangeTable, setExchangeTable] = useState(null);
+    const [exchangeStatistics, setExchangeStatistics] = useState(null);
+    const [exchangeDiagram, setExchangeDiagram] = useState(null);
+
+    useEffect(() => {
+        setConfig();
+        getExchangeTable();
+        getCoinStatistics();
+        getCoinDiagram();
+    }, []);
+
+    // get exchange table
+    const getExchangeTable = () => {
+        axios.get(`${url}exchange?page=0&size=10`, config)
+            .then(res => setExchangeTable(res.data.body.object))
+            .catch(err => console.log('Teacher panel exchange get qilishda error: ', err))
+    }
+
+    // get coin month
+    const getCoinStatistics = () => {
+        axios.get(`${url}exchange/group-statistics`, config)
+            .then(res => setExchangeStatistics(res.data.body))
+            .catch(err => console.log('Teacher panel exchange statistikani get qilishda error: ', err))
+    }
+
+    // get coin diagram
+    const getCoinDiagram = () => {
+        axios.get(`${url}exchange/group/diagram`, config)
+            .then(res => setExchangeDiagram(res.data.body.data5))
+            .catch(err => console.log('Teacher panel exchange diagrammani get qilishda error: ', err))
+    }
+
+    // active ni chiqarish uchun
     const toggleActive = (id) => {
-        setData(data.map(item => item.id === id ? { ...item, active: !item.active } : item));
+        setExchangeTable(exchangeTable.map(item => item.id === id ? { ...item, active: !item.active } : item));
     };
 
     return (
         <div className="p-8 w-full bg-gray-100">
             <div className="mt-10 flex justify-between items-center">
-                <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Exchange</h2>
+                <h2 className="text-4xl font-bold font-mono text-gray-900 mb-4">Exchange</h2>
                 <input
                     type="search"
                     className="w-80 py-3 px-3 text-sm border border-gray-300 rounded-lg
@@ -20,54 +56,22 @@ const Exchange = () => {
             </div>
             <div className='flex justify-between my-14'>
                 <div className='w-6/12 shadow-xl up duration-300 rounded-lg mr-4'>
-                    <TotalCoins />
+                    {exchangeDiagram ? (
+                        <TotalCoins exchangeDiagram={exchangeDiagram} />
+                    ) : (
+                        <TotalCoins exchangeDiagram={[{ groupName: "Loading...", numberOfExchange: 100 }]} />
+                    )}
                 </div>
                 <div className='w-6/12 shadow-xl up duration-300 rounded-lg ml-4'>
-                    <TotalCoinsmonth />
+                    <TotalCoinsmonth exchangeStatistics={exchangeStatistics} />
                 </div>
             </div>
 
-            <div>
-                <table className="w-full rounded-3xl shadow-lg overflow-hidden">
-                    <thead className="bg-gray-800 text-white uppercase text-sm leading-normal">
-                        <tr>
-                            <th className="py-3 px-6">#</th>
-                            <th className="py-3 px-6">photo</th>
-                            <th className="py-3 px-6">gift name</th>
-                            <th className="py-3 px-6">name</th>
-                            <th className="py-3 px-6">coin</th>
-                            <th className="py-3 px-6">date</th>
-                            <th className="py-3 px-6">active</th>
-                            <th className="py-3 px-6">action</th>
-                        </tr>
-                    </thead>
-                    <tbody className="text-gray-600 font-light">
-                        <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
-                            <th className="py-3 px-6">1</th>
-                            <td className="py-3 px-6">
-                                <img src='' alt="nofound" />
-                            </td>
-                            <td className="py-3 px-6">giftname</td>
-                            <td className="py-3 px-6">name</td>
-                            <td className="py-3 px-6">Coin</td>
-                            <td className="py-3 px-6">date</td>
-                            <td className="py-3 px-6">
-                                <input
-                                    type="checkbox"
-                                    className="form-checkbox h-5 w-5 text-blue-600"
-                                // checked={item.active}
-                                // onChange={() => toggleActive(item.id)}
-                                />
-                            </td>
-                            <td className="py-3 px-6">
-                                <div className="flex item-center justify-center">
-                                    <button className="text-sm bg-blue-500 hover:bg-blue-600 text-white active:scale-95 tracking-widest rounded-lg shadow-lg font-semibold py-1.5 px-4 duration-300">info</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            {exchangeTable ? (
+                <ExchangeTable exchangeTable={exchangeTable} toggleActive={toggleActive} />
+            ) : (
+                <TopLoading name='Exchange information' />
+            )}
         </div>
     );
 };
