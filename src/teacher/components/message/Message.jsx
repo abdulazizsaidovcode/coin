@@ -60,13 +60,13 @@ function Message() {
   }
 
   return (
-    <div className={`bg-gray-100 container mx-auto p-8 min-h-screen`}>
+    <div className={`bg-gray-100 mx-auto p-8 min-h-screen`}>
       <div className="mt-3">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Message</h2>
       </div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-col md:flex-row md:justify-between items-center gap-4">
         <button className='btm' onClick={openModal}>Add Message</button>
-        <div>
+        <div className='flex justify-center items-center'>
           <button onClick={getCategory} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg duration-200 active:scale-95">
             New posts first
           </button>
@@ -76,7 +76,7 @@ function Message() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 mb-16 md:mb-0">
         {messages ? (
           messages.map((item, i) => (
             <div key={i} className="border rounded shadow hover:shadow-lg duration-300 hover:scale-[102%] p-3 relative">
