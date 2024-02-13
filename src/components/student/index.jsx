@@ -19,6 +19,7 @@ const AdminStudent = () => {
   useEffect(() => {
     setConfig();
     getStudent();
+    getGroup()
   }, []);
   // Modalni ochish va yopish uchun funksiyalar
   const openModal = () => setIsModalOpen(true);
@@ -112,10 +113,20 @@ const AdminStudent = () => {
       });
   };
 
+  const getGroup = () => {
+    axios.get(`${url}group`, config)
+    .then((res) => {
+      setGroup(res.data.body)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
   return (
     <div className=" p-8  w-full h-full bg-gray-100">
       <div className="mt-10">
-        <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Teacher</h2>
+        <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Student</h2>
       </div>
       <div className=" mb-4 flex justify-between">
         <button className="btm" onClick={openModal}>
@@ -317,7 +328,24 @@ const AdminStudent = () => {
                     </button>
                   </div>
                 </div>
-
+                <div className="col-span-2 sm:col-span-1">
+                  <label
+                    htmlFor="gender"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Select gender
+                  </label>
+                  <select
+                    id="gender"
+                    className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
+                  >
+                    <option selected disabled>
+                      Choose one...
+                    </option>
+                    <option value="MALE">MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                  </select>
+                </div>
                 <div className="col-span-2 sm:col-span-1">
                   <label
                     htmlFor="gender"
