@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { byId, config, getFile, setConfig, url } from "../api/api";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Loader from "../../assits/loader"
+import Loader from "../../assits/loader";
 
 const AdminTeacher = () => {
   const [modal, setIsModalOpen] = useState(false);
@@ -14,6 +14,7 @@ const AdminTeacher = () => {
   const [group, setGroup] = useState([]);
   const [student, setStudent] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     setConfig();
@@ -28,6 +29,7 @@ const AdminTeacher = () => {
   const closeModaldelete = () => setDeleteModal(false);
 
   const addUsers = () => {
+    setLoading(true);
     let addData = {
       firstName: byId("firstName").value,
       lastName: byId("lastName").value,
@@ -43,15 +45,19 @@ const AdminTeacher = () => {
       .then(() => {
         closeModal();
         getStudent();
-        toast.success("User successfully added✔");
+        toast.success("Teacher successfully added✔");
+        setLoading(false);
       })
       .catch(() => {
         toast.error("Something went wrong❓");
+        setLoading(false);
       });
   };
 
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   const editUser = () => {
+    setLoading(true);
     let editData = {
       firstName: byId("firstName").value,
       lastName: byId("lastName").value,
@@ -65,16 +71,17 @@ const AdminTeacher = () => {
     axios
       .put(`${url}user/update${userId}`, editData, config)
       .then(() => {
-        closeModalEdit()
+        closeModalEdit();
         // getUsers();
+        getStudent();
         toast.success("User information has been changed✔");
+        setLoading(false);
       })
       .catch(() => {
         toast.error("Something went wrong❓");
+        setLoading(false);
       });
   };
-
-  
 
   const getStudent = () => {
     axios
@@ -86,19 +93,27 @@ const AdminTeacher = () => {
   };
 
   const deleteUser = () => {
+    setLoading(true);
     axios
-      .delete(`${url}user/
-      ${userId.id}`, config)
+      .delete(
+        `${url}user/
+      ${userId.id}`,
+        config
+      )
       .then((res) => {
-        toast.success("Succesfully delete teacher!")
-        closeModaldelete()
-        getStudent()
+        toast.success("Succesfully delete teacher!");
+        closeModaldelete();
+        getStudent();
+        setLoading(false);
       })
-      .catch(() => toast.error("Failed to delete"))
+      .catch(() => {
+        toast.error("Failed to delete");
+        setLoading(false);
+      });
   };
 
   return (
-    <div className=" p-8 pb-28 w-full h-screen bg-gray-100">
+    <div className=" p-8 pb-28 w-full h-full bg-gray-100">
       <div className="mt-10">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Teacher</h2>
       </div>
@@ -106,11 +121,9 @@ const AdminTeacher = () => {
         <button className="btm" onClick={openModal}>
           + Add
         </button>
-       
       </div>
 
       <div>
-        
         <div className="w-full mt-8 shadow-md rounded-3xl overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-800 text-white rounded-t-2xl uppercase text-sm leading-normal">
@@ -126,7 +139,7 @@ const AdminTeacher = () => {
             </thead>
             <tbody className="text-gray-600 font-light">
               {student ? (
-                 student.map((item, i) => (
+                student.map((item, i) => (
                   <tr
                     key={item.id}
                     className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200"
@@ -280,16 +293,31 @@ const AdminTeacher = () => {
                   >
                     Password
                   </label>
-                  <input
-                    type="text"
-                    name="password"
-                    id="password"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Type product name"
-                    required=""
-                  />
+
+                  <div className="relative">
+                    <input
+                      // onKeyDown={checkKeyPress}
+                      id="password"
+                      disabled={loading}
+                      type={showPassword ? "text" : "password"}
+                      className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500`}
+                    />
+                    <button
+                      type="button"
+                      className="absolute inset-y-0 flex right-0 items-center justify-center pr-3 text-sm leading-5 text-black"
+                      onClick={togglePasswordVisibility}
+                    >
+                      <i
+                        className={
+                          showPassword
+                            ? "fa-solid fa-eye-slash"
+                            : "fa-solid fa-eye"
+                        }
+                      />
+                    </button>
+                  </div>
                 </div>
-            
+
                 <div className="col-span-2 sm:col-span-1">
                   <label
                     htmlFor="gender"
@@ -308,17 +336,16 @@ const AdminTeacher = () => {
                     <option value="FEMALE">FEMALE</option>
                   </select>
                 </div>
-               
               </div>
               <div className="flex justify-end">
-                <button className="btm-close me-2 bg-red-900">Close</button>
+                <button onClick={closeModal} className="btm-close me-2 bg-red-900">Close</button>
                 <button
                   onClick={() => {
                     addUsers();
                   }}
                   className="btm"
                 >
-                  Add
+                  {loading ? <Loader /> : "Add"}
                 </button>
               </div>
             </div>
@@ -436,17 +463,31 @@ const AdminTeacher = () => {
                   >
                     Password
                   </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    defaultValue={userId.password}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Type product name"
-                    required=""
-                  />
+
+                  <div className="relative">
+                    <input
+                      // onKeyDown={checkKeyPress}
+                      id="password"
+                      disabled={loading}
+                      type={showPassword ? "text" : "password"}
+                      className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500`}
+                    />
+                    <button
+                      type="button"
+                      className="absolute inset-y-0 flex right-0 items-center justify-center pr-3 text-sm leading-5 text-black"
+                      onClick={togglePasswordVisibility}
+                    >
+                      <i
+                        className={
+                          showPassword
+                            ? "fa-solid fa-eye-slash"
+                            : "fa-solid fa-eye"
+                        }
+                      />
+                    </button>
+                  </div>
                 </div>
-                
+
                 <div className="col-span-2 sm:col-span-1">
                   <label
                     htmlFor="gender"
@@ -465,7 +506,6 @@ const AdminTeacher = () => {
                     <option value="FEMALE">FEMALE</option>
                   </select>
                 </div>
-               
               </div>
               <div className="flex justify-end">
                 <button
@@ -480,7 +520,7 @@ const AdminTeacher = () => {
                   }}
                   className="btm"
                 >
-                  Edit
+                  {loading ? <Loader /> : "Edit"}
                 </button>
               </div>
             </div>
@@ -488,8 +528,7 @@ const AdminTeacher = () => {
         </div>
       )}
 
-
-{deleteModal && (
+      {deleteModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 ">
           <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
@@ -522,9 +561,8 @@ const AdminTeacher = () => {
 
             {/* Modal body */}
             <div className="p-4 md:p-5">
-              
-              qwertyuiobhy yuhjnm 
-              <div className="flex justify-end">
+              <p className="mb-5 text-xl font-semibold">Do you want to delete this teacher?</p>
+              <div className="flex justify-center">
                 <button
                   onClick={closeModaldelete}
                   className="btm-close me-2 bg-red-900"
@@ -537,7 +575,7 @@ const AdminTeacher = () => {
                   }}
                   className="btm"
                 >
-                  Yes
+                  {loading ? <Loader /> : "Yes"}
                 </button>
               </div>
             </div>

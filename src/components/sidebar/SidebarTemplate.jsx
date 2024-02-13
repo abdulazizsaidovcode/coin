@@ -2,9 +2,45 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import img from "../../assits/IT-CA-logo.png"; // O'zgartiring, agar yo'l noto'g'ri bo'lsa
 import MobileBar from "./mobileBar";
+import { byId } from "../../components/api/api";
 
 function SidebarTemplate({ isAdmin }) {
   const [isExpanded, setIsExpanded] = useState(window.innerWidth > 992);
+  const [sidebarActiveDashboard, setSidebarActiveDashboard] = useState(false);
+  const [sidebarActiveCategory, setSidebarActiveCategory] = useState(false);
+  const [sidebarActiveGroup, setSidebarActiveGroup] = useState(false);
+  const [sidebarActiveStudent, setSidebarActiveStudent] = useState(false);
+  const [sidebarActiveTest, setSidebarActiveTest] = useState(false);
+  const [sidebarActiveGift, setSidebarActiveGift] = useState(false);
+  const [sidebarActiveExchange, setSidebarActiveExchange] = useState(false);
+  const [sidebarActiveMessage, setSidebarActiveMessage] = useState(false);
+
+  const activeHandler = (e) => {
+    e.target.textContent === "Dashboard"
+      ? setSidebarActiveDashboard(true)
+      : setSidebarActiveDashboard(false);
+    e.target.textContent === "Category"
+      ? setSidebarActiveCategory(true)
+      : setSidebarActiveCategory(false);
+    e.target.textContent === "Group"
+      ? setSidebarActiveGroup(true)
+      : setSidebarActiveGroup(false);
+    e.target.textContent === "Student"
+      ? setSidebarActiveStudent(true)
+      : setSidebarActiveStudent(false);
+    e.target.textContent === "Teacher"
+      ? setSidebarActiveTest(true)
+      : setSidebarActiveTest(false);
+    e.target.textContent === "Gift"
+      ? setSidebarActiveGift(true)
+      : setSidebarActiveGift(false);
+    e.target.textContent === "Exchange"
+      ? setSidebarActiveExchange(true)
+      : setSidebarActiveExchange(false);
+    e.target.textContent === "Message"
+      ? setSidebarActiveMessage(true)
+      : setSidebarActiveMessage(false);
+  };
 
   // Oyna o'lchamini kuzatish
   useEffect(() => {
@@ -18,12 +54,22 @@ function SidebarTemplate({ isAdmin }) {
     };
   }, []);
 
+  const styles = {
+    sideBarStylexxl: `flex items-center h-11 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 hover:bg-slate-100 duration-300 pr-5 font-semibold font-mono`,
+    sideBarStylexl:
+      "flex items-center justify-center h-11 focus:outline-0 text-gray-600 hover:text-gray-800 border-l-4 border-transparent duration-200 hover:bg-slate-100 hover:border-indigo-500 focus:border-l-4 focus:border-indigo-500 focus:bg-slate-100 pr-5",
+    sidebarFlexClass: "inline-flex justify-center items-center ml-4 text-xl",
+    focusClass:
+      "outline-0 bg-indigo-500 rounded-2xl border-0 mx-2 text-white tracking-wider font-bold focus:bg-indigo-500 focus:text-white focus:border-0",
+  };
+  // 6366F1
   return (
     <>
       <div
         className={`relative bg-white h-full border-r ${
           isExpanded ? "w-72" : "w-20"
-        } transition-width hidden xl:inline duration-300 z-40 ease-in-out`}>
+        } transition-width hidden xl:inline duration-300 z-40 ease-in-out`}
+      >
         <div
           className={` bg-white h-full border-r ${
             isExpanded ? "w-64" : "w-20"
@@ -78,15 +124,18 @@ function SidebarTemplate({ isAdmin }) {
               {/* Dashboard Link */}
               <li className="py-2">
                 <Link
-                  to={`/${isAdmin ? "admin" : "teacher"}/dashboard`}
+                  to={`/admin/dashboard`}
+                  onClick={activeHandler}
                   className={`${
                     isExpanded
-                      ? "flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
-                      : "flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
+                      ? `${styles.sideBarStylexxl} ${
+                          sidebarActiveDashboard ? styles.focusClass : ""
+                        }`
+                      : styles.sideBarStylexl
                   }`}
                 >
                   <div className="flex justify-center items-center">
-                    <span className="inline-flex justify-center items-center ml-4 text-xl">
+                    <span className={styles.sidebarFlexClass}>
                       <i className="fa-solid fa-house "></i>
                     </span>
                   </div>
@@ -97,15 +146,18 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li>
                 <Link
-                  to={`/${isAdmin ? "admin" : "teacher"}/category`}
+                  to={`/admin/category`}
+                  onClick={activeHandler}
                   className={`${
                     isExpanded
-                      ? "flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
-                      : "flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
+                      ? `${styles.sideBarStylexxl} ${
+                          sidebarActiveCategory ? styles.focusClass : ""
+                        }`
+                      : styles.sideBarStylexl
                   }`}
                 >
                   <div className="flex justify-center items-center">
-                    <span className="inline-flex justify-center items-center ml-4 text-xl">
+                    <span className={styles.sidebarFlexClass}>
                       <i className="fa-solid fa-keyboard"></i>
                     </span>
                   </div>
@@ -116,15 +168,18 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li className="py-2">
                 <Link
-                  to={`/${isAdmin ? "admin" : "teacher"}/group`}
+                  to={`/admin/group`}
+                  onClick={activeHandler}
                   className={`${
                     isExpanded
-                      ? "flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
-                      : "flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
+                      ? `${styles.sideBarStylexxl} ${
+                          sidebarActiveGroup ? styles.focusClass : ""
+                        }`
+                      : styles.sideBarStylexl
                   }`}
                 >
                   <div className="flex justify-center items-center">
-                    <span className="inline-flex justify-center items-center ml-4 text-xl">
+                    <span className={styles.sidebarFlexClass}>
                       <i className="fa-solid fa-users"></i>
                     </span>
                   </div>
@@ -135,15 +190,18 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li className="py-2">
                 <Link
-                  to={`/${isAdmin ? "admin" : "teacher"}/student`}
+                  to={`/admin/student`}
+                  onClick={activeHandler}
                   className={`${
                     isExpanded
-                      ? "flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
-                      : "flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
+                      ? `${styles.sideBarStylexxl} ${
+                          sidebarActiveStudent ? styles.focusClass : ""
+                        }`
+                      : styles.sideBarStylexl
                   }`}
                 >
                   <div className="flex justify-center items-center">
-                    <span className="inline-flex justify-center items-center ml-4 text-xl">
+                    <span className={styles.sidebarFlexClass}>
                       <i class="fa-solid fa-user"></i>
                     </span>
                   </div>
@@ -154,16 +212,19 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li className="py-2">
                 <Link
-                  to={`/${isAdmin ? "admin" : "teacher"}/teacher`}
+                  to={`/admin/teacher`}
+                  onClick={activeHandler}
                   className={`${
                     isExpanded
-                      ? "flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
-                      : "flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
+                      ? `${styles.sideBarStylexxl} ${
+                          sidebarActiveTest ? styles.focusClass : ""
+                        }`
+                      : styles.sideBarStylexl
                   }`}
                 >
                   <div className="flex justify-center items-center">
-                    <span className="inline-flex justify-center items-center ml-4 text-xl">
-                    <i class="fa-solid fa-user-tie"></i>
+                    <span className={styles.sidebarFlexClass}>
+                      <i class="fa-solid fa-user-tie"></i>
                     </span>
                   </div>
                   <span className={`ml-2 ${isExpanded ? "block" : "hidden"}`}>
@@ -173,33 +234,39 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li className="py-2">
                 <Link
-                  to={`/${isAdmin ? "admin" : "teacher"}/gift`}
+                  to={`/admin/gift`}
+                  onClick={activeHandler}
                   className={`${
                     isExpanded
-                      ? "flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
-                      : "flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
+                      ? `${styles.sideBarStylexxl} ${
+                          sidebarActiveGift ? styles.focusClass : ""
+                        }`
+                      : styles.sideBarStylexl
                   }`}
                 >
                   <div className="flex justify-center items-center">
-                    <span className="flex justify-center items-center ml-4 text-xl ">
+                    <span className={styles.sidebarFlexClass}>
                       <i className="fa-solid fa-gift"></i>
                     </span>
                   </div>
                   <span className={`ml-2 ${isExpanded ? "block" : "hidden"}`}>
-                    gift
+                    Gift
                   </span>
                 </Link>
               </li>
               <li className="py-2">
                 <Link
-                  to={`/${isAdmin ? "admin" : "teacher"}/exchange`}
+                  to={`/admin/exchange`}
+                  onClick={activeHandler}
                   className={`${
                     isExpanded
-                      ? "flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
-                      : "flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
+                      ? `${styles.sideBarStylexxl} ${
+                          sidebarActiveExchange ? styles.focusClass : ""
+                        }`
+                      : styles.sideBarStylexl
                   }`}
                 >
-                  <span className="inline-flex justify-center items-center ml-4 text-xl">
+                  <span className={styles.sidebarFlexClass}>
                     <i className="fa-solid fa-calendar-days"></i>
                   </span>
                   <span className={`ml-2 ${isExpanded ? "block" : "hidden"}`}>
@@ -209,14 +276,17 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li className="py-2">
                 <Link
-                  to={`/${isAdmin ? "admin" : "teacher"}/message`}
+                  to={`/admin/message`}
+                  onClick={activeHandler}
                   className={`${
                     isExpanded
-                      ? "flex items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
-                      : "flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"
+                      ? `${styles.sideBarStylexxl} ${
+                          sidebarActiveMessage ? styles.focusClass : ""
+                        }`
+                      : styles.sideBarStylexl
                   }`}
                 >
-                  <span className="inline-flex justify-center items-center ml-4 text-xl">
+                  <span className={styles.sidebarFlexClass}>
                     <i className="fa-solid fa-envelope"></i>
                   </span>
                   <span className={`ml-2 ${isExpanded ? "block" : "hidden"}`}>
@@ -228,7 +298,7 @@ function SidebarTemplate({ isAdmin }) {
           </div>
         </div>
       </div>
-      <MobileBar isAdmin={isAdmin}/>
+      <MobileBar isAdmin={isAdmin} />
       {/* </div> */}
     </>
   );

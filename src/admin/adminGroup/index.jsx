@@ -92,7 +92,7 @@ const AdminGroup = () => {
 
   return (
     <div className="min-h-screen w-full bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className=" mb-2 flex justify-between items-center flex-wrap font-inika">
+      <div className=" mb-2 flex justify-between items-center gap-5 flex-wrap font-inika">
         <button id="openMenuButton" className="btm" onClick={openModal}>
           + Add
         </button>

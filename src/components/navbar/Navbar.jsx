@@ -23,9 +23,14 @@ const Navbarcha = () => {
   const [userId, setUserId] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setloading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
 
   const openModalEdit = () => setIsModalOpenEdit(true);
   const closeModalEdit = () => setIsModalOpenEdit(false);
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  const togglePasswordVisibility2 = () => setShowPassword2(!showPassword2);
+
 
   useEffect(() => {
     setConfig();
@@ -286,30 +291,60 @@ const Navbarcha = () => {
                   >
                     Password
                   </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Type product name"
-                    defaultValue={userId.password}
-                  />
+
+                  <div className="relative">
+                    <input
+                      // onKeyDown={checkKeyPress}
+                      id="password"
+                      disabled={loading}
+                      type={showPassword ? "text" : "password"}
+                      className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500`}
+                    />
+                    <button
+                      type="button"
+                      className="absolute inset-y-0 flex right-0 items-center justify-center pr-3 text-sm leading-5 text-black"
+                      onClick={togglePasswordVisibility}
+                    >
+                      <i
+                        className={
+                          showPassword
+                            ? "fa-solid fa-eye-slash"
+                            : "fa-solid fa-eye"
+                        }
+                      />
+                    </button>
+                  </div>
                 </div>
                 <div className="col-span-2 sm:col-span-1">
                   <label
                     htmlFor="prePassword"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Confirm password
+                    Confirm Password
                   </label>
-                  <input
-                    type="password"
-                    name="prePassword"
-                    id="prePassword"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="100"
-                    defaultValue={userId.password}
-                  />
+
+                  <div className="relative">
+                    <input
+                      // onKeyDown={checkKeyPress}
+                      id="prePassword"
+                      disabled={loading}
+                      type={showPassword2 ? "text" : "password"}
+                      className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500`}
+                    />
+                    <button
+                      type="button"
+                      className="absolute inset-y-0 flex right-0 items-center justify-center pr-3 text-sm leading-5 text-black"
+                      onClick={togglePasswordVisibility2}
+                    >
+                      <i
+                        className={
+                          showPassword2
+                            ? "fa-solid fa-eye-slash"
+                            : "fa-solid fa-eye"
+                        }
+                      />
+                    </button>
+                  </div>
                 </div>
                 <div className="col-span-2 sm:col-span-1">
                   <label
