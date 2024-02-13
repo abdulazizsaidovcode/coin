@@ -39,10 +39,10 @@ function SidebarTemplate({ isAdmin }) {
   }, []);
 
   const styles = {
-    sideBarStylexxl: `flex items-center h-11 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 hover:bg-slate-100 duration-300 pr-5 font-semibold font-mono`,
-    sideBarStylexl: 'flex items-center justify-center h-11 focus:outline-0 text-gray-600 hover:text-gray-800 border-l-4 border-transparent duration-200 hover:bg-slate-100 hover:border-indigo-500 focus:border-l-4 focus:border-indigo-500 focus:bg-slate-100 pr-5',
+    sideBarStylexxl: `flex items-center h-11 text-gray-600 hover:text-gray-900 hover:bg-slate-100 text-[1.1rem] duration-300 pr-5 font-semibold font-mono`,
+    sideBarStylexl: 'flex items-center justify-center h-11 focus:outline-0 text-gray-600 hover:text-gray-800 border-transparent duration-200 hover:bg-slate-100 focus:bg-slate-100 pr-5',
     sidebarFlexClass: 'inline-flex justify-center items-center ml-4 text-xl',
-    focusClass: 'outline-0 bg-red-600 rounded-2xl border-0 mx-2 text-white tracking-wider font-bold focus:bg-red-600 focus:text-white focus:border-0'
+    focusClass: 'outline-0 bg-gradient-to-r from-blue-600 to-blue-200 rounded-2xl border-0 mx-2 text-white tracking-wider font-bold focus:bg-red-600 focus:text-white focus:border-0'
   }
 
   return (

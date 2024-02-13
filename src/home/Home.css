@@ -11,13 +11,13 @@
 
 }
 
-.font {  
+.font {
     font-family: Inika;
     font-size: 20px;
 }
 
 .nav {
-    background-color:#2a2888;
+    background-color: #2a2888;
 }
 
 .foot-bg {
@@ -31,10 +31,12 @@
         flex-wrap: wrap;
     }
 }
+
 @media only screen and (max-width: '1024px') {
     .ll {
         padding: 0;
     }
+
     .har {
         flex-direction: column;
     }
@@ -47,14 +49,13 @@
 }
 
 .hr {
-    width: 80%;
+    width: 100%;
     margin: 48px auto 28px;
 }
 
 
 footer {
     padding: 64px 0 0;
-    border-radius: 4px;
     background: #F9F9F9;
 }
 
@@ -146,11 +147,13 @@ footer p {
         width: 100%;
     }
 }
+
 @media screen and (max-width: 640px) {
     .btn-2 {
         width: 100%;
 
     }
+
     .sass {
         text-align: center;
     }
