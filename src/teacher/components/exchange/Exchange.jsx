@@ -53,22 +53,35 @@ const Exchange = () => {
     }
 
     // exchange filter
-    const exchangeFilter = (e) => {
-        console.log(byId('searchGroup').value);
+    const exchangeFilter = () => {
+        byId('exchangeSearch').value = '';
+        let data = byId('searchGroup').value
+        axios.post(`${url}exchange/filter-teacher?groupId=${data}`, '', config)
+            .then(res => res.data.body.length === 0 ? getExchangeTable() : setExchangeTable(res.data.body))
+            .catch(err => console.log('Teacher panel exchange filter da error: ', err))
+    }
+    const searchHandler = (e) => {
+        byId('searchGroup').value = 'Search Group';
+        let data = e.target.value;
+        !!data
+            ? axios.post(`${url}exchange/filter-teacher?studentName=${data}`, '', config)
+                .then(res => setExchangeTable(res.data.body))
+                .catch(() => setExchangeTable(null))
+            : getExchangeTable()
     }
 
     return (
         <div className="p-8 w-full bg-gray-100">
             <h2 className="text-4xl font-bold font-mono text-gray-900 mt-5">Exchange</h2>
-            <div className='flex justify-between my-14'>
-                <div className='w-6/12 shadow-xl up duration-300 rounded-lg mr-4'>
+            <div className='flex flex-col lg:flex-row my-14 gap-7'>
+                <div className='w-full lg:w-6/12 shadow-xl up duration-300 rounded-lg'>
                     {exchangeDiagram ? (
                         <TotalCoins exchangeDiagram={exchangeDiagram} />
                     ) : (
                         <TotalCoins exchangeDiagram={[{ groupName: "Loading...", numberOfExchange: 100 }]} />
                     )}
                 </div>
-                <div className='w-6/12 shadow-xl up duration-300 rounded-lg ml-4'>
+                <div className='w-full lg:w-6/12 shadow-xl up duration-300 rounded-lg'>
                     {exchangeStatistics ? (
                         <TotalCoinsmonth exchangeStatistics={exchangeStatistics} />
                     ) : (
@@ -84,17 +97,19 @@ const Exchange = () => {
                 </div>
             </div>
 
-            <div className='flex flex-col flex-wrap lg:flex-row mt-16 mb-5 w-full gap-5'>
+            <div className='flex flex-col flex-wrap md:flex-row mt-16 mb-5 w-full gap-5'>
                 <input
                     type="search"
-                    className="w-[30%] p-3 text-sm border border-gray-300 rounded-lg
+                    id='exchangeSearch'
+                    onChange={searchHandler}
+                    className="w-full md:w-[48%] lg:w-[30%] p-3 text-sm border border-gray-300 rounded-lg
                     bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
                     placeholder="🔍  Search"
                 />
                 <select
                     id='searchGroup'
                     onChange={exchangeFilter}
-                    className="w-[30%] p-3 text-sm border border-gray-300 rounded-lg
+                    className="w-full md:w-[48%] lg:w-[30%] p-3 text-sm border border-gray-300 rounded-lg
                     bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300">
                     <option selected disabled>Search Group</option>
                     {group && group.map(item => (
