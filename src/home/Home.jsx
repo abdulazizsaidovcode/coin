@@ -5,7 +5,7 @@ import img2 from "./img/image 1.png";
 import img3 from "./img/Rectangle.png";
 import img4 from "./img/Rectangle 103.png";
 import { Button } from "flowbite-react";
-import "./home.css";
+import "./style.css";
 // zaybalam qildinglar shunga teginmanglar. bitta css ulash qiyinmi turilab quyuraman yana uzgartirasilar
 
 function Home() {

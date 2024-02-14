@@ -14,6 +14,7 @@ const AdminGroup = () => {
   const [category, setCategory] = useState(null);
   const [groups, setGroups] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -90,6 +91,11 @@ const AdminGroup = () => {
       .catch(() => console.log("kategory kelmadi"));
   };
 
+  const select = () => {
+    let select = byId("category").value
+    (select == "0") ? setHidden(true) : setHidden(false)
+  }
+
   return (
     <div className="min-h-screen w-full bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className=" mb-2 flex justify-between items-center gap-5 flex-wrap font-inika">
@@ -137,11 +143,34 @@ const AdminGroup = () => {
                   Category
                 </label>
                 <select
+                  onChange={select}
+                  id="category"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                >
+                  <option selected disabled value="0">
+                    Select category
+                  </option>
+                  {category &&
+                    category.map((item, i) => (
+                      <option key={i} value={item.id}>
+                        {item.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              <div className={`mt-5 ${hidden ? "hidden" : ""}`}>
+                <label
+                  htmlFor="categoryId"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Category
+                </label>
+                <select
                   id="category"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
                   <option selected disabled>
-                    Select category
+                    Select child category
                   </option>
                   {category &&
                     category.map((item, i) => (
