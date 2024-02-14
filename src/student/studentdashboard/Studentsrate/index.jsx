@@ -22,7 +22,7 @@ function Studetsrate() {
                 </div>
                 <div className="flex flex-col ml-3">
                     <span className="text-sm text-gray-600 ">Current Coin</span>
-                    <span className="text-lg font-semibold">{coin.currentRate}</span>
+                    <span className="text-lg font-semibold">{coin ? coin.currentRate : "0"}</span>
                 </div>
             </div>
             <div className="flex items-center sm:items-start  mb-4 sm:mb-0 ">
@@ -31,7 +31,7 @@ function Studetsrate() {
                 </div>
                 <div className="flex flex-col ml-3">
                     <span className="text-sm text-gray-600 ">Exchange Coin</span>
-                    <span className="text-lg font-semibold">{coin.usedRate}</span>
+                    <span className="text-lg font-semibold">{coin ? coin.usedRate : "0"}</span>
                 </div>
             </div>
             <div className="flex items-center sm:items-start  mb-4 sm:mb-0 ">
@@ -40,7 +40,7 @@ function Studetsrate() {
                 </div>
                 <div className="flex flex-col ml-3">
                     <span className="text-sm text-gray-600 ">Total coin</span>
-                    <span className="text-lg font-semibold">{coin.numberOfExchange}</span>
+                    <span className="text-lg font-semibold">{coin ? coin.numberOfExchange : "0"}</span>
                 </div>
             </div>
         </div>

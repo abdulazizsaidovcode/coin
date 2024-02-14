@@ -4,7 +4,7 @@ import { config, setConfig, url } from "../../../components/api/api";
 import "./style.css"
 
 function StudentsTotalcoin({ studentStatistics }) {
-    const [totalCoin, setTotalCoin] = useState({});
+    const [totalCoin, setTotalCoin] = useState(null);
     useEffect(() => {
         setConfig();
         axios.get(url + "user/student/statistics", config)
@@ -12,7 +12,7 @@ function StudentsTotalcoin({ studentStatistics }) {
                 setTotalCoin(res.data.body);
                 console.log("salom" + totalCoin);
             })
-            .catch(err => console.log("Boshqa backendinchi topiyla iltomos 😭", err));
+            .catch(err => console.log("student dashboard total coin  😭", err));
     }, []);
         
     return (
@@ -25,7 +25,7 @@ function StudentsTotalcoin({ studentStatistics }) {
                 </div>
                 <div className="flex flex-col ml-3">
                     <span className="text-sm text-gray-600 ">Total coin</span>
-                    <span className="text-lg font-semibold">{totalCoin.coin}</span>
+                    <span className="text-lg font-semibold">{totalCoin   ? totalCoin.coin : "0"}</span>
                 </div>
             </div>
             <div className="flex items-center   mb-4 sm:mb-0 ">
@@ -34,7 +34,7 @@ function StudentsTotalcoin({ studentStatistics }) {
                 </div>
                 <div className="flex flex-col ml-3">
                     <span className="text-sm text-gray-600 ">Rate</span>
-                    <span className="text-lg font-semibold">{totalCoin.rate}</span>
+                    <span className="text-lg font-semibold">{totalCoin  ? totalCoin.rate : "0"}</span>
                 </div>
             </div>
             <div className="flex items-center mb-4 sm:mb-0 ">
@@ -43,7 +43,7 @@ function StudentsTotalcoin({ studentStatistics }) {
                 </div>
                 <div className="flex flex-col ml-3">
                     <span className="text-sm text-gray-600 ">Learning time</span>
-                    <span className="text-lg font-semibold">{totalCoin.time}</span>
+                    <span className="text-lg font-semibold">{totalCoin ? totalCoin.time : "0"}</span>
                 </div>
             </div>
             <div className="flex items-center  mb-4 sm:mb-0 ">
@@ -52,7 +52,7 @@ function StudentsTotalcoin({ studentStatistics }) {
                 </div>
                 <div className="flex flex-col ml-3">
                     <span className="text-sm text-gray-600 ">Completed course</span>
-                    <span className="text-lg font-semibold">{totalCoin.completedCourse}</span>
+                    <span className="text-lg font-semibold">{totalCoin ? totalCoin.completedCourse : "0"}</span>
                 </div>
             </div>
         </div>
