@@ -96,6 +96,7 @@ const Students = () => {
                                 onClick={async () => {
                                     await getStudent(item.id);
                                     await setStudentId(item.id);
+                                    sessionStorage.setItem('studentInfoId', item.id)
                                 }}
                                 key={item.id}
                                 className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl

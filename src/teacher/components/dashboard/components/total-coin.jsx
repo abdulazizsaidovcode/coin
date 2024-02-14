@@ -7,9 +7,13 @@ const TotalCoins = ({ pl }) => {
 
     const [pn, setPn] = useState(null);
     const [data, setData] = useState(null);
+    const [month, setMonth] = useState(null);
+    const [year, setYear] = useState(null);
 
     useEffect(() => {
         setPn(pl.map(p => p.categoryName));
+        setMonth(pl.map(p => p.MONTH));
+        setYear(pl.map(p => p.YEAR));
         setData(pl.map(p => {
             return { value: p.coin, name: p.categoryName }
         }))
@@ -18,8 +22,8 @@ const TotalCoins = ({ pl }) => {
     const option = {
         title: {
             text: 'Total coin by courses',
-            subtext: 'Languages',
-            left: 'center'
+            subtext: `${year}, ${month}`,
+            left: 'right'
         },
         tooltip: {
             trigger: 'item',
@@ -32,7 +36,7 @@ const TotalCoins = ({ pl }) => {
         },
         series: [
             {
-                name: 'Access From',
+                name: `${month}`,
                 type: 'pie',
                 radius: '50%',
                 data: data ? data : [{ value: 100, name: "Loading..." }],

@@ -64,7 +64,7 @@ const Dashboard = () => {
                         {pl ? (
                             <TotalCoins pl={pl} />
                         ) : (
-                            <TotalCoins pl={[{ categoryName: "Loading...", coin: 100 }]} />
+                            <TotalCoins pl={[{ categoryName: "Loading...", coin: 100, MONTH: 'Loading...', YEAR: 'Loading...' }]} />
                         )}
                     </div>
                     <div className="flex-grow lg:w-[40%]">
