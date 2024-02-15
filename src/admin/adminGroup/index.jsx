@@ -12,9 +12,11 @@ const AdminGroup = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [teacher, setTeacher] = useState(null);
   const [category, setCategory] = useState(null);
+  const [categoryId, setCategoryId] = useState("");
+  const [subcategory, setSubCategory] = useState(null);
   const [groups, setGroups] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [hidden, setHidden] = useState(false);
+  const [hidden, setHidden] = useState(true);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -41,7 +43,7 @@ const AdminGroup = () => {
         url + "group/save",
         {
           name: byId("name").value,
-          categoryId: byId("category").value,
+          categoryId: byId("subCategory").value,
           teacherId: byId("teacher").value,
         },
         config
@@ -86,30 +88,44 @@ const AdminGroup = () => {
       .get(url + "category/father", config)
       .then((res) => {
         setCategory(res.data.body);
-        console.log(res.data.body);
       })
       .catch(() => console.log("kategory kelmadi"));
   };
 
-  const select = () => {
-    let select = byId("category").value
-    (select == "0") ? setHidden(true) : setHidden(false)
+  const getSubCategoryId = () => {
+    axios
+      .get(`${url}category/sub-for-admin/${categoryId}`, config)
+      .then((res) => {
+        setSubCategory(res.data.body);
+      })
+      .catch(() => console.log("kategoryjsjjs kelmadi"));
+  };
+
+
+  const select = async () =>  {
+    await (byId("select") === "0") ? setHidden(true) : setHidden(false)
+    await setCategoryId(document.getElementById("category").value)
+    await getSubCategoryId()
   }
 
   return (
     <div className="min-h-screen w-full bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className=" mb-2 flex justify-between items-center gap-5 flex-wrap font-inika">
-        <button id="openMenuButton" className="btm" onClick={openModal}>
+        <button id="openMenuButton" className="btm" onClick={() => {
+          openModal()
+          setHidden(true)
+        }}>
           + Add
         </button>
+        
         <input
           type="search"
           id="search"
           onChange={groupSearchHandler}
           className="block w-80 p-3 ps-3 text-sm border border-gray-300 rounded-lg 
-                        bg-gray-50 focus:outline-0 duration-300 focus:border-blue-500  
-                        dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 
-                        dark:focus:border-blue-500"
+                bg-gray-50 focus:outline-0 duration-300 focus:border-blue-500  
+                dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 
+                dark:focus:border-blue-500"
           placeholder="🔍  Search"
         />
       </div>
@@ -158,28 +174,28 @@ const AdminGroup = () => {
                     ))}
                 </select>
               </div>
-              <div className={`mt-5 ${hidden ? "hidden" : ""}`}>
+               <div className={`mt-5 ${hidden ? "hidden" : ""}`}>
                 <label
                   htmlFor="categoryId"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Category
+                  Child category
                 </label>
                 <select
-                  id="category"
+                  id="subCategory"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option selected disabled>
+                  <option selected disabled value={0}>
                     Select child category
                   </option>
-                  {category &&
-                    category.map((item, i) => (
+                  {subcategory &&
+                    subcategory.map((item, i) => (
                       <option key={i} value={item.id}>
                         {item.name}
                       </option>
                     ))}
                 </select>
-              </div>
+              </div> 
               <div className="mt-5">
                 <label
                   htmlFor="teacherId"
@@ -225,6 +241,7 @@ const AdminGroup = () => {
         <GroupsTable
           teacher={teacher}
           category={category}
+          subcategory={subcategory}
           groups={groups}
           setGroups={setGroups}
           getGroup={getCategory}

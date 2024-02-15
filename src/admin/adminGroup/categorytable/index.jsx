@@ -6,11 +6,12 @@ import { toast } from "react-toastify";
 import NotFound from "../../../NotFound";
 import Loader from "../../../assits/loader";
 
-const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
+const GroupsTable = ({ subcategory, teacher, category, groups, setGroups, getGroup }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDelete, setIsModalDelete] = useState(false);
   const [gropuId, setGroupId] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [hidden, setHidden] = useState(true);
 
   const toggleActive = (id) => {
     setGroups(
@@ -80,6 +81,10 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
       });
   };
 
+  const select = () => {
+    (byId("select") === "0") ? setHidden(true) : setHidden(false)
+  }
+
   return (
     <>
       {/* //  px-4 sm:px-6 lg:px-8 */}
@@ -106,7 +111,6 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
                     {/* <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">
                       Active
                     </th> */}
-
                     <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">
                       Action
                     </th>
@@ -233,6 +237,28 @@ const GroupsTable = ({ teacher, category, groups, setGroups, getGroup }) => {
                     ))}
                 </select>
               </div>
+              <div className={`mt-5 ${hidden ? "hidden" : ""}`}>
+                <label
+                  htmlFor="categoryId"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Child category
+                </label>
+                <select
+                  id="subCategory"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                >
+                  <option selected disabled value={0}>
+                    Select child category
+                  </option>
+                  {subcategory &&
+                    subcategory.map((item, i) => (
+                      <option key={i} value={item.id}>
+                        {item.name}
+                      </option>
+                    ))}
+                </select>
+              </div> 
               <div className="mt-5">
                 <label
                   htmlFor="teacherId"
