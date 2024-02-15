@@ -7,7 +7,7 @@ import Student from "./student/index"
 import {byId} from "./components/api/api";
 import {useEffect, useState} from "react";
 import FalsePage from "./components/falsepage"
-import Home from "./home/Home"
+import Home from "./home/homeS/home"
 
 function App() {
     const [path, setPath] = useState(false);
@@ -15,7 +15,7 @@ function App() {
     return (
         <div className="flex">
             <Routes>
-                <Route path="/home" element = {<Home/>}/>
+                <Route path="/home" element={<Home/>}/>
                 <Route path="/" element={<SignIn setpath={setPath}/>}/>
                 {/*yullarga utishga ruxsat berishni nazorat qilish*/}
                 <Route path='/admin/*' element={<Scan role='ROLE_SUPER_ADMIN' setPath={setPath}/>}/>
