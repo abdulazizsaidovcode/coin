@@ -1,12 +1,15 @@
 import React from 'react'
 import HomeNavbar from './NavbarSection/homeNavbar'
 import './home.css'
+import AboutSection from './AboutSection/aboutSection'
 
 const Home = () => {
+
   return (
     <>
-      <div className='bg-[#89C5F5] w-full h-screen '>
+      <div className=' homeBody w-[1140px ] mx-auto h-screen  '>
         <HomeNavbar />
+        <AboutSection/>
       </div>
     </>
   )

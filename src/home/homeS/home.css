@@ -1,4 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-body{
+
+body {
     font-family: "PT Sans", sans-serif;
+}
+
+/* Home background color */
+.homeBody {
+    background-color: #FFFFFF;
+}
+
+.aboutSection{
+    background-image: url(./img/Subtract.svg);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: 30%;
 }
