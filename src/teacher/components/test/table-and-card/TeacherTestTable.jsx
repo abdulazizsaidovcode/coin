@@ -45,6 +45,7 @@ function TeacherTestTable({ getTestTable, getAllTestCard, testCategorySub, allTe
                                                     toggleEditMenu();
                                                     setIsHoveredId(item);
                                                 }}
+                                                disabled={isDeleteMenuOpen}
                                             >Edit</button>
                                         </td>
                                         <td className="py-3 px-6">
