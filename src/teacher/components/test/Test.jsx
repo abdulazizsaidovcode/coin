@@ -68,6 +68,7 @@ const Test = () => {
                         testCategorySub={testCategorySub}
                         tableHeddin={tableHeddin}
                         getTestTable={getTestTable}
+                        getAllTestCard={getAllTestCard}
                     />
                 ) : (
                     <TopLoading name='Category related tests' />
@@ -80,6 +81,7 @@ const Test = () => {
                 testCategorySub={testCategorySub}
                 getTestTable={getTestTable}
                 toggleMenu={toggleMenu}
+                getAllTestCard={getAllTestCard}
             />
         </div>
     )

@@ -14,3 +14,9 @@
 .code-no::placeholder {
     color: white;
 }
+
+.lazyload {
+    object-fit: cover !important;
+    transition: all .3s !important;
+    object-position: center !important;
+}
