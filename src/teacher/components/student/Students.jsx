@@ -7,7 +7,7 @@ import TopLoading from "../dashboard/components/loading";
 const Students = () => {
 
     const getStudentInfo = sessionStorage.getItem("studentInfoId")
-    const [group, setGroup] = useState([]);
+    const [group, setGroup] = useState(null);
     const [student, setStudent] = useState([]);
     const [studentId, setStudentId] = useState(null);
 
@@ -91,19 +91,26 @@ const Students = () => {
             <div>
                 <div className="mb-4">
                     <div className='flex mb-2 flex-wrap'>
-                        {group.map((item) =>
-                            <button
-                                onClick={async () => {
-                                    await getStudent(item.id);
-                                    await setStudentId(item.id);
-                                    sessionStorage.setItem('studentInfoId', item.id)
-                                }}
-                                key={item.id}
-                                className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
-                              bg-purple-500 text-white hover:bg-purple-700 active:scale-90 focus:outline-none focus:bg-purple-700 duration-300">
-                                {item.name}
-                            </button>
-                        )}
+                        {group ?
+                            group.map((item) => (
+                                <button
+                                    onClick={async () => {
+                                        await getStudent(item.id);
+                                        await setStudentId(item.id);
+                                        sessionStorage.setItem('studentInfoId', item.id)
+                                    }}
+                                    key={item.id}
+                                    className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
+                                    bg-purple-500 text-white hover:bg-purple-700 active:scale-90 focus:outline-none focus:bg-purple-700 duration-300">
+                                    {item.name}
+                                </button>
+                            )) : (
+                                <button
+                                    className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
+                                    bg-purple-500 text-white hover:bg-purple-700 active:scale-90 focus:outline-none focus:bg-purple-700 duration-300">
+                                    Loading...
+                                </button>
+                            )}
                     </div>
                 </div>
                 <div className="w-full mt-8 shadow-md rounded-3xl overflow-hidden">
