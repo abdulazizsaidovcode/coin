@@ -121,7 +121,7 @@ function Offcanvas({ getCategory1, categories, getCategorySub }) {
                                                 <div className="flex justify-end mt-20">
                                                     <button
                                                         onClick={toggleMenu}
-                                                        className="mr-3 bg-red-600 py-2.5 px-5 font-bold rounded-lg text-white active:scale-90 duration-300">Close</button>
+                                                        className="mr-3 bg-slate-700 py-2.5 px-5 font-bold rounded-lg text-white active:scale-90 duration-300">Close</button>
                                                     <button
                                                         className={`btm ${isLoadingBtn ? 'cursor-not-allowed opacity-60' : ''}`}
                                                         onClick={addCategory}

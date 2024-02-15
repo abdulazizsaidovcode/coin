@@ -74,7 +74,7 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
         <>
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-96">
+                    <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-lg shadow-gray-600 px-8 py-3 w-96">
                         <div className='flex justify-between items-center border-b pb-1'>
                             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Disable active to false</h2>
                             <button onClick={closeModal} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 duration-300 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
@@ -88,12 +88,12 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                             Are you sure about that?
                         </div>
                         <div className='flex justify-end items-center mt-5'>
-                            <button onClick={closeModal} className="font-semibold bg-red-600 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
+                            <button onClick={closeModal} className="font-semibold bg-slate-700 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
                                 Close
                             </button>
                             <button
                                 onClick={deleteCategory}
-                                className={`font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90
+                                className={`font-semibold bg-red-500 py-2 px-6 text-white rounded-lg active:scale-90
                                 duration-300 ${isLoadingDelete ? 'cursor-not-allowed opacity-70' : ''}`}
                             >
                                 {isLoadingDelete ? <div className='py-[.35rem]'><LoadingBtn /></div> : 'Yes'}
@@ -105,7 +105,7 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
 
             {isModalOpenEdit && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
+                    <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 mt-5 w-full md:w-[80%] lg:w-[70%] xl:w-1/2">
                         <div className='flex justify-between items-center border-b pb-1'>
                             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Edit Category</h2>
                             <button onClick={closeModalEdit} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 duration-300 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
@@ -161,12 +161,12 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                             </select>
                         </div>
                         <div className='flex justify-end items-center mt-5'>
-                            <button onClick={closeModalEdit} className="font-semibold bg-yellow-500 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
+                            <button onClick={closeModalEdit} className="font-semibold bg-slate-700 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
                                 Close
                             </button>
                             <button
                                 onClick={editCategory}
-                                className={`font-semibold bg-green-500 py-2 px-6 text-white rounded-lg 
+                                className={`font-semibold bg-yellow-500 py-2 px-6 text-white rounded-lg 
                                 active:scale-90 duration-300 ${isLoadingEdit ? 'cursor-not-allowed opacity-70' : ''}`}
                                 disabled={isLoadingEdit}
                             >
@@ -193,6 +193,12 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                     dark:focus:border-blue-500"
                     placeholder="🔍  Search" /> */}
             </div>
+            <button
+                onClick={getCategoryChild}
+                className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
+                    bg-purple-500 text-white hover:bg-purple-700 active:scale-95 focus:outline-none focus:bg-purple-700 duration-300">
+                All Category
+            </button>
             {categories && categories.map(item => (
                 <button
                     onClick={async () => {
