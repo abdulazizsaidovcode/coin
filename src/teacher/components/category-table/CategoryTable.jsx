@@ -4,10 +4,13 @@ import { byId, config, getFile, setConfig, url } from '../../../components/api/a
 import avatar from "../../../assits/opacha.jpg";
 import { toast } from 'react-toastify';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import LoadingBtn from '../loadingBtn/LoadingBtn';
 
 const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysub, filterCategory }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
+    const [isLoadingEdit, setIsLoadingEdit] = useState(false);
+    const [isLoadingDelete, setIsLoadingDelete] = useState(false);
     const [categoryInfo, setCategoryInfo] = useState([]);
 
     // Modalni ochish va yopish uchun funksiyalar
@@ -23,6 +26,7 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
 
     // edit category
     const editCategory = async () => {
+        setIsLoadingEdit(true);
         const img = new FormData();
         img.append('file', byId('attachmentId').files[0]);
         const editData = {
@@ -41,20 +45,29 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
             .then(() => {
                 closeModalEdit();
                 getCategoryChild();
-                toast.success("Category saccessfulliy edited!")
+                toast.success("Category saccessfulliy edited!");
+                setIsLoadingEdit(false);
             })
-            .catch(() => toast.error("Category error editing!"))
+            .catch(() => {
+                toast.error("Category error editing!");
+                setIsLoadingEdit(false);
+            });
     }
 
     // deleteCategory
     const deleteCategory = () => {
+        setIsLoadingDelete(true);
         axios.delete(url + "category/active/" + categoryInfo.id, config)
             .then(() => {
                 closeModal();
                 getCategoryChild();
-                toast.success("Category deleted successfully!")
+                toast.success("Category deleted successfully!");
+                setIsLoadingDelete(false);
             })
-            .catch(() => toast.error("Something is error!"))
+            .catch(() => {
+                toast.error("Something is error!");
+                setIsLoadingDelete(false);
+            });
     }
 
     return (
@@ -63,7 +76,7 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                 <div className="fixed inset-0 flex items-center justify-center z-50">
                     <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-96">
                         <div className='flex justify-between items-center border-b pb-1'>
-                            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Delete Category</h2>
+                            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Disable active to false</h2>
                             <button onClick={closeModal} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 duration-300 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                                 <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -78,8 +91,12 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                             <button onClick={closeModal} className="font-semibold bg-red-600 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
                                 Close
                             </button>
-                            <button onClick={deleteCategory} className="font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300">
-                                Yes
+                            <button
+                                onClick={deleteCategory}
+                                className={`font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90
+                                duration-300 ${isLoadingDelete ? 'cursor-not-allowed opacity-70' : ''}`}
+                            >
+                                {isLoadingDelete ? <div className='py-[.35rem]'><LoadingBtn /></div> : 'Yes'}
                             </button>
                         </div>
                     </div>
@@ -147,8 +164,13 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                             <button onClick={closeModalEdit} className="font-semibold bg-yellow-500 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
                                 Close
                             </button>
-                            <button onClick={editCategory} className="font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300">
-                                Saqlash
+                            <button
+                                onClick={editCategory}
+                                className={`font-semibold bg-green-500 py-2 px-6 text-white rounded-lg 
+                                active:scale-90 duration-300 ${isLoadingEdit ? 'cursor-not-allowed opacity-70' : ''}`}
+                                disabled={isLoadingEdit}
+                            >
+                                {isLoadingEdit ? <div className='py-[.35rem]'><LoadingBtn /></div> : 'Save'}
                             </button>
                         </div>
                     </div>
@@ -234,7 +256,7 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                                                             setCategoryInfo(category);
                                                         }}
                                                         className="text-sm bg-yellow-500 hover:bg-yellow-600 duration-200 text-white 
-                                                    py-1 px-3 rounded focus:outline-none focus:shadow-outline">Edit</button>
+                                                    py-1 px-3 rounded focus:outline-none focus:shadow-outline shadow-md shadow-yellow-700">Edit</button>
 
                                                 </td>
                                             </tr>
