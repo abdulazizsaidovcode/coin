@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import rasm from "../../../../assits/opacha.jpg";
 import { faClock, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { getFile } from '../../../../components/api/api';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 function TeacherTestCard({ allTestCard, getTestTable, setTableHeddin }) {
     return (
@@ -12,13 +13,21 @@ function TeacherTestCard({ allTestCard, getTestTable, setTableHeddin }) {
                         <div className='bg-white rounded-xl all-shadow hover:shadow-lg hover:shadow-slate-500 
                             duration-300 overflow-hidden w-full md:w-[48%] lg:w-1/4 xl:max-w-72 h-[360px] sm:h-[450px] md:h-[360px]'>
                             <div className="w-full h-44 sm:h-64 md:h-44 overflow-hidden">
-                                <img
+                                {/* <img
                                     src={item.attachmentId === null
                                         ? rasm
                                         : getFile + item.attachmentId
                                     }
                                     alt="profile"
-                                    className="h-full w-full hover:scale-110 duration-300"
+                                    className="h-full w-full hover:scale-110 object-cover duration-300"
+                                /> */}
+                                <LazyLoadImage
+                                    src={item.attachmentId === null ? rasm : getFile + item.attachmentId}
+                                    alt="profile"
+                                    effect="blur"
+                                    className="hover:scale-110 lazyload"
+                                    width='100%'
+                                    height='100%'
                                 />
                             </div>
                             <div className="mt-3 text-center p-3 pt-0">

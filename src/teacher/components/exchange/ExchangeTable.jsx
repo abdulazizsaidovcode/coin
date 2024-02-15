@@ -1,3 +1,4 @@
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import images from '../../../assits/opacha.jpg';
 import { getFile } from '../../../components/api/api';
 
@@ -25,10 +26,16 @@ const ExchangeTable = ({ exchangeTable, toggleActive }) => {
                                 <tr key={item.id} className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200 w-full">
                                     <th className="py-2 px-6">{i + 1}</th>
                                     <td className="py-2 px-6 flex justify-center">
-                                        <img
+                                        {/* <img
                                             className='w-14 h-14 rounded-full'
                                             src={item.attachmentId === null ? images : getFile + item.attachmentId}
-                                            alt="nofound" />
+                                            alt="nofound" /> */}
+                                        <LazyLoadImage
+                                            src={item.attachmentId === null ? images : getFile + item.attachmentId}
+                                            alt="nofound"
+                                            effect="blur"
+                                            className='rounded-full w-14 h-14'
+                                        />
                                     </td>
                                     <td className="py-2 px-6">{item.fullName}</td>
                                     <td className="py-2 px-6">{item.giftName}</td>
