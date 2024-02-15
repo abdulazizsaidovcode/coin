@@ -42,7 +42,7 @@ const AddModal = (props) => {
             question: byId('question').value,
             categoryId: byId('categorySelect').value,
             processMinute: byId('teacherTime').value,
-            parameters: ['let a', 'let b'],
+            parameters: ['int a', 'int b'],
             answer: answers,
             grade: byId('teacherCoin').value,
             advice: byId('advice').value,
@@ -60,7 +60,6 @@ const AddModal = (props) => {
                 setIsLoading(false);
                 toast.error('Someting is error❌');
                 console.log('Teacher panel test qushishda xatolik: ', err);
-                console.log(addData);
             });
     }
 
