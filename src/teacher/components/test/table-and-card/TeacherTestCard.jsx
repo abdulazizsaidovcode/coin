@@ -54,7 +54,15 @@ function TeacherTestCard({ allTestCard, getTestTable, setTableHeddin }) {
                     )) :
                     <div className="bg-white inline-block m-2 rounded-lg all-shadow hover:shadow-xl duration-300 overflow-hidden max-w-sm w-72">
                         <div className="flex justify-center items-center w-full h-44 overflow-hidden">
-                            <img src={rasm} alt="Profile" className="h-full w-full object-cover hover:scale-110 duration-300" />
+                            {/* <img src={rasm} alt="Profile" className="h-full w-full object-cover hover:scale-110 duration-300" /> */}
+                            <LazyLoadImage
+                                src={rasm}
+                                alt="profile"
+                                effect="blur"
+                                className="hover:scale-110 duration-300 lazyload"
+                                width='100%'
+                                height='100%'
+                            />
                         </div>
                         <div className="mt-3 text-center p-3 pt-0">
                             <h2 className="font-semibold tracking-wide opacity-70 text-lg">Test not found 😊</h2>

@@ -23,7 +23,7 @@ const Dashboard = () => {
         axios.get(url + "user/top/teachers", config)
             .then((res) => setTopTeacher(res.data.body))
             .catch((err) => console.log(err));
-        axios.get(url + "user/teacher/top/users", config)
+        axios.get(url + "user/teacher-top-users", config)
             .then((res) => setTopStudent(res.data.body))
             .catch((err) => console.log(err));
         axios.get(url + "group/top-groups-for-teacher", config)
