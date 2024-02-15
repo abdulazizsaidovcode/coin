@@ -21,7 +21,7 @@ const TotalCoins = ({ exchangeDiagram }) => {
         title: {
             text: 'Exchanges made every month',
             subtext: `${year}, ${month}`,
-            left: 'center'
+            left: 'right'
         },
         tooltip: {
             trigger: 'item',

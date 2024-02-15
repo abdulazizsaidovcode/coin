@@ -3,25 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { byId, config, getFile, setConfig, url } from '../../../components/api/api';
 import avatar from "../../../assits/opacha.jpg";
 import { toast } from 'react-toastify';
-import { Icon } from '@iconify/react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import LoadingBtn from '../loadingBtn/LoadingBtn';
 
 const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysub, filterCategory }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
+    const [isLoadingEdit, setIsLoadingEdit] = useState(false);
+    const [isLoadingDelete, setIsLoadingDelete] = useState(false);
     const [categoryInfo, setCategoryInfo] = useState([]);
-
-    // Function to toggle the active state
-    const toggleActive = (id) => {
-        axios.post(url + "category/reset/" + id, config)
-            .then(() => {
-                getCategoryChild();
-                toast.success("Reset category")
-            })
-            .catch((err) => {
-                toast.error("Somesing is error")
-                // console.log(err);
-            })
-    };
 
     // Modalni ochish va yopish uchun funksiyalar
     const openModal = () => setIsModalOpen(true)
@@ -36,6 +26,7 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
 
     // edit category
     const editCategory = async () => {
+        setIsLoadingEdit(true);
         const img = new FormData();
         img.append('file', byId('attachmentId').files[0]);
         const editData = {
@@ -48,41 +39,44 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
         if (img.get('file') !== 'undefined')
             await axios.post(url + "attachment/upload", img, config)
                 .then(res => editData.attachmentId = res.data.body)
-                .catch(() => console.log("img ketmadi"))
+                .catch(() => console.log("img id ketmadi"))
 
         await axios.put(url + "category/update/" + categoryInfo.id, editData, config)
             .then(() => {
                 closeModalEdit();
                 getCategoryChild();
-                toast.success("Category saccessfulliy edited!")
+                toast.success("Category saccessfulliy edited!");
+                setIsLoadingEdit(false);
             })
             .catch(() => {
-                toast.error("Xatolik yuz berdi!!!")
-                // console.log(editData);
-            })
+                toast.error("Category error editing!");
+                setIsLoadingEdit(false);
+            });
     }
 
     // deleteCategory
     const deleteCategory = () => {
+        setIsLoadingDelete(true);
         axios.delete(url + "category/active/" + categoryInfo.id, config)
             .then(() => {
                 closeModal();
                 getCategoryChild();
-                toast.success("Succes!")
+                toast.success("Category deleted successfully!");
+                setIsLoadingDelete(false);
             })
-            .catch((err) => {
-                toast.error("Something is error")
-                // console.log(err);
-            })
+            .catch(() => {
+                toast.error("Something is error!");
+                setIsLoadingDelete(false);
+            });
     }
 
     return (
         <>
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-96">
+                    <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-lg shadow-gray-600 px-8 py-3 w-96">
                         <div className='flex justify-between items-center border-b pb-1'>
-                            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Delete Category</h2>
+                            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Disable active to false</h2>
                             <button onClick={closeModal} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 duration-300 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                                 <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -90,16 +84,19 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                                 <span className="sr-only">Close modal</span>
                             </button>
                         </div>
-                        {/* Modal body */}
                         <div className="mt-6 pb-6 border-b font-medium text-lg">
                             Are you sure about that?
                         </div>
                         <div className='flex justify-end items-center mt-5'>
-                            <button onClick={closeModal} className="font-semibold bg-red-600 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
+                            <button onClick={closeModal} className="font-semibold bg-slate-700 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
                                 Close
                             </button>
-                            <button onClick={deleteCategory} className="font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300">
-                                Yes
+                            <button
+                                onClick={deleteCategory}
+                                className={`font-semibold bg-red-500 py-2 px-6 text-white rounded-lg active:scale-90
+                                duration-300 ${isLoadingDelete ? 'cursor-not-allowed opacity-70' : ''}`}
+                            >
+                                {isLoadingDelete ? <div className='py-[.35rem]'><LoadingBtn /></div> : 'Yes'}
                             </button>
                         </div>
                     </div>
@@ -108,7 +105,7 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
 
             {isModalOpenEdit && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
+                    <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 mt-5 w-full md:w-[80%] lg:w-[70%] xl:w-1/2">
                         <div className='flex justify-between items-center border-b pb-1'>
                             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Edit Category</h2>
                             <button onClick={closeModalEdit} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 duration-300 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
@@ -164,11 +161,16 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                             </select>
                         </div>
                         <div className='flex justify-end items-center mt-5'>
-                            <button onClick={closeModalEdit} className="font-semibold bg-yellow-500 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
+                            <button onClick={closeModalEdit} className="font-semibold bg-slate-700 py-2 px-6 mr-3 text-white rounded-lg active:scale-90 duration-300">
                                 Close
                             </button>
-                            <button onClick={editCategory} className="font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300">
-                                Saqlash
+                            <button
+                                onClick={editCategory}
+                                className={`font-semibold bg-yellow-500 py-2 px-6 text-white rounded-lg 
+                                active:scale-90 duration-300 ${isLoadingEdit ? 'cursor-not-allowed opacity-70' : ''}`}
+                                disabled={isLoadingEdit}
+                            >
+                                {isLoadingEdit ? <div className='py-[.35rem]'><LoadingBtn /></div> : 'Save'}
                             </button>
                         </div>
                     </div>
@@ -191,6 +193,12 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                     dark:focus:border-blue-500"
                     placeholder="🔍  Search" /> */}
             </div>
+            <button
+                onClick={getCategoryChild}
+                className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
+                    bg-purple-500 text-white hover:bg-purple-700 active:scale-95 focus:outline-none focus:bg-purple-700 duration-300">
+                All Category
+            </button>
             {categories && categories.map(item => (
                 <button
                     onClick={async () => {
@@ -204,16 +212,14 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
             ))}
             <div className="w-full bg-gray-100 py-8">
                 <div className="w-full mx-auto">
-                    <div className="bg-white shadow-md rounded-3xl overflow-hidden">
+                    <div className="bg-white shadow-md shadow-slate-400 rounded-3xl overflow-hidden">
                         <div className="overflow-x-auto">
                             <table className="min-w-full bg-white">
                                 <thead className="bg-gray-800 text-white">
                                     <tr className='text-center'>
-                                        {/* Table Headers */}
                                         <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">No</th>
                                         <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Photo</th>
                                         <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Name</th>
-                                        {/* <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Description</th> */}
                                         <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">P.L</th>
                                         <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Active</th>
                                         <th className="py-3 px-6 text-xs font-medium uppercase tracking-wider">Action</th>
@@ -223,23 +229,22 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                                     {categorysub ?
                                         categorysub.map((category, i) => (
                                             <tr key={category.id} className='even:bg-slate-200 hover:bg-slate-300 duration-200 text-center'>
-                                                <td className="py-3 px-6 border-b border-gray-200">{i + 1}</td>
-                                                <td className="py-3 px-6 border-b border-gray-200 flex justify-center items-center">
-                                                    <img
-                                                        src={category.attachmentId === null
-                                                            ? avatar
-                                                            : getFile + category.attachmentId}
+                                                <td className="py-5 px-6 border-b border-gray-200">{i + 1}</td>
+                                                <td className="py-5 px-6 border-b border-gray-200 flex justify-center items-center">
+                                                    <LazyLoadImage
+                                                        src={category.attachmentId === null ? avatar : getFile + category.attachmentId}
                                                         alt="avatar"
-                                                        className="h-16 w-16 rounded-full object-cover" />
+                                                        effect="blur"
+                                                        className="h-10 w-10 scale-150 rounded-full object-cover"
+                                                    />
                                                 </td>
-                                                <td className="py-3 px-6 border-b border-gray-200">
+                                                <td className="py-5 px-6 border-b border-gray-200">
                                                     {category.name === null ? "Yo'q" : category.name}
                                                 </td>
-                                                {/* <td className="py-4 px-6 border-b border-gray-200">{category.description}</td> */}
-                                                <td className="py-3 px-6 border-b border-gray-200">
+                                                <td className="py-5 px-6 border-b border-gray-200">
                                                     {category.programmingLanguage === null ? "Yo'q" : category.programmingLanguage}
                                                 </td>
-                                                <td className="py-3 px-6 border-b border-gray-200">
+                                                <td className="py-5 px-6 border-b border-gray-200">
                                                     <input
                                                         type="checkbox"
                                                         checked={category.active}
@@ -250,20 +255,20 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
                                                         className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-0"
                                                     />
                                                 </td>
-                                                <td className="py-3 px-6 border-b border-gray-200">
+                                                <td className="py-5 px-6 border-b border-gray-200">
                                                     <button
                                                         onClick={() => {
                                                             openModalEdit();
                                                             setCategoryInfo(category);
                                                         }}
                                                         className="text-sm bg-yellow-500 hover:bg-yellow-600 duration-200 text-white 
-                                                    py-1 px-3 rounded focus:outline-none focus:shadow-outline">Edit</button>
+                                                    py-1 px-3 rounded focus:outline-none focus:shadow-outline shadow-md shadow-yellow-700">Edit</button>
 
                                                 </td>
                                             </tr>
                                         )) :
                                         <tr className='even:bg-slate-200 hover:bg-slate-300 duration-200'>
-                                            <td className="py-3 px-6 font-inika font-medium text-lg tracking-wider leading-10 text-center" colSpan='6'>
+                                            <td className="py-5 px-6 font-inika font-medium text-lg tracking-wider leading-10 text-center" colSpan='6'>
                                                 Category not found 😊
                                             </td>
                                         </tr>
