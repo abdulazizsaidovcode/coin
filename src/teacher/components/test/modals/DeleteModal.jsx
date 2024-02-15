@@ -1,27 +1,35 @@
 import axios from "axios";
 import { config, url } from "../../../../components/api/api";
 import { toast } from "react-toastify";
+import LoadingBtn from "../../loadingBtn/LoadingBtn";
+import { useState } from "react";
 
 const DeleteModal = (props) => {
     const {
         isHoveredId,
         getTestTable,
         isDeleteMenuOpen,
-        toggleDeleteMenu
+        toggleDeleteMenu,
+        getAllTestCard
     } = props;
-    const testCategoryId = sessionStorage.getItem('testCategoryId')
+    const [isLoading, setIsLoading] = useState(false);
+    const testCategoryId = sessionStorage.getItem('testCategoryId');
 
     const deleteTest = () => {
+        setIsLoading(true);
         axios.delete(`${url}test/${isHoveredId.testId}`, config)
-        .then(() => {
-            toast.success("Succesfully delete test✔");
-            getTestTable(testCategoryId);
-            toggleDeleteMenu();
-        })
-        .catch(err => {
-            toast.error("Something is wrong!");
-            console.log('Teacher panel test delete qilishda error: ', err);
-        })
+            .then(() => {
+                setIsLoading(false);
+                toast.success("Succesfully delete test✔");
+                getTestTable(testCategoryId);
+                getAllTestCard();
+                toggleDeleteMenu();
+            })
+            .catch(err => {
+                setIsLoading(false);
+                toast.error("Something is wrong!");
+                console.log('Teacher panel test delete qilishda error: ', err);
+            })
     }
 
     const styles = {
@@ -29,7 +37,7 @@ const DeleteModal = (props) => {
     }
 
     return (
-        <div className={`${isDeleteMenuOpen ? '-translate-y-[40rem] translate-x-[25%] fixed w-full' : 'hidden'}`}>
+        <div className={`${isDeleteMenuOpen ? 'translate-x-[25%] fixed top-[35%] w-full' : 'hidden'}`}>
             <div className="w-[30rem] py-4 px-8 bg-slate-200 rounded-xl shadow-lg shadow-slate-500">
                 <div className="flex justify-between items-center border-b border-slate-400 pb-2">
                     <p className="text-lg font-semibold font-inika text-gray-900 tracking-wide">Delete Test</p>
@@ -41,7 +49,13 @@ const DeleteModal = (props) => {
                 </div>
                 <div className="mt-5 flex justify-end items-center">
                     <button onClick={toggleDeleteMenu} className={`${styles.btn} mr-3 bg-yellow-400 shadow-yellow-700`}>Close</button>
-                    <button onClick={deleteTest} className={`${styles.btn} bg-red-500 shadow-red-700`}>Yes</button>
+                    <button
+                        onClick={deleteTest}
+                        className={`${styles.btn} bg-red-500 shadow-red-700`}
+                        disabled={isLoading}
+                    >
+                        {isLoading ? <div className="py-[.34rem]"><LoadingBtn /></div> : "Yes"}
+                    </button>
                 </div>
             </div>
         </div>

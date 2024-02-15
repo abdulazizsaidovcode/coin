@@ -2,7 +2,7 @@ import DeleteModal from "../modals/DeleteModal";
 import EditModal from "../modals/EditModal";
 import { useState } from "react";
 
-function TeacherTestTable({ getTestTable, testCategorySub, allTestTable, tableHeddin }) {
+function TeacherTestTable({ getTestTable, getAllTestCard, testCategorySub, allTestTable, tableHeddin }) {
     const [isEditMenuOpen, setEditIsMenuOpen] = useState(false);
     const [isDeleteMenuOpen, setDeleteIsMenuOpen] = useState(false);
     const [isHoveredId, setIsHoveredId] = useState([]);
@@ -76,6 +76,7 @@ function TeacherTestTable({ getTestTable, testCategorySub, allTestTable, tableHe
                     testCategorySub={testCategorySub}
                     isHoveredId={isHoveredId}
                     getTestTable={getTestTable}
+                    getAllTestCard={getAllTestCard}
                 />
             </div>
             {/* delete modal */}
@@ -84,6 +85,7 @@ function TeacherTestTable({ getTestTable, testCategorySub, allTestTable, tableHe
                 isHoveredId={isHoveredId}
                 isDeleteMenuOpen={isDeleteMenuOpen}
                 toggleDeleteMenu={toggleDeleteMenu}
+                getAllTestCard={getAllTestCard}
             />
         </>
     );
