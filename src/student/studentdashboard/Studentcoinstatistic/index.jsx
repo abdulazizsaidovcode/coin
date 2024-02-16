@@ -9,12 +9,8 @@ function Studentcoinstatistic() {
   const [months, checkMonths] = useState([]);
 
   let month = [];
-  let coin = null;
-  let data = new Date()
-  let allmonth = ["yanvar", "fevral", "mart", "april", "may", "iyun", "iyul", "avqust", "sentyabr", "oktyabr", "noyabr", "dekabr"];
-  let curentmonth = [];
-  curentmonth.push(allmonth[data.getMonth()])
-
+  let coin = [];
+  
   useEffect(() => {
     setConfig();
 
@@ -22,23 +18,18 @@ function Studentcoinstatistic() {
       .then((res) => {
         setCoinsRate(res.data.body);
         checkMonths(res.data.body);
-
+        
         // Ob'ektning har bir qiymatini tekshirish
         Object.values(months).forEach((value) => {
           if (value !== null) {
-            for(let i of value) {
-              month.push(i);
-              console.log(month);
-            }}
-        });
-
-        Object.values(coins).forEach((value) => {
-          if (value !== null) {
-            coin.push(value);
+            for (let i of value) {
+                month.push(i.monthName);
+                coin.push(i.coin);
+                console.log(coin);
+                console.log(month);
+            }
           }
         });
-
-        // Natijani konsolga chiqarish
       })
       .catch((err) =>
         console.log("Student dashboard rate 😭", err)
@@ -64,7 +55,7 @@ function Studentcoinstatistic() {
       // Configuration for the x-axis
       {
         type: "category",
-        data: month ? month : curentmonth,
+        data: `${month}`,
         axisTick: {
           alignWithLabel: true,
         },
@@ -82,7 +73,7 @@ function Studentcoinstatistic() {
         name: "Direct",
         type: "bar",
         barWidth: "60%",
-        data: coin ? coin : [0],
+        data: `${coin}`,
         itemStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             // Gradient color for the bars
