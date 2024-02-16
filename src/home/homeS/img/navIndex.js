@@ -8,6 +8,7 @@ import Frame from './Frame.svg'
 import Frame2 from './Frame (1).svg'
 import group from './Group.svg'
 import AboutCompany from './aboutcompany.svg'
+import Vector from './Vector.svg'
 
 export {
     coinIcon,
@@ -19,5 +20,6 @@ export {
     Frame,
     Frame2,
     group,
-    AboutCompany
+    AboutCompany,
+    Vector
 }
