@@ -1,0 +1,26 @@
+/* .aboutMain {
+    border: 0px solid rgba(100, 100, 100, 1);
+    border-radius: 155px;
+    background: #9E69A7;
+} */
+
+.aboutMain2 {
+    border-top-left-radius: 155px;
+    border-bottom-left-radius: 155px;
+}
+
+.aboutP  h1{
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(131, 58, 180, 1) 0%, rgba(166, 92, 148, 1) 98%);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: Animate 1.5s infinite ease alternate;
+}
+@keyframes Animate{
+    0%{
+        text-shadow: none;
+    }
+    100%{
+        text-shadow: 1px 5px 15px #9E69A7 ;
+    }
+}
