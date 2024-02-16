@@ -5,9 +5,14 @@ import { config, setConfig, url } from "../../../components/api/api";
 import axios from "axios";
 
 function Studentcoinstatistic() {
-  const [coin, setCoinsRate] = useState([]);
+  const [coins, setCoinsRate] = useState(null);
   const [months, checkMonths] = useState([]);
-  let month = [];
+  let month = null;
+  let coin = null;
+  let data = new Date()
+  let allmonth = ["yanvar", "fevral", "mart", "april", "may", "iyun", "iyul", "avqust", "sentyabr", "oktyabr", "noyabr", "dekabr"];
+  let curentmonth = [];
+      curentmonth.push(allmonth[data.getMonth()])
   useEffect(() => {
     setConfig();
 
@@ -20,6 +25,12 @@ function Studentcoinstatistic() {
         Object.values(months).forEach((value) => {
           if (value !== null) {
             month.push(value);
+          }
+        });
+
+        Object.values(coins).forEach((value) => {
+          if (value !== null) {
+            coin.push(value);
           }
         });
 
@@ -50,7 +61,7 @@ function Studentcoinstatistic() {
       // Configuration for the x-axis
       {
         type: "category",
-        data: month,
+        data: month ? month : curentmonth,
         axisTick: {
           alignWithLabel: true,
         },
@@ -68,7 +79,7 @@ function Studentcoinstatistic() {
         name: "Direct",
         type: "bar",
         barWidth: "60%",
-        data: [],
+        data: coin ? coin : [0],
         itemStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             // Gradient color for the bars

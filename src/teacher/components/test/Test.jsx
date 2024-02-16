@@ -46,15 +46,15 @@ const Test = () => {
     return (
         <div className="bg-gray-100 pb-10 p-8 w-full min-h-screen">
             <h2 className="text-4xl font-bold font-inika text-gray-900 mb-4 ml-2">Test</h2>
-            <div className="mb-4 flex justify-between items-center">
-                <button className="btm ml-2" onClick={toggleMenu}>Add Test</button>
+            <div className="mb-4 flex justify-between items-center flex-wrap gap-5">
+                <button className="btm ml-0 lg:ml-2" onClick={toggleMenu}>Add Test</button>
                 <input
                     type="search"
-                    className="w-80 py-3 px-3 text-sm border border-gray-300 rounded-lg
+                    className="w-full md:w-80 py-3 px-3 text-sm border border-gray-300 rounded-lg
                     bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
                     placeholder="🔍  Search" />
             </div>
-            <div className="mt-10">
+            <div className="my-10">
                 <TeacherTestCard
                     allTestCard={allTestCard}
                     getTestTable={getTestTable}
