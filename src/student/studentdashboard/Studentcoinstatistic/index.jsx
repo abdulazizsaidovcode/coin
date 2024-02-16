@@ -35,7 +35,6 @@ function Studentcoinstatistic() {
         });
 
         // Natijani konsolga chiqarish
-        console.log(month);
       })
       .catch((err) =>
         console.log("Boshqa backendinchi topiyla iltomos 😭", err)
@@ -79,7 +78,7 @@ function Studentcoinstatistic() {
         name: "Direct",
         type: "bar",
         barWidth: "60%",
-        data: coin ? coin : [0],
+        data: coin ? coin : [0] ,
         itemStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             // Gradient color for the bars
