@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingBtn from "../../loadingBtn/LoadingBtn";
+import axios from "axios";
+import { byId, config, url } from "../../../../components/api/api";
+import { toast } from "react-toastify";
 
 const EditModal = (props) => {
     const {
@@ -8,10 +11,86 @@ const EditModal = (props) => {
         isHoveredId,
         testCategorySub,
         getTestTable,
-        getAllTestCard
+        getAllTestCard,
+        categoryFather,
+        getTestCategoryChild
     } = props;
     const testCategoryId = sessionStorage.getItem('testCategoryId');
     const [isLoading, setIsLoading] = useState(false);
+    const [childCategoryId, setChildCategoryId] = useState(null);
+    const [divCount, setDivCount] = useState(1);
+    const [answers, setAnswers] = useState([{ answer: '', values: [] }]);
+    const [parameters, setParameters] = useState(['']);
+
+    useEffect(() => {
+        axios.get(`${url}category/sub`, config)
+            .then(res => setChildCategoryId(res.data.body.find(c => c.name === isHoveredId.categoryName)))
+    }, [isHoveredId])
+
+    const handleInputChange = (index, field, value) => {
+        const updatedAnswers = [...answers];
+        if (field === 'answer') {
+            updatedAnswers[index].answer = value;
+        } else {
+            updatedAnswers[index].values = value.split(',').map(val => val.trim());
+        }
+        setAnswers(updatedAnswers);
+    };
+
+    const handleAddDiv = () => {
+        setDivCount(prevCount => prevCount + 1);
+        setAnswers(prevAnswers => [...prevAnswers, { answer: '', values: [] }]);
+    };
+
+    const handleRemoveDiv = () => {
+        if (divCount > 1) {
+            setDivCount(prevCount => prevCount - 1);
+            setAnswers(prevAnswers => prevAnswers.slice(0, -1));
+        }
+    };
+
+    const handleInputChangeP = (index, value) => {
+        const updatedParameters = [...parameters];
+        updatedParameters[index] = value;
+        setParameters(updatedParameters);
+    };
+
+    const handleAddParameter = () => {
+        setParameters(prevParameters => [...prevParameters, '']);
+    };
+
+    const handleRemoveParameter = (index) => {
+        setParameters(prevParameters => prevParameters.filter((_, i) => i !== index));
+    };
+
+    // edit test
+    const editTest = () => {
+        setIsLoading(true);
+        let editData = {
+            id: 0,
+            question: byId('questionEdit').value,
+            categoryId: childCategoryId.id,
+            processMinute: byId('teacherTimeEdit').value,
+            parameters: parameters,
+            answer: answers,
+            grade: byId('teacherCoinEdit').value,
+            advice: byId('adviceEdit').value,
+            active: true
+        }
+        axios.put(`${url}test/${isHoveredId.testId}`, editData, config)
+            .then(() => {
+                toast.success('Successfully edited the test✔');
+                toggleEditMenu();
+                getTestTable(testCategoryId);
+                setIsLoading(false);
+                getAllTestCard();
+            })
+            .catch(err => {
+                setIsLoading(false);
+                toast.error('Someting is error❌');
+                console.log('Teacher panel test edit qilishda xatolik: ', err);
+            });
+    }
 
     return (
         <div>
@@ -56,10 +135,28 @@ const EditModal = (props) => {
                                                     placeholder="Enter Advice..."
                                                     rows="3" className="w-full p-2 mt-1 border rounded-md bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"></textarea>
 
-                                                <label htmlFor="categorySelectEdit" className="block text-sm font-medium text-gray-700 mt-4">
-                                                    Select category
+                                                <label htmlFor="categorySelectFatherEdit" className="block text-sm font-medium text-gray-700 mt-4">
+                                                    Father Category
                                                 </label>
-                                                <select id="categorySelectEdit" className='mt-1 p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full'>
+                                                <select
+                                                    id="categorySelectFatherEdit"
+                                                    onChange={e => {
+                                                        getTestCategoryChild(e.target.value);
+                                                    }}
+                                                    className='mt-1 p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full'>
+                                                    <option selected disabled>Father Category</option>
+                                                    {categoryFather && categoryFather.map((item) =>
+                                                        <option value={item.id}>{item.name}</option>
+                                                    )}
+                                                </select>
+
+                                                <label htmlFor="categorySelectChildEdit" className="block text-sm font-medium text-gray-700 mt-4">
+                                                    Child Category
+                                                </label>
+                                                <select
+                                                    id="categorySelectChildEdit"
+                                                    disabled={testCategorySub.length !== 0 ? false : true}
+                                                    className='mt-1 p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full'>
                                                     <option selected disabled>{isHoveredId.categoryName}</option>
                                                     {testCategorySub && testCategorySub.map((item) =>
                                                         <option value={item.id}>{item.name}</option>
@@ -89,54 +186,71 @@ const EditModal = (props) => {
                                                     </div>
                                                 </div>
 
-                                                <label htmlFor="teacherParamEdit" className="text-sm font-medium text-gray-700">
-                                                    Parametrs (bunga faqat uzgaruvchi kiritilishi(ochilishi) kerak)
-                                                </label>
-                                                <input
-                                                    id="teacherParamEdit"
-                                                    defaultValue={isHoveredId && isHoveredId.attribute}
-                                                    placeholder="Enter parametr"
-                                                    className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300" />
+                                                {parameters.map((param, index) => (
+                                                    <div key={index} className="w-full flex justify-between items-center gap-5">
+                                                        <div className="w-[90%]">
+                                                            <label htmlFor={`teacherParamEdit${index}`} className="text-sm font-medium text-gray-700">
+                                                                Parameters
+                                                            </label>
+                                                            <input
+                                                                id={`teacherParamEdit${index}`}
+                                                                placeholder="Enter parameter"
+                                                                className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"
+                                                                value={param}
+                                                                onChange={e => handleInputChangeP(index, e.target.value)}
+                                                            />
+                                                        </div>
+                                                        <div className="w-[10%] flex justify-end flex-wrap text-[1.5rem] leading-7 mt-5 font-bold">
+                                                            <span className="w-full text-center hover:cursor-pointer hover:text-slate-400 duration-300" onClick={handleAddParameter}>+</span>
+                                                            {parameters.length > 1 && (
+                                                                <span className="w-full text-center hover:cursor-pointer hover:text-slate-400 duration-300" onClick={() => handleRemoveParameter(index)}>-</span>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                ))}
 
                                                 {/* plus inputs */}
                                                 <div className="flex justify-between items-center flex-wrap">
-                                                    {isHoveredId.answer.map((item, i) => (
-                                                        <div className="flex justify-start w-[100%] mt-4">
+                                                    {[...Array(divCount)].map((_, index) => (
+                                                        <div key={index} className="flex justify-start w-[90%] mt-4">
                                                             <div className="mr-1">
-                                                                <label htmlFor={`teacherAnswer${i}`} className="text-sm font-medium text-gray-700">
+                                                                <label htmlFor={`teacherAnswer${index}`} className="text-sm font-medium text-gray-700">
                                                                     Answer
                                                                 </label>
                                                                 <input
-                                                                    id={`teacherAnswer${i}`}
+                                                                    id={`teacherAnswer${index}`}
                                                                     placeholder="Enter answer"
-                                                                    defaultValue={item}
                                                                     className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"
+                                                                    value={answers[index].answer}
+                                                                    onChange={e => handleInputChange(index, 'answer', e.target.value)}
                                                                 />
                                                             </div>
                                                             <div className="mr-2">
-                                                                <label htmlFor={`teacherValue${i}`} className="text-sm font-medium text-gray-700">
+                                                                <label htmlFor={`teacherValue${index}`} className="text-sm font-medium text-gray-700">
                                                                     Enter value
                                                                 </label>
                                                                 <input
-                                                                    id={`teacherValue${i}`}
+                                                                    id={`teacherValue${index}`}
                                                                     placeholder="Enter value"
                                                                     className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"
+                                                                    value={answers[index].values.join(',  ')}
+                                                                    onChange={e => handleInputChange(index, 'values', e.target.value)}
                                                                 />
                                                             </div>
                                                         </div>
                                                     ))}
-                                                    {/* <div className="w-[4%] leading-5">
+                                                    <div className="w-[10%] leading-6">
                                                         <button
-                                                            className="font-bold text-black text-[1.5rem] mt-10 
-                                                            hover:text-slate-700 duration-300"
+                                                            className="font-bold text-black text-[1.5rem] mt-10 w-full
+                                                            hover:text-slate-400 duration-300"
                                                             onClick={handleAddDiv}
                                                         >+</button>
                                                         <button
-                                                            className="font-bold text-black text-[1.8rem]
-                                                            hover:text-slate-700 duration-300"
+                                                            className="font-bold text-black text-[1.8rem] w-full
+                                                            hover:text-slate-400 duration-300"
                                                             onClick={handleRemoveDiv}
                                                         >-</button>
-                                                    </div> */}
+                                                    </div>
                                                 </div>
 
                                                 {/* buttons */}
@@ -145,6 +259,7 @@ const EditModal = (props) => {
                                                         onClick={() => { toggleEditMenu() }}
                                                         className="mr-3 bg-slate-600 py-2.5 px-5 font-bold rounded-lg text-white active:scale-90 duration-300">Close</button>
                                                     <button
+                                                        onClick={editTest}
                                                         className={`btm ${isLoading ? 'cursor-not-allowed opacity-70' : ''}`}
                                                         disabled={isLoading}
                                                     >
