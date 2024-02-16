@@ -25,9 +25,9 @@ function TeacherTestCard({ allTestCard, getTestTable, setTableHeddin }) {
                                     src={item.attachmentId === null ? rasm : getFile + item.attachmentId}
                                     alt="profile"
                                     effect="blur"
-                                    className="hover:scale-110 lazyload"
-                                    width='100%'
-                                    height='100%'
+                                    width="100%"
+                                    height="100%"
+                                    className="hover:scale-110 w-full h-full lazyload"
                                 />
                             </div>
                             <div className="mt-3 text-center p-3 pt-0">
