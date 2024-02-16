@@ -16,6 +16,7 @@
     color: transparent;
     animation: Animate 1.5s infinite ease alternate;
 }
+
 @keyframes Animate{
     0%{
         text-shadow: none;

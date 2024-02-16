@@ -7,9 +7,8 @@ const About = () => {
                 <img src={AboutCompany} alt="" className='w-full' />
             </div>
             <div className='content-section md:w-[50%] w-full '>
-                <div className='aboutP mb-5 flex'>
+                <div className='aboutP mb-5 '>
                     <h1 className='text-5xl text-center md:text-start text-center font-extrabold '>About <br />  Company</h1>
-                    <img src={Vector} alt="image " />
                 </div>
                 <div className='content1'>
                     <h1 className='text-xl w-[80%]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, deserunt.</h1>
@@ -19,10 +18,9 @@ const About = () => {
                     <div className='Read-More mt-4'>
                         <a href="#" className='bg-[rgb(158,105,167)] hover:bg-[#BA68C8] hover:duration-500 hover:underline rounded  px-8 py-2 text-white '>Read More</a>
                     </div>
-                    <div>
-                    </div>
                 </div>
             </div>
+
         </div>
     )
 }
