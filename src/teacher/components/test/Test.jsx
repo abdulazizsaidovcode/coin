@@ -9,6 +9,8 @@ import TopLoading from "../dashboard/components/loading";
 const Test = () => {
     const [allTestCard, setAllTestCard] = useState(null);
     const [allTestTable, setAllTestTable] = useState(null);
+    const [categoryFather, setCategoryFather] = useState(null);
+    // const [categoryFatherId, setCategoryFatherId] = useState(null);
     const [testCategorySub, setTestCategorySub] = useState([]);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [tableHeddin, setTableHeddin] = useState(false);
@@ -19,7 +21,8 @@ const Test = () => {
         setConfig();
         getAllTestCard();
         getTestTable();
-        getTestCategory();
+        getCategoryFather();
+        getTestCategoryChild();
     }, [])
 
     // getAllTestCard
@@ -36,10 +39,17 @@ const Test = () => {
             .catch((error) => console.log("Error getting test and category: ", error))
     }
 
-    // getCategory
-    const getTestCategory = () => {
+    // get category father
+    const getCategoryFather = () => {
+        axios.get(`${url}category/father`, config)
+            .then(res => setCategoryFather(res.data.body))
+            .catch((error) => console.log("Error getting test father category: ", error))
+    }
+
+    // getCategoryChild
+    const getTestCategoryChild = (categoryFatherId) => {
         axios.get(`${url}category/sub`, config)
-            .then((res) => setTestCategorySub(res.data.body))
+            .then((res) => setTestCategorySub(res.data.body.filter(c => c.categoryId == categoryFatherId)))
             .catch((err) => console.log('Error getting test category: ', err))
     }
 
@@ -78,6 +88,9 @@ const Test = () => {
             {/* test modals */}
             <AddModal
                 isMenuOpen={isMenuOpen}
+                categoryFather={categoryFather}
+                // setCategoryFatherId={setCategoryFatherId}
+                getTestCategoryChild={getTestCategoryChild}
                 testCategorySub={testCategorySub}
                 getTestTable={getTestTable}
                 toggleMenu={toggleMenu}

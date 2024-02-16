@@ -10,7 +10,6 @@ function StudentsTotalcoin({ studentStatistics }) {
         axios.get(url + "user/student/statistics", config)
             .then(res => {
                 setTotalCoin(res.data.body);
-                console.log("salom" + totalCoin);
             })
             .catch(err => console.log("student dashboard total coin  😭", err));
     }, []);
