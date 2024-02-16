@@ -8,6 +8,12 @@ import Frame from './Frame.svg'
 import Frame2 from './Frame (1).svg'
 import group from './Group.svg'
 import AboutCompany from './aboutcompany.svg'
+import Reading1 from './readin1.svg'
+import Reading2 from './reading2.svg.svg'
+import Reading3 from './reading.svg'
+import Reading4 from './readin4g.svg'
+import Reading5 from './reading5.svg.svg'
+
 
 export {
     coinIcon,
@@ -20,4 +26,9 @@ export {
     Frame2,
     group,
     AboutCompany,
+    Reading1,
+    Reading2,
+    Reading3,
+    Reading4,
+    Reading5
 }
