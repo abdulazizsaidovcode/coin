@@ -5,6 +5,7 @@ import avatar from "../../assits/opacha.jpg";
 import { toast } from "react-toastify";
 import { Icon } from "@iconify/react";
 import Loader from "../../assits/loader";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -287,20 +288,22 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
                           {i + 1}
                         </td>
                         <td className="py-3 px-6 border-b border-gray-200 flex justify-center items-center">
-                          <img
+                         
+                          <LazyLoadImage
                             src={
                               category.attachmentId === null
                                 ? avatar
                                 : getFile + category.attachmentId
                             }
-                            alt="avatar"
-                            className="h-16 w-16 rounded-full object-cover"
+                            alt="nofound"
+                            effect="blur"
+                            className="rounded-full w-14 h-14"
                           />
                         </td>
                         <td className="py-3 px-6 border-b border-gray-200">
                           {category.name === null ? "Yo'q" : category.name}
                         </td>
-                      
+
                         <td className=" border-b border-gray-200">
                           <div className="flex gap-7 justify-center">
                             <button

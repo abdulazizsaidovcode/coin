@@ -5,8 +5,16 @@ import avatar from "../../../assits/itca.jpg";
 import { toast } from "react-toastify";
 import NotFound from "../../../NotFound";
 import Loader from "../../../assits/loader";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const GroupsTable = ({ subcategory, teacher, category, groups, setGroups, getGroup }) => {
+const GroupsTable = ({
+  subcategory,
+  teacher,
+  category,
+  groups,
+  setGroups,
+  getGroup,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDelete, setIsModalDelete] = useState(false);
   const [gropuId, setGroupId] = useState([]);
@@ -82,8 +90,8 @@ const GroupsTable = ({ subcategory, teacher, category, groups, setGroups, getGro
   };
 
   const select = () => {
-    (byId("select") === "0") ? setHidden(true) : setHidden(false)
-  }
+    byId("select") === "0" ? setHidden(true) : setHidden(false);
+  };
 
   return (
     <>
@@ -127,10 +135,11 @@ const GroupsTable = ({ subcategory, teacher, category, groups, setGroups, getGro
                           {i + 1}
                         </td>
                         <td className="py-3 px-6 border-b border-gray-200 flex justify-center items-center">
-                          <img
+                          <LazyLoadImage
                             src={avatar}
-                            alt="avatar"
-                            className="h-16 w-16 rounded-full"
+                            alt="nofound"
+                            effect="blur"
+                            className="rounded-full w-14 h-14"
                           />
                         </td>
                         <td className="py-3 px-6 border-b border-gray-200">
@@ -258,7 +267,7 @@ const GroupsTable = ({ subcategory, teacher, category, groups, setGroups, getGro
                       </option>
                     ))}
                 </select>
-              </div> 
+              </div>
               <div className="mt-5">
                 <label
                   htmlFor="teacherId"

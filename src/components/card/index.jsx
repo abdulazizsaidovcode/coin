@@ -4,6 +4,7 @@ import { byId, config, getFile, url } from "../api/api";
 import axios from "axios";
 import { toast } from "react-toastify";
 import giftImg from "../../assits/itca.jpg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const GiftCard = ({ gifts, getGift }) => {
   const [deleteModal, setDeleteModal] = useState(false); // Modalni ochish va yopish uchun holat
@@ -19,11 +20,11 @@ const GiftCard = ({ gifts, getGift }) => {
       .then(() => {
         toast.success("Succesfully delete gift!");
         getGift();
-        closedelete()
+        closedelete();
       })
       .catch(() => {
         toast.error("Something is wrong!");
-        closedelete()
+        closedelete();
       });
   };
 
@@ -84,15 +85,15 @@ const GiftCard = ({ gifts, getGift }) => {
             key={item.id}
             className="w-1/4 h-96 rounded-xl overflow-hidden shadow-md hover:shadow-xl duration-300 mr-3 mb-8"
           >
-            <img
-              className="w-full h-1/2 object-cover"
-              src={
-                item.attachmentId === null
-                  ? giftImg
-                  : getFile + item.attachmentId
-              }
-              alt="Gift"
-            />
+            <div className="w-full h-1/2 overflow-hidden flex items-top">
+                <LazyLoadImage
+                  src={item.attachmentId === null ? giftImg : getFile + item.attachmentId}
+                  alt="Gift"
+                  effect="blur"
+                  className="hover:scale-110 lazyload"
+                  width='100%'
+                />
+              </div>
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2 text-center">
                 {item.name}
@@ -125,7 +126,7 @@ const GiftCard = ({ gifts, getGift }) => {
                       <button
                         className="btm-close"
                         onClick={() => {
-                          closeModal()
+                          closeModal();
                           opendelete();
                           setGiftid(toShow.id);
                         }}
@@ -136,7 +137,7 @@ const GiftCard = ({ gifts, getGift }) => {
                       <button
                         className="btm"
                         onClick={() => {
-                          closeModal()
+                          closeModal();
                           openEdit();
                           setGiftid(toShow.id);
                         }}

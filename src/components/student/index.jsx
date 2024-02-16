@@ -19,7 +19,7 @@ const AdminStudent = () => {
   useEffect(() => {
     setConfig();
     getStudent();
-    getGroup()
+    getGroup();
   }, []);
   // Modalni ochish va yopish uchun funksiyalar
   const openModal = () => setIsModalOpen(true);
@@ -37,9 +37,9 @@ const AdminStudent = () => {
       email: byId("email").value,
       password: byId("password").value,
       phoneNumber: byId("phoneNumber").value,
-      groupId: 0,
+      groupId: byId("groupId").value,
       gender: byId("gender").value,
-      friendPhoneNumber: "",
+      friendPhoneNumber: (byId("friendNumber").value !== "null") ? byId("friendNumber").value : "",
     };
     axios
       .post(url + "auth/register?ROLE=ROLE_USER", addData, config)
@@ -65,9 +65,9 @@ const AdminStudent = () => {
       email: byId("email").value,
       password: byId("password").value,
       phoneNumber: byId("phoneNumber").value,
-      groupId: 0,
+      groupId: byId("groupId").value,
       gender: byId("gender").value,
-      friendPhoneNumber: "",
+      friendPhoneNumber: (byId("friendNumber").value !== "null") ? byId("friendNumber").value : "",
     };
     axios
       .put(`${url}user/update${userId}`, editData, config)
@@ -114,14 +114,16 @@ const AdminStudent = () => {
   };
 
   const getGroup = () => {
-    axios.get(`${url}group`, config)
-    .then((res) => {
-      setGroup(res.data.body)
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  }
+    axios
+      .get(`${url}group`, config)
+      .then((res) => {
+        setGroup(res.data.body.object);
+        console.log(res.data.body);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className=" p-8  w-full h-full bg-gray-100">
@@ -245,7 +247,7 @@ const AdminStudent = () => {
                     id="firstName"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="FirstName"
-                    required=""
+                    required="true"
                   />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
@@ -261,7 +263,7 @@ const AdminStudent = () => {
                     id="lastName"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="LastName"
-                    required=""
+                    required="false"
                   />
                 </div>
 
@@ -278,7 +280,7 @@ const AdminStudent = () => {
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Email"
-                    required=""
+                    required="true"
                   />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
@@ -294,7 +296,7 @@ const AdminStudent = () => {
                     id="phoneNumber"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="100"
-                    required=""
+                    required={true}
                   />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
@@ -351,22 +353,45 @@ const AdminStudent = () => {
                     htmlFor="gender"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Select gender
+                    Select group
                   </label>
                   <select
-                    id="gender"
+                    id="groupId"
                     className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
                   >
                     <option selected disabled>
                       Choose one...
                     </option>
-                    <option value="MALE">MALE</option>
-                    <option value="FEMALE">FEMALE</option>
+                    {group &&
+                      group.map((res, i) => <option key={i} value={res.id} >{res.name}</option>)}
                   </select>
                 </div>
+                <div className="col-span-2">
+                  <label
+                    htmlFor="friendNumber"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Friend phone number
+                  </label>
+                  <input
+                    type="number"
+                    name="friendNumber"
+                    id="friendNumber"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="972220790"
+                    required=""
+                  />
+                  <p>Writing is optional...</p>
+                </div>
+
               </div>
               <div className="flex justify-end">
-                <button onClick={closeModal} className="btm-close me-2 bg-red-900">Close</button>
+                <button
+                  onClick={closeModal}
+                  className="btm-close me-2 bg-red-900"
+                >
+                  Close
+                </button>
                 <button
                   onClick={() => {
                     addUsers();
@@ -589,7 +614,9 @@ const AdminStudent = () => {
 
             {/* Modal body */}
             <div className="p-4 md:p-5">
-              <p className="mb-5 text-xl font-semibold">Do you want to delete this teacher?</p>
+              <p className="mb-5 text-xl font-semibold">
+                Do you want to delete this teacher?
+              </p>
               <div className="flex justify-center">
                 <button
                   onClick={closeModaldelete}

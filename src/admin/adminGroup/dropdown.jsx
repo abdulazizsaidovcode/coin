@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-const Dropdown = ({ options }) => {
+const Dropdown = ({ options, isAdmin }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,44 +27,85 @@ const Dropdown = ({ options }) => {
       </div>
 
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg -top-52 bg-white ring-1 ring-black ring-opacity-5 z-50">
-          <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            
-              <button
-                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                role="menuitem"
-              >
-                salom
-              </button>
-              <button
-                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                role="menuitem"
-              >
-                salom
-              </button>
-              <button
-                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                role="menuitem"
-              >
-                salom
-              </button>
-              <button
-                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                role="menuitem"
-              >
-                salom
-              </button>
+        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg -top-[22rem] bg-white ring-1 ring-black ring-opacity-5 z-50">
+          <div
+            className="py-1"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="options-menu"
+          >
+            <ul>
+              <li className="py-2">
+                <Link
+                  to={`/${isAdmin ? "admin" : "teacher"}/student`}
+                  className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
+                >
+                  <div className="flex justify-center items-center me-2">
+                    <span>
+                      <i class="fa-solid fa-user"></i>
+                    </span>
+                  </div>
+                  <span>Student</span>
+                </Link>
+              </li>
+              <li className="py-2">
+                <Link
+                  to={`/${isAdmin ? "admin" : "teacher"}/teacher`}
+                  className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
+                >
+                  <div className="flex justify-center items-center me-2">
+                    <span>
+                      <i class="fa-solid fa-user-tie"></i>
+                    </span>
+                  </div>
+                  <span>Teacher</span>
+                </Link>
+              </li>
+              <li className="py-2">
+                <Link
+                  to={`/${isAdmin ? "admin" : "teacher"}/gift`}
+                  className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
+                >
+                  <div className="flex justify-center items-center me-2">
+                    <span>
+                      <i className="fa-solid fa-gift"></i>
+                    </span>
+                  </div>
+                  <span>Gift</span>
+                </Link>
+              </li>
+              <li className="py-2">
+                <Link
+                  to={`/${isAdmin ? "admin" : "teacher"}/exchange`}
+                  className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
+                >
+                  <div className="flex justify-center items-center me-2">
+                    <span>
+                      <i className="fa-solid fa-calendar-days"></i>
+                    </span>
+                  </div>
 
-              <button
-                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                role="menuitem"
-              >
-                salom
-              </button>
-           
+                  <span>Exchange</span>
+                </Link>
+              </li>
+              <li className="py-2">
+                <Link
+                  to={`/${isAdmin ? "admin" : "teacher"}/message`}
+                  className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
+                >
+                  <div className="flex justify-center items-center me-2">
+                    <span>
+                      <i className="fa-solid fa-envelope"></i>
+                    </span>
+                  </div>
+
+                  <span>Message</span>
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
-       )} 
+      )}
     </div>
   );
 };

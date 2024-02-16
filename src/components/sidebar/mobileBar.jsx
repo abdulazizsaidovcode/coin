@@ -102,7 +102,7 @@ function MobileBar({ isAdmin }) {
           </li>
           <li className="py-2 block sm:hidden">
             <div className="">
-              <Dropdown />
+              <Dropdown isAdmin={isAdmin} />
             </div>
           </li>
         </ul>

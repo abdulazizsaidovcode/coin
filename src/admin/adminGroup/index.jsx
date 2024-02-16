@@ -92,9 +92,9 @@ const AdminGroup = () => {
       .catch(() => console.log("kategory kelmadi"));
   };
 
-  const getSubCategoryId = () => {
+  const getSubCategoryId = (value) => {
     axios
-      .get(`${url}category/sub-for-admin/${categoryId}`, config)
+      .get(`${url}category/child/list/${value}`, config)
       .then((res) => {
         setSubCategory(res.data.body);
       })
@@ -104,8 +104,6 @@ const AdminGroup = () => {
 
   const select = async () =>  {
     await (byId("select") === "0") ? setHidden(true) : setHidden(false)
-    await setCategoryId(document.getElementById("category").value)
-    await getSubCategoryId()
   }
 
   return (
@@ -159,7 +157,10 @@ const AdminGroup = () => {
                   Category
                 </label>
                 <select
-                  onChange={select}
+                  onChange={(e) => {
+                    select()
+                    getSubCategoryId(e.target.value)
+                  }}
                   id="category"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >

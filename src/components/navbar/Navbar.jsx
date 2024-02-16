@@ -42,6 +42,7 @@ const Navbarcha = () => {
       .get(url + "user/getMe", config)
       .then((res) => {
         setName(res.data.body);
+        console.log(res.data.body);
       })
       .catch((err) =>
         console.log("Boshqa backendinchi topiyla iltomos 😭", err)
@@ -127,9 +128,9 @@ const Navbarcha = () => {
               >
                 <img
                   src={
-                    name.attachmentId === null
-                      ? avatar
-                      : getFile + name.attachmentId
+                    name.attachmentId 
+                      ? getFile + name.attachmentId
+                      : avatar
                   }
                   alt="avatar"
                   className="rounded-full w-12 h-12 p-1 border"
