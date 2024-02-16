@@ -1,6 +1,6 @@
 import { Button } from 'flowbite-react'
 import './about.css'
-import { AboutCompany } from '../img/navIndex'
+import { AboutCompany, Vector } from '../img/navIndex'
 const About = () => {
     return (
         <div className="max-w-screen-xl mx-auto md:flex block flex-wrap aboutMain  items-center justify-between h-60 mt-20 ">
@@ -18,6 +18,9 @@ const About = () => {
                     </p>
                     <div className='Read-More mt-4'>
                         <a href="#" className='bg-[rgb(158,105,167)] hover:bg-[#BA68C8] hover:duration-500 hover:underline rounded  px-8 py-2 text-white '>Read More</a>
+                    </div>
+                    <div>
+                        <img src={Vector} alt="" />
                     </div>
                 </div>
             </div>
