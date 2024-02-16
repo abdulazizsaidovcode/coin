@@ -5,27 +5,31 @@ import { config, setConfig, url } from "../../../components/api/api";
 import axios from "axios";
 
 function Studentcoinstatistic() {
-  const [coins, setCoinsRate] = useState(null);
+  const [coins, setCoinsRate] = useState([]);
   const [months, checkMonths] = useState([]);
-  let month = null;
+
+  let month = [];
   let coin = null;
   let data = new Date()
   let allmonth = ["yanvar", "fevral", "mart", "april", "may", "iyun", "iyul", "avqust", "sentyabr", "oktyabr", "noyabr", "dekabr"];
   let curentmonth = [];
-      curentmonth.push(allmonth[data.getMonth()])
+  curentmonth.push(allmonth[data.getMonth()])
+
   useEffect(() => {
     setConfig();
 
-    axios
-      .get(url + "coin/history/student/category/coin", config)
+    axios.get(url + "coin/history/student/category/coin", config)
       .then((res) => {
         setCoinsRate(res.data.body);
         checkMonths(res.data.body);
+
         // Ob'ektning har bir qiymatini tekshirish
         Object.values(months).forEach((value) => {
           if (value !== null) {
-            month.push(value);
-          }
+            for(let i of value) {
+              month.push(i);
+              console.log(month);
+            }}
         });
 
         Object.values(coins).forEach((value) => {
@@ -37,7 +41,7 @@ function Studentcoinstatistic() {
         // Natijani konsolga chiqarish
       })
       .catch((err) =>
-        console.log("Boshqa backendinchi topiyla iltomos 😭", err)
+        console.log("Student dashboard rate 😭", err)
       );
   }, []);
 
@@ -78,7 +82,7 @@ function Studentcoinstatistic() {
         name: "Direct",
         type: "bar",
         barWidth: "60%",
-        data: coin ? coin : [0] ,
+        data: coin ? coin : [0],
         itemStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             // Gradient color for the bars
