@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <>
-      <div className=' homeBody w-[1140px ] mx-auto h-screen  '>
+      <div className=' homeBody w-[1430px] mx-auto px-5   '>
         <HomeNavbar />
         <AboutSection/>
       </div>
