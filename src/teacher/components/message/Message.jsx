@@ -7,12 +7,13 @@ import img from '../../../assits/not-found.png';
 function Message() {
   const [messages, setMessages] = useState(null);
   const [group, setGroup] = useState([]);
+  const [groupId, setGroupId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isMore, setIsMore] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
-  const openMore = () => setIsMore(!isMore);
+  const openMore = () => setIsMoreOpen(!isMoreOpen);
 
   useEffect(() => {
     getCategory()
@@ -82,11 +83,14 @@ function Message() {
             <div key={i} className="border rounded shadow hover:shadow-lg duration-300 hover:scale-[102%] p-3 relative">
               <h2 className="font-bold text-lg mb-3" >{item.groupName}</h2>
               <p className="text-gray-700 text-base mb-6">
-                {isMore ? item.description : cutDescription(item.description)}
+                {cutDescription(item.description) + '.'}
                 <span
                   className='font-bold tracking-wide ms-3 hover:cursor-pointer hover:text-black duration-200'
-                  onClick={openMore}
-                >{isMore ? 'back' : 'more'}</span>
+                  onClick={() => {
+                    openMore();
+                    setGroupId(item);
+                  }}
+                >{isMoreOpen ? '' : 'more...'}</span>
               </p>
               <div className="absolute bottom-2 right-3">
                 <span className="text-sm font-semibold">{item.date}</span>
@@ -98,6 +102,16 @@ function Message() {
             <img src={img} alt="img" className='w-64' />
           </div>
         )}
+      </div>
+
+      <div
+        className={`${isMoreOpen ? 'fixed top-[40%] left-[45%] w-96 px-10 py-6 rounded-lg shadow-md shadow-slate-500 bg-slate-100' : 'hidden'}`}>
+        <div className='flex justify-between pb-2 border-b border-b-slate-700'>
+          <p>{isMoreOpen ? groupId.groupName : ''}</p>
+          <p onClick={openMore} className='hover:cursor-pointer'>close</p>
+        </div>
+        <p className='my-4'>{isMoreOpen ? groupId.description : ''}</p>
+        <p className='text-end'>{isMoreOpen ? groupId.date: ''}</p>
       </div>
 
       {isModalOpen && (
