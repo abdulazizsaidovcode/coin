@@ -21,7 +21,6 @@ function StudentDashboard() {
         getStudentStatistics(setStudentStatistics);
     }, []);
 
-    console.log(studentStatistics)
     return (
         <div className="bg-gray-100 min-h-screen p-4 sm:p-8  w-full">
             <div className="mb-10">

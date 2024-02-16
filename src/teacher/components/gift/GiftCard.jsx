@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../../globalcss/style.css";
 import giftImg from "../../../assits/itca.jpg";
 import { getFile } from "../../../components/api/api";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const GiftCard = ({ gifts }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,9 +19,18 @@ const GiftCard = ({ gifts }) => {
           <div
             key={item.id}
             className="w-full sm:w-1/2 lg:w-1/4 h-[30rem] sm:h-[24rem] lg:h-[23rem] xl:h-[24rem] p-5">
-            <div className="w-full h-full rounded-xl overflow-hidden shadow-md hover:shadow-xl 
+            <div className="w-full h-full rounded-xl overflow-hidden shadow-md hover:shadow-lg hover:shadow-slate-500
                  duration-300 mb-8">
-              <img className="w-full h-1/2 object-cover" src={item.attachmentId === null ? giftImg : getFile + item.attachmentId} alt="Gift" />
+              <div className="w-full h-1/2 overflow-hidden">
+                <LazyLoadImage
+                  src={item.attachmentId === null ? giftImg : getFile + item.attachmentId}
+                  alt="Gift"
+                  effect="blur"
+                  className="hover:scale-110 lazyload"
+                  width='100%'
+                  height='100%'
+                />
+              </div>
               <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2 text-center">{item.name}</div>
                 <p className="text-gray-700 text-base text-center">{item.rate} coin</p>

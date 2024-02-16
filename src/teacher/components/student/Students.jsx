@@ -7,7 +7,7 @@ import TopLoading from "../dashboard/components/loading";
 const Students = () => {
 
     const getStudentInfo = sessionStorage.getItem("studentInfoId")
-    const [group, setGroup] = useState([]);
+    const [group, setGroup] = useState(null);
     const [student, setStudent] = useState([]);
     const [studentId, setStudentId] = useState(null);
 
@@ -65,13 +65,13 @@ const Students = () => {
 
     return (
         <div className="p-8 w-full bg-studentTableBg min-h-screen">
-            <div className=" mb-4 flex justify-between items-center">
-                <h2 className="text-4xl font-bold font-inika text-gray-900 mb-4">Students</h2>
-                <div class="relative">
+            <div className="gap-4 mb-5 flex lg:justify-between lg:items-center flex-col lg:flex-row">
+                <h2 className="text-4xl font-bold font-inika text-gray-900">Students</h2>
+                <div className="flex flex-wrap sm:flex-nowrap gap-5">
                     <select
                         id="searchSelect"
                         onChange={showHideInputs}
-                        className="w-80 py-3 ps-3 text-sm border border-gray-300 rounded-lg
+                        className="w-full sm:w-1/2 lg:w-80 py-3 px-3 text-sm border border-gray-300 rounded-lg
                         bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300">
                         <option selected disabled>Search Select</option>
                         <option value="fistName">Search firstName</option>
@@ -83,7 +83,7 @@ const Students = () => {
                         type="search"
                         id="studentSearch"
                         style={{ display: "none" }}
-                        className="w-80 py-3 px-3 ms-3 text-sm border border-gray-300 rounded-lg
+                        className="w-full sm:w-1/2 lg:w-80 py-3 px-3 lg:ms-3 text-sm border border-gray-300 rounded-lg
                         bg-gray-200 focus:bg-gray-50 focus:outline-0 focus:border-blue-500 duration-300"
                         placeholder="🔍  Search" />
                 </div>
@@ -91,56 +91,66 @@ const Students = () => {
             <div>
                 <div className="mb-4">
                     <div className='flex mb-2 flex-wrap'>
-                        {group.map((item) =>
-                            <button
-                                onClick={async () => {
-                                    await getStudent(item.id);
-                                    await setStudentId(item.id);
-                                }}
-                                key={item.id}
-                                className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
-                              bg-purple-500 text-white hover:bg-purple-700 active:scale-90 focus:outline-none focus:bg-purple-700 duration-300">
-                                {item.name}
-                            </button>
-                        )}
+                        {group ?
+                            group.map((item) => (
+                                <button
+                                    onClick={async () => {
+                                        await getStudent(item.id);
+                                        await setStudentId(item.id);
+                                        sessionStorage.setItem('studentInfoId', item.id)
+                                    }}
+                                    key={item.id}
+                                    className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
+                                    bg-purple-500 text-white hover:bg-purple-700 active:scale-90 focus:outline-none focus:bg-purple-700 duration-300">
+                                    {item.name}
+                                </button>
+                            )) : (
+                                <button
+                                    className="px-10 py-2.5 mr-5 my-2 rounded-3xl shadow-lg font-inika font-semibold tracking-wide text-xl
+                                    bg-purple-500 text-white hover:bg-purple-700 active:scale-90 focus:outline-none focus:bg-purple-700 duration-300">
+                                    Loading...
+                                </button>
+                            )}
                     </div>
                 </div>
-                <div className="w-full mt-8 shadow-md rounded-3xl overflow-hidden">
-                    <table className="w-full">
-                        <thead className="bg-gray-800 text-white rounded-t-2xl uppercase text-sm leading-normal">
-                            <tr>
-                                <th className="py-3 px-6">#</th>
-                                <th className="py-3 px-6">Full Name</th>
-                                <th className="py-3 px-6">Group</th>
-                                <th className="py-3 px-6">Phone Number</th>
-                                <th className="py-3 px-6">Coin</th>
-                                <th className="py-3 px-6">Task</th>
-                                <th className="py-3 px-6">Exschange</th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-gray-600 font-light">
-                            {student ?
-                                student.map((item, i) =>
-                                    <tr key={item.id} className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
-                                        <td className="py-3 px-6">{i + 1}</td>
-                                        <td className="py-3 px-6">{item.fullName}</td>
-                                        <td className="py-3 px-6">{item.groupName}</td>
-                                        <td className="py-3 px-6">{item.phoneNumber}</td>
-                                        <td className="py-3 px-6">{item.coin}</td>
-                                        <td className="py-3 px-6">{item.task}</td>
-                                        <td className="py-3 px-6">{item.numberOfExchange}</td>
-                                    </tr>
-                                ) :
-                                <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
-                                    <td colSpan='7' className="font-inika font-medium text-xl tracking-wider leading-10 text-center">
-                                        <span className='inline-block min-h-[2em] w-full py-3 flex-auto cursor-wait animate-[pulse_1s_ease-in-out_infinite] bg-[rgba(113,203,245,0.3)]'>
-                                            Student not found 😊
-                                        </span>
-                                    </td>
+                <div className="w-full mt-8 mb-20 xl:mb-0 shadow-md rounded-3xl overflow-hidden">
+                    <div className="overflow-x-auto">
+                        <table className="w-full">
+                            <thead className="bg-gray-800 text-white rounded-t-2xl uppercase text-sm leading-normal">
+                                <tr>
+                                    <th className="py-3 px-6">#</th>
+                                    <th className="py-3 px-6">Full Name</th>
+                                    <th className="py-3 px-6">Group</th>
+                                    <th className="py-3 px-6">Phone Number</th>
+                                    <th className="py-3 px-6">Coin</th>
+                                    <th className="py-3 px-6">Task</th>
+                                    <th className="py-3 px-6">Exschange</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody className="text-gray-600 font-light">
+                                {student ?
+                                    student.map((item, i) =>
+                                        <tr key={item.id} className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
+                                            <td className="py-3 px-6">{i + 1}</td>
+                                            <td className="py-3 px-6">{item.fullName}</td>
+                                            <td className="py-3 px-6">{item.groupName}</td>
+                                            <td className="py-3 px-6">{item.phoneNumber}</td>
+                                            <td className="py-3 px-6">{item.coin}</td>
+                                            <td className="py-3 px-6">{item.task}</td>
+                                            <td className="py-3 px-6">{item.numberOfExchange}</td>
+                                        </tr>
+                                    ) :
+                                    <tr className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200">
+                                        <td colSpan='7' className="font-inika font-medium text-xl tracking-wider leading-10 text-center">
+                                            <span className='inline-block min-h-[2em] w-full py-3 flex-auto cursor-wait animate-[pulse_1s_ease-in-out_infinite] bg-[rgba(113,203,245,0.3)]'>
+                                                Student not found 😊
+                                            </span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

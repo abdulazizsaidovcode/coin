@@ -23,11 +23,11 @@ const TotalCoinsmonth = ({ exchangeStatistics }) => {
         legend: {},
         tooltip: {
             trigger: 'item',
-            formatter: `${groupName} <br /> ${month} : ${exchange} exchange`
+            formatter: `${groupName} <br /> ${month} : ${exchange} (exchange)`
         },
         dataset: {
             source: [
-                ['Exchange', exchange],
+                [`${month} (exchange)`, exchange],
             ]
         },
         xAxis: { type: 'category' },

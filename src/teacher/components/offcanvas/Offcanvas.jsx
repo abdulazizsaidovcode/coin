@@ -2,13 +2,13 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { byId, config, setConfig, url } from '../../../components/api/api';
 import { toast } from 'react-toastify';
+import LoadingBtn from '../loadingBtn/LoadingBtn';
 
-function Offcanvas({getCategory1, categories, getCategorySub}) {
+function Offcanvas({ getCategory1, categories, getCategorySub }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isLoadingBtn, setIsLoadingBtn] = useState(false);
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
     useEffect(() => {
         setConfig();
@@ -18,11 +18,11 @@ function Offcanvas({getCategory1, categories, getCategorySub}) {
         return () => {
             button.removeEventListener('click', toggleMenu);
         };
-        getCategory1()
     }, []);
 
     // add category
     const addCategory = async () => {
+        setIsLoadingBtn(true);
         const img = new FormData();
         img.append('file', byId('attachmentId').files[0]);
         const addData = {
@@ -40,12 +40,13 @@ function Offcanvas({getCategory1, categories, getCategorySub}) {
         await axios.post(url + "category/save", addData, config)
             .then(() => {
                 toggleMenu();
-                getCategorySub()
+                getCategorySub();
+                setIsLoadingBtn(false);
                 toast.success("Category saccessfulliy saved!")
             })
             .catch(() => {
-                toast.error("Xatolik yuz berdi!!!")
-                // console.log(addData);
+                toast.error("Category error saved!");
+                setIsLoadingBtn(false);
             })
     }
 
@@ -111,17 +112,23 @@ function Offcanvas({getCategory1, categories, getCategorySub}) {
                                                     <option value="C++">C++</option>
                                                 </select>
 
-                                                <div className="flex items-center mt-7">
+                                                {/* <div className="flex items-center mt-7">
                                                     <input id="active" type="checkbox"
                                                         className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
                                                     <label for="active" className="ml-2 text-md text-gray-900 font-medium">Active</label>
-                                                </div>
+                                                </div> */}
 
-                                                <div className="flex justify-end mt-10">
+                                                <div className="flex justify-end mt-20">
                                                     <button
                                                         onClick={toggleMenu}
-                                                        className="mr-3 bg-red-600 py-2.5 px-5 font-bold rounded-lg text-white active:scale-90 duration-300">Close</button>
-                                                    <button className="btm" onClick={addCategory}>Save</button>
+                                                        className="mr-3 bg-slate-700 py-2.5 px-5 font-bold rounded-lg text-white active:scale-90 duration-300">Close</button>
+                                                    <button
+                                                        className={`btm ${isLoadingBtn ? 'cursor-not-allowed opacity-60' : ''}`}
+                                                        onClick={addCategory}
+                                                        disabled={isLoadingBtn}
+                                                    >
+                                                        {isLoadingBtn ? <LoadingBtn /> : 'Save'}
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>

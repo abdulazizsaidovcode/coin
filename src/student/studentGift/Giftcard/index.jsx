@@ -34,9 +34,8 @@ const StudentGiftCard = () => {
         console.log("Backenddan ma'lumot olishda xatolik yuz berdi 😭", err)
       );
   }, []);
-
    const exchange = () => {
-    axios.post(`${url}exchange/save/${giftId}`)
+    axios.post(`${url}exchange/save/${giftId}`, '', config)
       .then(() => {
         toast.success("Succes!")
       })
@@ -91,7 +90,6 @@ const StudentGiftCard = () => {
                 className="btm"
                 onClick={() => {
                   openExchange();
-                  
                   setGiftId(item.id);
                 }}
               >
@@ -101,7 +99,7 @@ const StudentGiftCard = () => {
 
             {isModalOpen && (
               <div className="fixed inset-0 flex items-center justify-center z-50">
-                <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
+                <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/3">
                   <div className="mt-6 pb-6 border-b font-medium text-lg">
                     {toShow}
                   </div>
@@ -118,7 +116,7 @@ const StudentGiftCard = () => {
             )}
             {isModalExchange && (
               <div className="fixed inset-0 flex items-center justify-center z-50">
-                <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
+                <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/3">
                   <div className="mt-6 pb-6 border-b font-medium text-lg">
                     salom
                   </div>
