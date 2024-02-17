@@ -4,6 +4,7 @@ import { byId, config, getFile, setConfig, url } from "../api/api";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Loader from "../../assits/loader";
+import ReactPaginate from "react-paginate";
 
 const AdminStudent = () => {
   const [modal, setIsModalOpen] = useState(false);
@@ -16,6 +17,8 @@ const AdminStudent = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [coinModal, setCoinModal] = useState(false);
+  const [page, setPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     setConfig();
@@ -115,6 +118,7 @@ const AdminStudent = () => {
       .get(url + "user", config)
       .then((res) => {
         setStudent(res.data.body.object);
+        setPage(res.data.body.totalPage);
       })
       .catch(() => console.log("kelmadi"));
   };
@@ -151,6 +155,14 @@ const AdminStudent = () => {
       });
   };
 
+  const handelPageClick = (event) => {
+    const pageNumber = event.selected;
+    setCurrentPage(pageNumber)
+    axios.get(`${url}user?page=${pageNumber}&size=10`, config)
+      .then(res => setStudent(res.data.body.object))
+      .catch(err => console.log('error page: ', err));
+  }
+
   return (
     <div className=" p-8 w-full h-screen bg-gray-100">
       <div className="mt-10">
@@ -184,7 +196,7 @@ const AdminStudent = () => {
                     key={item.id}
                     className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200"
                   >
-                    <td className="py-3 px-6">{i + 1}</td>
+                    <td className="py-3 px-6">{(currentPage * 10) + (i + 1)}</td>
                     <td className="py-3 px-6">{item.fullName}</td>
                     <td className="py-3 px-6">{item.phoneNumber}</td>
                     <td className="py-3 px-6">{item.coin}</td>
@@ -235,6 +247,20 @@ const AdminStudent = () => {
               )}
             </tbody>
           </table>
+        </div>
+
+        <div className='mt-6'>
+          <ReactPaginate className="navigation"
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handelPageClick}
+            pageRangeDisplayed={5}
+            pageCount={page}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            nextClassName='nextBtn'
+            previousClassName='prevBtn'
+          />
         </div>
       </div>
 
