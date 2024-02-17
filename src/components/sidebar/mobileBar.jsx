@@ -4,6 +4,7 @@ import Dropdown from "../../admin/adminGroup/dropdown";
 
 function MobileBar({ isAdmin }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDrop, setIsDrop] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -13,7 +14,8 @@ function MobileBar({ isAdmin }) {
       <div className="relative">
         <ul className="flex xl:hidden flex-row items-center fixed bg-white bottom-0 w-full justify-center">
           {/* Dashboard Link */}
-          <li className="py-2">
+          <li className="py-2"
+              onClick={() => setIsDrop(false)}>
             <Link
               to={`/${isAdmin ? "admin" : "teacher"}/dashboard`}
               className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
@@ -26,7 +28,8 @@ function MobileBar({ isAdmin }) {
               <span className={`ml-2 hidden`}>Dashboard</span>
             </Link>
           </li>
-          <li>
+          <li
+              onClick={() => setIsDrop(false)}>
             <Link
               to={`/${isAdmin ? "admin" : "teacher"}/category`}
               className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
@@ -39,7 +42,8 @@ function MobileBar({ isAdmin }) {
               <span className={`ml-2 hidden`}>Category</span>
             </Link>
           </li>
-          <li className="py-2">
+          <li className="py-2"
+              onClick={() => setIsDrop(false)}>
             <Link
               to={`/${isAdmin ? "admin" : "teacher"}/group`}
               className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
@@ -52,7 +56,8 @@ function MobileBar({ isAdmin }) {
               <span className={`ml-2 hidden`}>Group</span>
             </Link>
           </li>
-          <li className="py-2 hidden sm:block">
+          <li className="py-2 hidden sm:block"
+              onClick={() => setIsDrop(false)}>
             <Link
               to={`/${isAdmin ? "admin" : "teacher"}/student`}
               className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
@@ -65,7 +70,22 @@ function MobileBar({ isAdmin }) {
               <span className={`ml-2 hidden`}>Student</span>
             </Link>
           </li>
-          <li className="py-2 hidden sm:block">
+          <li className="py-2 hidden sm:block" 
+              onClick={() => setIsDrop(false)}>
+                <Link
+                  to={`/${isAdmin ? "admin" : "teacher"}/teacher`}
+                  className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
+                >
+                  <div className="flex justify-center items-center me-2">
+                    <span>
+                      <i class="fa-solid fa-user-tie"></i>
+                    </span>
+                  </div>
+                  <span className={`ml-2 hidden`}>Teacher</span>
+                </Link>
+              </li>
+          <li className="py-2 hidden sm:block"
+              onClick={() => setIsDrop(false)}>
             <Link
               to={`/${isAdmin ? "admin" : "teacher"}/gift`}
               className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
@@ -78,7 +98,8 @@ function MobileBar({ isAdmin }) {
               <span className={`ml-2 hidden`}>gift</span>
             </Link>
           </li>
-          <li className="py-2 hidden sm:block">
+          <li className="py-2 hidden sm:block"
+              onClick={() => setIsDrop(false)}>
             <Link
               to={`/${isAdmin ? "admin" : "teacher"}/exchange`}
               className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
@@ -89,7 +110,8 @@ function MobileBar({ isAdmin }) {
               <span className={`ml-2 hidden`}>Exchange</span>
             </Link>
           </li>
-          <li className="py-2 hidden sm:block">
+          <li className="py-2 hidden sm:block"
+              onClick={() => setIsDrop(false)}>
             <Link
               to={`/${isAdmin ? "admin" : "teacher"}/message`}
               className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
@@ -102,7 +124,7 @@ function MobileBar({ isAdmin }) {
           </li>
           <li className="py-2 block sm:hidden">
             <div className="">
-              <Dropdown isAdmin={isAdmin} />
+              <Dropdown isAdmin={isAdmin} isOpen={isDrop} setIsOpen={setIsDrop} />
             </div>
           </li>
         </ul>

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "../../components/sidebar/mobile.css"
 
-const Dropdown = ({ options, isAdmin }) => {
+const Dropdown = ({ options, isAdmin, isOpen, setIsOpen }) => {
   const [selectedOption, setSelectedOption] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionClick = () => {
     setIsOpen(false);
@@ -26,8 +26,8 @@ const Dropdown = ({ options, isAdmin }) => {
         </span>
       </div>
 
-      {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg -top-[22rem] bg-white ring-1 ring-black ring-opacity-5 z-50">
+      {/* {isOpen && ( */}
+        <div className={`origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg ${isOpen ? " dropAni" : "dropAni2"} bg-white ring-1 ring-black ring-opacity-5 z-50`}>
           <div
             className="py-1"
             role="menu"
@@ -35,7 +35,8 @@ const Dropdown = ({ options, isAdmin }) => {
             aria-labelledby="options-menu"
           >
             <ul>
-              <li className="py-2">
+              <li className="py-2"
+              onClick={() => setIsOpen(false)}>
                 <Link
                   to={`/${isAdmin ? "admin" : "teacher"}/student`}
                   className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
@@ -48,7 +49,8 @@ const Dropdown = ({ options, isAdmin }) => {
                   <span>Student</span>
                 </Link>
               </li>
-              <li className="py-2">
+              <li className="py-2" 
+              onClick={() => setIsOpen(false)}>
                 <Link
                   to={`/${isAdmin ? "admin" : "teacher"}/teacher`}
                   className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
@@ -61,7 +63,8 @@ const Dropdown = ({ options, isAdmin }) => {
                   <span>Teacher</span>
                 </Link>
               </li>
-              <li className="py-2">
+              <li className="py-2" 
+              onClick={() => setIsOpen(false)}>
                 <Link
                   to={`/${isAdmin ? "admin" : "teacher"}/gift`}
                   className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
@@ -74,7 +77,8 @@ const Dropdown = ({ options, isAdmin }) => {
                   <span>Gift</span>
                 </Link>
               </li>
-              <li className="py-2">
+              <li className="py-2" 
+              onClick={() => setIsOpen(false)}>
                 <Link
                   to={`/${isAdmin ? "admin" : "teacher"}/exchange`}
                   className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
@@ -88,7 +92,8 @@ const Dropdown = ({ options, isAdmin }) => {
                   <span>Exchange</span>
                 </Link>
               </li>
-              <li className="py-2">
+              <li className="py-2" 
+              onClick={() => setIsOpen(false)}>
                 <Link
                   to={`/${isAdmin ? "admin" : "teacher"}/message`}
                   className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
@@ -105,7 +110,7 @@ const Dropdown = ({ options, isAdmin }) => {
             </ul>
           </div>
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 };
