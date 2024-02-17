@@ -39,10 +39,10 @@ const StudentGiftCard = () => {
       .then((res) => {
         if (res.data.success) {
           toast.success("Succes!")
-
-        }else{
-        toast.warning(res.data.message);
-
+          closeExchange()
+        } else {
+          toast.warning(res.data.message);
+          closeExchange()
         }
       })
       .catch((error) => {
@@ -124,7 +124,7 @@ const StudentGiftCard = () => {
               <div className="fixed inset-0 flex items-center justify-center z-50 zoom-modal">
                 <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/3">
                   <div className="mt-6 pb-6 border-b font-medium text-lg">
-                    salom
+                    Do you really want to get the gift !
                   </div>
                   <div className="flex justify-end gap-3 items-center mt-5">
                     <button

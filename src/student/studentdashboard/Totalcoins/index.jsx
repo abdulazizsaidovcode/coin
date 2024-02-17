@@ -11,7 +11,7 @@ function StudentsTotalcoin({ studentStatistics }) {
             .then(res => {
                 setTotalCoin(res.data.body);
             })
-            .catch(err => console.log("student dashboard total coin  😭", err));
+            .catch(err => console.log("student dashboard total coin.  😭", err));
     }, []);
         
     return (

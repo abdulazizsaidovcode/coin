@@ -4,6 +4,7 @@ import { byId, config, getFile, setConfig, url } from "../api/api";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Loader from "../../assits/loader";
+import ReactPaginate from "react-paginate";
 
 const AdminTeacher = () => {
   const [modal, setIsModalOpen] = useState(false);
@@ -15,6 +16,8 @@ const AdminTeacher = () => {
   const [student, setStudent] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [page, setPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0)
 
   useEffect(() => {
     setConfig();
@@ -112,6 +115,14 @@ const AdminTeacher = () => {
       });
   };
 
+  const handelPageClick = (event) => {
+    const pageNumber = event.selected;
+    setCurrentPage(pageNumber)
+    axios.get(`${url}gift?page=${pageNumber}&size=10`, config)
+      .then(res => setStudent(res.data.body))
+      .catch(err => console.log('error page: ', err));
+  }
+
   return (
     <div className=" p-8 pb-28 w-full h-screen bg-gray-100">
       <div className="mt-10">
@@ -185,6 +196,20 @@ const AdminTeacher = () => {
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div className='mt-7 mb-10 text-center'>
+        <ReactPaginate className="navigation"
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={handelPageClick}
+          pageRangeDisplayed={5}
+          pageCount={page}
+          previousLabel="<"
+          renderOnZeroPageCount={null}
+          nextClassName='nextBtn'
+          previousClassName='prevBtn'
+        />
       </div>
 
       {modal && (
