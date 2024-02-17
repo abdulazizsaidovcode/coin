@@ -188,8 +188,8 @@ const AdminTeacher = () => {
       </div>
 
       {modal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 ">
-          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+        <div className="fixed bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
+          <div className="modal zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
                 Add student
@@ -356,8 +356,8 @@ const AdminTeacher = () => {
       {/* EDIT MODAL */}
 
       {editModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 ">
-          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+        <div className="fixed bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
+          <div className="modal zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
                 Edit student
@@ -529,8 +529,8 @@ const AdminTeacher = () => {
       )}
 
       {deleteModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 ">
-          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+        <div className="fixed bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
+          <div className="modal zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
                 Delete student
