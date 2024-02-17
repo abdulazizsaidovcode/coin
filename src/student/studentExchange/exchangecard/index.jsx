@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import "../../../globalcss/style.css";
-import { config, setConfig, url } from '../../../components/api/api';
+import { config, getFile, setConfig, url } from '../../../components/api/api';
 import axios from 'axios';
 
 const StudentExchangeCard = () => {
   const [gift, setGift] = useState([]);
+  const [giftAttachmentId, getgiftAttachmentId] = useState('')
 
   useEffect(() => {
     setConfig();
@@ -22,7 +23,7 @@ const StudentExchangeCard = () => {
       {gift.length > 0 ? (
         gift.map(item => (
           <div key={item.id} className="w-80 h-96 rounded-xl overflow-hidden all-shadow m-4 up">
-            <img className="w-full h-1/2 bg-contain" src={item.attachmentId} alt="Gift" />
+            <img className="w-full h-1/2 bg-contain" src={item.attachmentId ? getFile + item.attachmentId : ''} alt='fg' />
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2 text-center">{item.name}</div>
               <div className="font-bold text-xl mb-2 text-center">{item.fullName}</div>

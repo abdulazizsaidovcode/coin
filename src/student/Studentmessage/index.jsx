@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function Studentmessage() {
     const [messages, setMessages] = useState([]);
+    const [messageId, getMessageId] = useState('');
     let [isModalOpen, setIsModalOpen] = useState(false);
 
     function openModal() {
@@ -34,7 +35,10 @@ function Studentmessage() {
                         <div key={message.id} className="border rounded all-shadow p-3">
                             <h2 className="font-bold text-lg mb-3">{message.groupName}</h2>
                             <p className="text-gray-700 text-base">{message.description.length < 50 ? message.description : `${message.description.slice(0, 50)} `} </p>
-                            {message.description.length > 50 ? <b onClick={openModal}>More</b> : ''}
+                            {message.description.length > 50 ? <b className='pionter' onClick={() => {
+                                openModal()
+                                getMessageId(message.id)
+                            }}>More</b> : ''}
                             <p className="text-gray-700 text-base">{message.date}</p>
 
                         </div>
@@ -48,7 +52,16 @@ function Studentmessage() {
                     <div className="fixed inset-0 flex items-center justify-center z-50 zoom-modal">
                         <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/3">
                             <div className="mt-6 pb-6 border-b font-medium text-lg">
-                                {messages.description}
+                                {messages
+                                    .filter(message => message.id === messageId) 
+                                    .map(message => ( 
+                                        <div key={message.id} >
+                                            <h2 className="font-bold text-lg mb-3">{message.groupName}</h2>
+                                            <p className="text-gray-700 text-base mb-6">{message.description}</p>
+                                            <p className="text-gray-700 text-base">{message.date}</p>
+                                        </div>
+                                    ))
+                                }
                             </div>
                             <div className="flex justify-end gap-3 items-center mt-5">
 
