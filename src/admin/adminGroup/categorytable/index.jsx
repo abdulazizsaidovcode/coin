@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import NotFound from "../../../NotFound";
 import Loader from "../../../assits/loader";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import ReactPaginate from "react-paginate";
 
 const GroupsTable = ({
   subcategory,
@@ -14,6 +15,9 @@ const GroupsTable = ({
   groups,
   setGroups,
   getGroup,
+  page,
+  handelPageClick,
+  currentPage,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDelete, setIsModalDelete] = useState(false);
@@ -364,6 +368,19 @@ const GroupsTable = ({
           </div>
         </div>
       )}
+      <div className='ms-1'>
+        <ReactPaginate className="navigation"
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={handelPageClick}
+          pageRangeDisplayed={5}
+          pageCount={page}
+          previousLabel="<"
+          renderOnZeroPageCount={null}
+          nextClassName='nextBtn'
+          previousClassName='prevBtn'
+        />
+      </div>
     </>
   );
 };
