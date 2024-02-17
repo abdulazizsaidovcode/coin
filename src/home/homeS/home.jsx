@@ -4,6 +4,7 @@ import './home.css'
 import AboutSection from './homeSection/aboutSection'
 import About from './about/about'
 import Analytics from './analytic/analytics'
+import Footer from './footer/footer'
 
 const Home = () => {
 
@@ -14,6 +15,7 @@ const Home = () => {
         <AboutSection />
         <Analytics/>
         <About />
+        <Footer/>
       </div>
     </>
   )

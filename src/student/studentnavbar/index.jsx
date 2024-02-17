@@ -41,9 +41,7 @@ const StudentNavbar = () => {
     axios
       .get(url + "message/student", config)
       .then((res) => {
-        if (res.data && res.data.body && res.data.body.object) {
           setMessages(res.data.body.object);
-        }
       })
       .catch((err) =>
         console.log("Backenddan ma'lumot olishda xatolik yuz berdi 😭", err)
@@ -54,17 +52,15 @@ const StudentNavbar = () => {
     let editData = {
       firstName: byId("firstName").value,
       lastName: byId("lastName").value,
-      email: byId("email").value,
-      password: byId("password").value,
       phoneNumber: byId("phoneNumber").value,
-      groupId: byId("groupId").value,
-      gender: byId("gender").value,
-      friendPhoneNumber: "",
+      password: byId("password").value,
+      prePassword: byId("prePassword").value,
+      file: byId("image").files[0]
     };
     axios
       .put(url + "user/update/", editData, config)
       .then(() => {
-        // openEditModal();
+        closeModalEdit();
         // getUsers();
         toast.success("User information has been changed✔");
       })
@@ -251,24 +247,7 @@ const StudentNavbar = () => {
                     required=""
                   />
                 </div>
-
-                <div className="col-span-2">
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Email"
-                    defaultValue={userId.email}
-                  />
-                </div>
-                <div className="col-span-2 sm:col-span-1">
+                <div className="col-span-2 sm:col-span-2">
                   <label
                     htmlFor="phoneNumber"
                     className="block mb-2 text-sm font-medium text-gray-900"
@@ -296,28 +275,39 @@ const StudentNavbar = () => {
                     name="password"
                     id="password"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Type product name"
+                    placeholder="Type product password"
                     defaultValue={userId.password}
                   />
                 </div>
-
                 <div className="col-span-2 sm:col-span-1">
                   <label
-                    htmlFor="gender"
+                    htmlFor="prePassword"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Select gender
+                    prePassword
                   </label>
-                  <select
-                    id="gender"
-                    className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
+                  <input
+                    type="text"
+                    name="prePassword"
+                    id="prePassword"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Type product password"
+                  />
+                </div>
+                <div className="col-span-2 sm:col-span-2">
+                  <label
+                    htmlFor="image"
+                    className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    <option selected disabled>
-                      Choose one...
-                    </option>
-                    <option value="MALE">MALE</option>
-                    <option value="FEMALE">FEMALE</option>
-                  </select>
+                    prePassword
+                  </label>
+                  <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Type product password"
+                  />
                 </div>
               </div>
               <div className="flex justify-between">
