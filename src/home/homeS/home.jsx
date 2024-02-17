@@ -5,6 +5,7 @@ import AboutSection from './homeSection/aboutSection'
 import About from './about/about'
 import Analytics from './analytic/analytics'
 import Footer from './footer/footer'
+import Contact from './Contact/contact'
 
 const Home = () => {
 
@@ -15,6 +16,7 @@ const Home = () => {
         <AboutSection />
         <Analytics/>
         <About />
+        <Contact/>
         <Footer/>
       </div>
     </>
