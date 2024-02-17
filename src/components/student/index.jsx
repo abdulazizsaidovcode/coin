@@ -152,7 +152,7 @@ const AdminStudent = () => {
   };
 
   return (
-    <div className=" p-8  w-full h-full bg-gray-100">
+    <div className=" p-8 w-full h-screen bg-gray-100">
       <div className="mt-10">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Student</h2>
       </div>
@@ -201,7 +201,7 @@ const AdminStudent = () => {
                         Give
                       </button>
                     </td>
-                    <td className="py-3 px-6 border-b border-gray-200 flex justify-center">
+                    <td className="py-3 px-6 flex justify-center items-center">
                       <button
                         className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline"
                         onClick={() => {
@@ -239,8 +239,8 @@ const AdminStudent = () => {
       </div>
 
       {modal && (
-        <div className="fixed  bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
-          <div className="modal zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
+        <div className="fixed bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
+          <div className="modal w-full md:w-2/4 zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
                 Add student
@@ -272,7 +272,7 @@ const AdminStudent = () => {
             {/* Modal body */}
             <div className="p-4 md:p-5">
               <div className="grid md:gap-4 mb-4 grid-cols-2">
-                <div className="col-span-2 sm:col-span-1">
+                <div className="col-span-1">
                   <label
                     htmlFor="name"
                     className="block mb-2 text-sm font-medium text-gray-900"
@@ -288,7 +288,7 @@ const AdminStudent = () => {
                     required="true"
                   />
                 </div>
-                <div className="col-span-2 sm:col-span-1">
+                <div className="col-span-1">
                   <label
                     htmlFor="lastName"
                     className="block mb-2 text-sm font-medium text-gray-900"
@@ -451,7 +451,7 @@ const AdminStudent = () => {
 
       {editModal && (
         <div className="fixed  bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
-          <div className="modal zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
+          <div className="modal w-full md:w-2/4 zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
                 Edit student
