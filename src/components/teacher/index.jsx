@@ -113,7 +113,7 @@ const AdminTeacher = () => {
   };
 
   return (
-    <div className=" p-8 pb-28 w-full h-full bg-gray-100">
+    <div className=" p-8 pb-28 w-full h-screen bg-gray-100">
       <div className="mt-10">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Teacher</h2>
       </div>
