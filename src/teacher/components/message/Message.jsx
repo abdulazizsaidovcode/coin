@@ -24,13 +24,13 @@ function Message() {
   }, []);
 
   const getCategory = () => {
-    axios.get(url + "message/teache", config)
+    axios.get(url + "message/teacher", config)
       .then((res) => setMessages(res.data.body.object.reverse()))
       .catch((err) => console.log(err))
   }
 
   const getCategory2 = () => {
-    axios.get(url + "message/teache", config)
+    axios.get(url + "message/teacher", config)
       .then((res) => setMessages(res.data.body.object))
       .catch((err) => console.log(err))
   }
