@@ -12,7 +12,7 @@ import Reading1 from './readin1.svg'
 import Reading2 from './reading2.svg'
 import Reading3 from './reading.svg'
 import Reading4 from './readin4g.svg'
-import Reading6 from './reading6.svg'
+import alt from './reading7.svg'
 
 
 export {
@@ -30,5 +30,5 @@ export {
     Reading2,
     Reading3,
     Reading4,
-    Reading6
+    alt
 }
