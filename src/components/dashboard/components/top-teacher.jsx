@@ -90,19 +90,19 @@ const TopTeachers = ({ teacherList }) => {
                 <table className="min-w-full">
                     <thead>
                         <tr>
-                            <th className='py-2'>#</th>
-                            <th className='py-2'>Name</th>
-                            <th className='py-2'>Students</th>
-                            <th className='py-2'>Rate</th>
+                            <th className='py-2 px-6'>#</th>
+                            <th className='py-2 px-6'>Name</th>
+                            <th className='py-2 px-6'>Students</th>
+                            <th className='py-2 px-6'>Rate</th>
                         </tr>
                     </thead>
                     <tbody>
                         {currentTeachers.map((teacher, index) => (
                             <tr key={index} className="border-t border-gray-200 text-center">
-                                <td className="py-2 whitespace-nowrap text-gray-500">{index + 1}</td>
-                                <td className="py-2 whitespace-nowrap text-gray-500">{teacher.teacherName}</td>
-                                <td className="py-2 whitespace-nowrap text-gray-500">{teacher.numberOfStudent}</td>
-                                <td className="py-2 whitespace-nowrap">
+                                <td className="py-2 px-6 whitespace-nowrap text-gray-500">{index + 1}</td>
+                                <td className="py-2 px-6 whitespace-nowrap text-gray-500">{teacher.teacherName}</td>
+                                <td className="py-2 px-6 whitespace-nowrap text-gray-500">{teacher.numberOfStudent}</td>
+                                <td className="py-2 px-6 whitespace-nowrap">
                                     <CircularProgress percentage={teacher.rate} color={teacher.color} />
                                 </td>
                             </tr>

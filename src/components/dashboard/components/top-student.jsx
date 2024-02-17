@@ -76,7 +76,6 @@ const TopStudent = ({ students }) => {
         //     return s;
         // }) : [].slice(indexOfFirstTeacher, indexOfLastTeacher))
     }, []);
-    console.log(students);
 
     // let a = {
     //     active: false,
@@ -103,23 +102,23 @@ const TopStudent = ({ students }) => {
                 <table className="min-w-full">
                     <thead>
                         <tr>
-                            <th className='py-2'>#</th>
-                            <th className='py-2'>Full Name</th>
-                            <th className='py-2'>Group Name</th>
-                            <th className='py-2'>Exchange</th>
-                            <th className='py-2'>Coin</th>
-                            <th className='py-2'>Task</th>
+                            <th className='py-2 px-6'>#</th>
+                            <th className='py-2 px-6'>Full Name</th>
+                            <th className='py-2 px-6'>Group Name</th>
+                            <th className='py-2 px-6'>Exchange</th>
+                            <th className='py-2 px-6'>Coin</th>
+                            <th className='py-2 px-6'>Task</th>
                         </tr>
                     </thead>
                     <tbody>
                         {students && students.map((student, index) => (
                             <tr key={index} className="border-t border-gray-200 text-center">
-                                <td className="text-gray-500 py-2">{index + 1}</td>
-                                <td className="text-gray-500 py-2">{student.fullName}</td>
-                                <td className="text-gray-500 py-2">{student.groupName}</td>
-                                <td className="text-gray-500 py-2">{student.numberOfExchange}</td>
-                                <td className="text-gray-500 py-2">{student.coin}</td>
-                                <td className="flex justify-center py-2">
+                                <td className="text-gray-500 py-2 px-6">{index + 1}</td>
+                                <td className="text-gray-500 py-2 px-6">{student.fullName}</td>
+                                <td className="text-gray-500 py-2 px-6">{student.groupName}</td>
+                                <td className="text-gray-500 py-2 px-6">{student.numberOfExchange}</td>
+                                <td className="text-gray-500 py-2 px-6">{student.coin}</td>
+                                <td className="flex justify-center py-2 px-6">
                                     <CircularProgress percentage={student.task} color={student.color} />
                                 </td>
                             </tr>
