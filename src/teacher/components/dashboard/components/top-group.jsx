@@ -21,7 +21,7 @@ const TopGroup = ({ topGroups }) => {
             {groups && groups.map((group, index) => (
                 <div key={index} className="flex items-center mb-2 mt-6 align-middle">
                     <span className="text-sm font-semibold">{group.groupName}</span>
-                    <div className="flex-1 h-6 mx-2 bg-gray-200 rounded-xl">
+                    <div className="flex-1 h-6 ms-4 bg-gray-200 rounded-xl">
                         <div className={`${group.color} w-full h-full rounded-xl flex justify-center items-center`}>
                             <span className="text-sm">{group.percentCoin}%</span>
                         </div>
