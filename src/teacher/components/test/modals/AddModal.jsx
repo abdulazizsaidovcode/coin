@@ -218,7 +218,7 @@ const AddModal = (props) => {
                                                                     id={`teacherValue${index}`}
                                                                     placeholder="Enter value"
                                                                     className="mt-1 w-full rounded-md p-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"
-                                                                    value={answers[index].values.join(',')}
+                                                                    value={answers[index].values.join(',  ')}
                                                                     onChange={e => handleInputChange(index, 'values', e.target.value)}
                                                                 />
                                                             </div>
