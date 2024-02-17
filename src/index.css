@@ -20,3 +20,18 @@
     transition: all .3s !important;
     object-position: center !important;
 }
+
+.zoom-close {
+    animation: all .5s ease-out;
+    animation-name: zoom-close;
+}
+
+@keyframes zoom-close {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        display: none;
+        transform: scale(0);
+    }
+}
