@@ -11,6 +11,8 @@ const Exchange = () => {
     const [exchangeStatistics, setExchangeStatistics] = useState(null);
     const [exchangeDiagram, setExchangeDiagram] = useState(null);
     const [group, setGroup] = useState(null);
+    const [page, setPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
         setConfig();
@@ -22,8 +24,11 @@ const Exchange = () => {
 
     // get exchange table
     const getExchangeTable = () => {
-        axios.get(`${url}exchange/teacher?page=0&size=10`, config)
-            .then(res => setExchangeTable(res.data.body.object))
+        axios.get(`${url}exchange/teacher`, config)
+            .then(res => {
+                setExchangeTable(res.data.body.object);
+                setPage(res.data.body.totalPage);
+            })
             .catch(err => console.log('Teacher panel exchange get qilishda error: ', err))
     }
 
@@ -68,6 +73,14 @@ const Exchange = () => {
                 .then(res => setExchangeTable(res.data.body))
                 .catch(() => setExchangeTable(null))
             : getExchangeTable()
+    }
+
+    const handelPageClick = (event) => {
+        const pageNumber = event.selected;
+        setCurrentPage(pageNumber)
+        axios.get(`${url}exchange/teacher?page=${pageNumber}&size=10`, config)
+            .then(res => setExchangeTable(res.data.body.object))
+            .catch(err => console.log('error page: ', err))
     }
 
     return (
@@ -119,7 +132,12 @@ const Exchange = () => {
             </div>
 
             {exchangeTable ? (
-                <ExchangeTable exchangeTable={exchangeTable} toggleActive={toggleActive} />
+                <ExchangeTable
+                    page={page}
+                    currentPage={currentPage}
+                    handelPageClick={handelPageClick}
+                    exchangeTable={exchangeTable}
+                    toggleActive={toggleActive} />
             ) : (
                 <TopLoading name='Exchange information' />
             )}

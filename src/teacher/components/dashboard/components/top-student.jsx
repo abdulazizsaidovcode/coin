@@ -126,7 +126,7 @@ const TopStudent = ({ students }) => {
                     </tbody>
                 </table>
             </div>
-            <Pagination itemsPerPage={teachersPerPage} totalItems={students.length} paginate={paginate} />
+            {/* <Pagination itemsPerPage={teachersPerPage} totalItems={students.length} paginate={paginate} /> */}
         </div>
     );
 };
