@@ -4,7 +4,6 @@ const TopGroup = ({ topGroups }) => {
   const colors = ["bg-purple-500", "bg-green-500", "bg-blue-500", "bg-red-500"];
 
   const [groups, setGroups] = useState(null);
-  
 
   useEffect(() => {
     setGroups(
