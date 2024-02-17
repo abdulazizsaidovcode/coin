@@ -82,7 +82,7 @@ const StudentGiftCard = () => {
                 {/* {item.description} */}
               </p>
             </div>
-            <div className="px-2 flex gap-3 pt-4 text-center justify-between">
+            <div className="px-2 flex gap-3 pt-4 text-center justify-around">
               <button
                 className="btm-info"
                 onClick={() => {
