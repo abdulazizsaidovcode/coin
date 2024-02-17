@@ -28,7 +28,7 @@ const GiftCard = ({ gifts, page, handelPageClick }) => {
                     src={item.attachmentId === null ? giftImg : getFile + item.attachmentId}
                     alt="Gift"
                     effect="blur"
-                    className="hover:scale-110 lazyload"
+                    className="hover:scale-110 w-full h-full lazyload"
                     width='100%'
                     height='100%'
                   />
