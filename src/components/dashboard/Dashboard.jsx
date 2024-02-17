@@ -36,7 +36,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <div className="bg-gray-100 min-h-screen p-8  w-full">
+            <div className="bg-gray-100 min-h-screen p-8 pb-20 xl:pb-8 w-full">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
                     <MetricCard
                         title="Number of Students"
@@ -64,7 +64,7 @@ const Dashboard = () => {
                         {pl ? (
                             <TotalCoins pl={pl} />
                         ) : (
-                            <TotalCoins pl={[{ categoryName: "Loading...", coin: 100 }]} />
+                            <TotalCoins pl={[{ categoryName: "Loading...", coin: 100, MONTH: 'Loading...', YEAR: 'Loading...' }]} />
                         )}
                     </div>
                     <div className="flex-grow lg:w-[40%]">

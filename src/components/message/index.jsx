@@ -89,7 +89,7 @@ function Message() {
   }
 
   return (
-    <div className=" p-8 bg-gray-100 h-screen w-full">
+    <div className=" p-8 bg-gray-100 lg:h-screen w-full ">
       {/* Tartiblash tugmalari */}
 
       <div className="mt-3">
@@ -120,7 +120,7 @@ function Message() {
       </div>
 
       {/* Xabarlar ro'yxatini ko'rsatish */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
         {messages.map((item, i) => (
           <div
             key={i}

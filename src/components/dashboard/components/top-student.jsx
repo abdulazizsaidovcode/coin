@@ -71,10 +71,10 @@ const TopStudent = ({ students }) => {
 
 
     useEffect(() => {
-        // setCurrentStudents(students ? students.map((s, i) => {
-        //     s.color = ['#4f46e5', '#6366f1', '#10b981', '#3b82f6'][i % 4];
-        //     return s;
-        // }) : [].slice(indexOfFirstTeacher, indexOfLastTeacher))
+        setCurrentStudents(students ? students.map((s, i) => {
+            s.color = ['#4f46e5', '#6366f1', '#10b981', '#3b82f6'][i % 4];
+            return s;
+        }) : [].slice(indexOfFirstTeacher, indexOfLastTeacher))
     }, []);
 
     // let a = {
@@ -111,7 +111,7 @@ const TopStudent = ({ students }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {students && students.map((student, index) => (
+                        {currentStudents && currentStudents.map((student, index) => (
                             <tr key={index} className="border-t border-gray-200 text-center">
                                 <td className="text-gray-500 py-2 px-6">{index + 1}</td>
                                 <td className="text-gray-500 py-2 px-6">{student.fullName}</td>
