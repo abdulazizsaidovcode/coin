@@ -13,19 +13,19 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
   const [categoryInfo, setCategoryInfo] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Function to toggle the active state
-  const toggleActive = (id) => {
-    axios
-      .post(url + "category/reset/" + id, config)
-      .then(() => {
-        getCategory1();
-        toast.success("Reset category");
-      })
-      .catch((err) => {
-        toast.error("Somesing is error");
-        // console.log(err);
-      });
-  };
+  // // Function to toggle the active state
+  // const toggleActive = (id) => {
+  //   axios
+  //     .post(url + "category/reset/" + id, config)
+  //     .then(() => {
+  //       getCategory1();
+  //       toast.success("Reset category");
+  //     })
+  //     .catch((err) => {
+  //       toast.error("Somesing is error");
+  //       // console.log(err);
+  //     });
+  // };
 
   // Modalni ochish va yopish uchun funksiyalar
   const openModal = () => setIsModalOpen(true);
@@ -67,9 +67,7 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
       .catch(() => {
         toast.error("Xatolik yuz berdi!!!");
         setLoading(false);
-        // console.log(editData);
       });
-    setLoading(false);
   };
 
   // deleteCategory
@@ -85,7 +83,6 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
       .catch((err) => {
         toast.error("Something is error!");
         setLoading(false);
-        // console.log(err);
       });
   };
 
@@ -103,7 +100,7 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
   return (
     <>
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="zoom-modal fixed inset-0 flex items-center justify-center z-50">
           <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-96">
             <div className="flex justify-between items-center border-b pb-1">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -155,7 +152,7 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
       )}
 
       {isModalOpenEdit && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="zoom-modal fixed inset-0 flex items-center justify-center z-50">
           <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
             <div className="flex justify-between items-center border-b pb-1">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white">

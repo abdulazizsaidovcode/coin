@@ -104,6 +104,7 @@ const TopTeachers = ({ teacherList }) => {
                                 <td className="py-2 px-5 whitespace-nowrap text-gray-500">{teacher.numberOfStudent}</td>
                                 <td className="py-2 px-5 whitespace-nowrap">
                                     <CircularProgress percentage={teacher.rate} color={teacher.color} />
+                                    
                                 </td>
                             </tr>
                         ))}

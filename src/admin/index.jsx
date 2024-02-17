@@ -21,7 +21,7 @@ function Admin() {
     <div className="flex w-full">
       <SidebarTemplate isAdmin={true} />
       <div className="w-full">
-        <Navbarcha />
+        <Navbarcha isAdminNav={true} />
         <Routes >
           <Route path="/admin/group" element={<AdminGroup />} />
           <Route path="/admin/student" element={<AdminStudent />} />

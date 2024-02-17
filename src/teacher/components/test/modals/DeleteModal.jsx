@@ -37,8 +37,8 @@ const DeleteModal = (props) => {
     }
 
     return (
-        <div className={`${isDeleteMenuOpen ? 'sm:translate-x-[10%] md:translate-x-[20%] lg:translate-x-[25%] fixed top-[35%] w-full' : 'hidden'}`}>
-            <div className="w-[80%] ms-2 sm:ms-0 sm:w-[30rem] py-4 px-8 bg-slate-200 rounded-xl shadow-lg shadow-slate-500">
+        <div className={`${isDeleteMenuOpen ? 'animation-modal-test flex justify-center items-start w-full' : 'hidden'}`}>
+            <div className="w-[88%] sm:w-[30rem] py-4 px-8 bg-slate-200 rounded-xl shadow-lg shadow-slate-500">
                 <div className="flex justify-between items-center border-b border-slate-400 pb-2">
                     <p className="text-lg font-semibold font-inika text-gray-900 tracking-wide">Delete Test</p>
                     <i onClick={toggleDeleteMenu} className="fa-solid fa-xmark fa-xl hover:cursor-pointer hover:opacity-70 duration-200"></i>

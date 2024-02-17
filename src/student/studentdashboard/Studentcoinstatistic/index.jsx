@@ -10,23 +10,29 @@ function Studentcoinstatistic() {
 
   let month = [];
   let coin = [];
-  
+
   useEffect(() => {
     setConfig();
+    setTimeout(() => {
+    }, 5000)
+    getMonth()
+  }, []);
 
+
+  const getMonth = () => {
     axios.get(url + "coin/history/student/category/coin", config)
       .then((res) => {
         setCoinsRate(res.data.body);
         checkMonths(res.data.body);
-        
+
         // Ob'ektning har bir qiymatini tekshirish
         Object.values(months).forEach((value) => {
           if (value !== null) {
             for (let i of value) {
-                month.push(i.monthName);
-                coin.push(i.coin);
-                console.log(coin);
-                console.log(month);
+              month.push(i.monthName);
+              coin.push(i.coin);
+              console.log(coin);
+              console.log(month);
             }
           }
         });
@@ -34,7 +40,7 @@ function Studentcoinstatistic() {
       .catch((err) =>
         console.log("Student dashboard rate 😭", err)
       );
-  }, []);
+  }
 
   const option = {
     backgroundColor: "#ffffff", // Background color of the chart
@@ -55,7 +61,7 @@ function Studentcoinstatistic() {
       // Configuration for the x-axis
       {
         type: "category",
-        data: `${month}`,
+        data: month ? month : ['FEBRUARY', 'FEBRUARY'],
         axisTick: {
           alignWithLabel: true,
         },
@@ -73,7 +79,7 @@ function Studentcoinstatistic() {
         name: "Direct",
         type: "bar",
         barWidth: "60%",
-        data: `${coin}`,
+        data: coin ? coin[0] : ["1", "2"],
         itemStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             // Gradient color for the bars
