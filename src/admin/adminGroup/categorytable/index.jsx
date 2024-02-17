@@ -136,7 +136,7 @@ const GroupsTable = ({
                         className="even:bg-slate-100 hover:bg-slate-200 duration-200 text-center"
                       >
                         <td className="py-3 px-6 border-b border-gray-200">
-                          {i + 1}
+                          {(currentPage * 10) + (i + 1)}
                         </td>
                         <td className="py-3 px-6 border-b border-gray-200 flex justify-center items-center">
                           <LazyLoadImage
