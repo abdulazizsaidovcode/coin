@@ -207,7 +207,7 @@ function Gift() {
                 </div>
               </div>
               <div className="flex justify-end">
-                <button className="btm-close me-2 bg-red-900">Close</button>
+                <button onClick={closeModal} className="btm-close me-2 bg-red-900">Close</button>
                 <button
                   onClick={() => {
                     closeModal();
