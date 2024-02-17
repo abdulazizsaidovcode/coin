@@ -341,6 +341,7 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
                 </tbody>
               </table>
             </div>
+            
           </div>
         </div>
       </div>
