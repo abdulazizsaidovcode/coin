@@ -5,7 +5,7 @@ import Studentcoinstatistic from "../studentdashboard/Studentcoinstatistic";
 
 const StudentGroup = () => {
   const [topStudent, setTopStudent] = useState([]);
-
+  let group = null
   useEffect(() => {
     setConfig();
     axios
@@ -16,13 +16,21 @@ const StudentGroup = () => {
       .catch((err) => console.log("Boshqa backendchi topiyla iltimos 😭", err));
   }, []);
 
+  getGroupName()
+
+  function getGroupName(){
+    topStudent.map((item) => {
+      group = item.groupName;
+    })
+  }
+
   return (
     <div className="p-8 w-full bg-gray-100">
       <div className="mb-10">
         <h2 className="text-4xl font-bold font-inika text-gray-900 mb-4">Exchange</h2>
       </div>
       <div className="flex justify-around mb-10 px-10">
-        <div className="w-5/12 text-5xl flex items-center h-64  font-bold font-inika text-gray-900 mb-4">MY group</div>
+        <div className="w-5/12 text-5xl flex items-center h-64  font-bold font-inika text-gray-900 mb-4">MY group {group ? group : ""}</div>
         <div className="w-5/12 h-max shadow-xl up h-64">
           <Studentcoinstatistic />
         </div>

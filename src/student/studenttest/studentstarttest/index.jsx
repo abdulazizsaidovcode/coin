@@ -58,7 +58,7 @@ function StudentStartTest() {
                         </svg>
                         <span className="sr-only">Loading...</span>
                     </div> : "Run"}</button>
-                    <span className="bg-white p-2 rounded-2xl text-lg font-mono text-gray-700">{time}:{second}</span>
+                    <span className="bg-white p-2 rounded-2xl text-lg font-mono text-gray-700">{time}:{second} {console.log(time, second)}</span>
                 </div>
                 <div className="flex space-x-4 mt-4 ">
                     <div className="flex-1">
