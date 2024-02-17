@@ -129,7 +129,7 @@ const AdminGroup = () => {
       </div>
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+          <div className="zoom-modal relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <h2 className="text-lg leading-6 font-medium text-gray-900 mb-4">
               Add New Group
             </h2>
