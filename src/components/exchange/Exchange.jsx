@@ -5,12 +5,15 @@ import axios from 'axios';
 import { byId, config, setConfig, url } from "../api/api"
 import ExchangeTable from './ExchangeTable';
 import TopLoading from '../dashboard/components/loading';
+import { toast } from 'react-toastify';
 
 const Exchange = () => {
     const [exchangeTable, setExchangeTable] = useState(null);
     const [exchangeStatistics, setExchangeStatistics] = useState(null);
     const [exchangeDiagram, setExchangeDiagram] = useState(null);
     const [group, setGroup] = useState(null);
+    const [page, setPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
         setConfig();
@@ -22,28 +25,33 @@ const Exchange = () => {
 
     // get exchange table
     const getExchangeTable = () => {
-        axios.get(`${url}exchange?page=0&size=10`, config)
-            .then(res => setExchangeTable(res.data.body.object))
-            .catch(err => console.log('Teacher panel exchange get qilishda error: ', err))
+        axios.get(`${url}exchange`, config)
+            .then(res => {
+                setExchangeTable(res.data.body.object);
+                setPage(res.data.body.totalPage);
+            })
+            .catch(err => console.log('Admin panel exchange get qilishda error: ', err))
     }
 
     // get coin month
     const getCoinStatistics = () => {
         axios.get(`${url}exchange/group-statistics`, config)
             .then(res => setExchangeStatistics(res.data.body))
-            .catch(err => console.log('Teacher panel exchange statistikani get qilishda error: ', err))
+            .catch(err => console.log('Admin panel exchange statistikani get qilishda error: ', err))
     }
 
     // get coin diagram
     const getCoinDiagram = () => {
         axios.get(`${url}exchange/group-diagram`, config)
             .then(res => setExchangeDiagram(res.data.body.data5))
-            .catch(err => console.log('Teacher panel exchange diagrammani get qilishda error: ', err))
+            .catch(err => console.log('Admin panel exchange diagrammani get qilishda error: ', err))
     }
 
     // active ni chiqarish uchun
     const toggleActive = (id) => {
-        setExchangeTable(exchangeTable.map(item => item.id === id ? { ...item, active: !item.active } : item));
+        axios.post(`${url}exchange/confirmation?exchangeId=${id}`, config)
+        .then(res => toast.success("Succesfully"))
+        .catch(err => toast.error("Error"))
     };
 
     const getGroups = () => {
@@ -69,6 +77,15 @@ const Exchange = () => {
                 .catch(() => setExchangeTable(null))
             : getExchangeTable()
     }
+
+    const handelPageClick = (event) => {
+        const pageNumber = event.selected;
+        setCurrentPage(pageNumber)
+        axios.get(`${url}exchange?page=${pageNumber}&size=10`, config)
+            .then(res => setExchangeTable(res.data.body.object))
+            .catch(err => console.log('error page: ', err))
+    }
+
 
     return (
         <div className="p-8 w-full bg-gray-100">
@@ -119,7 +136,12 @@ const Exchange = () => {
             </div>
 
             {exchangeTable ? (
-                <ExchangeTable exchangeTable={exchangeTable} toggleActive={toggleActive} />
+                <ExchangeTable
+                    page={page}
+                    currentPage={currentPage}
+                    handelPageClick={handelPageClick}
+                    exchangeTable={exchangeTable}
+                    toggleActive={toggleActive} />
             ) : (
                 <TopLoading name='Exchange information' />
             )}

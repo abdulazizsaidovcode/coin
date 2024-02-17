@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 function Gift() {
   const [isModalOpen, setIsModalOpen] = useState(false); // Modalni ochish va yopish uchun holat
   const [gifts, setGifts] = useState(null); // Sifod
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     getGift();
@@ -18,19 +19,20 @@ function Gift() {
       .get(url + "gift", config)
       .then((res) => {
         setGifts(res.data.body.object.reverse());
+        setPage(res.data.body.totalPage);
       })
-      .catch(() => {});
+      .catch(() => { });
   }
 
   // giftFilter
   const searchGift = (e) => {
     let data = e.target.value
-    
+
     !data ? getGift() :
-        axios.get(`${url}gift/search?name=${data}`, config)
-            .then(res => res.data.body.length === 0 ? setGifts(null) : setGifts(res.data.body))
-            .catch(err => console.log('Teacher panel gift filterda error: ', err));
-}
+      axios.get(`${url}gift/search?name=${data}`, config)
+        .then(res => res.data.body.length === 0 ? setGifts(null) : setGifts(res.data.body))
+        .catch(err => console.log('Teacher panel gift filterda error: ', err));
+  }
 
   const addGift = async () => {
     const img = new FormData();
@@ -43,22 +45,20 @@ function Gift() {
     }
 
     if (img.get('file') !== 'undefined')
-        await axios.post(url + "attachment/upload", img, config)
-            .then(res => addData.attachmentId = res.data.body)
-            .catch(() => console.log("img ketmadi"))
+      await axios.post(url + "attachment/upload", img, config)
+        .then(res => addData.attachmentId = res.data.body)
+        .catch(() => console.log("img ketmadi"))
 
     await axios.post(url + "gift/save", addData, config)
-    .then(() => {
-      toast.success("Successfully added!");
-      getGift();
-    })
-    .catch(() => {
-      toast.error("Failed to add gift card!");
-    });
-}
+      .then(() => {
+        toast.success("Successfully added!");
+        getGift();
+      })
+      .catch(() => {
+        toast.error("Failed to add gift card!");
+      });
+  }
 
-
- 
   // Modalni ochish va yopish uchun funksiyalar
   const openModal = () => {
     setIsModalOpen(true);
@@ -67,6 +67,14 @@ function Gift() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const handelPageClick = (event) => {
+    const pageNumber = event.selected;
+    // setCurrentPage(pageNumber)
+    axios.get(`${url}gift?page=${pageNumber}&size=10`, config)
+      .then(res => setGifts(res.data.body.object.reverse()))
+      .catch(err => console.log('error page: ', err));
+  }
 
   return (
     <div className="bg-gray-100 min-h-screen p-8 w-full ">
@@ -104,12 +112,12 @@ function Gift() {
           />
         </div>
       </div>
-      <GiftCard gifts={gifts} getGift={getGift} />
+      <GiftCard gifts={gifts} getGift={getGift} handelPageClick={handelPageClick} page={page} />
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 ">
-          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+        <div className="fixed bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
+          <div className="modal zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
                 Add gift
@@ -199,7 +207,7 @@ function Gift() {
                 </div>
               </div>
               <div className="flex justify-end">
-                <button className="btm-close me-2 bg-red-900">Close</button>
+                <button onClick={closeModal} className="btm-close me-2 bg-red-900">Close</button>
                 <button
                   onClick={() => {
                     closeModal();

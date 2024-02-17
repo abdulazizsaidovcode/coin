@@ -44,10 +44,10 @@ const HomeNavbar = () => {
                             ))
                         }
                     </ul>
-                    <button className={`${styles.ButtonNav} navButton `} src>
+                    <a className={`${styles.ButtonNav} navButton `} >
                         <CiLogin className='navLogo' />
                             Sign in
-                    </button>
+                    </a>
                 </div>
             </div>
         </>
