@@ -5,6 +5,7 @@ import { byId, config, url } from '../../../components/api/api';
 import img from '../../../assits/not-found.png';
 import './style.css';
 import LoadingBtn from '../loadingBtn/LoadingBtn';
+import ReactPaginate from 'react-paginate';
 
 function Message() {
   const [messages, setMessages] = useState(null);
@@ -13,6 +14,7 @@ function Message() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(0);
 
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
@@ -25,13 +27,19 @@ function Message() {
 
   const getCategory = () => {
     axios.get(url + "message/teacher", config)
-      .then((res) => setMessages(res.data.body.object.reverse()))
+      .then((res) => {
+        setMessages(res.data.body.object.reverse());
+        setPage(res.data.body.totalPage);
+      })
       .catch((err) => console.log(err))
   }
 
   const getCategory2 = () => {
     axios.get(url + "message/teacher", config)
-      .then((res) => setMessages(res.data.body.object))
+      .then((res) => {
+        setMessages(res.data.body.object)
+        setPage(res.data.body.totalPage);
+      })
       .catch((err) => console.log(err))
   }
 
@@ -68,6 +76,16 @@ function Message() {
     } else {
       return description.slice(0, 50);
     }
+  }
+
+  const handelPageClick = (event) => {
+    const pageNumber = event.selected;
+    // setCurrentPage(pageNumber)
+    axios.get(`${url}message/teacher?page=${pageNumber}&size=10`, config)
+      .then(res => {
+        setMessages(res.data.body.object);
+        setMessages(res.data.body.object.reverse());
+      });
   }
 
   return (
@@ -112,6 +130,20 @@ function Message() {
             <img src={img} alt="img" className='w-64' />
           </div>
         )}
+      </div>
+
+      <div className='mt-10'>
+        <ReactPaginate className="navigation"
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={handelPageClick}
+          pageRangeDisplayed={5}
+          pageCount={page}
+          previousLabel="<"
+          renderOnZeroPageCount={null}
+          nextClassName='nextBtn'
+          previousClassName='prevBtn'
+        />
       </div>
 
       <div
