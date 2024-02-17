@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { config, url } from "../api/api";
 // import React, { useState, useEffect } from "react";
-import { byId, config, setConfig, url } from "../../components/api/api";
+import { byId, config, getFile, setConfig, url } from "../../components/api/api";
 import axios from "axios";
 import avatar from "../../assits/opacha.jpg";
 import { Link } from "react-router-dom";
@@ -20,6 +20,9 @@ const StudentNavbar = () => {
 
   useEffect(() => {
     setConfig();
+    getMe()
+  }, []);
+  function getMe() {
     axios
       .get(url + "user/getMe", config)
       .then((res) => {
@@ -28,7 +31,7 @@ const StudentNavbar = () => {
       .catch((err) =>
         console.log(err)
       );
-  }, []);
+  }
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -41,7 +44,7 @@ const StudentNavbar = () => {
     axios
       .get(url + "message/student", config)
       .then((res) => {
-          setMessages(res.data.body.object);
+        setMessages(res.data.body.object);
       })
       .catch((err) =>
         console.log("Backenddan ma'lumot olishda xatolik yuz berdi 😭", err)
@@ -49,23 +52,23 @@ const StudentNavbar = () => {
   }, []);
 
   const editUser = () => {
-    let editData = {
-      firstName: byId("firstName").value,
-      lastName: byId("lastName").value,
-      phoneNumber: byId("phoneNumber").value,
-      password: byId("password").value,
-      prePassword: byId("prePassword").value,
-      file: byId("image").files[0]
-    };
+    let editData = new FormData();
+    editData.append("firstName", byId("firstName").value);
+    editData.append("lastName", byId("lastName").value);
+    editData.append("phoneNumber", byId("phoneNumber").value);
+    editData.append("password", byId("password").value);
+    editData.append("prePassword", byId("prePassword").value);
+    editData.append("file", byId("image").files[0]);
     axios
-      .put(url + "user/update/", editData, config)
+      .put(url + "user/edit/user/profile", editData, config)
       .then(() => {
         closeModalEdit();
+        getMe()
         // getUsers();
         toast.success("User information has been changed✔");
       })
       .catch(() => {
-        toast.error("Something went wrong❓");
+        toast.error("Something went wrong ❓");
       });
   };
 
@@ -110,7 +113,7 @@ const StudentNavbar = () => {
                 className="flex items-center space-x-2 "
               >
                 <img
-                  src={avatar}
+                  src={name.attachmentId  ? getFile + name.attachmentId : avatar}
                   alt="Admin"
                   className="rounded-full w-12 h-12 p-1 border"
                 />
@@ -125,9 +128,10 @@ const StudentNavbar = () => {
               <div className="h-40 bg-profileColor rounded-t-xl flex justify-center items-center">
                 <img
                   className="w-20 h-20 rounded-full"
-                  src={avatar}
+                  src={name.attachmentId  ? getFile + name.attachmentId : avatar}
                   alt="Gift"
                 />
+                
                 <span
                   className="absolute right-3 top-3 hover:text-gray-200 duration-200 text-white cursor-pointer"
                   onClick={toggleMenu}
@@ -318,7 +322,7 @@ const StudentNavbar = () => {
                   Close
                 </button>
                 <button
-                  
+
                   onClick={() => {
                     editUser();
                   }}

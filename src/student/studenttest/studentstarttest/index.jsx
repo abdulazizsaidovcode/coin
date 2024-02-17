@@ -35,7 +35,7 @@ function StudentStartTest() {
 
     return (
         <>
-            {test && <div className='w-full bg-gray-100 h-screen p-6 '>
+            {test && <div className='w-full bg-gray-100 h-screen p-6'>
                 <div className="flex justify-between items-middle py-6">
                     <h1 className="text-4xl">test</h1>
                 </div>
