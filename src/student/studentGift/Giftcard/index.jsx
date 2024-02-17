@@ -7,17 +7,17 @@ import { toast } from "react-toastify";
 const StudentGiftCard = () => {
   const [gift, setGift] = useState([]); // nomini 'setTopStudent' dan 'setGift' ga o'zgartirildi aniqroq bo'lishi uchun
   const [giftId, setGiftId] = useState('')
-  
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalExchange, setIsModalExchange] = useState(false);
   const [toShow, setItemToShow] = useState("");
 
-  
+
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const openExchange = () => setIsModalExchange(true);
   const closeExchange = () => setIsModalExchange(false);
-  
+
 
 
   useEffect(() => {
@@ -34,19 +34,25 @@ const StudentGiftCard = () => {
         console.log("Backenddan ma'lumot olishda xatolik yuz berdi 😭", err)
       );
   }, []);
-   const exchange = () => {
+  const exchange = () => {
     axios.post(`${url}exchange/save/${giftId}`, '', config)
-      .then(() => {
-        toast.success("Succes!")
+      .then((res) => {
+        if (res.data.success) {
+          toast.success("Succes!")
+
+        }else{
+        toast.warning(res.data.message);
+
+        }
       })
-      .catch((error)=> {
+      .catch((error) => {
         console.log(`${error.response.data.message} `);
         error.response.data.msg === 'Unauthorized user!' ? toast
-        .error("Authorization is failed! Please login again.") :
-        toast.error("Error! " + error.response.data.msg);
-        });
-   }
-   
+          .error("Authorization is failed! Please login again.") :
+          toast.error("Error! " + error.response.data.msg);
+      });
+  }
+
 
   return (
     <div className="flex flex-wrap justify-around bg-gray-100 pt-10">
@@ -56,7 +62,7 @@ const StudentGiftCard = () => {
         ) => (
           <div
             key={item.id}
-            className="w-1/4 h-96 rounded-xl overflow-hidden shadow-md hover:shadow-xl duration-300 mr-3 mb-8"
+            className="w-80 h-96 rounded-xl overflow-hidden shadow-md hover:shadow-xl duration-300 mr-3 mb-8"
           >
             <img
               className="w-full h-1/2 object-cover"
@@ -76,7 +82,7 @@ const StudentGiftCard = () => {
                 {/* {item.description} */}
               </p>
             </div>
-            <div className="px-2 flex gap-3 pt-4 text-center">
+            <div className="px-2 flex gap-3 pt-4 text-center justify-between">
               <button
                 className="btm-info"
                 onClick={() => {
@@ -98,7 +104,7 @@ const StudentGiftCard = () => {
             </div>
 
             {isModalOpen && (
-              <div className="fixed inset-0 flex items-center justify-center z-50">
+              <div className="fixed inset-0 flex items-center justify-center z-50 ">
                 <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/3">
                   <div className="mt-6 pb-6 border-b font-medium text-lg">
                     {toShow}
@@ -121,7 +127,7 @@ const StudentGiftCard = () => {
                     salom
                   </div>
                   <div className="flex justify-end gap-3 items-center mt-5">
-                  <button
+                    <button
                       className="font-semibold bg-red-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300"
                       onClick={closeExchange}
                     >
