@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { config, url } from "../api/api";
-// import React, { useState, useEffect } from "react";
 import {
   byId,
   config,
@@ -25,49 +23,35 @@ const Navbarcha = () => {
   const [loading, setloading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
+  const [messages, setMessages] = useState([]);
 
   const openModalEdit = () => setIsModalOpenEdit(true);
   const closeModalEdit = () => setIsModalOpenEdit(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const togglePasswordVisibility2 = () => setShowPassword2(!showPassword2);
-
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   useEffect(() => {
     setConfig();
     getMe();
   }, []);
 
-  const getMe = () => {
-    axios
-      .get(url + "user/getMe", config)
-      .then((res) => {
-        setName(res.data.body);
-        console.log(res.data.body);
-      })
-      .catch((err) =>
-        console.log("Boshqa backendinchi topiyla iltomos 😭", err)
-      );
-  };
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const [messages, setMessages] = useState([]);
-
   useEffect(() => {
     setConfig();
-    axios
-      .get(url + "message/student", config)
+    axios.get(url + "message/student", config)
       .then((res) => {
-        if (res.data && res.data.body && res.data.body.object) {
-          setMessages(res.data.body.object);
-        }
+        // if (res.data && res.data.body && res.data.body.object) {
+        setMessages(res.data.body.object);
+        // }
       })
-      .catch((err) =>
-        console.log("Backenddan ma'lumot olishda xatolik yuz berdi 😭", err)
-      );
+      .catch((err) => console.log("Backenddan ma'lumot olishda xatolik yuz berdi 😭", err));
   }, []);
+
+  const getMe = () => {
+    axios.get(url + "user/getMe", config)
+      .then((res) => setName(res.data.body))
+      .catch((err) => console.log("Boshqa backendinchi topiyla iltomos 😭: get me kelmadi: ", err));
+  };
 
   const editUser = () => {
     let editData = new FormData();
@@ -80,8 +64,7 @@ const Navbarcha = () => {
 
     setloading(true);
 
-    axios
-      .put(url + "user/edit/user/profile", editData, config)
+    axios.put(url + "user/edit/user/profile", editData, config)
       .then(() => {
         setloading(true);
         closeModalEdit();
@@ -101,7 +84,6 @@ const Navbarcha = () => {
       <Link to="/" id="logout"></Link>
       <div className="">
         <div className="flex xl:py-2 justify-between xl:justify-end fixed items-center w-full left-0 z-20 bg-white px-8 ">
-          {/* Qidiruv maydoni */}
           <div className="flex xl:hidden items-center space-x-1 w-32 h-20">
             <img className=" object-cover" src={logo} alt="logo" />
           </div>
@@ -128,7 +110,7 @@ const Navbarcha = () => {
               >
                 <img
                   src={
-                    name.attachmentId 
+                    name.attachmentId
                       ? getFile + name.attachmentId
                       : avatar
                   }
@@ -139,7 +121,7 @@ const Navbarcha = () => {
               </button>
             </div>
             <div
-              className={`${isOpen ? "absolute duration-500" : "hidden"} 
+              className={`${isOpen ? "zoom-modal-right absolute duration-500" : "hidden"} 
               right-0 mt-2 py-2 w-80 bg-white rounded-xl shadow-xl z-20`}
             >
               {/* Menu items */}
@@ -202,7 +184,7 @@ const Navbarcha = () => {
       </div>
 
       {editModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 ">
+        <div className={`zoom-modal fixed inset-0 flex items-center justify-center z-50`}>
           <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
@@ -376,7 +358,7 @@ const Navbarcha = () => {
                   }}
                   className="btm"
                 >
-                  {loading ? <Loader/> : "Edit"}
+                  {loading ? <Loader /> : "Edit"}
                 </button>
               </div>
             </div>

@@ -1,6 +1,7 @@
 .wd-50 {
   width: 50% !important;
 }
+
 .btm {
   padding: 10px 45px !important;
   color: #fff;
@@ -14,7 +15,7 @@
 
   &:active {
     transform: scale(0.9);
-    
+
   }
 }
 
@@ -64,6 +65,7 @@
   transform: scale(1.02);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
 }
+
 .text {
   color: #0c8ce9;
 }
@@ -82,13 +84,16 @@
 }
 
 .sidebar-item:hover {
-  border-left-color: #4f46e5; /* Indigo color */
+  border-left-color: #4f46e5;
+  /* Indigo color */
 }
 
 .sidebar-icon {
-  min-width: 1.25rem; /* Icon width */
+  min-width: 1.25rem;
+  /* Icon width */
   margin-left: 1rem;
-  margin-right: 2rem; /* Space between icon and text */
+  margin-right: 2rem;
+  /* Space between icon and text */
 }
 
 .sidebar-text {
@@ -114,15 +119,19 @@
   0% {
     box-shadow: 14px 0 0 -2px, 38px 0 0 -2px, -14px 0 0 -2px, -38px 0 0 -2px;
   }
+
   25% {
     box-shadow: 14px 0 0 -2px, 38px 0 0 -2px, -14px 0 0 -2px, -38px 0 0 2px;
   }
+
   50% {
     box-shadow: 14px 0 0 -2px, 38px 0 0 -2px, -14px 0 0 2px, -38px 0 0 -2px;
   }
+
   75% {
     box-shadow: 14px 0 0 2px, 38px 0 0 -2px, -14px 0 0 -2px, -38px 0 0 -2px;
   }
+
   100% {
     box-shadow: 14px 0 0 -2px, 38px 0 0 2px, -14px 0 0 -2px, -38px 0 0 -2px;
   }
@@ -133,6 +142,7 @@
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
     rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
+
 .zayball-navbar {
   width: 86%;
 }
@@ -144,14 +154,36 @@
 
 @keyframes zoom-modal {
   0% {
-      transform: scale(.3);
+    transform: scale(.3);
   }
+
   50% {
-      transform: scale(1.1);
+    transform: scale(1.1);
   }
+
   100% {
-      transform: scale(1);
+    transform: scale(1);
   }
 }
 
+.zoom-modal-right {
+  animation: all 1s ease-in-out;
+  animation-name: zoom-modal-right;
+}
 
+@keyframes zoom-modal-right {
+  0% {
+    right: -20rem;
+    transform: scale(0);
+  }
+
+  50% {
+    right: 3rem;
+    transform: scale(1.1);
+  }
+
+  100% {
+    right: 0;
+    transform: scale(1);
+  }
+}
