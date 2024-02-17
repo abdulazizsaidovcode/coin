@@ -46,7 +46,7 @@ const AdminStudent = () => {
       groupId: byId("groupId").value,
       gender: byId("gender").value,
       friendPhoneNumber:
-        byId("friendNumber").value !== "null" ? byId("friendNumber").value : "",
+        byId("friendNumber").value ? byId("friendNumber").value : "",
     };
     axios
       .post(url + "auth/register?ROLE=ROLE_USER", addData, config)
@@ -95,11 +95,10 @@ const AdminStudent = () => {
       phoneNumber: byId("phoneNumber").value,
       groupId: byId("groupId").value,
       gender: byId("gender").value,
-      friendPhoneNumber:
-        byId("friendNumber").value !== "null" ? byId("friendNumber").value : "",
+      friendPhoneNumber: "",
     };
     axios
-      .put(`${url}user/update${userId}`, editData, config)
+      .put(`${url}user/update/${userId.id}`, editData, config)
       .then(() => {
         closeModalEdit();
         // getUsers();
@@ -508,8 +507,8 @@ const AdminStudent = () => {
 
             {/* Modal body */}
             <div className="p-4 md:p-5">
-              <div className="grid md:gap-4 mb-4 grid-cols-2">
-                <div className="col-span-2 sm:col-span-1">
+            <div className="grid md:gap-4 mb-4 grid-cols-2">
+                <div className="col-span-1">
                   <label
                     htmlFor="name"
                     className="block mb-2 text-sm font-medium text-gray-900"
@@ -522,10 +521,10 @@ const AdminStudent = () => {
                     id="firstName"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="FirstName"
-                    defaultValue={userId.fullName}
+                   defaultValue={userId.fullName}
                   />
                 </div>
-                <div className="col-span-2 sm:col-span-1">
+                <div className="col-span-1">
                   <label
                     htmlFor="lastName"
                     className="block mb-2 text-sm font-medium text-gray-900"
@@ -538,7 +537,6 @@ const AdminStudent = () => {
                     id="lastName"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="LastName"
-                    required=""
                   />
                 </div>
 
@@ -553,10 +551,9 @@ const AdminStudent = () => {
                     type="text"
                     name="email"
                     id="email"
-                    defaultValue={userId.email}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Email"
-                    required=""
+                    defaultValue={userId.email}
                   />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
@@ -572,7 +569,6 @@ const AdminStudent = () => {
                     id="phoneNumber"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="100"
-                    required=""
                     defaultValue={userId.phoneNumber}
                   />
                 </div>
@@ -591,6 +587,7 @@ const AdminStudent = () => {
                       disabled={loading}
                       type={showPassword ? "text" : "password"}
                       className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500`}
+                      defaultValue={userId.password}
                     />
                     <button
                       type="button"
@@ -607,7 +604,6 @@ const AdminStudent = () => {
                     </button>
                   </div>
                 </div>
-
                 <div className="col-span-2 sm:col-span-1">
                   <label
                     htmlFor="gender"
@@ -626,6 +622,29 @@ const AdminStudent = () => {
                     <option value="FEMALE">FEMALE</option>
                   </select>
                 </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <label
+                    htmlFor="gender"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Select group
+                  </label>
+                  <select
+                    id="groupId"
+                    className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
+                  >
+                    <option selected disabled>
+                      Choose one...
+                    </option>
+                    {group &&
+                      group.map((res, i) => (
+                        <option key={i} value={res.id}>
+                          {res.name}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+                
               </div>
               <div className="flex justify-end">
                 <button

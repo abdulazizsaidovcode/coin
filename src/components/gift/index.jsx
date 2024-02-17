@@ -4,15 +4,25 @@ import GiftCard from "../card";
 import axios from "axios";
 import { byId, config, url } from "../api/api";
 import { toast } from "react-toastify";
+import Loader from "../../assits/loader";
 
 function Gift() {
   const [isModalOpen, setIsModalOpen] = useState(false); // Modalni ochish va yopish uchun holat
   const [gifts, setGifts] = useState(null); // Sifod
   const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getGift();
   }, []);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   function getGift() {
     axios
@@ -35,6 +45,7 @@ function Gift() {
   }
 
   const addGift = async () => {
+    setLoading(true)
     const img = new FormData();
     img.append('file', byId('image').files[0]);
     const addData = {
@@ -53,20 +64,17 @@ function Gift() {
       .then(() => {
         toast.success("Successfully added!");
         getGift();
+        setLoading(false)
+        closeModal()
       })
       .catch(() => {
         toast.error("Failed to add gift card!");
+        setLoading(false)
       });
   }
 
   // Modalni ochish va yopish uchun funksiyalar
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+ 
 
   const handelPageClick = (event) => {
     const pageNumber = event.selected;
@@ -210,12 +218,11 @@ function Gift() {
                 <button onClick={closeModal} className="btm-close me-2 bg-red-900">Close</button>
                 <button
                   onClick={() => {
-                    closeModal();
                     addGift();
                   }}
                   className="btm"
                 >
-                  Add
+                  {loading ? <Loader /> : "Add"}
                 </button>
               </div>
             </div>

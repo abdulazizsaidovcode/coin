@@ -6,30 +6,37 @@ import { toast } from "react-toastify";
 import giftImg from "../../assits/itca.jpg";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ReactPaginate from "react-paginate";
+import Loader from "../../assits/loader";
 
 const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
   const [deleteModal, setDeleteModal] = useState(false); // Modalni ochish va yopish uchun holat
   const [editModal, setEditModal] = useState(false); // Modalni ochish va yopish uchun holat
-  const [giftId, setGiftid] = useState([]); // Sifr
+  const [giftId, setGiftid] = useState(""); // Sifr
   const [giftIn, setGiftIn] = useState([]); // Sifr
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [toShow, setItemToShow] = useState([]);
 
   const deleteGift = () => {
+    setLoading(true);
     axios
       .delete(url + "gift/delete/" + giftId, config)
       .then(() => {
+        setLoading(false);
         toast.success("Succesfully delete gift!");
         getGift();
+
         closedelete();
       })
       .catch(() => {
+        setLoading(false);
         toast.error("Something is wrong!");
         closedelete();
       });
   };
 
   const editGift = async () => {
+    setLoading(true);
     const img = new FormData();
     img.append("file", byId("image").files[0]);
     const addData = {
@@ -46,12 +53,15 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
         .catch(() => console.log("img ketmadi"));
 
     await axios
-      .put(url + "gift/update/", giftId, addData, config)
+      .put(url + "gift/update/" + giftId, addData, config)
       .then(() => {
+        setLoading(false);
         toast.success("Successfully added!");
         getGift();
+        closeEdit()
       })
       .catch(() => {
+        setLoading(false);
         toast.error("Failed to add gift card!");
       });
   };
@@ -85,37 +95,79 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
           gifts.map((item) => (
             <div
               key={item.id}
-              className="w-full sm:w-1/2 lg:w-1/4 h-[30rem] sm:h-[24rem] lg:h-[23rem] xl:h-[24rem] p-5">
-              <div className="w-full h-full rounded-xl overflow-hidden shadow-md hover:shadow-lg hover:shadow-slate-500
-                 duration-300 mb-8">
+              className="w-full sm:w-1/2 lg:w-1/4 h-[30rem] sm:h-[24rem] lg:h-[23rem] xl:h-[24rem] p-5"
+            >
+              <div
+                className="w-full h-full rounded-xl overflow-hidden shadow-md hover:shadow-lg hover:shadow-slate-500
+                 duration-300 mb-8"
+              >
                 <div className="w-full h-1/2 overflow-hidden">
                   <LazyLoadImage
-                    src={item.attachmentId === null ? giftImg : getFile + item.attachmentId}
+                    src={
+                      item.attachmentId === null
+                        ? giftImg
+                        : getFile + item.attachmentId
+                    }
                     alt="Gift"
                     effect="blur"
                     className="hover:scale-110 w-full h-full lazyload"
-                    width='100%'
-                    height='100%'
+                    width="100%"
+                    height="100%"
                   />
                 </div>
                 <div className="px-6 py-4">
-                  <div className="font-bold text-xl mb-2 text-center">{item.name}</div>
-                  <p className="text-gray-700 text-base text-center">{item.rate} coin</p>
+                  <div className="font-bold text-xl mb-2 text-center">
+                    {item.name}
+                  </div>
+                  <p className="text-gray-700 text-base text-center">
+                    {item.rate} coin
+                  </p>
                 </div>
                 <div className="px-6 pt-4 text-center">
-                  <button className="btm-info" onClick={() => {
-                    openModal();
-                    setItemToShow(item.description);
-                  }}>Gift Info</button>
+                  <button
+                    className="btm-info"
+                    onClick={() => {
+                      openModal();
+                      setItemToShow(item.description);
+                      setGiftid(item.id);
+                      setGiftIn(item);
+                    }}
+                  >
+                    Gift Info
+                  </button>
                 </div>
 
                 {isModalOpen && (
-                  <div className={`${isModalOpen ? 'zoom-modal' : ''} fixed inset-0 flex items-center justify-center z-50`}>
+                  <div
+                    className={`${
+                      isModalOpen ? "zoom-modal" : ""
+                    } fixed inset-0 flex items-center justify-center z-50`}
+                  >
                     <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
                       <div className="mt-6 pb-6 border-b font-medium text-lg">
                         {toShow}
                       </div>
-                      <div className="flex justify-end items-center mt-5">
+                      <div className="flex justify-between items-center mt-5">
+                        <div className="flex gap-5">
+                          <button
+                            className="font-semibold bg-red-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300"
+                            onClick={() => {
+                              closeModal();
+                              opendelete();
+                            }}
+                          >
+                            Delete
+                          </button>
+                          <button
+                            className="font-semibold bg-yellow-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300"
+                            onClick={() => {
+                              closeModal();
+                              openEdit();
+                            }}
+                          >
+                            Edit
+                          </button>
+                        </div>
                         <button
                           className="font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300"
                           onClick={closeModal}
@@ -131,8 +183,14 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
           ))
         ) : (
           <div className="w-1/4 rounded-xl overflow-hidden shadow-md hover:shadow-xl duration-300 mr-3 mb-8">
-            <img className="w-full h-52 object-cover" src={giftImg} alt="Gift" />
-            <p className="text-center my-3 font-semibold tracking-wider">Gift not found 😊</p>
+            <img
+              className="w-full h-52 object-cover"
+              src={giftImg}
+              alt="Gift"
+            />
+            <p className="text-center my-3 font-semibold tracking-wider">
+              Gift not found 😊
+            </p>
           </div>
         )}
         {/* </div> */}
@@ -181,11 +239,10 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
                     </label>
                     <input
                       type="text"
-                      defaultValue={toShow.name}
+                      defaultValue={giftIn.name}
                       id="name"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Type product name"
-                      required=""
                     />
                   </div>
                   <div className="col-span-2 sm:col-span-1">
@@ -197,7 +254,7 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
                     </label>
                     <input
                       type="number"
-                      defaultValue={toShow.rate}
+                      defaultValue={giftIn.rate}
                       id="rate"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="100"
@@ -223,7 +280,7 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
                     <textarea
                       id="description"
                       rows="4"
-                      defaultValue={toShow.description}
+                      defaultValue={giftIn.description}
                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Write product description here"
                     ></textarea>
@@ -239,11 +296,10 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
                   <button
                     onClick={() => {
                       editGift();
-                      closeEdit();
                     }}
                     className="btm"
                   >
-                    Add
+                    {loading ? <Loader /> : "Edit"}
                   </button>
                 </div>
               </div>
@@ -303,7 +359,7 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
                     }}
                     className="btm"
                   >
-                    Yes
+                    {loading ? <Loader /> : "Yes"}
                   </button>
                 </div>
               </div>
@@ -311,8 +367,9 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
           </div>
         )}
       </div>
-      <div className='mt-2 mb-10 text-center'>
-        <ReactPaginate className="navigation"
+      <div className="mt-2 mb-10 text-center">
+        <ReactPaginate
+          className="navigation"
           breakLabel="..."
           nextLabel=">"
           onPageChange={handelPageClick}
@@ -320,8 +377,8 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
           pageCount={page}
           previousLabel="<"
           renderOnZeroPageCount={null}
-          nextClassName='nextBtn'
-          previousClassName='prevBtn'
+          nextClassName="nextBtn"
+          previousClassName="prevBtn"
         />
       </div>
     </>

@@ -69,7 +69,7 @@ const AdminTeacher = () => {
       friendPhoneNumber: "",
     };
     axios
-      .put(`${url}user/update${userId}`, editData, config)
+      .put(`${url}user/update/${userId.id}`, editData, config)
       .then(() => {
         closeModalEdit();
         // getUsers();

@@ -5,6 +5,7 @@ import { coinIcon, } from '../img/navIndex'
 import { useState } from 'react'
 import ScrollAnimation from '../scrollAnimation/scrollAnimation'
 import './homeNavbar.css'
+import { Link } from 'react-router-dom'
 // import { loadIcon } from '@iconify/react'
 
 const HomeNavbar = () => {
@@ -44,10 +45,10 @@ const HomeNavbar = () => {
                             ))
                         }
                     </ul>
-                    <a className={`${styles.ButtonNav} navButton `} >
+                    <Link to="/log-in" className={`${styles.ButtonNav} navButton `} >
                         <CiLogin className='navLogo' />
                             Sign in
-                    </a>
+                    </Link>
                 </div>
             </div>
         </>
