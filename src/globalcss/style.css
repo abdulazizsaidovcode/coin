@@ -1,4 +1,4 @@
-wd-50 {
+.wd-50 {
   width: 50% !important;
 }
 .btm {
@@ -55,7 +55,7 @@ wd-50 {
   border-top-right-radius: 15rem !important;
 }
 
-up {
+.up {
   transition: 0.5s !important;
   height: auto !important;
 }
@@ -135,6 +135,23 @@ up {
 }
 .zayball-navbar {
   width: 86%;
+}
+
+.zoom-modal {
+  animation: all 1s ease-in-out;
+  animation-name: zoom-modal;
+}
+
+@keyframes zoom-modal {
+  0% {
+      transform: scale(.3);
+  }
+  50% {
+      transform: scale(1.1);
+  }
+  100% {
+      transform: scale(1);
+  }
 }
 
 

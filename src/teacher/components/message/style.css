@@ -1,20 +1,3 @@
-.zoom-modal {
-    animation: all 1s ease-in-out;
-    animation-name: zoom-modal;
-}
-
-@keyframes zoom-modal {
-    0% {
-        transform: scale(.3);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
 .animation-modal {
     animation: all 1s ease-in-out;
     animation-name: zoom-anim;

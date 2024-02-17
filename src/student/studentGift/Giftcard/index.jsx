@@ -104,7 +104,7 @@ const StudentGiftCard = () => {
             </div>
 
             {isModalOpen && (
-              <div className="fixed inset-0 flex items-center justify-center z-50 ">
+              <div className="fixed inset-0 flex items-center justify-center z-50 zoom-modal">
                 <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/3">
                   <div className="mt-6 pb-6 border-b font-medium text-lg">
                     {toShow}
@@ -121,7 +121,7 @@ const StudentGiftCard = () => {
               </div>
             )}
             {isModalExchange && (
-              <div className="fixed inset-0 flex items-center justify-center z-50">
+              <div className="fixed inset-0 flex items-center justify-center z-50 zoom-modal">
                 <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/3">
                   <div className="mt-6 pb-6 border-b font-medium text-lg">
                     salom
