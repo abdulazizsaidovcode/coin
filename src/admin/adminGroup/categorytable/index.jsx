@@ -203,8 +203,8 @@ const GroupsTable = ({
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 z-50 overflow-y-auto h-full w-full">
+          <div className="zoom-modal relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <h2 className="text-lg leading-6 font-medium text-gray-900 mb-4">
               Edit Group
             </h2>
@@ -314,8 +314,8 @@ const GroupsTable = ({
       )}
 
       {isModalDelete && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-96">
+        <div className=" bg-gray-600 bg-opacity-50 fixed inset-0 flex items-center justify-center z-50">
+          <div className="modal zoom-modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-96">
             <div className="flex justify-between items-center border-b pb-1">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Delete Category

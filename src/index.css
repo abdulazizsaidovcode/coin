@@ -20,3 +20,73 @@
     transition: all .3s !important;
     object-position: center !important;
 }
+
+.zoom-close {
+    animation: all .5s ease-out;
+    animation-name: zoom-close;
+}
+
+@keyframes zoom-close {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        display: none;
+        transform: scale(0);
+    }
+}
+
+/* page style */
+.navigation {
+    list-style-type: none;
+}
+
+.navigation li {
+    display: inline-block;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 7px;
+    border-radius: 10%;
+    transition: all .5s;
+    background-color: #F1F5F9;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    position: relative;
+
+    &:hover {
+        background-color: #00141dc4;
+        color: white;
+    }
+
+    &:focus {
+        background-color: #00141dc4;
+        color: white;
+    }
+
+    &:active {
+        transform: scale(.8);
+    }
+
+    a {
+        position: absolute;
+        width: 100%;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 1.3rem;
+        font-weight: 500;
+        height: 100%;
+        left: 1%;
+        top: 8%;
+
+        &:focus {
+            font-weight: 900;
+            color: #00ffcc;
+        }
+    }
+}
+
+.prevBtn,
+.nextBtn {
+    font-size: 1.1rem;
+}

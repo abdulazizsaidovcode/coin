@@ -4,8 +4,6 @@ import { byId, config, setConfig, url } from "../../components/api/api";
 import axios from "axios";
 import { toast } from "react-toastify";
 import GroupsTable from "./categorytable";
-import { notFound } from "../../assits";
-import NotFound from "../../NotFound";
 import Loader from "../../assits/loader";
 
 const AdminGroup = () => {
@@ -17,7 +15,6 @@ const AdminGroup = () => {
   const [groups, setGroups] = useState(null);
   const [loading, setLoading] = useState(false);
   const [hidden, setHidden] = useState(true);
-
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -128,8 +125,8 @@ const AdminGroup = () => {
         />
       </div>
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 z-50 overflow-y-auto h-full w-full">
+          <div className="zoom-modal relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <h2 className="text-lg leading-6 font-medium text-gray-900 mb-4">
               Add New Group
             </h2>

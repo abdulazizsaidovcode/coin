@@ -69,8 +69,8 @@ function Offcanvas({ getCategory }) {
       <button id="openMenuButton"></button>
       {/* Modal */}
       {isMenuOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-        <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
+        <div className=" bg-gray-600 bg-opacity-50  fixed inset-0 flex items-center justify-center z-50">
+        <div className="zoom-modal modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
             <div className='flex justify-between items-center border-b pb-1'>
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Add Category</h2>
                 <button onClick={toggleMenu} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 duration-300 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">

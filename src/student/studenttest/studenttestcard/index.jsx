@@ -9,7 +9,7 @@ function StudentTestCard({category, setCategoryId}) {
 
     return (
         <>
-            <div className="bg-white rounded-lg all-shadow p-3 max-w-sm w-72">
+            <div className="bg-white rounded-lg all-shadow p-3 max-w-sm w-72 up">
                 <div className="flex justify-center items-center space-x-4 w-full h-40">
                     <img src={category.attachmentId ? getFile + category.attachmentId : rasm} alt="Profile"
                          className=" h-full w-full "/>
