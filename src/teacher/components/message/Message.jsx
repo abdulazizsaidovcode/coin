@@ -24,13 +24,13 @@ function Message() {
   }, []);
 
   const getCategory = () => {
-    axios.get(url + "message/teacher", config)
+    axios.get(url + "message/teache", config)
       .then((res) => setMessages(res.data.body.object.reverse()))
       .catch((err) => console.log(err))
   }
 
   const getCategory2 = () => {
-    axios.get(url + "message/teacher", config)
+    axios.get(url + "message/teache", config)
       .then((res) => setMessages(res.data.body.object))
       .catch((err) => console.log(err))
   }
@@ -107,7 +107,7 @@ function Message() {
               </div>
             </div>
           ))) : (
-          <div className="translate-x-[120%] mt-10 text-[2rem] flex justify-center items-center flex-col">
+          <div className="md:translate-x-[55%] lg:translate-x-[120%] mt-10 text-[2rem] flex justify-center items-center flex-col">
             Message not found 😊
             <img src={img} alt="img" className='w-64' />
           </div>
