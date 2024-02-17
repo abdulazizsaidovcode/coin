@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import logo from "../../assits/IT-CA-logo.png";
 import Loader from "../../assits/loader";
 
-const Navbarcha = () => {
+const Navbarcha = ({isAdminNav}) => {
   const [name, setName] = useState([]);
   const [editModal, setIsModalOpenEdit] = useState(false);
   const [userId, setUserId] = useState([]);
@@ -93,7 +93,7 @@ const Navbarcha = () => {
                 <div className="w-2 h-2 bg-red-400 rounded-full absolute right-2 ">
                   <a href=""></a>
                 </div>
-                <Link to="/admin/message">
+                <Link to={`${isAdminNav ? '/admin/message' : '/teacher/message'}`}>
                   <FontAwesomeIcon
                     icon={faBell}
                     className={
