@@ -17,7 +17,7 @@ const StudentExchangeCard = () => {
       })
       .catch(err => console.log("Exchange Backenddan ma'lumot olishda xatolik yuz berdi 😭", err));
   }, []);
-
+  
   return (
     <div className="flex flex-wrap justify-around bg-gray-100 pt-10">
       {gift.length > 0 ? (
