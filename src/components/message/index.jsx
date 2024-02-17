@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { byId, config, url } from "../api/api";
 import { toast } from "react-toastify";
+import img from "../../assits/not-found.png"
+import ReactPaginate from "react-paginate";
 
 // Dastlabki ma'lumotlar ro'yxati
 
@@ -9,10 +11,12 @@ function Message() {
   const [messages, setMessages] = useState([]);
   const [group, setGroup] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [groupid, setGroupid] = useState([]);
-  const [isMore, setIsMore] = useState(false);
+  const [groupId, setGroupId] = useState(null);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
 
-  const openMore = () => setIsMore(!isMore);
+  const [page, setPage] = useState(0);
+
+  const openMore = () => setIsMoreOpen(!isMoreOpen);
 
   // Modalni ochish va yopish uchun funksiyalar
   const openModal = () => {
@@ -33,7 +37,8 @@ function Message() {
       .get(url + "message", config)
       .then((res) => {
         setMessages(res.data.body.object.reverse());
-        console.log(res.data.body.object);
+        setPage(res.data.body.totalPage);
+
       })
       .catch((err) => console.log(err));
   };
@@ -43,7 +48,8 @@ function Message() {
       .get(url + "message", config)
       .then((res) => {
         setMessages(res.data.body.object);
-        console.log(res.data.body.object);
+        setPage(res.data.body.totalPage);
+
       })
       .catch((err) => console.log(err));
   };
@@ -88,6 +94,16 @@ function Message() {
     }
   }
 
+  const handelPageClick = (event) => {
+    const pageNumber = event.selected;
+    // setCurrentPage(pageNumber)
+    axios.get(`${url}message?page=${pageNumber}&size=10`, config)
+      .then(res => {
+        setMessages(res.data.body.object);
+        setMessages(res.data.body.object.reverse());
+      });
+  }
+
   return (
     <div className=" p-8 bg-gray-100 lg:h-screen w-full ">
       {/* Tartiblash tugmalari */}
@@ -120,28 +136,57 @@ function Message() {
       </div>
 
       {/* Xabarlar ro'yxatini ko'rsatish */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
-        {messages.map((item, i) => (
-          <div
-            key={i}
-            className="border rounded shadow hover:shadow-lg duration-300 hover:scale-[102%] p-3 relative"
-          >
-            <h2 className="font-bold text-lg mb-3">{item.groupName}</h2>
-            <p className="text-gray-700 text-base mb-6">
-              {isMore ? item.description : cutDescription(item.description)}
-              {/* {cutDescription(item.description)} */}
-              <span
-                className="font-bold tracking-wide ms-3 hover:cursor-pointer hover:text-black duration-200"
-                onClick={openMore}
-              >
-                {isMore ? "back" : "more"}
-              </span>
-            </p>
-            <div className="absolute bottom-2 right-3">
-              <span className="text-sm font-semibold">{item.date}</span>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 mb-16 md:mb-0">
+        {messages ? (
+          messages.map((item, i) => (
+            <div key={i} className="border rounded shadow hover:shadow-lg duration-300 hover:scale-[102%] p-3 relative">
+              <h2 className="font-bold text-lg mb-3" >{item.groupName}</h2>
+              <p className="text-gray-700 text-base mb-6">
+                {cutDescription(item.description) + '.'}
+                <span
+                  className='font-bold tracking-wide ms-3 hover:cursor-pointer hover:text-black duration-200'
+                  onClick={() => {
+                    openMore();
+                    setGroupId(item);
+                  }}
+                >{isMoreOpen ? '' : 'more...'}</span>
+              </p>
+              <div className="absolute bottom-2 right-3">
+                <span className="text-sm font-semibold">{item.date}</span>
+              </div>
             </div>
+          ))) : (
+          <div className="md:translate-x-[55%] lg:translate-x-[120%] mt-10 text-[2rem] flex justify-center items-center flex-col">
+            Message not found 😊
+            <img src={img} alt="img" className='w-64' />
           </div>
-        ))}
+        )}
+      </div>
+
+      <div className='mt-10'>
+        <ReactPaginate className="navigation"
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={handelPageClick}
+          pageRangeDisplayed={5}
+          pageCount={page}
+          previousLabel="<"
+          renderOnZeroPageCount={null}
+          nextClassName='nextBtn'
+          previousClassName='prevBtn'
+        />
+      </div>
+
+      <div
+        className={`${isMoreOpen ? 'animation-modal fixed top-[40%] left-[45%] w-96 px-10 py-6 rounded-lg shadow-lg shadow-slate-500 bg-slate-100' : 'hidden'}`}>
+        <div className='flex justify-between pb-2 border-b border-b-slate-700'>
+          <p className='font-bold text-xl tracking-wide'>{isMoreOpen ? groupId.groupName : ''}</p>
+          <p onClick={openMore} className='hover:cursor-pointer'>
+            <i className="fa-solid fa-xmark fa-xl hover:text-slate-600 duration-200"></i>
+          </p>
+        </div>
+        <p className='my-4'>{isMoreOpen ? groupId.description : ''}</p>
+        <p className='text-end'><span className='font-semibold border-b pb-1 px-1 border-b-slate-400'>{isMoreOpen ? groupId.date : ''}</span></p>
       </div>
 
       {isModalOpen && (

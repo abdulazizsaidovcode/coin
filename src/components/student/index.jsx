@@ -15,6 +15,7 @@ const AdminStudent = () => {
   const [student, setStudent] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [coinModal, setCoinModal] = useState(false);
 
   useEffect(() => {
     setConfig();
@@ -28,6 +29,8 @@ const AdminStudent = () => {
   const closeModalEdit = () => setIsModalOpenEdit(false);
   const openModaldelete = () => setDeleteModal(true);
   const closeModaldelete = () => setDeleteModal(false);
+  const openCoin = () => setCoinModal(true);
+  const closeCoin = () => setCoinModal(false);
 
   const addUsers = () => {
     setLoading(true);
@@ -39,7 +42,8 @@ const AdminStudent = () => {
       phoneNumber: byId("phoneNumber").value,
       groupId: byId("groupId").value,
       gender: byId("gender").value,
-      friendPhoneNumber: (byId("friendNumber").value !== "null") ? byId("friendNumber").value : "",
+      friendPhoneNumber:
+        byId("friendNumber").value !== "null" ? byId("friendNumber").value : "",
     };
     axios
       .post(url + "auth/register?ROLE=ROLE_USER", addData, config)
@@ -47,6 +51,27 @@ const AdminStudent = () => {
         closeModal();
         getStudent();
         toast.success("Teacher successfully added✔");
+        setLoading(false);
+      })
+      .catch(() => {
+        toast.error("Something went wrong❓");
+        setLoading(false);
+      });
+  };
+
+  const giveCoin = () => {
+    setLoading(true);
+    let addData = {
+      coin: byId("coin").value,
+      description: byId("description").value,
+      id: userId.id,
+    };
+    axios
+      .post(`${url}user/give-coin`, addData, config)
+      .then(() => {
+        closeCoin();
+        getStudent();
+        toast.success("Give coin");
         setLoading(false);
       })
       .catch(() => {
@@ -67,7 +92,8 @@ const AdminStudent = () => {
       phoneNumber: byId("phoneNumber").value,
       groupId: byId("groupId").value,
       gender: byId("gender").value,
-      friendPhoneNumber: (byId("friendNumber").value !== "null") ? byId("friendNumber").value : "",
+      friendPhoneNumber:
+        byId("friendNumber").value !== "null" ? byId("friendNumber").value : "",
     };
     axios
       .put(`${url}user/update${userId}`, editData, config)
@@ -147,6 +173,7 @@ const AdminStudent = () => {
                 <th className="py-3 px-6">Coin</th>
                 <th className="py-3 px-6">Task</th>
                 <th className="py-3 px-6">Exchange</th>
+                <th className="py-3 px-6">Give coin</th>
                 <th className="py-3 px-6">Action</th>
               </tr>
             </thead>
@@ -163,6 +190,17 @@ const AdminStudent = () => {
                     <td className="py-3 px-6">{item.coin}</td>
                     <td className="py-3 px-6">{item.task}</td>
                     <td className="py-3 px-6">{item.numberOfExchange}</td>
+                    <td className="py-3 px-6">
+                      <button
+                        className="text-sm bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline"
+                        onClick={() => {
+                          openCoin();
+                          setUserId(item);
+                        }}
+                      >
+                        Give
+                      </button>
+                    </td>
                     <td className="py-3 px-6 border-b border-gray-200 flex justify-center">
                       <button
                         className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline"
@@ -201,8 +239,8 @@ const AdminStudent = () => {
       </div>
 
       {modal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 ">
-          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+        <div className="fixed  bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
+          <div className="modal zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
                 Add student
@@ -363,7 +401,11 @@ const AdminStudent = () => {
                       Choose one...
                     </option>
                     {group &&
-                      group.map((res, i) => <option key={i} value={res.id} >{res.name}</option>)}
+                      group.map((res, i) => (
+                        <option key={i} value={res.id}>
+                          {res.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="col-span-2">
@@ -383,7 +425,6 @@ const AdminStudent = () => {
                   />
                   <p>Writing is optional...</p>
                 </div>
-
               </div>
               <div className="flex justify-end">
                 <button
@@ -409,8 +450,8 @@ const AdminStudent = () => {
       {/* EDIT MODAL */}
 
       {editModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 ">
-          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+        <div className="fixed  bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
+          <div className="modal zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
                 Edit student
@@ -582,8 +623,8 @@ const AdminStudent = () => {
       )}
 
       {deleteModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 ">
-          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+        <div className="fixed bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
+          <div className="modal zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
                 Delete student
@@ -631,6 +672,98 @@ const AdminStudent = () => {
                   className="btm"
                 >
                   {loading ? <Loader /> : "Yes"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {coinModal && (
+        <div className="fixed bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
+          <div className="modal zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
+            <div className="flex">
+              <h2 className="text-lg font-semibold text-gray-900 p-2">
+                Give coin
+              </h2>
+              <button
+                onClick={closeCoin}
+                className="text-gray-400 m-2 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-toggle="crud-modal"
+              >
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span className="sr-only">Close modal</span>
+              </button>
+            </div>
+
+            {/* Modal body */}
+            <div className="p-4 md:p-5">
+              <div className="grid md:gap-4 mb-4 grid-cols-2">
+                <div className="col-span-2">
+                  <label
+                    htmlFor="coin"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Number of coins
+                  </label>
+                  <input
+                    type="number"
+                    name="coin"
+                    id="coin"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Number of coins"
+                    required="true"
+                  />
+                </div>
+                <div className="col-span-2">
+                  <label
+                    htmlFor="description"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Description
+                  </label>
+                  {/* <textarea
+                    id="description"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="description"
+                    required="false"
+                  ></textarea> */}
+                  <input
+                    id="description"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="description"
+                    required="false"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <button
+                  onClick={closeCoin}
+                  className="btm-close me-2 bg-red-900"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={() => {
+                    giveCoin();
+                  }}
+                  className="btm"
+                >
+                  {loading ? <Loader /> : "Give"}
                 </button>
               </div>
             </div>
