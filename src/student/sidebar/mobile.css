@@ -1,0 +1,23 @@
+.dropAni1 {
+    top: -13rem;
+    animation-name: identifier;
+    animation-duration: 1s;
+    animation-direction: alternate;
+}
+
+@keyframes identifier {
+    from {top: 3rem;}
+    to {top: -13rem;}
+}
+
+.dropAni3 {
+    top: 3rem;
+    animation-duration: 1s;
+    animation-name: identifier2;
+    animation-direction: alternate;
+}
+
+@keyframes identifier2 {
+    from {top: -13rem;}
+    to {top: 3rem;}
+}

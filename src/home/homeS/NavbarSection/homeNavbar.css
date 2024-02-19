@@ -1,0 +1,10 @@
+
+@media only screen and (max-width:404px){
+    .navButton {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .navButton .navLogo{
+        display: none;
+    }
+}

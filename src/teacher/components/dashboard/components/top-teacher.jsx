@@ -110,7 +110,8 @@ const TopTeachers = ({ teacherList }) => {
                     </tbody>
                 </table>
             </div>
-            <Pagination itemsPerPage={teachersPerPage} totalItems={teacherList.length} paginate={paginate} />
+            {/* xozirda backendda page qilinmagani uchun comment qilingan backendda qilinsa bu chiqariladi */}
+            {/* <Pagination itemsPerPage={teachersPerPage} totalItems={teacherList.length} paginate={paginate} /> */}
         </div>
     );
 };

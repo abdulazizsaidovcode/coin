@@ -48,10 +48,10 @@ const TotalCoins = ({ pl }) => {
     };
 
     return (
-        <div className="bg-white rounded-lg shadow-md p-5">
+        <div className="bg-white rounded-lg shadow-md p-5"> 
             <div style={{ height: '400px', width: '100%', display: "flex", flexDirection: "column" }}>
                 <EChartsReact option={option}
-                    style={{ height: '100%', width: '100%', display: "flex", justifyContent: "center" }} />
+                    style={{ height: '100%', width: '100%', display:"flex", gap: "50px" }} />
             </div>
         </div>
 

@@ -73,7 +73,7 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
     return (
         <>
             {isModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div className={`${isModalOpen ? 'zoom-modal' : ''} fixed inset-0 flex items-center justify-center z-50`}>
                     <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-lg shadow-gray-600 px-8 py-3 w-96">
                         <div className='flex justify-between items-center border-b pb-1'>
                             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Disable active to false</h2>
@@ -104,7 +104,7 @@ const CategoryTable = ({ categories, setCategories, getCategoryChild, categorysu
             )}
 
             {isModalOpenEdit && (
-                <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div className={`${isModalOpenEdit ? 'zoom-modal' : ''} fixed inset-0 flex items-center justify-center z-50`}>
                     <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 mt-5 w-full md:w-[80%] lg:w-[70%] xl:w-1/2">
                         <div className='flex justify-between items-center border-b pb-1'>
                             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Edit Category</h2>

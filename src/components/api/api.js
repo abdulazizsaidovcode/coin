@@ -54,7 +54,7 @@ export function getTestCategory(setTestCategory) {
 
 export function sendTestCode(text, testId, setResponse, setLoading, setError) {
     setLoading(true)
-    axios.post(url + "test/performance/" + testId, {text}, config)
+    axios.post(url + "test/performance/" + testId + "?minute=" + 3, {text}, config)
         .then((res) => {
             setResponse(res.data.body);
             setLoading(false);
@@ -68,8 +68,11 @@ export function sendTestCode(text, testId, setResponse, setLoading, setError) {
 }
 
 export function getOneTest(testId, setTest) {
+    console.log(testId);
     axios.get(url + "test/one/" + testId, config)
-        .then((res) => setTest(res.data.body))
+        .then((res) => {
+            setTest(res.data.body);
+        })
         .catch((err) => console.log(err));
 }
 

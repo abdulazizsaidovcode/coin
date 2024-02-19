@@ -4,8 +4,6 @@ import { byId, config, setConfig, url } from "../../components/api/api";
 import axios from "axios";
 import { toast } from "react-toastify";
 import GroupsTable from "./categorytable";
-import { notFound } from "../../assits";
-import NotFound from "../../NotFound";
 import Loader from "../../assits/loader";
 
 const AdminGroup = () => {
@@ -17,7 +15,8 @@ const AdminGroup = () => {
   const [groups, setGroups] = useState(null);
   const [loading, setLoading] = useState(false);
   const [hidden, setHidden] = useState(true);
-
+  const [currentPage, setCurrentPage] = useState(0);
+  const [page, setPage] = useState(0);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -32,8 +31,9 @@ const AdminGroup = () => {
       .get(url + "group", config)
       .then((res) => {
         setGroups(res.data.body.object);
+        setPage(res.data.body.totalPage);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const addGroup = () => {
@@ -75,12 +75,12 @@ const AdminGroup = () => {
     !data
       ? getCategory()
       : axios
-          .get(`${url}group/search/for/admin/${data}`, config)
-          .then((res) => {
-            setGroups(res.data.body)
-            console.log(res.data.body);
-          })
-          .catch(() => console.log("kelmadi"));
+        .get(`${url}group/search/for/admin/${data}`, config)
+        .then((res) => {
+          setGroups(res.data.body)
+          console.log(res.data.body);
+        })
+        .catch(() => console.log("kelmadi"));
   };
 
   const getCategoryId = () => {
@@ -92,24 +92,29 @@ const AdminGroup = () => {
       .catch(() => console.log("kategory kelmadi"));
   };
 
-  const getSubCategoryId = () => {
+  const getSubCategoryId = (value) => {
     axios
-      .get(`${url}category/sub-for-admin/${categoryId}`, config)
+      .get(`${url}category/child/list/${value}`, config)
       .then((res) => {
         setSubCategory(res.data.body);
       })
       .catch(() => console.log("kategoryjsjjs kelmadi"));
   };
 
-
-  const select = async () =>  {
+  const select = async () => {
     await (byId("select") === "0") ? setHidden(true) : setHidden(false)
-    await setCategoryId(document.getElementById("category").value)
-    await getSubCategoryId()
+  }
+
+  const handelPageClick = (event) => {
+    const pageNumber = event.selected;
+    setCurrentPage(pageNumber)
+    axios.get(`${url}group?page=${pageNumber}&size=10`, config)
+      .then(res => setGroups(res.data.body.object))
+      .catch(err => console.log('error page: ', err));
   }
 
   return (
-    <div className="min-h-screen w-full bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen w-full bg-gray-100 pt-10 px-4 sm:px-6 lg:px-8">
       <div className=" mb-2 flex justify-between items-center gap-5 flex-wrap font-inika">
         <button id="openMenuButton" className="btm" onClick={() => {
           openModal()
@@ -117,7 +122,7 @@ const AdminGroup = () => {
         }}>
           + Add
         </button>
-        
+
         <input
           type="search"
           id="search"
@@ -130,8 +135,8 @@ const AdminGroup = () => {
         />
       </div>
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 z-50 overflow-y-auto h-full w-full">
+          <div className="zoom-modal relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <h2 className="text-lg leading-6 font-medium text-gray-900 mb-4">
               Add New Group
             </h2>
@@ -159,7 +164,10 @@ const AdminGroup = () => {
                   Category
                 </label>
                 <select
-                  onChange={select}
+                  onChange={(e) => {
+                    select()
+                    getSubCategoryId(e.target.value)
+                  }}
                   id="category"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
@@ -174,7 +182,7 @@ const AdminGroup = () => {
                     ))}
                 </select>
               </div>
-               <div className={`mt-5 ${hidden ? "hidden" : ""}`}>
+              <div className={`mt-5 ${hidden ? "hidden" : ""}`}>
                 <label
                   htmlFor="categoryId"
                   className="block text-sm font-medium text-gray-700"
@@ -195,7 +203,7 @@ const AdminGroup = () => {
                       </option>
                     ))}
                 </select>
-              </div> 
+              </div>
               <div className="mt-5">
                 <label
                   htmlFor="teacherId"
@@ -230,14 +238,14 @@ const AdminGroup = () => {
                   setLoading(true)
                   addGroup()
                 }} className="btm">
-                  {loading ? <Loader/> : "Add"}
+                  {loading ? <Loader /> : "Add"}
                 </button>
               </div>
             </div>
           </div>
         </div>
       )}
-      {groups && 
+      {groups &&
         <GroupsTable
           teacher={teacher}
           category={category}
@@ -245,6 +253,9 @@ const AdminGroup = () => {
           groups={groups}
           setGroups={setGroups}
           getGroup={getCategory}
+          currentPage={currentPage}
+          handelPageClick={handelPageClick}
+          page={page}
         />}
     </div>
   );

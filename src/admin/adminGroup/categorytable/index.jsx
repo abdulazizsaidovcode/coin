@@ -5,8 +5,20 @@ import avatar from "../../../assits/itca.jpg";
 import { toast } from "react-toastify";
 import NotFound from "../../../NotFound";
 import Loader from "../../../assits/loader";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import ReactPaginate from "react-paginate";
 
-const GroupsTable = ({ subcategory, teacher, category, groups, setGroups, getGroup }) => {
+const GroupsTable = ({
+  subcategory,
+  teacher,
+  category,
+  groups,
+  setGroups,
+  getGroup,
+  page,
+  handelPageClick,
+  currentPage,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDelete, setIsModalDelete] = useState(false);
   const [gropuId, setGroupId] = useState([]);
@@ -82,8 +94,8 @@ const GroupsTable = ({ subcategory, teacher, category, groups, setGroups, getGro
   };
 
   const select = () => {
-    (byId("select") === "0") ? setHidden(true) : setHidden(false)
-  }
+    byId("select") === "0" ? setHidden(true) : setHidden(false);
+  };
 
   return (
     <>
@@ -124,13 +136,14 @@ const GroupsTable = ({ subcategory, teacher, category, groups, setGroups, getGro
                         className="even:bg-slate-100 hover:bg-slate-200 duration-200 text-center"
                       >
                         <td className="py-3 px-6 border-b border-gray-200">
-                          {i + 1}
+                          {(currentPage * 10) + (i + 1)}
                         </td>
                         <td className="py-3 px-6 border-b border-gray-200 flex justify-center items-center">
-                          <img
+                          <LazyLoadImage
                             src={avatar}
-                            alt="avatar"
-                            className="h-16 w-16 rounded-full"
+                            alt="nofound"
+                            effect="blur"
+                            className="rounded-full w-14 h-14"
                           />
                         </td>
                         <td className="py-3 px-6 border-b border-gray-200">
@@ -194,8 +207,8 @@ const GroupsTable = ({ subcategory, teacher, category, groups, setGroups, getGro
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 z-50 overflow-y-auto h-full w-full">
+          <div className="zoom-modal relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <h2 className="text-lg leading-6 font-medium text-gray-900 mb-4">
               Edit Group
             </h2>
@@ -258,7 +271,7 @@ const GroupsTable = ({ subcategory, teacher, category, groups, setGroups, getGro
                       </option>
                     ))}
                 </select>
-              </div> 
+              </div>
               <div className="mt-5">
                 <label
                   htmlFor="teacherId"
@@ -305,8 +318,8 @@ const GroupsTable = ({ subcategory, teacher, category, groups, setGroups, getGro
       )}
 
       {isModalDelete && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-96">
+        <div className=" bg-gray-600 bg-opacity-50 fixed inset-0 flex items-center justify-center z-50">
+          <div className="modal zoom-modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-96">
             <div className="flex justify-between items-center border-b pb-1">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Delete Category
@@ -355,6 +368,19 @@ const GroupsTable = ({ subcategory, teacher, category, groups, setGroups, getGro
           </div>
         </div>
       )}
+      <div className='ms-1'>
+        <ReactPaginate className="navigation"
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={handelPageClick}
+          pageRangeDisplayed={5}
+          pageCount={page}
+          previousLabel="<"
+          renderOnZeroPageCount={null}
+          nextClassName='nextBtn'
+          previousClassName='prevBtn'
+        />
+      </div>
     </>
   );
 };

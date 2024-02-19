@@ -15,8 +15,8 @@ function App() {
     return (
         <div className="flex">
             <Routes>
-                <Route path="/home" element={<Home/>}/>
-                <Route path="/" element={<SignIn setpath={setPath}/>}/>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/log-in" element={<SignIn setpath={setPath}/>}/>
                 {/*yullarga utishga ruxsat berishni nazorat qilish*/}
                 <Route path='/admin/*' element={<Scan role='ROLE_SUPER_ADMIN' setPath={setPath}/>}/>
                 <Route path='/teacher/*' element={<Scan role='ROLE_TEACHER' setPath={setPath}/>}/>

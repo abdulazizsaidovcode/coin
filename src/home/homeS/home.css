@@ -5,11 +5,9 @@ body {
 }
 
 /* Home background color */
-.homeBody {
-    background-color: #FFFFFF;
-}
 
-.aboutSection{
+
+.aboutSection {
     background-image: url(./img/Subtract.svg);
     background-position: left;
     background-repeat: no-repeat;

@@ -1,31 +1,39 @@
 import EChartsReact from 'echarts-for-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const TotalCoinsmonth = ({ exchangeStatistics }) => {
-    const [coinData, setCoinData] = useState(null);
+    const [groupName, setGroupName] = useState(null);
+    const [exchange, setExchange] = useState(null);
+    const [year, setYear] = useState(null);
+    const [month, setMonth] = useState(null);
+
+    useEffect(() => {
+        setGroupName(exchangeStatistics.map(p => p.groupName));
+        setExchange(exchangeStatistics.map(p => p.numberOfExchange));
+        setYear(exchangeStatistics.map(p => p.year));
+        setMonth(exchangeStatistics.map(p => p.monthName));
+    }, [exchangeStatistics]);
+
     const option = {
+        title: {
+            text: 'Exchanges made in a month',
+            subtext: `${year}, ${month}`,
+            left: 'center',
+        },
         legend: {},
-        tooltip: {},
+        tooltip: {
+            trigger: 'item',
+            formatter: `${groupName} <br /> ${month} : ${exchange} (exchange)`
+        },
         dataset: {
             source: [
-                ['product', '2015', '2016', '2017'],
-                ['Matcha Latte', 43.3, 85.8, 93.7],
-                ['Milk Tea', 83.1, 73.4, 55.1],
-                ['Cheese Cocoa', 86.4, 65.2, 82.5],
-                ['Walnut Brownie', 72.4, 53.9, 39.1]
+                [`${month} (exchange)`, exchange],
             ]
         },
         xAxis: { type: 'category' },
         yAxis: {},
         series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }]
     };
-
-    // [
-    //     {
-    //         name: 'Matcha Latte',
-    //         value: 43.3
-    //     }
-    // ]
 
     return (
         <div className="bg-white rounded-lg shadow-md p-5">

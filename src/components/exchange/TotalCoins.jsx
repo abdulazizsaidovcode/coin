@@ -6,10 +6,12 @@ const TotalCoins = ({ exchangeDiagram }) => {
     const [pn, setPn] = useState(null);
     const [data, setData] = useState(null);
     const [month, setMonth] = useState(null);
+    const [year, setYear] = useState(null);
 
     useEffect(() => {
         setPn(exchangeDiagram.map(p => p.groupName));
         setMonth(exchangeDiagram.map(p => p.monthName));
+        setYear(exchangeDiagram.map(p => p.year));
         setData(exchangeDiagram.map(p => {
             return { value: p.numberOfExchange, name: p.groupName }
         }))
@@ -18,8 +20,8 @@ const TotalCoins = ({ exchangeDiagram }) => {
     const option = {
         title: {
             text: 'Exchanges made every month',
-            subtext: month,
-            left: 'center'
+            subtext: `${year}, ${month}`,
+            left: 'right'
         },
         tooltip: {
             trigger: 'item',

@@ -5,6 +5,7 @@ import avatar from "../../assits/opacha.jpg";
 import { toast } from "react-toastify";
 import { Icon } from "@iconify/react";
 import Loader from "../../assits/loader";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,19 +13,19 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
   const [categoryInfo, setCategoryInfo] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Function to toggle the active state
-  const toggleActive = (id) => {
-    axios
-      .post(url + "category/reset/" + id, config)
-      .then(() => {
-        getCategory1();
-        toast.success("Reset category");
-      })
-      .catch((err) => {
-        toast.error("Somesing is error");
-        // console.log(err);
-      });
-  };
+  // // Function to toggle the active state
+  // const toggleActive = (id) => {
+  //   axios
+  //     .post(url + "category/reset/" + id, config)
+  //     .then(() => {
+  //       getCategory1();
+  //       toast.success("Reset category");
+  //     })
+  //     .catch((err) => {
+  //       toast.error("Somesing is error");
+  //       // console.log(err);
+  //     });
+  // };
 
   // Modalni ochish va yopish uchun funksiyalar
   const openModal = () => setIsModalOpen(true);
@@ -66,9 +67,7 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
       .catch(() => {
         toast.error("Xatolik yuz berdi!!!");
         setLoading(false);
-        // console.log(editData);
       });
-    setLoading(false);
   };
 
   // deleteCategory
@@ -84,7 +83,6 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
       .catch((err) => {
         toast.error("Something is error!");
         setLoading(false);
-        // console.log(err);
       });
   };
 
@@ -102,8 +100,8 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
   return (
     <>
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-96">
+        <div className=" bg-gray-600 bg-opacity-50 fixed inset-0 flex items-center justify-center z-50">
+          <div className="modal zoom-modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-96">
             <div className="flex justify-between items-center border-b pb-1">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Delete Category
@@ -154,8 +152,8 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
       )}
 
       {isModalOpenEdit && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
+        <div className=" bg-gray-600 bg-opacity-50 fixed inset-0 flex items-center justify-center z-50">
+          <div className="zoom-modal modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
             <div className="flex justify-between items-center border-b pb-1">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Edit Category
@@ -287,20 +285,22 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
                           {i + 1}
                         </td>
                         <td className="py-3 px-6 border-b border-gray-200 flex justify-center items-center">
-                          <img
+                         
+                          <LazyLoadImage
                             src={
                               category.attachmentId === null
                                 ? avatar
                                 : getFile + category.attachmentId
                             }
-                            alt="avatar"
-                            className="h-16 w-16 rounded-full object-cover"
+                            alt="nofound"
+                            effect="blur"
+                            className="rounded-full w-14 h-14"
                           />
                         </td>
                         <td className="py-3 px-6 border-b border-gray-200">
                           {category.name === null ? "Yo'q" : category.name}
                         </td>
-                      
+
                         <td className=" border-b border-gray-200">
                           <div className="flex gap-7 justify-center">
                             <button
@@ -341,6 +341,7 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
                 </tbody>
               </table>
             </div>
+            
           </div>
         </div>
       </div>

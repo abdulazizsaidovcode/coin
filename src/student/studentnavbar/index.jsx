@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { config, url } from "../api/api";
 // import React, { useState, useEffect } from "react";
-import { byId, config, setConfig, url } from "../../components/api/api";
+import { byId, config, getFile, setConfig, url } from "../../components/api/api";
 import axios from "axios";
 import avatar from "../../assits/opacha.jpg";
 import { Link } from "react-router-dom";
@@ -20,6 +20,9 @@ const StudentNavbar = () => {
 
   useEffect(() => {
     setConfig();
+    getMe()
+  }, []);
+  function getMe() {
     axios
       .get(url + "user/getMe", config)
       .then((res) => {
@@ -28,7 +31,7 @@ const StudentNavbar = () => {
       .catch((err) =>
         console.log(err)
       );
-  }, []);
+  }
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -41,9 +44,7 @@ const StudentNavbar = () => {
     axios
       .get(url + "message/student", config)
       .then((res) => {
-        if (res.data && res.data.body && res.data.body.object) {
-          setMessages(res.data.body.object);
-        }
+        setMessages(res.data.body.object);
       })
       .catch((err) =>
         console.log("Backenddan ma'lumot olishda xatolik yuz berdi 😭", err)
@@ -51,25 +52,23 @@ const StudentNavbar = () => {
   }, []);
 
   const editUser = () => {
-    let editData = {
-      firstName: byId("firstName").value,
-      lastName: byId("lastName").value,
-      email: byId("email").value,
-      password: byId("password").value,
-      phoneNumber: byId("phoneNumber").value,
-      groupId: byId("groupId").value,
-      gender: byId("gender").value,
-      friendPhoneNumber: "",
-    };
+    let editData = new FormData();
+    editData.append("firstName", byId("firstName").value);
+    editData.append("lastName", byId("lastName").value);
+    editData.append("phoneNumber", byId("phoneNumber").value);
+    editData.append("password", byId("password").value);
+    editData.append("prePassword", byId("prePassword").value);
+    editData.append("file", byId("image").files[0]);
     axios
-      .put(url + "user/update/", editData, config)
+      .put(url + "user/edit/user/profile", editData, config)
       .then(() => {
-        // openEditModal();
+        closeModalEdit();
+        getMe()
         // getUsers();
         toast.success("User information has been changed✔");
       })
       .catch(() => {
-        toast.error("Something went wrong❓");
+        toast.error("Something went wrong ❓");
       });
   };
 
@@ -114,7 +113,7 @@ const StudentNavbar = () => {
                 className="flex items-center space-x-2 "
               >
                 <img
-                  src={avatar}
+                  src={name.attachmentId  ? getFile + name.attachmentId : avatar}
                   alt="Admin"
                   className="rounded-full w-12 h-12 p-1 border"
                 />
@@ -129,9 +128,10 @@ const StudentNavbar = () => {
               <div className="h-40 bg-profileColor rounded-t-xl flex justify-center items-center">
                 <img
                   className="w-20 h-20 rounded-full"
-                  src={avatar}
+                  src={name.attachmentId  ? getFile + name.attachmentId : avatar}
                   alt="Gift"
                 />
+                
                 <span
                   className="absolute right-3 top-3 hover:text-gray-200 duration-200 text-white cursor-pointer"
                   onClick={toggleMenu}
@@ -251,24 +251,7 @@ const StudentNavbar = () => {
                     required=""
                   />
                 </div>
-
-                <div className="col-span-2">
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Email"
-                    defaultValue={userId.email}
-                  />
-                </div>
-                <div className="col-span-2 sm:col-span-1">
+                <div className="col-span-2 sm:col-span-2">
                   <label
                     htmlFor="phoneNumber"
                     className="block mb-2 text-sm font-medium text-gray-900"
@@ -296,28 +279,39 @@ const StudentNavbar = () => {
                     name="password"
                     id="password"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Type product name"
+                    placeholder="Type product password"
                     defaultValue={userId.password}
                   />
                 </div>
-
                 <div className="col-span-2 sm:col-span-1">
                   <label
-                    htmlFor="gender"
+                    htmlFor="prePassword"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Select gender
+                    prePassword
                   </label>
-                  <select
-                    id="gender"
-                    className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
+                  <input
+                    type="text"
+                    name="prePassword"
+                    id="prePassword"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Type product password"
+                  />
+                </div>
+                <div className="col-span-2 sm:col-span-2">
+                  <label
+                    htmlFor="image"
+                    className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    <option selected disabled>
-                      Choose one...
-                    </option>
-                    <option value="MALE">MALE</option>
-                    <option value="FEMALE">FEMALE</option>
-                  </select>
+                    prePassword
+                  </label>
+                  <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Type product password"
+                  />
                 </div>
               </div>
               <div className="flex justify-between">
@@ -328,7 +322,7 @@ const StudentNavbar = () => {
                   Close
                 </button>
                 <button
-                  
+
                   onClick={() => {
                     editUser();
                   }}

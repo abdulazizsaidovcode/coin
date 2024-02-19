@@ -4,6 +4,7 @@ import { byId, config, getFile, setConfig, url } from "../api/api";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Loader from "../../assits/loader";
+import ReactPaginate from "react-paginate";
 
 const AdminTeacher = () => {
   const [modal, setIsModalOpen] = useState(false);
@@ -15,6 +16,8 @@ const AdminTeacher = () => {
   const [student, setStudent] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [page, setPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0)
 
   useEffect(() => {
     setConfig();
@@ -69,7 +72,7 @@ const AdminTeacher = () => {
       friendPhoneNumber: "",
     };
     axios
-      .put(`${url}user/update${userId}`, editData, config)
+      .put(`${url}user/update/${userId.id}`, editData, config)
       .then(() => {
         closeModalEdit();
         // getUsers();
@@ -112,8 +115,16 @@ const AdminTeacher = () => {
       });
   };
 
+  const handelPageClick = (event) => {
+    const pageNumber = event.selected;
+    setCurrentPage(pageNumber)
+    axios.get(`${url}gift?page=${pageNumber}&size=10`, config)
+      .then(res => setStudent(res.data.body))
+      .catch(err => console.log('error page: ', err));
+  }
+
   return (
-    <div className=" p-8 pb-28 w-full h-full bg-gray-100">
+    <div className=" p-8 pb-28 w-full h-screen bg-gray-100">
       <div className="mt-10">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Teacher</h2>
       </div>
@@ -187,9 +198,23 @@ const AdminTeacher = () => {
         </div>
       </div>
 
+      <div className='mt-7 mb-10 text-center'>
+        <ReactPaginate className="navigation"
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={handelPageClick}
+          pageRangeDisplayed={5}
+          pageCount={page}
+          previousLabel="<"
+          renderOnZeroPageCount={null}
+          nextClassName='nextBtn'
+          previousClassName='prevBtn'
+        />
+      </div>
+
       {modal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 ">
-          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+        <div className="fixed bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
+          <div className="modal zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
                 Add student
@@ -356,8 +381,8 @@ const AdminTeacher = () => {
       {/* EDIT MODAL */}
 
       {editModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 ">
-          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+        <div className="fixed bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
+          <div className="modal zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
                 Edit student
@@ -529,8 +554,8 @@ const AdminTeacher = () => {
       )}
 
       {deleteModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 ">
-          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+        <div className="fixed bg-gray-600 bg-opacity-50 inset-0 flex items-center justify-center z-50 ">
+          <div className="modal zoom-modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex">
               <h2 className="text-lg font-semibold text-gray-900 p-2">
                 Delete student

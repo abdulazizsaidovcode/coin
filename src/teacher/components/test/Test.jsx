@@ -10,7 +10,6 @@ const Test = () => {
     const [allTestCard, setAllTestCard] = useState(null);
     const [allTestTable, setAllTestTable] = useState(null);
     const [categoryFather, setCategoryFather] = useState(null);
-    // const [categoryFatherId, setCategoryFatherId] = useState(null);
     const [testCategorySub, setTestCategorySub] = useState([]);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [tableHeddin, setTableHeddin] = useState(false);
@@ -77,8 +76,10 @@ const Test = () => {
                         allTestTable={allTestTable}
                         testCategorySub={testCategorySub}
                         tableHeddin={tableHeddin}
+                        categoryFather={categoryFather}
                         getTestTable={getTestTable}
                         getAllTestCard={getAllTestCard}
+                        getTestCategoryChild={getTestCategoryChild}
                     />
                 ) : (
                     <TopLoading name='Category related tests' />
@@ -89,7 +90,6 @@ const Test = () => {
             <AddModal
                 isMenuOpen={isMenuOpen}
                 categoryFather={categoryFather}
-                // setCategoryFatherId={setCategoryFatherId}
                 getTestCategoryChild={getTestCategoryChild}
                 testCategorySub={testCategorySub}
                 getTestTable={getTestTable}
