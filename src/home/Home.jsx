@@ -25,7 +25,9 @@ function Home() {
                         <span className="text-xl font-semibold">Coin Exchange</span>
                     </div>
                     <div className="hidden md:flex space-x-8">
-                        <a href="#" className="hover:text-gray-300">About</a>
+                        <a href="#" className="hover:text-gray-300">
+                            
+                        </a>
                         <a href="#" className="hover:text-gray-300">Contact</a>
                         <a href="#" className="hover:text-gray-300">Coins</a>
                         <a href="#" className="hover:text-gray-300">Analytic</a>
