@@ -149,7 +149,7 @@ const Navbarcha = ({isAdminNav}) => {
                   {name.coin} coin
                 </p>
               </div>
-              <div className=" mt-2 text-center">
+              <div className="mt-2 text-center">
                 <button
                   onClick={() => {
                     setUserId(name);
@@ -165,6 +165,7 @@ const Navbarcha = ({isAdminNav}) => {
                   onClick={() => {
                     logOut();
                     sessionStorage.clear();
+                    toggleMenu();
                   }}
                 >
                   Log out
