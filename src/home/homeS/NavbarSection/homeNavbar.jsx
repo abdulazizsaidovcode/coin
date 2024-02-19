@@ -13,10 +13,10 @@ const HomeNavbar = () => {
         ButtonNav: "py-2 px-6 md:mr-0 mr-20 rounded  bg-[rgb(158,105,167)] outline-none  text-white hover:bg-[#BA68C8] hover:duration-500  flex items-center gap-2"
     }
     let Links = [
-        { name: "Home", link: '/' },
-        { name: "Analytic", link: '/' },
-        { name: "About", link: '/' },
-        { name: "Contact", link: '/' },
+        { name: "Home", link: '#1' },
+        { name: "Analytic", link: '#2' },
+        { name: "About", link: '#3' },
+        { name: "Contact", link: '#4' },
     ]
     const [open, setOpen] = useState(false)
     return (
@@ -38,7 +38,7 @@ const HomeNavbar = () => {
                         {
                             Links.map((item) => (
                                 <li key={item.name} className='md:ml-8 text-xl md:my-0 my-7'>
-                                    <a href={item.link} className='text-gray-800 hover:text-[#BA68C8] duration-500'>{item.name}</a>
+                                    <a href={item.link} className='text-gray-800 hover:text-[#BA68C8] duration-500 active'>{item.name}</a>
                                 </li>
                             ))
                         }

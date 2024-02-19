@@ -70,7 +70,7 @@ const AdminStudent = () => {
       id: userId.id,
     };
     axios
-      .post(`${url}user/give-coin`, addData, config)
+      .post(`${url}user/give-coin?coin=${addData.coin}&description=${addData.description}&id=${addData.id}`, '', config)
       .then(() => {
         closeCoin();
         getStudent();

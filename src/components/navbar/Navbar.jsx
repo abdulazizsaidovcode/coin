@@ -160,16 +160,18 @@ const Navbarcha = ({isAdminNav}) => {
                 >
                   Edit
                 </button>
+                <a href='/'>
+
                 <button
                   className="bg-red-500 text-white font-bold rounded-lg py-2.5 px-7 active:scale-90 duration-200"
                   onClick={() => {
-                    logOut();
-                    sessionStorage.clear();
                     toggleMenu();
+                    sessionStorage.clear();
                   }}
                 >
                   Log out
                 </button>
+                </a>
               </div>
             </div>
           </div>
