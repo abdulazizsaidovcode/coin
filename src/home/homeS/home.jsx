@@ -11,7 +11,7 @@ const Home = () => {
 
   return (
     <>
-      <div className='homeBody  w-[1430px] mx-auto px-5   '>
+      <div className='homeBody  w-[1430px] mx-auto px-5'>
         <HomeNavbar />
         <AboutSection />
         <Analytics/>
