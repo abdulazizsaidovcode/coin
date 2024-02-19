@@ -22,7 +22,6 @@ const HomeNavbar = () => {
     const [open, setOpen] = useState(false)
     return (
         <>
-            <ScrollAnimation />
             <div className=' z-50  shadow-md  w-full fixed top-0 left-0 bg-[#FFFFFF] md:bg-[#FFFFFF] '>
                 <div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4  '>
                     <div className='font-bold text-2xl cursor-pointer flex items-center text-gray-800'>
