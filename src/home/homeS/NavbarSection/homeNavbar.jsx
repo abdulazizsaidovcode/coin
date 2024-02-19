@@ -14,8 +14,8 @@ const HomeNavbar = () => {
     }
     let Links = [
         { name: "Home", link: '/' },
-        { name: "About", link: '/' },
         { name: "Analytic", link: '/' },
+        { name: "About", link: '/' },
         { name: "Contact", link: '/' },
     ]
     const [open, setOpen] = useState(false)
