@@ -30,7 +30,7 @@ function StudentStartTest() {
     }, [second]);
 
     function sendCode() {
-        sendTestCode(byId('result').value, sessionStorage.getItem('testId'), setResult, setLoading, setError);
+        sendTestCode(byId('result').value, sessionStorage.getItem('testId'), setResult, setLoading, setError, second    );
     }
 
     return (
