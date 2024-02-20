@@ -37,22 +37,6 @@ const Contact = () => {
             setInput(true)
         }
     }
-    const inputValue = (email) => {
-        let regex = ` /^[^\s@]+@[^\s@]+\.[^\s@]+$/`;
-        return regex.test(email);
-    }
-    const valueInput = () => {
-        if (byId('email').value !== inputValue()) {
-            toast.error('@gmail is not defined')
-        } else {
-            toast.success('Successfully send a message')
-        }
-
-    }
-
-
-
-
     return (
         <div className="container my-24 mx-auto md:px-6" id="4">
             <section className="mb-32">
