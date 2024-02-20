@@ -2,7 +2,7 @@ import axios from "axios";
 import {toast} from "react-toastify";
 
 export const url = "http://139.59.14.48:8090/";
-// export const url = "http://192.168.149.27/";
+// export const url = "http://192.168.149.27/"; 
 
 export const getFile = `${url}attachment/getFile/`;
 
@@ -52,9 +52,10 @@ export function getTestCategory(setTestCategory) {
         .catch((err) => console.log(err));
 }
 
-export function sendTestCode(text, testId, setResponse, setLoading, setError) {
+export function sendTestCode(text, testId, setResponse, setLoading, setError, time, secound) {
+    console.log(time, secound);
     setLoading(true)
-    axios.post(url + "test/performance/" + testId + "?minute=" + 3, {text}, config)
+    axios.post(url + "test/performance/" + testId + "?minute=" + `${time}.${secound}`  , {text}, config)
         .then((res) => {
             setResponse(res.data.body);
             setLoading(false);

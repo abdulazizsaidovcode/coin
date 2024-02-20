@@ -8,3 +8,7 @@
 .inputLabel{
     border: 1px solid #9E69A7;
 }
+
+.btSend {
+    padding: 10px 45px !important;
+}
