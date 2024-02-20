@@ -87,6 +87,7 @@ function MobileBar({ isAdmin }) {
           <li className="py-2 hidden sm:block"
               onClick={() => setIsDrop(false)}>
             <Link
+            
               to={`/${isAdmin ? "admin" : "teacher"}/gift`}
               className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
             >
