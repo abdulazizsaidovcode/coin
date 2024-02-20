@@ -13,6 +13,7 @@ import Dashboard from "../components/dashboard/Dashboard";
 import Exchange from "../components/exchange/Exchange";
 import FalsePage from "../teacher/components/false-page/FalsePage";
 import AdminTeacher from "../components/teacher";
+import Contact from "../components/contact/contact";
 
 function Admin() {
   const getme = sessionStorage.getItem("getMeInfo")
@@ -31,6 +32,7 @@ function Admin() {
           <Route path="/admin/gift" element={<Gift />} />
           <Route path="/admin/exchange" element={<Exchange />} />
           <Route path="/admin/message" element={<Message />} />
+          <Route path="/admin/contact" element={<Contact />} />
           <Route path="/admin/student-info" element={<GrStudents />} />
           <Route path="/admin/totalcoinforstudent" element={<TotalCoinForStudent />} />
           <Route path="*" element={<FalsePage />} />
