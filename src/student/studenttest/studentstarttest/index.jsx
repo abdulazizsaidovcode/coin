@@ -41,7 +41,7 @@ function StudentStartTest() {
         localStorage.removeItem('ts')
         sendTestCode(byId('result').value, localStorage.getItem('testId'), setResult, setLoading, setError, time, second);
     }
-
+    // salom
     return (
         <>
             {test && <div className='w-full bg-gray-100 h-screen p-6'>
