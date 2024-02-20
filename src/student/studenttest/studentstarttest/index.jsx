@@ -13,6 +13,7 @@ function StudentStartTest() {
     useEffect(() => {
         setConfig();
         getOneTest(sessionStorage.getItem('testId'), setTest);
+        // let testId = sessionStorage.getItem('testId');
     }, []);
 
     useEffect(() => {
@@ -28,7 +29,9 @@ function StudentStartTest() {
     }, [test, second]);
 
     useEffect(() => {
-        if (second !== 0) setTimeout(() => setSecond(second - 1), 1000);
+        if (second !== 0) {
+            setTimeout(() => setSecond(second - 1), 1000);
+        }
         else {
             if (time !== 0) {
                 setTime(time - 1);
@@ -39,7 +42,7 @@ function StudentStartTest() {
 
     function sendCode() {
         localStorage.removeItem('ts')
-        sendTestCode(byId('result').value, localStorage.getItem('testId'), setResult, setLoading, setError, time, second);
+        sendTestCode(byId('result').value, sessionStorage.getItem('testId'), setResult, setLoading, setError, time, second);
     }
     // salom
     return (
@@ -83,7 +86,7 @@ function StudentStartTest() {
                         <div className="text-black bg-white rounded-t-xl p-2">Result</div>
                         <textarea
                             className={`w-full h-64 bg-white rounded-b-xl p-3 font-mono ${error === 1 ? 'code-no' : error === 2 ? 'code-success' : 'code-error'}`}
-                            placeholder={codeResult ? codeResult : "Result"}
+                            placeholder={codeResult ? codeResult : <p className="text-red-200">{codeResult}</p>}
                             disabled
                         />
                     </div>
