@@ -52,9 +52,10 @@ export function getTestCategory(setTestCategory) {
         .catch((err) => console.log(err));
 }
 
-export function sendTestCode(text, testId, setResponse, setLoading, setError) {
+export function sendTestCode(text, testId, setResponse, setLoading, setError, time, secound) {
+    console.log(time, secound);
     setLoading(true)
-    axios.post(url + "test/performance/" + testId + "?minute=" + 3, {text}, config)
+    axios.post(url + "test/performance/" + testId + "?minute=" + `${time}.${secound}`  , {text}, config)
         .then((res) => {
             setResponse(res.data.body);
             setLoading(false);
