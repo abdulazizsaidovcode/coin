@@ -3,7 +3,6 @@ import { AiOutlineMenu, } from 'react-icons/ai'
 import { CiLogin, } from 'react-icons/ci'
 import { coinIcon, } from '../img/navIndex'
 import { useState } from 'react'
-import ScrollAnimation from '../scrollAnimation/scrollAnimation'
 import './homeNavbar.css'
 import { Link } from 'react-router-dom'
 // import { loadIcon } from '@iconify/react'
@@ -14,15 +13,14 @@ const HomeNavbar = () => {
         ButtonNav: "py-2 px-6 md:mr-0 mr-20 rounded  bg-[rgb(158,105,167)] outline-none  text-white hover:bg-[#BA68C8] hover:duration-500  flex items-center gap-2"
     }
     let Links = [
-        { name: "Home", link: '/' },
-        { name: "About", link: '/' },
-        { name: "Analytic", link: '/' },
-        { name: "Contact", link: '/' },
+        { name: "Home", link: '#1' },
+        { name: "Analytic", link: '#2' },
+        { name: "About", link: '#3' },
+        { name: "Contact", link: '#4' },
     ]
     const [open, setOpen] = useState(false)
     return (
         <>
-            <ScrollAnimation />
             <div className=' z-50  shadow-md  w-full fixed top-0 left-0 bg-[#FFFFFF] md:bg-[#FFFFFF] '>
                 <div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4  '>
                     <div className='font-bold text-2xl cursor-pointer flex items-center text-gray-800'>
@@ -40,7 +38,7 @@ const HomeNavbar = () => {
                         {
                             Links.map((item) => (
                                 <li key={item.name} className='md:ml-8 text-xl md:my-0 my-7'>
-                                    <a href={item.link} className='text-gray-800 hover:text-[#BA68C8] duration-500'>{item.name}</a>
+                                    <a href={item.link} className='text-gray-800 hover:text-[#BA68C8] duration-500 '>{item.name}</a>
                                 </li>
                             ))
                         }

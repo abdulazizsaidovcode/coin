@@ -34,12 +34,12 @@ const Dropdown = ({ options, isAdmin, isOpen, setIsOpen }) => {
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            <ul>
-              <li className="py-2"
+            <ul className="">
+              <li className="py-1"
               onClick={() => setIsOpen(false)}>
                 <Link
                   to={`/${isAdmin ? "admin" : "teacher"}/student`}
-                  className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
+                  className={`${"flex items-center ms-16 h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
                 >
                   <div className="flex justify-center items-center me-2">
                     <span>
@@ -49,11 +49,11 @@ const Dropdown = ({ options, isAdmin, isOpen, setIsOpen }) => {
                   <span>Student</span>
                 </Link>
               </li>
-              <li className="py-2" 
+              <li className="py-1" 
               onClick={() => setIsOpen(false)}>
                 <Link
                   to={`/${isAdmin ? "admin" : "teacher"}/teacher`}
-                  className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
+                  className={`${"flex items-center ms-16 h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
                 >
                   <div className="flex justify-center items-center me-2">
                     <span>
@@ -63,11 +63,11 @@ const Dropdown = ({ options, isAdmin, isOpen, setIsOpen }) => {
                   <span>Teacher</span>
                 </Link>
               </li>
-              <li className="py-2" 
+              <li className="py-1" 
               onClick={() => setIsOpen(false)}>
                 <Link
                   to={`/${isAdmin ? "admin" : "teacher"}/gift`}
-                  className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
+                  className={`${"flex items-center ms-16 h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
                 >
                   <div className="flex justify-center items-center me-2">
                     <span>
@@ -77,11 +77,11 @@ const Dropdown = ({ options, isAdmin, isOpen, setIsOpen }) => {
                   <span>Gift</span>
                 </Link>
               </li>
-              <li className="py-2" 
+              <li className="py-1" 
               onClick={() => setIsOpen(false)}>
                 <Link
                   to={`/${isAdmin ? "admin" : "teacher"}/exchange`}
-                  className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
+                  className={`${"flex items-center ms-16 h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
                 >
                   <div className="flex justify-center items-center me-2">
                     <span>
@@ -92,11 +92,11 @@ const Dropdown = ({ options, isAdmin, isOpen, setIsOpen }) => {
                   <span>Exchange</span>
                 </Link>
               </li>
-              <li className="py-2" 
+              <li className="py-1" 
               onClick={() => setIsOpen(false)}>
                 <Link
                   to={`/${isAdmin ? "admin" : "teacher"}/message`}
-                  className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
+                  className={`${"flex items-center ms-16 h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
                 >
                   <div className="flex justify-center items-center me-2">
                     <span>
@@ -107,6 +107,20 @@ const Dropdown = ({ options, isAdmin, isOpen, setIsOpen }) => {
                   <span>Message</span>
                 </Link>
               </li>
+              <li className="py-1"
+              onClick={() => setIsOpen(false)}>
+            <Link
+              to={`/${isAdmin ? "admin" : "teacher"}/contact`}
+              className={`${"flex items-center ms-16 h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
+            >
+              <div className="flex justify-center items-center me-2">
+                    <span>
+                      <i className="fa-solid fa-address-card"></i>
+                    </span>
+                  </div>
+              <span className={`ml-2`}>Contact</span>
+            </Link>
+          </li>
             </ul>
           </div>
         </div>

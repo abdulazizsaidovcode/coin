@@ -1,4 +1,6 @@
-
+.active{
+    color: #BA68C8;
+}
 @media only screen and (max-width:404px){
     .navButton {
         padding-left: 0.5rem;

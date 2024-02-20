@@ -2,6 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+*{
+    scroll-behavior: smooth;
+}
 
 .code-error::placeholder {
     color: #c12f2f;

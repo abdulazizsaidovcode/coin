@@ -87,6 +87,7 @@ function MobileBar({ isAdmin }) {
           <li className="py-2 hidden sm:block"
               onClick={() => setIsDrop(false)}>
             <Link
+            
               to={`/${isAdmin ? "admin" : "teacher"}/gift`}
               className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
             >
@@ -118,6 +119,18 @@ function MobileBar({ isAdmin }) {
             >
               <span className="inline-flex justify-center items-center ml-4 text-xl">
                 <i className="fa-solid fa-envelope"></i>
+              </span>
+              <span className={`ml-2 hidden`}>Message</span>
+            </Link>
+          </li>
+          <li className="py-2 hidden sm:block"
+              onClick={() => setIsDrop(false)}>
+            <Link
+              to={`/${isAdmin ? "admin" : "teacher"}/contact`}
+              className={`${"flex items-center justify-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-5"}`}
+            >
+              <span className="inline-flex justify-center items-center ml-4 text-xl">
+                <i className="fa-solid fa-address-card"></i>
               </span>
               <span className={`ml-2 hidden`}>Message</span>
             </Link>

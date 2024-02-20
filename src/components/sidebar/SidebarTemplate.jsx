@@ -6,7 +6,7 @@ import { byId } from "../../components/api/api";
 
 function SidebarTemplate({ isAdmin }) {
   const [isExpanded, setIsExpanded] = useState(window.innerWidth > 992);
-  const [sidebarActiveDashboard, setSidebarActiveDashboard] = useState(false);
+  const [sidebarActiveDashboard, setSidebarActiveDashboard] = useState(true);
   const [sidebarActiveCategory, setSidebarActiveCategory] = useState(false);
   const [sidebarActiveGroup, setSidebarActiveGroup] = useState(false);
   const [sidebarActiveStudent, setSidebarActiveStudent] = useState(false);
@@ -14,6 +14,7 @@ function SidebarTemplate({ isAdmin }) {
   const [sidebarActiveGift, setSidebarActiveGift] = useState(false);
   const [sidebarActiveExchange, setSidebarActiveExchange] = useState(false);
   const [sidebarActiveMessage, setSidebarActiveMessage] = useState(false);
+  const [sidebarActiveContact, setSidebarActiveContact] = useState(false);
 
   const activeHandler = (e) => {
     e.target.textContent === "Dashboard"
@@ -40,6 +41,9 @@ function SidebarTemplate({ isAdmin }) {
     e.target.textContent === "Message"
       ? setSidebarActiveMessage(true)
       : setSidebarActiveMessage(false);
+    e.target.textContent === "Contact"
+      ? setSidebarActiveContact(true)
+      : setSidebarActiveContact(false);
   };
 
   // Oyna o'lchamini kuzatish
@@ -287,10 +291,30 @@ function SidebarTemplate({ isAdmin }) {
                   }`}
                 >
                   <span className={styles.sidebarFlexClass}>
-                    <i className="fa-solid fa-envelope"></i>
+                    <i class="fa-solid fa-envelope"></i>
                   </span>
                   <span className={`ml-2 ${isExpanded ? "block" : "hidden"}`}>
                     Message
+                  </span>
+                </Link>
+              </li>
+              <li className="py-2">
+                <Link
+                  to={`/admin/contact`}
+                  onClick={activeHandler}
+                  className={`${
+                    isExpanded
+                      ? `${styles.sideBarStylexxl} ${
+                        sidebarActiveContact ? styles.focusClass : ""
+                        }`
+                      : styles.sideBarStylexl
+                  }`}
+                >
+                  <span className={styles.sidebarFlexClass}>
+                  <i class="fa-solid fa-address-card"></i>
+                  </span>
+                  <span className={`ml-2 ${isExpanded ? "block" : "hidden"}`}>
+                    Contact
                   </span>
                 </Link>
               </li>

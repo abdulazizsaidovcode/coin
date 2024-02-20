@@ -1,5 +1,5 @@
 .dropAni {
-    top: -21rem;
+    top: -22rem;
     animation-name: identifier;
     animation-duration: 1s;
     animation-direction: alternate;
@@ -7,7 +7,7 @@
 
 @keyframes identifier {
     from {top: 3rem;}
-    to {top: -21rem;}
+    to {top: -22rem;}
 }
 
 .dropAni2 {
@@ -18,6 +18,6 @@
 }
 
 @keyframes identifier2 {
-    from {top: -21rem;}
+    from {top: -22rem;}
     to {top: 3rem;}
 }
