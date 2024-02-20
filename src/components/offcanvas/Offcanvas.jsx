@@ -8,6 +8,7 @@ function Offcanvas({ getCategory }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [categoriesFafer, setCategoriesFather] = useState([]);
   const [loading, setLoading] = useState(false)
+  const [input, setInput] = useState(true)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -63,6 +64,10 @@ function Offcanvas({ getCategory }) {
         // console.log(addData);
       });
   };
+
+  const inputDes = () => {
+
+  }
 
   return (
     <div>
