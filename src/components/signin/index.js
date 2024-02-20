@@ -72,13 +72,16 @@ const SignIn = ({ setpath }) => {
         }
         axios.post(`${url}user/forgetPassword`, addData, config)
             .then(res => {
-                res.data.success === false ? toast.error(res.data.message) : toast.success(res.data.message)
-                byId('emailCon').style.display = "none";
-                byId('confirmBtn').style.display = "none";
-                byId('prePasswordCon').style.display = "inline";
-                byId('passwordCon').style.display = "inline";
-                byId('confirmBtnCode').style.display = "inline";
-                byId('confirmCodeVis').style.display = "inline";
+                if (res.data.success === false) toast.error(res.data.message)
+                else {
+                    toast.success(res.data.message)
+                    byId('emailCon').style.display = "none";
+                    byId('confirmBtn').style.display = "none";
+                    byId('prePasswordCon').style.display = "inline";
+                    byId('passwordCon').style.display = "inline";
+                    byId('confirmBtnCode').style.display = "inline";
+                    byId('confirmCodeVis').style.display = "inline";
+                }
                 setIsLoading(false);
             })
             .catch(err => {
@@ -109,7 +112,7 @@ const SignIn = ({ setpath }) => {
                 setIsLoading(false);
             })
     }
-    
+
     return (
         <>
             <Link to={role} id="links"></Link>
