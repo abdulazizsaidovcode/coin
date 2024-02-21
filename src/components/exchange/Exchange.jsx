@@ -14,6 +14,8 @@ const Exchange = () => {
     const [group, setGroup] = useState(null);
     const [page, setPage] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
+    const [loading, setLoading] = useState(false)
+    
 
     useEffect(() => {
         setConfig();
@@ -48,11 +50,7 @@ const Exchange = () => {
     }
 
     // active ni chiqarish uchun
-    const toggleActive = (id) => {
-        axios.post(`${url}exchange/confirmation?exchangeId=${id}`, config)
-        .then(res => toast.success("Succesfully"))
-        .catch(err => toast.error("Error"))
-    };
+    
 
     const getGroups = () => {
         axios.get(`${url}group`, config)
@@ -138,10 +136,12 @@ const Exchange = () => {
             {exchangeTable ? (
                 <ExchangeTable
                     page={page}
+                    loading={loading}
+                    setLoading={setLoading}
+                    getExchangeTable={getExchangeTable}
                     currentPage={currentPage}
                     handelPageClick={handelPageClick}
-                    exchangeTable={exchangeTable}
-                    toggleActive={toggleActive} />
+                    exchangeTable={exchangeTable}/>
             ) : (
                 <TopLoading name='Exchange information' />
             )}

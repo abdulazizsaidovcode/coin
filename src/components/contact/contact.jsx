@@ -9,7 +9,7 @@ import Loader from "../../assits/loader";
 // Dastlabki ma'lumotlar ro'yxati
 
 function Contact() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [groupId, setGroupId] = useState(null);
@@ -67,8 +67,6 @@ function Contact() {
         setLoading(false)
       });
   };
-
- 
 
   // Tartiblash turini va yo'nalishini o'zgartirish
 
