@@ -45,8 +45,8 @@ const GiftCard = ({ gifts, page, handelPageClick }) => {
                 </div>
 
                 {isModalOpen && (
-                  <div className={`${isModalOpen ? 'zoom-modal' : ''} fixed inset-0 flex items-center justify-center z-50`}>
-                    <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-4 w-full sm:w-1/2">
+                  <div className={`fixed inset-0 bg-slate-700 bg-opacity-50 flex items-center justify-center z-50`}>
+                    <div className="zoom-modal modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-4 w-full sm:w-1/2">
                       <div className="font-bold tracking-wider text-[1.4rem] border-b pb-2 text-lg flex justify-between items-center">
                         <span>{toShow.name}</span>
                         <span className="hover:cursor-pointer hover:opacity-50 duration-200" onClick={closeModal}><i class="fa-solid fa-xmark"></i></span>

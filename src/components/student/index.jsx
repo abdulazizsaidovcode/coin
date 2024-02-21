@@ -20,6 +20,7 @@ const AdminStudent = () => {
   const [page, setPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [input, setInput] = useState(true);
+  const [input2, setInput2] = useState(true);
 
   useEffect(() => {
     setConfig();
@@ -172,8 +173,8 @@ const AdminStudent = () => {
   const inputDes = () => {
     if (
       byId("firstName").value !== "" &&
-      byId("lastName").value !== "0" &&
-      byId("email").value !== "0" &&
+      byId("lastName").value !== "" &&
+      byId("email").value !== "" &&
       byId("password").value !== "" &&
       byId("phoneNumber").value !== "" &&
       byId("groupId").value !== "" &&
@@ -184,6 +185,8 @@ const AdminStudent = () => {
       setInput(true);
     }
   };
+
+  
 
   return (
     <div className=" p-8 w-full h-screen bg-gray-100">
@@ -695,10 +698,11 @@ const AdminStudent = () => {
                   Close
                 </button>
                 <button
+                disabled={input}
                   onClick={() => {
                     editUser();
                   }}
-                  className="btm"
+                  className={`btm ${ input ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   {loading ? <Loader /> : "Edit"}
                 </button>

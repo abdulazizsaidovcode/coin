@@ -16,6 +16,8 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toShow, setItemToShow] = useState([]);
+  const [input, setInput] = useState(true);
+
 
   const deleteGift = () => {
     setLoading(true);
@@ -86,6 +88,18 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const inputDes = () => {
+    if (
+      document.getElementById("description").value !== "" &&
+      document.getElementById("rate").value !== "" &&
+      document.getElementById("name").value !== ""
+    ) {
+      setInput(false);
+    } else {
+      setInput(true);
+    }
+  };
 
   return (
     <>
@@ -238,8 +252,9 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
                       Name
                     </label>
                     <input
+                      onChange={inputDes}
                       type="text"
-                      defaultValue={giftIn.name}
+                      defaultValue={giftIn.name ? giftIn.name : ""}
                       id="name"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Type product name"
@@ -253,8 +268,9 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
                       Rate
                     </label>
                     <input
+                      onChange={inputDes}
                       type="number"
-                      defaultValue={giftIn.rate}
+                      defaultValue={giftIn.rate ? giftIn.rate : ""}
                       id="rate"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="100"
@@ -278,9 +294,10 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
                       Gift Description
                     </label>
                     <textarea
+                      onChange={inputDes}
                       id="description"
                       rows="4"
-                      defaultValue={giftIn.description}
+                      defaultValue={giftIn.description ? giftIn.description : ""}
                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Write product description here"
                     ></textarea>
@@ -294,10 +311,11 @@ const GiftCard = ({ gifts, getGift, page, handelPageClick }) => {
                     Close
                   </button>
                   <button
+                  disabled={input}
                     onClick={() => {
                       editGift();
                     }}
-                    className="btm"
+                    className={`btm ${input ? "cursor-not-allowed opacity-50" : ""}`}
                   >
                     {loading ? <Loader /> : "Edit"}
                   </button>
