@@ -132,7 +132,7 @@ function Message() {
         )}
       </div>
 
-      <div className='mt-10'>
+      <div className='md:mt-10 mb-20 xl:mb-0'>
         <ReactPaginate className="navigation"
           breakLabel="..."
           nextLabel=">"
@@ -149,7 +149,7 @@ function Message() {
       {isMoreOpen && (
         <div className='flex inset-0 justify-center items-center fixed z-50 w-full bg-slate-700 bg-opacity-50'>
           <div
-            className={`animation-modal w-1/3 px-10 py-6 rounded-lg shadow-lg shadow-slate-500 bg-slate-100`}>
+            className={`animation-modal w-full sm:w-1/2 lg:w-1/3 px-10 py-6 rounded-lg shadow-lg shadow-slate-500 bg-slate-100`}>
             <div className='flex justify-between pb-2 border-b border-b-slate-700'>
               <p className='font-bold text-xl tracking-wide'>{isMoreOpen ? groupId.groupName : ''}</p>
               <p onClick={openMore} className='hover:cursor-pointer'>
