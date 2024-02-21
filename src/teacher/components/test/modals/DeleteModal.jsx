@@ -37,7 +37,7 @@ const DeleteModal = (props) => {
     }
 
     return (
-        <div className={`${isDeleteMenuOpen ? 'animation-modal-test flex justify-center items-start w-full' : 'hidden'}`}>
+        <div className={`${isDeleteMenuOpen ? 'animation-modal-test flex justify-center items-start w-full z-50' : 'hidden'}`}>
             <div className="w-[88%] sm:w-[30rem] py-4 px-8 bg-slate-200 rounded-xl shadow-lg shadow-slate-500">
                 <div className="flex justify-between items-center border-b border-slate-400 pb-2">
                     <p className="text-lg font-semibold font-inika text-gray-900 tracking-wide">Delete Test</p>

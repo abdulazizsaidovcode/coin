@@ -146,23 +146,25 @@ function Message() {
         />
       </div>
 
-      <div className='flex justify-center'>
-        <div
-          className={`${isMoreOpen ? 'animation-modal fixed top-[30%] w-1/3 px-10 py-6 rounded-lg shadow-lg shadow-slate-500 bg-slate-100' : 'hidden'}`}>
-          <div className='flex justify-between pb-2 border-b border-b-slate-700'>
-            <p className='font-bold text-xl tracking-wide'>{isMoreOpen ? groupId.groupName : ''}</p>
-            <p onClick={openMore} className='hover:cursor-pointer'>
-              <i className="fa-solid fa-xmark fa-xl hover:text-slate-600 duration-200"></i>
-            </p>
+      {isMoreOpen && (
+        <div className='flex inset-0 justify-center items-center fixed z-50 w-full bg-slate-700 bg-opacity-50'>
+          <div
+            className={`animation-modal w-1/3 px-10 py-6 rounded-lg shadow-lg shadow-slate-500 bg-slate-100`}>
+            <div className='flex justify-between pb-2 border-b border-b-slate-700'>
+              <p className='font-bold text-xl tracking-wide'>{isMoreOpen ? groupId.groupName : ''}</p>
+              <p onClick={openMore} className='hover:cursor-pointer'>
+                <i className="fa-solid fa-xmark fa-xl hover:text-slate-600 duration-200"></i>
+              </p>
+            </div>
+            <p className='my-4'>{isMoreOpen ? groupId.description : ''}</p>
+            <p className='text-end'><span className='font-semibold border-b pb-1 px-1 border-b-slate-400'>{isMoreOpen ? groupId.date : ''}</span></p>
           </div>
-          <p className='my-4'>{isMoreOpen ? groupId.description : ''}</p>
-          <p className='text-end'><span className='font-semibold border-b pb-1 px-1 border-b-slate-400'>{isMoreOpen ? groupId.date : ''}</span></p>
         </div>
-      </div>
+      )}
 
       {isModalOpen && (
-        <div className={`${isModalOpen ? 'animation-modal' : ''} fixed inset-0 flex items-center justify-center z-50`}>
-          <div className="modal bg-white rounded-xl overflow-hidden shadow-2xl">
+        <div className={`bg-slate-700 bg-opacity-50 fixed inset-0 flex items-center justify-center z-50`}>
+          <div className="modal animation-modal bg-white rounded-xl overflow-hidden shadow-2xl">
             <div className="flex justify-between items-center p-3">
               <h2 className="text-lg font-semibold text-gray-900">Send message</h2>
               <i onClick={closeModal} className="fa-solid fa-xmark fa-xl hover:text-slate-500 hover:cursor-pointer duration-200"></i>
