@@ -11,6 +11,7 @@ function Gift() {
   const [gifts, setGifts] = useState(null); // Sifod
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [input, setInput] = useState(true);
 
   useEffect(() => {
     getGift();
@@ -31,58 +32,80 @@ function Gift() {
         setGifts(res.data.body.object.reverse());
         setPage(res.data.body.totalPage);
       })
-      .catch(() => { });
+      .catch(() => {});
   }
 
   // giftFilter
   const searchGift = (e) => {
-    let data = e.target.value
+    let data = e.target.value;
 
-    !data ? getGift() :
-      axios.get(`${url}gift/search?name=${data}`, config)
-        .then(res => res.data.body.length === 0 ? setGifts(null) : setGifts(res.data.body))
-        .catch(err => console.log('Teacher panel gift filterda error: ', err));
-  }
+    !data
+      ? getGift()
+      : axios
+          .get(`${url}gift/search?name=${data}`, config)
+          .then((res) =>
+            res.data.body.length === 0
+              ? setGifts(null)
+              : setGifts(res.data.body)
+          )
+          .catch((err) =>
+            console.log("Teacher panel gift filterda error: ", err)
+          );
+  };
 
   const addGift = async () => {
-    setLoading(true)
+    setLoading(true);
     const img = new FormData();
-    img.append('file', byId('image').files[0]);
+    img.append("file", byId("image").files[0]);
     const addData = {
       name: document.getElementById("name").value,
       attachmentId: 0,
       rate: document.getElementById("rate").value,
       description: document.getElementById("description").value,
-    }
+    };
 
-    if (img.get('file') !== 'undefined')
-      await axios.post(url + "attachment/upload", img, config)
-        .then(res => addData.attachmentId = res.data.body)
-        .catch(() => console.log("img ketmadi"))
+    if (img.get("file") !== "undefined")
+      await axios
+        .post(url + "attachment/upload", img, config)
+        .then((res) => (addData.attachmentId = res.data.body))
+        .catch(() => console.log("img ketmadi"));
 
-    await axios.post(url + "gift/save", addData, config)
+    await axios
+      .post(url + "gift/save", addData, config)
       .then(() => {
         toast.success("Successfully added!");
         getGift();
-        setLoading(false)
-        closeModal()
+        setLoading(false);
+        closeModal();
       })
       .catch(() => {
         toast.error("Failed to add gift card!");
-        setLoading(false)
+        setLoading(false);
       });
-  }
+  };
 
   // Modalni ochish va yopish uchun funksiyalar
- 
 
   const handelPageClick = (event) => {
     const pageNumber = event.selected;
     // setCurrentPage(pageNumber)
-    axios.get(`${url}gift?page=${pageNumber}&size=10`, config)
-      .then(res => setGifts(res.data.body.object.reverse()))
-      .catch(err => console.log('error page: ', err));
-  }
+    axios
+      .get(`${url}gift?page=${pageNumber}&size=10`, config)
+      .then((res) => setGifts(res.data.body.object.reverse()))
+      .catch((err) => console.log("error page: ", err));
+  };
+
+  const inputDes = () => {
+    if (
+      document.getElementById("description").value !== "" &&
+      document.getElementById("rate").value !== "" &&
+      document.getElementById("name").value !== ""
+    ) {
+      setInput(false);
+    } else {
+      setInput(true);
+    }
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen p-8 w-full ">
@@ -120,7 +143,12 @@ function Gift() {
           />
         </div>
       </div>
-      <GiftCard gifts={gifts} getGift={getGift} handelPageClick={handelPageClick} page={page} />
+      <GiftCard
+        gifts={gifts}
+        getGift={getGift}
+        handelPageClick={handelPageClick}
+        page={page}
+      />
 
       {/* Modal */}
       {isModalOpen && (
@@ -165,6 +193,7 @@ function Gift() {
                     Name
                   </label>
                   <input
+                    onChange={inputDes}
                     type="text"
                     name="name"
                     id="name"
@@ -181,6 +210,7 @@ function Gift() {
                     Rate
                   </label>
                   <input
+                    onChange={inputDes}
                     type="number"
                     name="rate"
                     id="rate"
@@ -207,6 +237,7 @@ function Gift() {
                     Gift Description
                   </label>
                   <textarea
+                    onChange={inputDes}
                     id="description"
                     rows="4"
                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -215,12 +246,18 @@ function Gift() {
                 </div>
               </div>
               <div className="flex justify-end">
-                <button onClick={closeModal} className="btm-close me-2 bg-red-900">Close</button>
                 <button
+                  onClick={closeModal}
+                  className="btm-close me-2 bg-red-900"
+                >
+                  Close
+                </button>
+                <button
+                  disabled={input}
                   onClick={() => {
                     addGift();
                   }}
-                  className="btm"
+                  className={`btm ${input ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   {loading ? <Loader /> : "Add"}
                 </button>

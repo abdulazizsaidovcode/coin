@@ -19,6 +19,8 @@ const AdminStudent = () => {
   const [coinModal, setCoinModal] = useState(false);
   const [page, setPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+  const [input, setInput] = useState(true);
+  const [input2, setInput2] = useState(true);
 
   useEffect(() => {
     setConfig();
@@ -45,8 +47,9 @@ const AdminStudent = () => {
       phoneNumber: byId("phoneNumber").value,
       groupId: byId("groupId").value,
       gender: byId("gender").value,
-      friendPhoneNumber:
-        byId("friendNumber").value ? byId("friendNumber").value : "",
+      friendPhoneNumber: byId("friendNumber").value
+        ? byId("friendNumber").value
+        : "",
     };
     axios
       .post(url + "auth/register?ROLE=ROLE_USER", addData, config)
@@ -70,7 +73,11 @@ const AdminStudent = () => {
       id: userId.id,
     };
     axios
-      .post(`${url}user/give-coin?coin=${addData.coin}&description=${addData.description}&id=${addData.id}`, '', config)
+      .post(
+        `${url}user/give-coin?coin=${addData.coin}&description=${addData.description}&id=${addData.id}`,
+        "",
+        config
+      )
       .then(() => {
         closeCoin();
         getStudent();
@@ -156,11 +163,30 @@ const AdminStudent = () => {
 
   const handelPageClick = (event) => {
     const pageNumber = event.selected;
-    setCurrentPage(pageNumber)
-    axios.get(`${url}user?page=${pageNumber}&size=10`, config)
-      .then(res => setStudent(res.data.body.object))
-      .catch(err => console.log('error page: ', err));
-  }
+    setCurrentPage(pageNumber);
+    axios
+      .get(`${url}user?page=${pageNumber}&size=10`, config)
+      .then((res) => setStudent(res.data.body.object))
+      .catch((err) => console.log("error page: ", err));
+  };
+
+  const inputDes = () => {
+    if (
+      byId("firstName").value !== "" &&
+      byId("lastName").value !== "" &&
+      byId("email").value !== "" &&
+      byId("password").value !== "" &&
+      byId("phoneNumber").value !== "" &&
+      byId("groupId").value !== "" &&
+      byId("gender").value !== ""
+    ) {
+      setInput(false);
+    } else {
+      setInput(true);
+    }
+  };
+
+  
 
   return (
     <div className=" p-8 w-full h-screen bg-gray-100">
@@ -195,7 +221,7 @@ const AdminStudent = () => {
                     key={item.id}
                     className="border-b border-gray-200 text-center even:bg-slate-200 hover:bg-slate-300 duration-200"
                   >
-                    <td className="py-3 px-6">{(currentPage * 10) + (i + 1)}</td>
+                    <td className="py-3 px-6">{currentPage * 10 + (i + 1)}</td>
                     <td className="py-3 px-6">{item.fullName}</td>
                     <td className="py-3 px-6">{item.phoneNumber}</td>
                     <td className="py-3 px-6">{item.coin}</td>
@@ -248,8 +274,9 @@ const AdminStudent = () => {
           </table>
         </div>
 
-        <div className='mt-6'>
-          <ReactPaginate className="navigation"
+        <div className="mt-6">
+          <ReactPaginate
+            className="navigation"
             breakLabel="..."
             nextLabel=">"
             onPageChange={handelPageClick}
@@ -257,8 +284,8 @@ const AdminStudent = () => {
             pageCount={page}
             previousLabel="<"
             renderOnZeroPageCount={null}
-            nextClassName='nextBtn'
-            previousClassName='prevBtn'
+            nextClassName="nextBtn"
+            previousClassName="prevBtn"
           />
         </div>
       </div>
@@ -305,6 +332,7 @@ const AdminStudent = () => {
                     FirstName
                   </label>
                   <input
+                    onChange={inputDes}
                     type="text"
                     name="name"
                     id="firstName"
@@ -321,6 +349,7 @@ const AdminStudent = () => {
                     LastName
                   </label>
                   <input
+                    onChange={inputDes}
                     type="text"
                     name="LastName"
                     id="lastName"
@@ -338,6 +367,7 @@ const AdminStudent = () => {
                     Email
                   </label>
                   <input
+                    onChange={inputDes}
                     type="text"
                     name="email"
                     id="email"
@@ -354,6 +384,7 @@ const AdminStudent = () => {
                     Phone number
                   </label>
                   <input
+                    onChange={inputDes}
                     type="number"
                     name="phoneNumber"
                     id="phoneNumber"
@@ -372,6 +403,7 @@ const AdminStudent = () => {
 
                   <div className="relative">
                     <input
+                      onChange={inputDes}
                       // onKeyDown={checkKeyPress}
                       id="password"
                       disabled={loading}
@@ -401,10 +433,11 @@ const AdminStudent = () => {
                     Select gender
                   </label>
                   <select
+                    onChange={inputDes}
                     id="gender"
                     className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
                   >
-                    <option selected disabled>
+                    <option selected disabled value="">
                       Choose one...
                     </option>
                     <option value="MALE">MALE</option>
@@ -419,10 +452,11 @@ const AdminStudent = () => {
                     Select group
                   </label>
                   <select
+                    onChange={inputDes}
                     id="groupId"
                     className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
                   >
-                    <option selected disabled>
+                    <option selected disabled value="">
                       Choose one...
                     </option>
                     {group &&
@@ -459,10 +493,13 @@ const AdminStudent = () => {
                   Close
                 </button>
                 <button
+                  disabled={input}
                   onClick={() => {
                     addUsers();
                   }}
-                  className="btm"
+                  className={`btm ${
+                    input ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
                 >
                   {loading ? <Loader /> : "Add"}
                 </button>
@@ -507,7 +544,7 @@ const AdminStudent = () => {
 
             {/* Modal body */}
             <div className="p-4 md:p-5">
-            <div className="grid md:gap-4 mb-4 grid-cols-2">
+              <div className="grid md:gap-4 mb-4 grid-cols-2">
                 <div className="col-span-1">
                   <label
                     htmlFor="name"
@@ -516,12 +553,13 @@ const AdminStudent = () => {
                     FirstName
                   </label>
                   <input
+                    onChange={inputDes}
                     type="text"
                     name="name"
                     id="firstName"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="FirstName"
-                   defaultValue={userId.fullName}
+                    defaultValue={userId.fullName ? userId.fullName : ''}
                   />
                 </div>
                 <div className="col-span-1">
@@ -532,6 +570,7 @@ const AdminStudent = () => {
                     LastName
                   </label>
                   <input
+                    onChange={inputDes}
                     type="text"
                     name="LastName"
                     id="lastName"
@@ -548,12 +587,13 @@ const AdminStudent = () => {
                     Email
                   </label>
                   <input
+                    onChange={inputDes}
                     type="text"
                     name="email"
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Email"
-                    defaultValue={userId.email}
+                    defaultValue={userId.email ? userId.email : ""}
                   />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
@@ -564,12 +604,13 @@ const AdminStudent = () => {
                     Phone number
                   </label>
                   <input
+                    onChange={inputDes}
                     type="number"
                     name="phoneNumber"
                     id="phoneNumber"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="100"
-                    defaultValue={userId.phoneNumber}
+                    defaultValue={userId.phoneNumber ? userId.phoneNumber : ""}
                   />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
@@ -582,12 +623,14 @@ const AdminStudent = () => {
 
                   <div className="relative">
                     <input
+                    
+                    onChange={inputDes}
                       // onKeyDown={checkKeyPress}
                       id="password"
                       disabled={loading}
                       type={showPassword ? "text" : "password"}
                       className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500`}
-                      defaultValue={userId.password}
+                      defaultValue={userId.password ? userId.password : ""}
                     />
                     <button
                       type="button"
@@ -612,10 +655,11 @@ const AdminStudent = () => {
                     Select gender
                   </label>
                   <select
+                    onChange={inputDes}
                     id="gender"
                     className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
                   >
-                    <option selected disabled>
+                    <option selected disabled value="">
                       Choose one...
                     </option>
                     <option value="MALE">MALE</option>
@@ -630,10 +674,11 @@ const AdminStudent = () => {
                     Select group
                   </label>
                   <select
+                    onChange={inputDes}
                     id="groupId"
                     className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
                   >
-                    <option selected disabled>
+                    <option selected disabled value="">
                       Choose one...
                     </option>
                     {group &&
@@ -644,7 +689,6 @@ const AdminStudent = () => {
                       ))}
                   </select>
                 </div>
-                
               </div>
               <div className="flex justify-end">
                 <button
@@ -654,10 +698,11 @@ const AdminStudent = () => {
                   Close
                 </button>
                 <button
+                disabled={input}
                   onClick={() => {
                     editUser();
                   }}
-                  className="btm"
+                  className={`btm ${ input ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   {loading ? <Loader /> : "Edit"}
                 </button>

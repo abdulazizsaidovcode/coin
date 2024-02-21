@@ -7,7 +7,6 @@ import Category from "./components/category/Category";
 import Gift from "./components/gift/Gifts";
 import Exchange from "./components/exchange/Exchange";
 import Message from "./components/message/Message";
-import TotalCoinForStudent from "./components/total-coin-for-student/TotalCoinForStudent";
 import FalsePage from "./components/false-page/FalsePage";
 import Groups from "./components/group/Group";
 import Students from "./components/student/Students";
@@ -34,7 +33,6 @@ function Teacher() {
                     <Route path="/teacher/gift" element={<Gift />} />
                     <Route path="/teacher/exchange" element={<Exchange />} />
                     <Route path="/teacher/message" element={<Message />} />
-                    <Route path="/teacher/totalcoinforstudent" element={<TotalCoinForStudent />} />
                     <Route path="*" element={<FalsePage />} />
                 </Routes>
             </div>
