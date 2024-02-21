@@ -40,24 +40,47 @@ const GiftCard = ({ gifts, page, handelPageClick }) => {
                 <div className="px-6 pt-4 text-center">
                   <button className="btm-info" onClick={() => {
                     openModal();
-                    setItemToShow(item.description);
+                    setItemToShow(item);
                   }}>Gift Info</button>
                 </div>
 
                 {isModalOpen && (
                   <div className={`${isModalOpen ? 'zoom-modal' : ''} fixed inset-0 flex items-center justify-center z-50`}>
-                    <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-3 w-1/2">
-                      <div className="mt-6 pb-6 border-b font-medium text-lg">
-                        {toShow}
+                    <div className="modal font-inika bg-white rounded-xl overflow-hidden shadow-2xl px-8 py-4 w-full sm:w-1/2">
+                      <div className="font-bold tracking-wider text-[1.4rem] border-b pb-2 text-lg flex justify-between items-center">
+                        <span>{toShow.name}</span>
+                        <span className="hover:cursor-pointer hover:opacity-50 duration-200" onClick={closeModal}><i class="fa-solid fa-xmark"></i></span>
                       </div>
-                      <div className="flex justify-end items-center mt-5">
+                      <div className="mt-5 flex justify-start items-start flex-wrap lg:flex-nowrap">
+                        <div className="w-full lg:w-[35%] h-52 md:h-64 lg:h-40 overflow-hidden rounded-xl">
+                          <LazyLoadImage
+                            src={getFile + toShow.attachmentId}
+                            alt="Gift"
+                            effect="blur"
+                            className="hover:scale-110 w-full h-full lazyload"
+                            width='100%'
+                            height='100%'
+                          />
+                        </div>
+                        <div className="text-start mt-5 mt-lg-0 ps-0 lg:ps-5 w-full lg:w-[65%]">
+                          <p className="flex justify-between mb-3 w-full border-b pb-1.5">
+                            <span className="font-semibold me-3">Description:
+                            </span> {toShow.description}
+                          </p>
+                          <p className="flex justify-between mb-3 w-full border-b pb-1.5">
+                            <span className="font-semibold me-3">Coin:
+                            </span> {toShow.rate}
+                          </p>
+                        </div>
+                      </div>
+                      {/* <div className="flex justify-end items-center mt-5">
                         <button
                           className="font-semibold bg-green-500 py-2 px-6 text-white rounded-lg active:scale-90 duration-300"
                           onClick={closeModal}
                         >
                           Ok
                         </button>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 )}
