@@ -17,6 +17,7 @@ const AdminGroup = () => {
   const [hidden, setHidden] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const [page, setPage] = useState(0);
+  const [input, setInput] = useState(true);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -60,6 +61,15 @@ const AdminGroup = () => {
         setLoading(false);
       });
   };
+
+  const inputDes = () => {
+    if (byId("name").value !== "" && byId("subCategory").value !== "0" && byId("teacher").value !== "0") {
+      setInput(false);
+    } else {
+      setInput(true);
+    }
+  };
+
 
   const getTeacher = () => {
     axios
@@ -149,6 +159,7 @@ const AdminGroup = () => {
                   Name
                 </label>
                 <input
+                  onChange={inputDes}
                   type="text"
                   name="name"
                   id="name"
@@ -166,6 +177,7 @@ const AdminGroup = () => {
                 <select
                   onChange={(e) => {
                     select()
+                    inputDes()
                     getSubCategoryId(e.target.value)
                   }}
                   id="category"
@@ -190,10 +202,11 @@ const AdminGroup = () => {
                   Child category
                 </label>
                 <select
+                onChange={inputDes}
                   id="subCategory"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option selected disabled value={0}>
+                  <option selected disabled value='0' >
                     Select child category
                   </option>
                   {subcategory &&
@@ -212,10 +225,11 @@ const AdminGroup = () => {
                   Teacher
                 </label>
                 <select
+                onChange={inputDes}
                   id="teacher"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option selected disabled>
+                  <option selected disabled  value="0" >
                     Select teacher
                   </option>
                   {teacher &&
@@ -234,10 +248,10 @@ const AdminGroup = () => {
                 >
                   Close
                 </button>
-                <button onClick={() => {
+                <button disabled={input} onClick={() => {
                   setLoading(true)
                   addGroup()
-                }} className="btm">
+                }} className={`btm ${input ? "opacity-50 cursor-not-allowed" : ""}`}>
                   {loading ? <Loader /> : "Add"}
                 </button>
               </div>
@@ -251,6 +265,7 @@ const AdminGroup = () => {
           category={category}
           subcategory={subcategory}
           groups={groups}
+          getSubCategoryId={getSubCategoryId}
           setGroups={setGroups}
           getGroup={getCategory}
           currentPage={currentPage}

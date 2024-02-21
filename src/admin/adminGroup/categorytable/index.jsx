@@ -18,12 +18,14 @@ const GroupsTable = ({
   page,
   handelPageClick,
   currentPage,
+  getSubCategoryId
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDelete, setIsModalDelete] = useState(false);
   const [gropuId, setGroupId] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hidden, setHidden] = useState(true);
+  const [input, setInput] = useState(true);
 
   const toggleActive = (id) => {
     setGroups(
@@ -94,7 +96,15 @@ const GroupsTable = ({
   };
 
   const select = () => {
-    byId("select") === "0" ? setHidden(true) : setHidden(false);
+    byId("category") === "0" ? setHidden(true) : setHidden(false);
+  };
+
+  const inputDes = () => {
+    if (byId("name").value !== "" && byId("subCategory").value !== "0" && byId("teacher").value !== "0") {
+      setInput(false);
+    } else {
+      setInput(true);
+    }
   };
 
   return (
@@ -221,8 +231,9 @@ const GroupsTable = ({
                   Name
                 </label>
                 <input
+                onChange={inputDes}
                   type="text"
-                  defaultValue={gropuId.name}
+                  defaultValue={gropuId.name ? gropuId.name : ""}
                   id="name"
                   required
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
@@ -230,16 +241,21 @@ const GroupsTable = ({
               </div>
               <div className="mt-5">
                 <label
-                  htmlFor="categoryId"
+                  htmlFor="category"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Category
                 </label>
                 <select
+                  onChange={(e) => {
+                    select()
+                    inputDes()
+                    getSubCategoryId(e.target.value)
+                  }}
                   id="category"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option selected disabled>
+                  <option selected disabled value='0'>
                     Select category
                   </option>
                   {category &&
@@ -258,10 +274,11 @@ const GroupsTable = ({
                   Child category
                 </label>
                 <select
+                onChange={inputDes}
                   id="subCategory"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option selected disabled value={0}>
+                  <option selected disabled value='0'>
                     Select child category
                   </option>
                   {subcategory &&
@@ -280,10 +297,11 @@ const GroupsTable = ({
                   Teacher
                 </label>
                 <select
+                onChange={inputDes}
                   id="teacher"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option selected disabled>
+                  <option selected disabled value='0'>
                     Select teacher
                   </option>
                   {teacher.length &&
@@ -303,11 +321,12 @@ const GroupsTable = ({
                   Close
                 </button>
                 <button
+                disabled={input}
                   onClick={() => {
                     setLoading(true);
                     editGroup();
                   }}
-                  className="btm"
+                  className={`btm ${input ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   {loading ? <Loader /> : "Save"}
                 </button>
