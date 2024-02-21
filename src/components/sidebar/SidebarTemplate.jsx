@@ -6,7 +6,7 @@ import { byId } from "../../components/api/api";
 
 function SidebarTemplate({ isAdmin }) {
   const [isExpanded, setIsExpanded] = useState(window.innerWidth > 992);
-  const [sidebarActiveDashboard, setSidebarActiveDashboard] = useState(true);
+  const [sidebarActiveDashboard, setSidebarActiveDashboard] = useState(false);
   const [sidebarActiveCategory, setSidebarActiveCategory] = useState(false);
   const [sidebarActiveGroup, setSidebarActiveGroup] = useState(false);
   const [sidebarActiveStudent, setSidebarActiveStudent] = useState(false);

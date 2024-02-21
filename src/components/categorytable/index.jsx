@@ -12,6 +12,7 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
   const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
   const [categoryInfo, setCategoryInfo] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [input, setInput] = useState(true);
 
   // // Function to toggle the active state
   // const toggleActive = (id) => {
@@ -95,6 +96,14 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
         .then((res) => setCategoriesF(res.data.body))
         .catch((err) => console.log(err, searchVal));
     else getCategory1();
+  };
+
+  const inputDes = () => {
+    if (byId("category-name").value !== "") {
+      setInput(false);
+    } else {
+      setInput(true);
+    }
   };
 
   return (
@@ -203,8 +212,9 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
                 Category name
               </label>
               <input
+                onChange={inputDes}
                 id="category-name"
-                defaultValue={categoryInfo && categoryInfo.name}
+                defaultValue={categoryInfo.name ? categoryInfo.name : ''}
                 placeholder="Enter category name"
                 className="mt-1 w-full rounded-md py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300"
               />
@@ -228,7 +238,7 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
               <button onClick={closeModalEdit} className="btm-close">
                 Close
               </button>
-              <button onClick={editCategory} className="btm">
+              <button disabled={input} onClick={editCategory} className={`btm ${input ? "opacity-50 cursor-not-allowed" : ""}`}>
                 {loading ? <Loader /> : "Save"}
               </button>
             </div>
@@ -285,7 +295,6 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
                           {i + 1}
                         </td>
                         <td className="py-3 px-6 border-b border-gray-200 flex justify-center items-center">
-                         
                           <LazyLoadImage
                             src={
                               category.attachmentId === null
@@ -341,7 +350,6 @@ const CategoryTable = ({ categoriesF, getCategory1, setCategoriesF }) => {
                 </tbody>
               </table>
             </div>
-            
           </div>
         </div>
       </div>
