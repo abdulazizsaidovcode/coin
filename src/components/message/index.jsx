@@ -13,6 +13,8 @@ function Message() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [groupId, setGroupId] = useState(null);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [input, setInput] = useState(true);
+
 
   const [page, setPage] = useState(0);
 
@@ -101,6 +103,17 @@ function Message() {
         setMessages(res.data.body.object);
         setMessages(res.data.body.object.reverse());
       });
+  };
+
+  const inputDes = () => {
+    if (
+      byId("groupId").value !== "" &&
+      byId("message").value !== "" 
+    ) {
+      setInput(false);
+    } else {
+      setInput(true);
+    }
   };
 
   return (
@@ -245,10 +258,11 @@ function Message() {
                     Group
                   </label>
                   <select
+                    onChange={inputDes}
                     id="groupId"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   >
-                    <option selected disabled>
+                    <option selected disabled value="">
                       Select group
                     </option>
                     {group.map((item, i) => (
@@ -266,6 +280,7 @@ function Message() {
                     Write message
                   </label>
                   <textarea
+                    onChange={inputDes}
                     id="message"
                     rows="4"
                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -281,11 +296,12 @@ function Message() {
                   Close
                 </button>
                 <button
+                disabled={input}
                   onClick={() => {
                     addMessaga();
                     closeModal();
                   }}
-                  className="btm"
+                  className={`btm ${input ? "cursor-not-allowed opacity-50" : ""}`}
                 >
                   Save
                 </button>

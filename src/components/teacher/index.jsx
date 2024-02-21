@@ -11,13 +11,15 @@ const AdminTeacher = () => {
   const [editModal, setIsModalOpenEdit] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [userId, setUserId] = useState([]);
-  const [groupId, setGroupId] = useState("");
+  const [teacherId, setTeacherId] = useState("");
   const [group, setGroup] = useState([]);
   const [student, setStudent] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [input, setInput] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [page, setPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0)
+
 
   useEffect(() => {
     setConfig();
@@ -100,7 +102,7 @@ const AdminTeacher = () => {
     axios
       .delete(
         `${url}user/
-      ${userId.id}`,
+      ${teacherId}`,
         config
       )
       .then((res) => {
@@ -122,6 +124,21 @@ const AdminTeacher = () => {
       .then(res => setStudent(res.data.body))
       .catch(err => console.log('error page: ', err));
   }
+
+  const inputDes = () => {
+    if (
+      byId("firstName").value !== "" &&
+      byId("lastName").value !== "" &&
+      byId("email").value !== "" &&
+      byId("password").value !== "" &&
+      byId("phoneNumber").value !== "" &&
+      byId("gender").value !== ""
+    ) {
+      setInput(false);
+    } else {
+      setInput(true);
+    }
+  };
 
   return (
     <div className=" p-8 pb-28 w-full h-screen bg-gray-100">
@@ -175,6 +192,7 @@ const AdminTeacher = () => {
                         onClick={() => {
                           openModaldelete();
                           setUserId(item);
+                          setTeacherId(item.id)
                         }}
                         className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline ml-3"
                       >
@@ -254,6 +272,7 @@ const AdminTeacher = () => {
                     FirstName
                   </label>
                   <input
+                    onChange={inputDes}
                     type="text"
                     name="name"
                     id="firstName"
@@ -287,6 +306,7 @@ const AdminTeacher = () => {
                     Email
                   </label>
                   <input
+                    onChange={inputDes}
                     type="text"
                     name="email"
                     id="email"
@@ -303,6 +323,7 @@ const AdminTeacher = () => {
                     Phone number
                   </label>
                   <input
+                    onChange={inputDes}
                     type="number"
                     name="phoneNumber"
                     id="phoneNumber"
@@ -321,6 +342,7 @@ const AdminTeacher = () => {
 
                   <div className="relative">
                     <input
+                    onChange={inputDes}
                       // onKeyDown={checkKeyPress}
                       id="password"
                       disabled={loading}
@@ -351,10 +373,11 @@ const AdminTeacher = () => {
                     Select gender
                   </label>
                   <select
+                    onChange={inputDes}
                     id="gender"
                     className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
                   >
-                    <option selected disabled>
+                    <option selected disabled value=''>
                       Choose one...
                     </option>
                     <option value="MALE">MALE</option>
@@ -365,10 +388,11 @@ const AdminTeacher = () => {
               <div className="flex justify-end">
                 <button onClick={closeModal} className="btm-close me-2 bg-red-900">Close</button>
                 <button
+                disabled={input}
                   onClick={() => {
                     addUsers();
                   }}
-                  className="btm"
+                  className={`btm ${ input ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   {loading ? <Loader /> : "Add"}
                 </button>
@@ -422,12 +446,13 @@ const AdminTeacher = () => {
                     FirstName
                   </label>
                   <input
+                    onChange={inputDes}
                     type="text"
                     name="name"
                     id="firstName"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="FirstName"
-                    defaultValue={userId.fullName}
+                    defaultValue={userId.fullName ? userId.fullName : ''}
                   />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
@@ -438,6 +463,7 @@ const AdminTeacher = () => {
                     LastName
                   </label>
                   <input
+                    onChange={inputDes}
                     type="text"
                     name="LastName"
                     id="lastName"
@@ -455,10 +481,11 @@ const AdminTeacher = () => {
                     Email
                   </label>
                   <input
+                    onChange={inputDes}
                     type="text"
                     name="email"
                     id="email"
-                    defaultValue={userId.email}
+                    defaultValue={userId.email ? userId.email : ''}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Email"
                     required=""
@@ -472,13 +499,14 @@ const AdminTeacher = () => {
                     Phone number
                   </label>
                   <input
+                    onChange={inputDes}
                     type="number"
                     name="phoneNumber"
                     id="phoneNumber"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="100"
                     required=""
-                    defaultValue={userId.phoneNumber}
+                    defaultValue={userId.phoneNumber ? userId.phoneNumber :''}
                   />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
@@ -491,6 +519,7 @@ const AdminTeacher = () => {
 
                   <div className="relative">
                     <input
+                    onChange={inputDes}
                       // onKeyDown={checkKeyPress}
                       id="password"
                       disabled={loading}
@@ -521,10 +550,11 @@ const AdminTeacher = () => {
                     Select gender
                   </label>
                   <select
+                    onChange={inputDes}
                     id="gender"
                     className="mt-1 py-2 px-2 bg-slate-200 focus:bg-slate-100 focus:outline-0 duration-300 rounded-md w-full"
                   >
-                    <option selected disabled>
+                    <option selected disabled value=''>
                       Choose one...
                     </option>
                     <option value="MALE">MALE</option>
@@ -540,10 +570,11 @@ const AdminTeacher = () => {
                   Close
                 </button>
                 <button
+                disabled={input}
                   onClick={() => {
                     editUser();
                   }}
-                  className="btm"
+                  className={`btm ${ input ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   {loading ? <Loader /> : "Edit"}
                 </button>
