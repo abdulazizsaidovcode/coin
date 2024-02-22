@@ -1,5 +1,5 @@
 import axios from "axios";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 export const url = "http://139.59.14.48:8090/";
 // export const url = "http://192.168.149.27/"; 
@@ -42,22 +42,25 @@ export function getTopStudent(setTopStudent) {
 //                  test
 export function getTestCategoryId(categoryId, setTestByCategory) {
     axios.get(url + "test/student/category/test?categoryId=" + categoryId, config)
-        .then((res) => setTestByCategory(res.data.body))
+        .then((res) => { setTestByCategory(res.data.body) })
         .catch((err) => console.log(err));
 }
 
 export function getTestCategory(setTestCategory) {
     axios.get(url + "test/student/category/block", config)
-        .then((res) => setTestCategory(res.data.body))
+        .then((res) => {
+            setTestCategory(res.data.body);
+            console.log(res.data.body);
+        })
+
         .catch((err) => console.log(err));
 }
 
 export function sendTestCode(text, testId, setResponse, setLoading, setError, time, secound) {
-    console.log(time, secound);
     setLoading(true)
-    axios.post(url + "test/performance/" + testId + "?minute=" + `${time}.${secound}`  , {text}, config)
+    axios.post(url + "test/performance/" + testId + "?minute=" + `${time}.${secound}`, { text }, config)
         .then((res) => {
-            setResponse(res.data.body);
+            setResponse(res.data);
             setLoading(false);
             setError(2);
         })
