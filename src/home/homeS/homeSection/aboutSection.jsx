@@ -2,7 +2,7 @@ import { Frame, Frame2, Highlight, chart3, group, mainScreen } from '../img/navI
 import './aboutSection.css'
 const AboutSection = () => {
   return (
-    <section className='w-full aboutBackground' id="1" >
+    <section className='w-full aboutBackground'  >
       <img src={Frame} className=' frame relative top-40 left-[-3rem] md:block hidden' alt="" />
       <div className='max-w-screen-xl md:flex block  items-center justify-between mx-auto  md:mt-[2rem] mt-[rem]'>
         <div className=' md:w-[40%] md:mt-[-5rem]'>

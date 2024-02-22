@@ -30,7 +30,7 @@ const HomeNavbar = () => {
                     </div>
                     <ul className={`${styles.NavUlstyle} ${open ? 'top-[4.2rem] opacity-100' : 'top-[-490px] md:opacity-100 opacity-0'} `}>
                         <li className='md:ml-8 text-xl md:my-0 my-7'>
-                            <a href='#1' className='text-gray-800 hover:text-[#BA68C8] duration-500 active '>Home</a>
+                            <a href='#1' className='text-gray-800 hover:text-[#BA68C8] duration-500 acti '>Home</a>
                         </li>
                         <li className='md:ml-8 text-xl md:my-0 my-7'>
                             <a href='#2' className='text-gray-800 hover:text-[#BA68C8] duration-500 '>Analytic</a>
