@@ -14,12 +14,14 @@ function StudentDashboard() {
     const [topGroup, setTopGroup] = useState(null);
     const [topStudent, setTopStudent] = useState(null);
     const [studentStatistics, setStudentStatistics] = useState(null);
-    
+
     useEffect(() => {
         setConfig()
         axios.get(url + "group/top-groups-for-teacher", config)
             .then((res) => setTopGroup(res.data.body))
-            .catch((err) => console.log(err));
+            .catch((err) => (
+                console.log("top student hato" + err)
+            ));
     }, []);
 
 

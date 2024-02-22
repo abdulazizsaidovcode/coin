@@ -8,8 +8,8 @@ function Studentcoinstatistic() {
   const [coins, setCoinsRate] = useState([]);
   const [months, checkMonths] = useState([]);
 
-  let month = [];
-  let coin = [];
+  const [month] = useState([]);
+  const [coin] = useState([]);
 
   useEffect(() => {
     setConfig();

@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function Studetsrate() {
     const [coin, setCoinsRate] = useState([]);
+    
     useEffect(() => {
         setConfig();
         axios.get(url + "user/rate/statistics", config)

@@ -46,7 +46,6 @@ function StudentStartTest() {
         sendTestCode(byId('result').value, sessionStorage.getItem('testId'), setResult, setLoading, setError, time, second);
     }
 
-    // salom
     return (
         <>
             {test && <div className='w-full bg-gray-100 h-screen p-6'>
