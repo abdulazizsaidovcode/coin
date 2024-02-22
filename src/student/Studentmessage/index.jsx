@@ -34,11 +34,11 @@ function Studentmessage() {
                     messages.map(message => (
                         <div key={message.id} className="border rounded all-shadow p-3 up">
                             <h2 className="font-bold text-lg mb-3">{message.groupName}</h2>
-                            <p className="text-gray-700 text-base">{message.description.length < 50 ? message.description : `${message.description.slice(0, 50)} `} </p>
+                            <p className="text-gray-700 text-base">{message.description.length < 50 ? message.description : `${message.description.slice(0, 50, "...")} `} </p>
                             {message.description.length > 50 ? <b className='pionter' onClick={() => {
                                 openModal()
                                 getMessageId(message.id)
-                            }}>More</b> : ''}
+                            }}>More </b> : ''}
                             <p className="text-gray-700 text-base">{message.date}</p>
 
                         </div>

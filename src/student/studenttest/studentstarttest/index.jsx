@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { byId, getOneTest, sendTestCode, setConfig } from "../../../components/api/api";
 
 function StudentStartTest() {
+    const SECOUND = 60
+
     const [code, setCode] = useState('');
     const [error, setError] = useState(1);
     const [test, setTest] = useState(null);
     const [time, setTime] = useState(0);
-    const [second, setSecond] = useState(60);
+    const [second, setSecond] = useState(SECOUND);
     const [codeResult, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -29,21 +31,21 @@ function StudentStartTest() {
     }, [test, second]);
 
     useEffect(() => {
-        if (second !== 0) {
-            setTimeout(() => setSecond(second - 1), 1000);
-        }
+        if (second != 0) setTimeout(() => setSecond(second - 1), 1000);
         else {
-            if (time !== 0) {
+            if (time != 0) {
                 setTime(time - 1);
-                setSecond(60);
+                setSecond(SECOUND);
             } else alert('vaqt tugadi');
         }
     }, [second]);
 
     function sendCode() {
+        console.log('ts');
         localStorage.removeItem('ts')
         sendTestCode(byId('result').value, sessionStorage.getItem('testId'), setResult, setLoading, setError, time, second);
     }
+
     // salom
     return (
         <>
@@ -77,7 +79,7 @@ function StudentStartTest() {
                         <div className="text-white bg-black rounded-t-xl p-2">Typing code...</div>
                         <textarea id='result'
                             className="w-full h-64 bg-black text-white rounded-b-xl p-3 font-mono"
-                            value={code}
+                            value={code ? code : test.method}
                             onChange={(e) => setCode(e.target.value)}
                             placeholder="Errors will be shown here..."
                         />
@@ -86,7 +88,7 @@ function StudentStartTest() {
                         <div className="text-black bg-white rounded-t-xl p-2">Result</div>
                         <textarea
                             className={`w-full h-64 bg-white rounded-b-xl p-3 font-mono ${error === 1 ? 'code-no' : error === 2 ? 'code-success' : 'code-error'}`}
-                            placeholder={codeResult ? codeResult : <p className="text-red-200">{codeResult}</p>}
+                            placeholder={codeResult && codeResult.body}
                             disabled
                         />
                     </div>

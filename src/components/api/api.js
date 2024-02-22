@@ -62,9 +62,9 @@ export function sendTestCode(text, testId, setResponse, setLoading, setError, ti
         .then((res) => {
             setResponse(res.data);
             setLoading(false);
-            setError(2);
-        })
-        .catch((err) => {
+            if (res.data.success) setError(2);
+            else setError(3);
+        }).catch((err) => {
             setResponse(err.response.data.body);
             setLoading(false);
             setError(3);
