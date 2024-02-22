@@ -15,6 +15,7 @@ function Message() {
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);
+  document.title = "IT City Academy | Message";
 
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)

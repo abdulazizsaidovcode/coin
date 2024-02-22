@@ -2,7 +2,6 @@ import axios from "axios";
 import { config, setConfig, url } from "../../../components/api/api";
 import { useState } from "react";
 import { useEffect } from "react";
-import TopLoading from "../dashboard/components/loading";
 
 const Students = () => {
 
@@ -10,6 +9,7 @@ const Students = () => {
     const [group, setGroup] = useState(null);
     const [student, setStudent] = useState([]);
     const [studentId, setStudentId] = useState(null);
+    document.title = "IT City Academy | Student";
 
     useEffect(() => {
         setConfig();
