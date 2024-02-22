@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import img from "../../assits/IT-CA-logo.png"; // O'zgartiring, agar yo'l noto'g'ri bo'lsa
 import MobileBar from "./mobileBar";
-import { byId } from "../../components/api/api";
 
 function SidebarTemplate({ isAdmin }) {
   const [isExpanded, setIsExpanded] = useState(window.innerWidth > 992)
@@ -14,17 +13,19 @@ function SidebarTemplate({ isAdmin }) {
   const [sidebarActiveGift, setSidebarActiveGift] = useState(false)
   const [sidebarActiveExchange, setSidebarActiveExchange] = useState(false)
   const [sidebarActiveMessage, setSidebarActiveMessage] = useState(false)
+  const location = useLocation();
+  const locationPathName = location.pathname;
 
-  const activeHandler = (e) => {
-    e.target.textContent === 'Dashboard' ? setSidebarActiveDashboard(true) : setSidebarActiveDashboard(false)
-    e.target.textContent === 'Category' ? setSidebarActiveCategory(true) : setSidebarActiveCategory(false)
-    e.target.textContent === 'Group' ? setSidebarActiveGroup(true) : setSidebarActiveGroup(false)
-    e.target.textContent === 'Student' ? setSidebarActiveStudent(true) : setSidebarActiveStudent(false)
-    e.target.textContent === 'Test' ? setSidebarActiveTest(true) : setSidebarActiveTest(false)
-    e.target.textContent === 'Gift' ? setSidebarActiveGift(true) : setSidebarActiveGift(false)
-    e.target.textContent === 'Exchange' ? setSidebarActiveExchange(true) : setSidebarActiveExchange(false)
-    e.target.textContent === 'Message' ? setSidebarActiveMessage(true) : setSidebarActiveMessage(false)
-  }
+  useEffect(() => {
+    locationPathName === '/teacher/dashboard' ? setSidebarActiveDashboard(true) : setSidebarActiveDashboard(false)
+    locationPathName === '/teacher/category' ? setSidebarActiveCategory(true) : setSidebarActiveCategory(false)
+    locationPathName === '/teacher/group' ? setSidebarActiveGroup(true) : setSidebarActiveGroup(false)
+    locationPathName === '/teacher/student' ? setSidebarActiveStudent(true) : setSidebarActiveStudent(false)
+    locationPathName === '/teacher/test' ? setSidebarActiveTest(true) : setSidebarActiveTest(false)
+    locationPathName === '/teacher/gift' ? setSidebarActiveGift(true) : setSidebarActiveGift(false)
+    locationPathName === '/teacher/exchange' ? setSidebarActiveExchange(true) : setSidebarActiveExchange(false)
+    locationPathName === '/teacher/message' ? setSidebarActiveMessage(true) : setSidebarActiveMessage(false)
+  }, [locationPathName])
 
   // Oyna o'lchamini kuzatish
   useEffect(() => {
@@ -101,7 +102,6 @@ function SidebarTemplate({ isAdmin }) {
               {/* Dashboard Link */}
               <li className='py-2'>
                 <Link to={`/teacher/dashboard`}
-                  onClick={activeHandler}
                   className={`${isExpanded ? `${styles.sideBarStylexxl} ${sidebarActiveDashboard ? styles.focusClass : ''}` : styles.sideBarStylexl}`}>
                   <div className='flex justify-center items-center'>
                     <span className={styles.sidebarFlexClass}>
@@ -113,7 +113,6 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li>
                 <Link to={`/teacher/category`}
-                  onClick={activeHandler}
                   className={`${isExpanded ? `${styles.sideBarStylexxl} ${sidebarActiveCategory ? styles.focusClass : ''}` : styles.sideBarStylexl}`}>
                   <div className='flex justify-center items-center'>
                     <span className={styles.sidebarFlexClass}>
@@ -125,7 +124,6 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li className='py-2'>
                 <Link to={`/teacher/group`}
-                  onClick={activeHandler}
                   className={`${isExpanded ? `${styles.sideBarStylexxl} ${sidebarActiveGroup ? styles.focusClass : ''}` : styles.sideBarStylexl}`}>
                   <div className='flex justify-center items-center'>
                     <span className={styles.sidebarFlexClass}>
@@ -137,7 +135,6 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li className='py-2'>
                 <Link to={`/teacher/student`}
-                  onClick={activeHandler}
                   className={`${isExpanded ? `${styles.sideBarStylexxl} ${sidebarActiveStudent ? styles.focusClass : ''}` : styles.sideBarStylexl}`}>
                   <div className='flex justify-center items-center'>
                     <span className={styles.sidebarFlexClass}>
@@ -149,7 +146,6 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li className='py-2'>
                 <Link to={`/teacher/test`}
-                  onClick={activeHandler}
                   className={`${isExpanded ? `${styles.sideBarStylexxl} ${sidebarActiveTest ? styles.focusClass : ''}` : styles.sideBarStylexl}`}>
                   <div className='flex justify-center items-center'>
                     <span className={styles.sidebarFlexClass}>
@@ -163,7 +159,6 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li className='py-2'>
                 <Link to={`/teacher/gift`}
-                  onClick={activeHandler}
                   className={`${isExpanded ? `${styles.sideBarStylexxl} ${sidebarActiveGift ? styles.focusClass : ''}` : styles.sideBarStylexl}`}>
                   <div className='flex justify-center items-center'>
                     <span className={styles.sidebarFlexClass}>
@@ -175,7 +170,6 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li className='py-2'>
                 <Link to={`/teacher/exchange`}
-                  onClick={activeHandler}
                   className={`${isExpanded ? `${styles.sideBarStylexxl} ${sidebarActiveExchange ? styles.focusClass : ''}` : styles.sideBarStylexl}`}>
                   <span className={styles.sidebarFlexClass}>
                     <i className="fa-solid fa-calendar-days"></i>
@@ -185,7 +179,6 @@ function SidebarTemplate({ isAdmin }) {
               </li>
               <li className='py-2'>
                 <Link to={`/teacher/message`}
-                  onClick={activeHandler}
                   className={`${isExpanded ? `${styles.sideBarStylexxl} ${sidebarActiveMessage ? styles.focusClass : ''}` : styles.sideBarStylexl}`}>
                   <span className={styles.sidebarFlexClass}>
                     <i className="fa-solid fa-envelope"></i>
