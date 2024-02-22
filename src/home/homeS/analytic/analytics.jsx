@@ -40,7 +40,7 @@ const Analytics = () => {
         },
     ]
     return (
-        <div className="w-full md:mt-0 mt-10" id="2">
+        <div className="w-full md:mt-0 mt-10" >
             <h1 className="flex justify-center h-[3.5rem] mb-20 font-extrabold text-5xl analyticH1 ">Our success <span></span> </h1>
             <div className="max-w-screen-xl mx-auto gap-5 cards ">
                 <div className=" card ">
