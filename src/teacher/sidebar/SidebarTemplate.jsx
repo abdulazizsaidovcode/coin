@@ -191,7 +191,6 @@ function SidebarTemplate({ isAdmin }) {
         </div>
       </div>
       <MobileBar isAdmin={isAdmin} />
-      {/* </div> */}
     </>
   );
 }
