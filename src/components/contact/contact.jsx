@@ -9,7 +9,7 @@ import Loader from "../../assits/loader";
 // Dastlabki ma'lumotlar ro'yxati
 
 function Contact() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [groupId, setGroupId] = useState(null);
@@ -68,8 +68,6 @@ function Contact() {
       });
   };
 
- 
-
   // Tartiblash turini va yo'nalishini o'zgartirish
 
   function cutDescription(description) {
@@ -107,7 +105,8 @@ function Contact() {
             className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
           >
             Old posts first
-            {/* {sortType === 'time' && (isAscending ? '⬆️' : '⬇️')} */}
+            {/* {sortType === 'time' && (isAscending ? '
+             : '⬇️')} */}
           </button>
         </div>
       </div>

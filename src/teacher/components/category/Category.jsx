@@ -10,6 +10,8 @@ function Category() {
   const [categories, setCategories] = useState(null);
   const [categorysub, setCategoriesub] = useState(null);
 
+  document.title = "IT City Academy | Category";
+
   useEffect(() => {
     setConfig();
     getCategory1()

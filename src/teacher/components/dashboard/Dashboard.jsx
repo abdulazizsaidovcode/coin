@@ -14,6 +14,7 @@ const Dashboard = () => {
     const [topStudent, setTopStudent] = useState(null);
     const [topGroup, setTopGroup] = useState(null);
     const [pl, setPl] = useState(null);
+    document.title = "IT City Academy | Dashboard";
 
     useEffect(() => {
         setConfig();

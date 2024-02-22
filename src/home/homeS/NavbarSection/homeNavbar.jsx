@@ -8,6 +8,13 @@ import { Link } from 'react-router-dom'
 // import { loadIcon } from '@iconify/react'
 
 const HomeNavbar = () => {
+    const activPage=window.location.pathname
+    const navLinks=document.querySelectorAll('.sxh').
+    forEach(link=>{
+        if(link.href.includes(`${activPage}`)){
+            link.classList.add('active')
+        }
+    })
     const styles = {
         NavUlstyle: "md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto pl-9 transition-all duration-500 ease-in",
         ButtonNav: "py-2 px-6 md:mr-0 mr-20 rounded  bg-[rgb(158,105,167)] outline-none  text-white hover:bg-[#BA68C8] hover:duration-500  flex items-center gap-2"
@@ -30,16 +37,16 @@ const HomeNavbar = () => {
                     </div>
                     <ul className={`${styles.NavUlstyle} ${open ? 'top-[4.2rem] opacity-100' : 'top-[-490px] md:opacity-100 opacity-0'} `}>
                         <li className='md:ml-8 text-xl md:my-0 my-7'>
-                            <a href='#1' className='text-gray-800 hover:text-[#BA68C8] duration-500 active '>Home</a>
+                            <a href='#1' className='text-gray-800 hover:text-[#BA68C8] duration-500 sxh active '>Home</a>
                         </li>
                         <li className='md:ml-8 text-xl md:my-0 my-7'>
-                            <a href='#2' className='text-gray-800 hover:text-[#BA68C8] duration-500 '>Analytic</a>
+                            <a href='#2' className='text-gray-800 hover:text-[#BA68C8] duration-500 sxh '>Analytic</a>
                         </li>
                         <li className='md:ml-8 text-xl md:my-0 my-7'>
-                            <a href='#3' className='text-gray-800 hover:text-[#BA68C8] duration-500 '>About</a>
+                            <a href='#3' className='text-gray-800 hover:text-[#BA68C8] duration-500 sxh '>About</a>
                         </li>
                         <li className='md:ml-8 text-xl md:my-0 my-7'>
-                            <a href='#4' className='text-gray-800 hover:text-[#BA68C8] duration-500 '>Contact</a>
+                            <a href='#4' className='text-gray-800 hover:text-[#BA68C8] duration-500 sxh '>Contact</a>
                         </li>
                     </ul>
                     <Link to="/log-in" className={`${styles.ButtonNav} navButton `} >

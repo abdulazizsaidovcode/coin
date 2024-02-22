@@ -31,6 +31,7 @@
 }
 
 @media (max-width: 768px) {
+
   .btm,
   .btm-close,
   .btm-info {
@@ -164,5 +165,20 @@
   100% {
     right: 0;
     transform: scale(1);
+  }
+}
+
+.mobile-animation-nav {
+  animation: all 1s ease;
+  animation-name: mobile-animation-nav;
+}
+
+@keyframes mobile-animation-nav {
+  0% {
+    bottom: -22rem;
+  }
+
+  100% {
+    bottom: 3.45rem;
   }
 }

@@ -3,7 +3,7 @@ import { AboutCompany, Vector } from '../img/navIndex'
 const About = () => {
     return (
         <>
-            <div className="max-w-screen-xl mx-auto md:flex block flex-wrap aboutMain  items-center justify-between h-60 mt-20 md:mb-[30rem] mb-[40rem] " id="3">
+            <div className="max-w-screen-xl mx-auto md:flex block flex-wrap aboutMain  items-center justify-between h-60 mt-20 md:mb-[30rem] mb-[40rem] " >
                 <div className='image-section md:w-[50%] w-full'>
                     <img src={AboutCompany} alt="" className='w-full' />
                 </div>

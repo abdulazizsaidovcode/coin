@@ -13,6 +13,7 @@ const Exchange = () => {
     const [group, setGroup] = useState(null);
     const [page, setPage] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
+    document.title = "IT City Academy | Exchange";
 
     useEffect(() => {
         setConfig();

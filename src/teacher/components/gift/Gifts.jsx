@@ -7,6 +7,7 @@ import axios from "axios";
 function Gift() {
     const [gifts, setGifts] = useState(null);
     const [page, setPage] = useState(0);
+    document.title = "IT City Academy | Gift";
 
     useEffect(() => {
         setConfig();
