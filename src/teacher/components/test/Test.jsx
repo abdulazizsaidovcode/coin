@@ -13,6 +13,7 @@ const Test = () => {
     const [testCategorySub, setTestCategorySub] = useState([]);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [tableHeddin, setTableHeddin] = useState(false);
+    document.title = "IT City Academy | Test";
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
