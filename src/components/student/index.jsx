@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Loader from "../../assits/loader";
 import ReactPaginate from "react-paginate";
+import Referal from "./referal";
 
 const AdminStudent = () => {
   const [modal, setIsModalOpen] = useState(false);
@@ -197,6 +198,7 @@ const AdminStudent = () => {
         <button className="btm" onClick={openModal}>
           + Add
         </button>
+        <Referal/>
       </div>
 
       <div>
