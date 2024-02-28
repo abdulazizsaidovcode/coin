@@ -3,11 +3,10 @@ import StudentsTotalcoin from "./Totalcoins/index.jsx";
 import Studetsrate from "./Studentsrate/index.jsx";
 import Studentcoinstatistic from "./Studentcoinstatistic/index.jsx";
 import TopGroup from "./TopGroups/index.jsx";
-import { getStudentStatistics, getTopGroupForTeacher, getTopStudent, setConfig, url } from "../../components/api/api.js";
+import { config, getStudentStatistics, getTopGroupForTeacher, getTopStudent, setConfig, url } from "../../components/api/api.js";
 import TopLoading from "../../components/Topteachers/TopLoading.js";
 import TopStudent from "../../components/Topstudents/index.jsx";
 import axios from "axios";
-import { config } from "@fortawesome/fontawesome-svg-core";
 
 function StudentDashboard() {
 
@@ -18,7 +17,9 @@ function StudentDashboard() {
     useEffect(() => {
         setConfig()
         axios.get(url + "group/top-groups-for-teacher", config)
-            .then((res) => setTopGroup(res.data.body))
+            .then((res) => { 
+                setTopGroup(res.data.body) 
+            })
             .catch((err) => (
                 console.log("top student hato" + err)
             ));
