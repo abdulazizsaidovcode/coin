@@ -10,7 +10,7 @@ import axios from "axios";
 
 function StudentDashboard() {
 
-    const [topGroup, setTopGroup] = useState(null);
+    const [topGroup, setTopGroup] = useState([]);
     const [topStudent, setTopStudent] = useState(null);
     const [studentStatistics, setStudentStatistics] = useState(null);
 
@@ -62,7 +62,7 @@ function StudentDashboard() {
                     )}
                 </div>
                 <div className="col-span-1 lg:col-span-6 ">
-                    {topGroup ? (
+                    {topGroup.length > 0 ? (
                         <TopGroup topGroups={topGroup} />
                     ) : (
                         <TopLoading name="Top Group" />

@@ -39,7 +39,7 @@ function Studetsrate() {
                     <i className="fa-solid fa-sack-dollar text-4xl"></i>
                 </div>
                 <div className="flex flex-col ml-3">
-                    <span className="text-sm text-gray-600 ">Total coin</span>
+                    <span className="text-sm text-gray-600 ">Total Exchange</span>
                     <span className="text-lg font-semibold">{coin ? coin.numberOfExchange : "0"}</span>
                 </div>
             </div>

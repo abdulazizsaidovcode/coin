@@ -8,8 +8,8 @@ function Studentcoinstatistic() {
   const [coins, setCoinsRate] = useState([]);
   const [months, checkMonths] = useState([]);
 
-  const [month] = useState([]);
-  const [coin] = useState([]);
+  const [month, getMonths] = useState([]);
+  const [coin, getCoins] = useState([]);
 
   useEffect(() => {
     setConfig();
@@ -23,6 +23,7 @@ function Studentcoinstatistic() {
     axios.get(url + "coin/history/student/category/coin", config)
       .then((res) => {
         setCoinsRate(res.data.body);
+        console.log(res.data.body);
         checkMonths(res.data.body);
 
         // Ob'ektning har bir qiymatini tekshirish
@@ -31,8 +32,6 @@ function Studentcoinstatistic() {
             for (let i of value) {
               month.push(i.monthName);
               coin.push(i.coin);
-              console.log(coin);
-              console.log(month);
             }
           }
         });
