@@ -10,20 +10,27 @@ function Studentcoinstatistic() {
 
   const [month, getMonths] = useState([]);
   const [coin, getCoins] = useState([]);
-
+  const [curentmotht, getcurentmonth] = useState(null)
+  const allmonth = ["January","February", "March","April" ]
   useEffect(() => {
     setConfig();
     setTimeout(() => {
     }, 5000)
     getMonth()
+    getCurentMonth()
   }, []);
 
+  function getCurentMonth(){
+    let date = new Date()
+    getcurentmonth(date.getMonth())
+    console.log(date.getMonth());
+    console.log(date);
+  }
 
   const getMonth = () => {
     axios.get(url + "coin/history/student/category/coin", config)
       .then((res) => {
         setCoinsRate(res.data.body);
-        console.log(res.data.body);
         checkMonths(res.data.body);
 
         // Ob'ektning har bir qiymatini tekshirish
@@ -60,7 +67,7 @@ function Studentcoinstatistic() {
       // Configuration for the x-axis
       {
         type: "category",
-        data: month ? month : ['FEBRUARY', 'FEBRUARY'],
+        data: month.length > 0 ? month : ['FEBRUARY'],
         axisTick: {
           alignWithLabel: true,
         },
