@@ -3,23 +3,26 @@ import StudentsTotalcoin from "./Totalcoins/index.jsx";
 import Studetsrate from "./Studentsrate/index.jsx";
 import Studentcoinstatistic from "./Studentcoinstatistic/index.jsx";
 import TopGroup from "./TopGroups/index.jsx";
-import { getStudentStatistics, getTopGroupForTeacher, getTopStudent, setConfig, url } from "../../components/api/api.js";
+import { config, getStudentStatistics, getTopGroupForTeacher, getTopStudent, setConfig, url } from "../../components/api/api.js";
 import TopLoading from "../../components/Topteachers/TopLoading.js";
 import TopStudent from "../../components/Topstudents/index.jsx";
 import axios from "axios";
-import { config } from "@fortawesome/fontawesome-svg-core";
 
 function StudentDashboard() {
 
-    const [topGroup, setTopGroup] = useState(null);
+    const [topGroup, setTopGroup] = useState([]);
     const [topStudent, setTopStudent] = useState(null);
     const [studentStatistics, setStudentStatistics] = useState(null);
-    
+
     useEffect(() => {
         setConfig()
         axios.get(url + "group/top-groups-for-teacher", config)
-            .then((res) => setTopGroup(res.data.body))
-            .catch((err) => console.log(err));
+            .then((res) => { 
+                setTopGroup(res.data.body) 
+            })
+            .catch((err) => (
+                console.log("top student hato" + err)
+            ));
     }, []);
 
 
@@ -59,7 +62,7 @@ function StudentDashboard() {
                     )}
                 </div>
                 <div className="col-span-1 lg:col-span-6 ">
-                    {topGroup ? (
+                    {topGroup.length > 0 ? (
                         <TopGroup topGroups={topGroup} />
                     ) : (
                         <TopLoading name="Top Group" />

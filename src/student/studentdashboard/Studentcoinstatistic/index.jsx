@@ -8,16 +8,24 @@ function Studentcoinstatistic() {
   const [coins, setCoinsRate] = useState([]);
   const [months, checkMonths] = useState([]);
 
-  let month = [];
-  let coin = [];
-
+  const [month, getMonths] = useState([]);
+  const [coin, getCoins] = useState([]);
+  const [curentmotht, getcurentmonth] = useState(null)
+  const allmonth = ["January","February", "March","April" ]
   useEffect(() => {
     setConfig();
     setTimeout(() => {
     }, 5000)
     getMonth()
+    getCurentMonth()
   }, []);
 
+  function getCurentMonth(){
+    let date = new Date()
+    getcurentmonth(date.getMonth())
+    console.log(date.getMonth());
+    console.log(date);
+  }
 
   const getMonth = () => {
     axios.get(url + "coin/history/student/category/coin", config)
@@ -31,8 +39,6 @@ function Studentcoinstatistic() {
             for (let i of value) {
               month.push(i.monthName);
               coin.push(i.coin);
-              console.log(coin);
-              console.log(month);
             }
           }
         });
@@ -61,7 +67,7 @@ function Studentcoinstatistic() {
       // Configuration for the x-axis
       {
         type: "category",
-        data: month ? month : ['FEBRUARY', 'FEBRUARY'],
+        data: month.length > 0 ? month : ['FEBRUARY'],
         axisTick: {
           alignWithLabel: true,
         },
