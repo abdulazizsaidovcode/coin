@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import img from "../../assits/IT-CA-logo.png"; // O'zgartiring, agar yo'l noto'g'ri bo'lsa
 import MobileBar from "./mobileBar";
 import { byId } from "../../components/api/api";
@@ -15,36 +15,19 @@ function SidebarTemplate({ isAdmin }) {
   const [sidebarActiveExchange, setSidebarActiveExchange] = useState(false);
   const [sidebarActiveMessage, setSidebarActiveMessage] = useState(false);
   const [sidebarActiveContact, setSidebarActiveContact] = useState(false);
+  const location = useLocation();
+  const locationPathName = location.pathname;
 
-  const activeHandler = (e) => {
-    e.target.textContent === "Dashboard"
-      ? setSidebarActiveDashboard(true)
-      : setSidebarActiveDashboard(false);
-    e.target.textContent === "Category"
-      ? setSidebarActiveCategory(true)
-      : setSidebarActiveCategory(false);
-    e.target.textContent === "Group"
-      ? setSidebarActiveGroup(true)
-      : setSidebarActiveGroup(false);
-    e.target.textContent === "Student"
-      ? setSidebarActiveStudent(true)
-      : setSidebarActiveStudent(false);
-    e.target.textContent === "Teacher"
-      ? setSidebarActiveTest(true)
-      : setSidebarActiveTest(false);
-    e.target.textContent === "Gift"
-      ? setSidebarActiveGift(true)
-      : setSidebarActiveGift(false);
-    e.target.textContent === "Exchange"
-      ? setSidebarActiveExchange(true)
-      : setSidebarActiveExchange(false);
-    e.target.textContent === "Message"
-      ? setSidebarActiveMessage(true)
-      : setSidebarActiveMessage(false);
-    e.target.textContent === "Contact"
-      ? setSidebarActiveContact(true)
-      : setSidebarActiveContact(false);
-  };
+  useEffect(() => {
+    locationPathName === '/admin/dashboard' ? setSidebarActiveDashboard(true) : setSidebarActiveDashboard(false)
+    locationPathName === '/admin/category' ? setSidebarActiveCategory(true) : setSidebarActiveCategory(false)
+    locationPathName === '/admin/group' ? setSidebarActiveGroup(true) : setSidebarActiveGroup(false)
+    locationPathName === '/admin/student' ? setSidebarActiveStudent(true) : setSidebarActiveStudent(false)
+    locationPathName === '/admin/test' ? setSidebarActiveTest(true) : setSidebarActiveTest(false)
+    locationPathName === '/admin/gift' ? setSidebarActiveGift(true) : setSidebarActiveGift(false)
+    locationPathName === '/admin/exchange' ? setSidebarActiveExchange(true) : setSidebarActiveExchange(false)
+    locationPathName === '/admin/message' ? setSidebarActiveMessage(true) : setSidebarActiveMessage(false)
+  }, [locationPathName])
 
   // Oyna o'lchamini kuzatish
   useEffect(() => {
@@ -129,7 +112,7 @@ function SidebarTemplate({ isAdmin }) {
               <li className="py-2">
                 <Link
                   to={`/admin/dashboard`}
-                  onClick={activeHandler}
+                  
                   className={`${
                     isExpanded
                       ? `${styles.sideBarStylexxl} ${
@@ -151,7 +134,7 @@ function SidebarTemplate({ isAdmin }) {
               <li>
                 <Link
                   to={`/admin/category`}
-                  onClick={activeHandler}
+                  
                   className={`${
                     isExpanded
                       ? `${styles.sideBarStylexxl} ${
@@ -173,7 +156,7 @@ function SidebarTemplate({ isAdmin }) {
               <li className="py-2">
                 <Link
                   to={`/admin/group`}
-                  onClick={activeHandler}
+                  
                   className={`${
                     isExpanded
                       ? `${styles.sideBarStylexxl} ${
@@ -195,7 +178,7 @@ function SidebarTemplate({ isAdmin }) {
               <li className="py-2">
                 <Link
                   to={`/admin/student`}
-                  onClick={activeHandler}
+                  
                   className={`${
                     isExpanded
                       ? `${styles.sideBarStylexxl} ${
@@ -217,7 +200,7 @@ function SidebarTemplate({ isAdmin }) {
               <li className="py-2">
                 <Link
                   to={`/admin/teacher`}
-                  onClick={activeHandler}
+                  
                   className={`${
                     isExpanded
                       ? `${styles.sideBarStylexxl} ${
@@ -239,7 +222,7 @@ function SidebarTemplate({ isAdmin }) {
               <li className="py-2">
                 <Link
                   to={`/admin/gift`}
-                  onClick={activeHandler}
+                  
                   className={`${
                     isExpanded
                       ? `${styles.sideBarStylexxl} ${
@@ -261,7 +244,7 @@ function SidebarTemplate({ isAdmin }) {
               <li className="py-2">
                 <Link
                   to={`/admin/exchange`}
-                  onClick={activeHandler}
+                  
                   className={`${
                     isExpanded
                       ? `${styles.sideBarStylexxl} ${
@@ -281,7 +264,7 @@ function SidebarTemplate({ isAdmin }) {
               <li className="py-2">
                 <Link
                   to={`/admin/message`}
-                  onClick={activeHandler}
+                  
                   className={`${
                     isExpanded
                       ? `${styles.sideBarStylexxl} ${
@@ -301,7 +284,7 @@ function SidebarTemplate({ isAdmin }) {
               <li className="py-2">
                 <Link
                   to={`/admin/contact`}
-                  onClick={activeHandler}
+                  
                   className={`${
                     isExpanded
                       ? `${styles.sideBarStylexxl} ${

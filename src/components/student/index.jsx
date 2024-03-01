@@ -194,7 +194,7 @@ const AdminStudent = () => {
       <div className="mt-10">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Student</h2>
       </div>
-      <div className=" mb-4 flex justify-between">
+      <div className=" mb-4 flex flex-col gap-3 sm:flex-row sm:justify-between">
         <button className="btm" onClick={openModal}>
           + Add
         </button>

@@ -1,7 +1,7 @@
 .dropAni {
     top: -22rem;
     animation-name: identifier;
-    animation-duration: 1s;
+    animation-duration: 2s;
     animation-direction: alternate;
 }
 
@@ -12,7 +12,7 @@
 
 .dropAni2 {
     top: 3rem;
-    animation-duration: 1s;
+    animation-duration: 2s;
     animation-name: identifier2;
     animation-direction: alternate;
 }

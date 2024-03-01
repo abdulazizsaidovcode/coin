@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import GroupsTable from "./categorytable";
 import Loader from "../../assits/loader";
+import NotFound from "../../NotFound";
 
 const AdminGroup = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -259,7 +260,7 @@ const AdminGroup = () => {
           </div>
         </div>
       )}
-      {groups &&
+      {groups ?
         <GroupsTable
           teacher={teacher}
           category={category}
@@ -271,7 +272,8 @@ const AdminGroup = () => {
           currentPage={currentPage}
           handelPageClick={handelPageClick}
           page={page}
-        />}
+        /> : 
+        <NotFound/>}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TopGroup from "./components/top-group";
 import TopStudent from "./components/top-student";
 import TopTeachers from "./components/top-teacher";
@@ -9,6 +9,8 @@ import TopLoading from "./components/loading";
 import { toast } from "react-toastify";
 
 const Dashboard = () => {
+    
+  const scrolltop = useRef(null);
     const [STMGSize, setSTMGSize] = useState(null);
     const [topTeacher, setTopTeacher] = useState(null);
     const [topStudent, setTopStudent] = useState(null);
@@ -16,6 +18,21 @@ const Dashboard = () => {
     const [pl, setPl] = useState(null);
 
     useEffect(() => {
+        const handleScroll = () => {
+            // Agar scroll pastga bo'lsa
+            if (window.scrollY > 0) {
+              // OfCanvas tepaga chiqish
+              scrolltop.current.scrollTop = 0;
+            }
+          };
+      
+          // Scroll hodisalarini eshitish uchun event listener qo'shish
+          window.addEventListener('scroll', handleScroll);
+      
+          // Tarkibi ko'rsatishdan keyin event listener ni o'chirish
+          return () => {
+            window.removeEventListener('scroll', handleScroll);
+          }
         setConfig();
         axios.get(url + "user/statistic", config)
             .then((res) => setSTMGSize(res.data.body))
@@ -36,7 +53,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <div className="bg-gray-100 min-h-screen p-8 pb-20 xl:pb-8 w-full">
+            <div ref={scrolltop} className="bg-gray-100 min-h-screen p-8 pb-20 xl:pb-8 w-full">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
                     <MetricCard
                         title="Number of Students"
