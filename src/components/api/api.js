@@ -57,12 +57,15 @@ export function getTestCategory(setTestCategory) {
 }
 
 export function sendTestCode(text, testId, setResponse, setLoading, setError, time, secound) {
-    console.log(text);
     setLoading(true)
+    let data = {
+        code: text
+    } 
     config.headers["Content-Type"] = 'application/json'
-    axios.post(url + "test/performance/" + testId + "?minute=" + `${time}.${secound}`, text, config)
+    axios.post(url + "test/performance/" + testId + "?minute=" + `${time}.${secound}`, data, config)
         .then((res) => {
             setResponse(res.data);
+            console.log(res.data);
             setLoading(false);
             if (res.data.success) setError(2);
             else setError(3);
