@@ -20,7 +20,7 @@ function StudentStartTest() {
 
     useEffect(() => {
         if (localStorage.getItem('ts')) {
-            console.log(localStorage.getItem('ts'));
+            // console.log(localStorage.getItem('ts'));
             setTime(localStorage.getItem('ts').split('.')[0]);
             setSecond(localStorage.getItem('ts').split('.')[1]);
         } else if (test) setTime(test.processMinute - 1);
@@ -41,7 +41,6 @@ function StudentStartTest() {
     }, [second]);
 
     function sendCode() {
-        console.log('ts');
         localStorage.removeItem('ts')
         sendTestCode(byId('result').value, sessionStorage.getItem('testId'), setResult, setLoading, setError, time, second);
     }
