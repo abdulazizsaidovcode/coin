@@ -16,9 +16,9 @@ function StudentStartTest() {
         setConfig();
         getOneTest(sessionStorage.getItem('testId'), setTest);
         // let testId = sessionStorage.getItem('testId');
-        return () => {
-            localStorage.removeItem('ts')
-         }
+        // return () => {
+        //     localStorage.removeItem('ts')
+        //  }
     }, []);
 
     useEffect(() => {

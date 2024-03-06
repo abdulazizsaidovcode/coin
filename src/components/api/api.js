@@ -1,8 +1,8 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const url = "http://139.59.14.48:8090/";
-// export const url = "http://192.168.0.114/";
+// export const url = "http://139.59.14.48:8090/";
+export const url = "http://192.168.0.111/";
 
 export const getFile = `${url}attachment/getFile/`;
 
@@ -59,10 +59,17 @@ export function getTestCategory(setTestCategory) {
 export function sendTestCode(text, testId, setResponse, setLoading, setError, time, secound) {
     setLoading(true)
     // config.headers["Content-Type"] = 'application/json'
-    axios.post(url + "test/performance/" + testId + "?minute=" + `${time}.${secound}`, {text}, config)
+    axios.post(url + "test/performance/" + testId + "?minute=" + `${time}.${secound}`, { text }, config)
         .then((res) => {
             setResponse(res.data);
-            console.log(res);
+            console.log(res.data);
+            if (res.data.success && res.data.body.length > 0) {
+                toast.success(res.data.body);
+            } else if (res.data.success && res.data.body.length == 0) {
+                toast.warning("siz testni tog'ri ishladingiz ammo coin berilmatdi")
+            }
+            else {
+            }
             setLoading(false);
             if (res.data.success) setError(2);
             else setError(3);
