@@ -2,20 +2,19 @@ import { useEffect, useState } from "react";
 import { byId, getOneTest, sendTestCode, setConfig } from "../../../components/api/api";
 
 function StudentStartTest() {
-    const SECOUND = 60
+    const secound = 60
 
     const [code, setCode] = useState('');
     const [error, setError] = useState(1);
     const [test, setTest] = useState(null);
     const [time, setTime] = useState(0);
-    const [second, setSecond] = useState(SECOUND);
+    const [second, setSecond] = useState(secound);
     const [codeResult, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setConfig();
         getOneTest(sessionStorage.getItem('testId'), setTest);
-        // let testId = sessionStorage.getItem('testId');
         // return () => {
         //     localStorage.removeItem('ts')
         //  }
@@ -23,7 +22,6 @@ function StudentStartTest() {
 
     useEffect(() => {
         if (localStorage.getItem('ts')) {
-            // console.log(localStorage.getItem('ts'));
             setTime(localStorage.getItem('ts').split('.')[0]);
             setSecond(localStorage.getItem('ts').split('.')[1]);
         } else if (test) setTime(test.processMinute - 1);
@@ -38,7 +36,7 @@ function StudentStartTest() {
         else {
             if (time != 0) {
                 setTime(time - 1);
-                setSecond(SECOUND);
+                setSecond(secound);
             } else alert('vaqt tugadi');
         }
     }, [second]);

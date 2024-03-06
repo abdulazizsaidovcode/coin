@@ -50,9 +50,7 @@ export function getTestCategory(setTestCategory) {
     axios.get(url + "test/student/category/block", config)
         .then((res) => {
             setTestCategory(res.data.body);
-            console.log(res.data.body);
         })
-
         .catch((err) => console.log(err));
 }
 
@@ -62,7 +60,6 @@ export function sendTestCode(text, testId, setResponse, setLoading, setError, ti
     axios.post(url + "test/performance/" + testId + "?minute=" + `${time}.${secound}`, { text }, config)
         .then((res) => {
             setResponse(res.data);
-            console.log(res.data);
             if (res.data.success && res.data.body.length > 0) {
                 toast.success(res.data.body);
             } else if (res.data.success && res.data.body.length == 0) {
