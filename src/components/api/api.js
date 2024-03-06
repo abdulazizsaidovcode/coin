@@ -1,8 +1,8 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-// export const url = "http://139.59.14.48:8090/";
-export const url = "http://192.168.0.111/";
+export const url = "http://139.59.14.48:8090/";
+// export const url = "http://192.168.0.111/";
 
 export const getFile = `${url}attachment/getFile/`;
 
