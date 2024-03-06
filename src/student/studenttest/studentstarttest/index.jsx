@@ -16,6 +16,9 @@ function StudentStartTest() {
         setConfig();
         getOneTest(sessionStorage.getItem('testId'), setTest);
         // let testId = sessionStorage.getItem('testId');
+        return () => {
+            localStorage.removeItem('ts')
+         }
     }, []);
 
     useEffect(() => {
@@ -86,7 +89,7 @@ function StudentStartTest() {
                         <div className="text-black bg-white rounded-t-xl p-2">Result</div>
                         <textarea
                             className={`w-full h-64 bg-white rounded-b-xl p-3 font-mono ${error === 1 ? 'code-no' : error === 2 ? 'code-success' : 'code-error'}`}
-                            placeholder={codeResult && codeResult.body}
+                            placeholder={codeResult && codeResult.message}
                             disabled
                         />
                     </div>
