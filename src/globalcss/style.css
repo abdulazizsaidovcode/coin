@@ -51,7 +51,7 @@
 }
 
 .up:hover {
-  transform: scale(1.02);
+  transform: scale(1);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
 }
 
