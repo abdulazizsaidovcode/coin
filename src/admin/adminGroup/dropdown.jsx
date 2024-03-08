@@ -21,7 +21,7 @@ const Dropdown = ({ options, isAdmin, isOpen, setIsOpen }) => {
             aria-haspopup="true"
             aria-expanded="true"
           >
-            <i class="fa-solid fa-bars"></i>
+            <i className="fa-solid fa-bars"></i>
           </button>
         </span>
       </div>
@@ -43,7 +43,7 @@ const Dropdown = ({ options, isAdmin, isOpen, setIsOpen }) => {
                 >
                   <div className="flex justify-center items-center me-2">
                     <span>
-                      <i class="fa-solid fa-user"></i>
+                      <i className="fa-solid fa-user"></i>
                     </span>
                   </div>
                   <span>Student</span>
@@ -57,7 +57,7 @@ const Dropdown = ({ options, isAdmin, isOpen, setIsOpen }) => {
                 >
                   <div className="flex justify-center items-center me-2">
                     <span>
-                      <i class="fa-solid fa-user-tie"></i>
+                      <i className="fa-solid fa-user-tie"></i>
                     </span>
                   </div>
                   <span>Teacher</span>
