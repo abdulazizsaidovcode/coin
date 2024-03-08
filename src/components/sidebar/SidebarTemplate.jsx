@@ -189,7 +189,7 @@ function SidebarTemplate({ isAdmin }) {
                 >
                   <div className="flex justify-center items-center">
                     <span className={styles.sidebarFlexClass}>
-                      <i class="fa-solid fa-user"></i>
+                      <i className="fa-solid fa-user"></i>
                     </span>
                   </div>
                   <span className={`ml-2 ${isExpanded ? "block" : "hidden"}`}>
@@ -211,7 +211,7 @@ function SidebarTemplate({ isAdmin }) {
                 >
                   <div className="flex justify-center items-center">
                     <span className={styles.sidebarFlexClass}>
-                      <i class="fa-solid fa-user-tie"></i>
+                      <i className="fa-solid fa-user-tie"></i>
                     </span>
                   </div>
                   <span className={`ml-2 ${isExpanded ? "block" : "hidden"}`}>
@@ -274,7 +274,7 @@ function SidebarTemplate({ isAdmin }) {
                   }`}
                 >
                   <span className={styles.sidebarFlexClass}>
-                    <i class="fa-solid fa-envelope"></i>
+                    <i className="fa-solid fa-envelope"></i>
                   </span>
                   <span className={`ml-2 ${isExpanded ? "block" : "hidden"}`}>
                     Message
@@ -294,7 +294,7 @@ function SidebarTemplate({ isAdmin }) {
                   }`}
                 >
                   <span className={styles.sidebarFlexClass}>
-                  <i class="fa-solid fa-address-card"></i>
+                  <i className="fa-solid fa-address-card"></i>
                   </span>
                   <span className={`ml-2 ${isExpanded ? "block" : "hidden"}`}>
                     Contact

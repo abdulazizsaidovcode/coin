@@ -64,7 +64,7 @@ function MobileBar({ isAdmin }) {
             >
               <div className="flex justify-center items-center">
                 <span className="inline-flex justify-center items-center ml-4 text-xl">
-                  <i class="fa-solid fa-user"></i>
+                  <i className="fa-solid fa-user"></i>
                 </span>
               </div>
               <span className={`ml-2 hidden`}>Student</span>
@@ -78,7 +78,7 @@ function MobileBar({ isAdmin }) {
                 >
                   <div className="flex justify-center items-center me-2">
                     <span>
-                      <i class="fa-solid fa-user-tie"></i>
+                      <i className="fa-solid fa-user-tie"></i>
                     </span>
                   </div>
                   <span className={`ml-2 hidden`}>Teacher</span>
