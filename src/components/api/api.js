@@ -14,7 +14,7 @@ export const config = {
     }
 }
 
-//              top
+// --------- ******** top *************** -------------------- //
 export function getTopGroupForAdmin(setTopGroup) {
     axios.get(url + "group/topGroupsForAdmin", config)
         .then((res) => setTopGroup(res.data.body))
@@ -87,7 +87,7 @@ export function getOneTest(testId, setTest) {
 }
 
 
-//              User
+//  --------- ********** User *************** -------------------- //
 export function getStudentStatistics(setStudentStatistics) {
     axios.get(url + "user/student/statistics", config)
         .then((res) => setStudentStatistics(res.data.body))
@@ -101,14 +101,14 @@ export function getTeacher(setTeacher) {
 }
 
 
-//              Category
+//   ----------- ******* Category *********** ----------- //
 export function getCategory(setCategory) {
     axios.get(url + "category/father/category?page=0&size=100", config)
         .then((res) => setCategory(res.data.body.object))
         .catch((err) => console.log(err));
 }
 
-//                 Group
+// ----------- ******* Group ********** ----------- //
 export function getGroup(setGroup) {
     axios.get(url + "group", config)
         .then(res => {
