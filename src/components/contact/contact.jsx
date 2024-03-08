@@ -121,7 +121,7 @@ function Contact() {
             >
               <div className="flex justify-between">
               <h2 className="font-bold text-lg mb-3">{item.fullName}</h2>
-              <i class="fa-regular fa-trash-can cursor-pointer" onClick={() => {
+              <i className="fa-regular fa-trash-can cursor-pointer" onClick={() => {
                 setMesId(item.id)
                 openDelete()
                 

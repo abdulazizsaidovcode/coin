@@ -116,10 +116,10 @@ function Gift() {
         <button id="openMenuButton" className="btm" onClick={openModal}>
           + Add
         </button>
-        <div class="relative">
-          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+        <div className="relative">
+          <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg
-              class="w-4 h-4 text-gray-500 dark:text-gray-400"
+              className="w-4 h-4 text-gray-500 dark:text-gray-400"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -138,7 +138,7 @@ function Gift() {
             type="search"
             onChange={searchGift}
             id="searchGift"
-            class="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="block w-full p-4 ps-10 text-sm  border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search"
           />
         </div>
