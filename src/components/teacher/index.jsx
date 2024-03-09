@@ -207,7 +207,7 @@ const AdminTeacher = () => {
                     colSpan="7"
                     className="py-3 px-6 font-inika font-medium text-lg tracking-wider leading-10 text-center"
                   >
-                    Student not found 😊
+                    Teacher not found 😊
                   </td>
                 </tr>
               )}
