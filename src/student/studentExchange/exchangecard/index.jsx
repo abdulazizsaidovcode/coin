@@ -13,7 +13,6 @@ const StudentExchangeCard = () => {
       .then(res => {
 
         setGift(res.data.body.object);
-        console.log(res.data.body.object);
       })
       .catch(err => console.log("Exchange Backenddan ma'lumot olishda xatolik yuz berdi 😭", err));
   }, []);

@@ -46,7 +46,6 @@ const StudentGiftCard = () => {
         }
       })
       .catch((error) => {
-        console.log(`${error.response.data.message} `);
         error.response.data.msg === 'Unauthorized user!' ? toast
           .error("Authorization is failed! Please login again.") :
           toast.error("Error! " + error.response.data.msg);

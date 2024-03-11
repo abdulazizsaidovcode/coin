@@ -23,8 +23,6 @@ function Studentcoinstatistic() {
   function getCurentMonth(){
     let date = new Date()
     getcurentmonth(date.getMonth())
-    console.log(date.getMonth());
-    console.log(date);
   }
 
   const getMonth = () => {

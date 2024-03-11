@@ -77,7 +77,6 @@ function Message() {
     axios
       .get(url + "group", config)
       .then((res) => {
-        console.log(res.data.body.object);
         setGroup(res.data.body.object);
       })
       .catch(() => {});

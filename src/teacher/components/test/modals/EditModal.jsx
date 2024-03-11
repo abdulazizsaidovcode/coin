@@ -88,7 +88,6 @@ const EditModal = (props) => {
             .catch(err => {
                 setIsLoading(false);
                 toast.error('Someting is error❌');
-                console.log('Teacher panel test edit qilishda xatolik: ', err);
             });
     }
 

@@ -82,7 +82,6 @@ const AddModal = (props) => {
             .catch(err => {
                 setIsLoading(false);
                 toast.error('Someting is error❌');
-                console.log('Teacher panel test qushishda xatolik: ', err);
             });
     }
 

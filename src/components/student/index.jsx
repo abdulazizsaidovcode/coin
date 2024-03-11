@@ -155,7 +155,6 @@ const AdminStudent = () => {
       .get(`${url}group`, config)
       .then((res) => {
         setGroup(res.data.body.object);
-        console.log(res.data.body);
       })
       .catch((err) => {
         console.log(err);

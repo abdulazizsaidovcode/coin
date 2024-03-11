@@ -61,7 +61,6 @@ function Offcanvas({ getCategory }) {
       .catch(() => {
         toast.error("Something is error?");
         setLoading(false);
-        // console.log(addData);
       });
   };
 

@@ -28,7 +28,6 @@ const DeleteModal = (props) => {
             .catch(err => {
                 setIsLoading(false);
                 toast.error("Something is wrong!");
-                console.log('Teacher panel test delete qilishda error: ', err);
             })
     }
 

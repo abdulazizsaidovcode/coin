@@ -78,7 +78,6 @@ export function sendTestCode(text, testId, setResponse, setLoading, setError, ti
 }
 
 export function getOneTest(testId, setTest) {
-    console.log(testId);
     axios.get(url + "test/one/" + testId, config)
         .then((res) => {
             setTest(res.data.body);
