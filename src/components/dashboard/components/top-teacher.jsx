@@ -97,7 +97,7 @@ const TopTeachers = ({ teacherList }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentTeachers.map((teacher, index) => (
+                        {currentTeachers && currentTeachers.map((teacher, index) => (
                             <tr key={index} className="border-t border-gray-200 text-center">
                                 <td className="py-2 px-5 whitespace-nowrap text-gray-500">{index + 1}</td>
                                 <td className="py-2 px-5 whitespace-nowrap text-gray-500">{teacher.teacherName}</td>

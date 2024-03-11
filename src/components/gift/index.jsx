@@ -1,4 +1,4 @@
-import "../../globalcss/style.css";
+import "../../globalcss/style.css"
 import React, { useEffect, useState } from "react";
 import GiftCard from "../card";
 import axios from "axios";
@@ -83,8 +83,6 @@ function Gift() {
         setLoading(false);
       });
   };
-
-  // Modalni ochish va yopish uchun funksiyalar
 
   const handelPageClick = (event) => {
     const pageNumber = event.selected;
@@ -270,4 +268,4 @@ function Gift() {
   );
 }
 
-export default Gift;
+export default Gift

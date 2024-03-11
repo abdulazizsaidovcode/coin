@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TopGroup from "./components/top-group";
 import TopStudent from "./components/top-student";
 import TopTeachers from "./components/top-teacher";
@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 
 const Dashboard = () => {
     
-  const scrolltop = useRef(null);
     const [STMGSize, setSTMGSize] = useState(null);
     const [topTeacher, setTopTeacher] = useState(null);
     const [topStudent, setTopStudent] = useState(null);
@@ -18,27 +17,15 @@ const Dashboard = () => {
     const [pl, setPl] = useState(null);
 
     useEffect(() => {
-        const handleScroll = () => {
-            // Agar scroll pastga bo'lsa
-            if (window.scrollY > 0) {
-              // OfCanvas tepaga chiqish
-              scrolltop.current.scrollTop = 0;
-            }
-          };
-      
-          // Scroll hodisalarini eshitish uchun event listener qo'shish
-          window.addEventListener('scroll', handleScroll);
-      
-          // Tarkibi ko'rsatishdan keyin event listener ni o'chirish
-          return () => {
-            window.removeEventListener('scroll', handleScroll);
-          }
         setConfig();
         axios.get(url + "user/statistic", config)
             .then((res) => setSTMGSize(res.data.body))
             .catch(() => toast.warning("internetga blan aloqani tekshirig!"));
         axios.get(url + "user/top/teachers", config)
-            .then((res) => setTopTeacher(res.data.body))
+            .then((res) => {
+                setTopTeacher(res.data.body)
+                console.log(res.data.body)
+            })
             .catch((err) => console.log(err));
         axios.get(url + "user/top/student", config)
             .then((res) => setTopStudent(res.data.body))
@@ -53,7 +40,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <div ref={scrolltop} className="bg-gray-100 min-h-screen p-8 pb-20 xl:pb-8 w-full">
+            <div className="bg-gray-100 min-h-screen p-8 pb-20 xl:pb-8 w-full">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
                     <MetricCard
                         title="Number of Students"
@@ -86,7 +73,7 @@ const Dashboard = () => {
                     </div>
                     <div className="flex-grow lg:w-[40%]">
                         {topTeacher ? (
-                            <TopTeachers teacherList={topTeacher} />
+                            <TopTeachers teacherList={ topTeacher } />
                         ) : (
                             <TopLoading name="Top Teacher" />
                         )}
